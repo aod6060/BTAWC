@@ -1,0 +1,17 @@
+package com.derf.btawc.handler;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+
+public class PlayerHandler {
+	
+	public void onEntityUpdateEvent(LivingUpdateEvent e) {
+		
+		
+		if(e.entityLiving instanceof EntityPlayer) {
+			
+			
+			
+		}
+	}
+}

@@ -3,6 +3,8 @@ package com.derf.btawc.items;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.derf.btawc.util.Vec3;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,7 +19,7 @@ public abstract class ItemMagnet extends ItemBasic {
 	private double range;
 	private double strength;
 	
-	public ItemMagnet(String name, List<Class<? extends Entity>> entities, double range, double strength) {
+	public ItemMagnet(String name, double range, double strength) {
 		super(name);
 		this.entities = new ArrayList<Class<? extends Entity>>();
 		for(Class<? extends Entity> entity : entities) {
@@ -25,6 +27,7 @@ public abstract class ItemMagnet extends ItemBasic {
 		}
 		this.range = range;
 		this.strength = strength;
+		this.setMaxStackSize(1);
 	}
 
 	@Override
@@ -38,14 +41,12 @@ public abstract class ItemMagnet extends ItemBasic {
 				stack.setTagCompound(tag);
 			}
 			
-			String s = String.format("%s: is %s", stack.getDisplayName(), ((isToggle(stack))? "on" : "off"));
-			
-			if(player.isSneaking()) {
-				player.addChatMessage(new ChatComponentText(s));
-			} else {
+			if(!player.isSneaking()) {
 				this.toggle(stack);
-				player.addChatMessage(new ChatComponentText(s));
 			}
+			
+			String s = String.format("%s: is %s", stack.getDisplayName(), ((isToggle(stack))? "on" : "off"));
+			player.addChatMessage(new ChatComponentText(s));
 		}
 		
 		return super.onItemRightClick(stack, world, player);
@@ -69,7 +70,20 @@ public abstract class ItemMagnet extends ItemBasic {
 	}
 
 	private void onMagnetUpdate(ItemStack stack, World world, Entity entity) {
-		
+		AxisAlignedBB box = this.createBox(entity);
+		Vec3 pp = new Vec3(entity.posX, entity.posY, entity.posZ);
+		for(Class<? extends Entity> e : this.entities) {
+			List<Entity> list = this.getEntitesWithinAABB(world, e, box);
+			for(Entity item : list) {
+				Vec3 v = new Vec3(item.posX, item.posY, item.posZ);
+				Vec3 delta = Vec3.sub(pp, v);
+				delta = Vec3.unit(delta);
+				delta = Vec3.mul(delta, this.strength);
+				item.motionX += delta.getX();
+				item.motionY += delta.getY();
+				item.motionZ += delta.getZ();
+			}
+		}
 	}
 
 	private void toggle(ItemStack stack) {
@@ -101,5 +115,9 @@ public abstract class ItemMagnet extends ItemBasic {
 		List<Entity> temp;
 		temp = world.getEntitiesWithinAABB(clz, box);
 		return temp;
+	}
+	
+	protected void addEntity(Class<? extends Entity> entity) {
+		this.entities.add(entity);
 	}
 }

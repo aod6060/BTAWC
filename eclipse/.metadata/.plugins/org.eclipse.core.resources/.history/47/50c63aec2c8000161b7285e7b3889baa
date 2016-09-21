@@ -1,0 +1,8 @@
+package com.derf.btawc.items;
+
+public class ItemFlowtationDevice extends ItemBasic {
+	
+	public ItemFlowtationDevice() {
+		
+	}
+}

@@ -20,7 +20,7 @@ public class ItemsManager {
 	// Magnets
 	public static Item magnetFrame;				// Magnet Frame
 	public static Item magnetItems;				// This is a simple Item magnet
-	public static Item magnetCreatures;			// This is a simple Magnet for farm animals
+	public static Item magnetAnimals;			// This is a simple Magnet for farm animals
 	
 	// Flowtation Device
 	public static Item flowtationDeviceFrame;	// Flowtation Device Frame
@@ -29,8 +29,8 @@ public class ItemsManager {
 	// Misc
 	public static Item netharStarMesh;
 	public static Item netharStarIngot;			// This is a new ingot that is made from nether star, diamonds, and iron...
-	public static Item animalIngot;				// This is a new ingot that is mode from steak, pork, chicken...
-	public static Item cookedAnimalIngot;		// Very good food source :D
+	public static Item animalIngotUncooked;		// This is a new ingot that is mode from steak, pork, chicken...
+	public static Item animalIngotCooked;		// Very good food source :D
 	
 	public static final void create() {
 		// Growth Device
@@ -41,11 +41,16 @@ public class ItemsManager {
 		growthDeviceUltra = new ItemGrowthDeviceUltimate();
 		// Magnet
 		magnetFrame = new ItemBasic("magnet_frame");
+		magnetItems = new ItemMagnetItems();
+		magnetAnimals = new ItemMagnetAnimals();
 		// Flowtation Device
 		flowtationDeviceFrame = new ItemBasic("flowtation_device_frame");
+		flowtationDevice = new ItemFlowtationDevice();
 		// Misc
 		netharStarMesh = new ItemBasic("nethar_star_mesh");
 		netharStarIngot = new ItemBasic("nethar_star_ingot");
+		animalIngotUncooked = new ItemAnimalIngotUncooked();
+		animalIngotCooked = new ItemAnimalIngotCooked();
 		
 	}
 	
@@ -58,11 +63,16 @@ public class ItemsManager {
 		GameRegistry.registerItem(growthDeviceUltra, "growth_device_ultimate");
 		// Magnet
 		GameRegistry.registerItem(magnetFrame, "magnet_frame");
+		GameRegistry.registerItem(magnetItems, "magnet_items");
+		GameRegistry.registerItem(magnetAnimals, "magnet_animals");
 		// Flowtation Device
 		GameRegistry.registerItem(flowtationDeviceFrame, "flowtation_device_frame");
+		GameRegistry.registerItem(flowtationDevice, "flowtation_device");
 		// Misc
 		GameRegistry.registerItem(netharStarMesh, "nethar_star_mesh");
 		GameRegistry.registerItem(netharStarIngot, "nethar_star_ingot");
+		GameRegistry.registerItem(animalIngotUncooked, "animal_ingot_uncooked");
+		GameRegistry.registerItem(animalIngotCooked, "animal_ingot_cooked");
 	}
 	
 	public static final void creativeTabs() {
@@ -74,11 +84,16 @@ public class ItemsManager {
 		growthDeviceUltra.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Magnet
 		magnetFrame.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		magnetItems.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		magnetAnimals.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Flowtation Device
 		flowtationDeviceFrame.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		flowtationDevice.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Misc
 		netharStarMesh.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		netharStarIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		animalIngotUncooked.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		animalIngotCooked.setCreativeTab(CreativeTabsManager.tabBTAWC);
 	}
 	
 	public static final void crafting() {
@@ -137,6 +152,25 @@ public class ItemsManager {
 				'i', Items.iron_ingot,
 				'g', Items.gold_ingot);
 		
+		// Magnet Items
+		GameRegistry.addShapedRecipe(
+				new ItemStack(magnetItems), 
+				" i ",
+				"imi",
+				" r ",
+				'i', Items.iron_ingot,
+				'r', Blocks.redstone_block,
+				'm', magnetFrame);
+		
+		GameRegistry.addShapedRecipe(
+				new ItemStack(magnetAnimals), 
+				" i ",
+				"imi",
+				" r ",
+				'i', animalIngotCooked,
+				'r', Blocks.redstone_block,
+				'm', magnetFrame);
+		
 		// Flowtation Device
 		
 		// Flowtation Device Frame
@@ -147,6 +181,15 @@ public class ItemsManager {
 				"fff",
 				's', Items.stick,
 				'f', Items.feather);
+		
+		// Flowtation Device
+		GameRegistry.addShapedRecipe(
+				new ItemStack(flowtationDevice), 
+				" i ",
+				"ifi",
+				" i ",
+				'i', netharStarIngot,
+				'f', flowtationDeviceFrame);
 		
 		// Misc
 		
@@ -161,5 +204,21 @@ public class ItemsManager {
 				'n', Items.nether_star);
 		// Nethar Star Ingot
 		GameRegistry.addSmelting(netharStarMesh, new ItemStack(netharStarIngot), 255.0f);
+		
+		// Animal Ingot Uncooked
+		GameRegistry.addShapelessRecipe(
+				new ItemStack(animalIngotUncooked), 
+				Items.chicken,
+				Items.chicken,
+				Items.chicken,
+				Items.beef,
+				Items.beef,
+				Items.beef,
+				Items.porkchop,
+				Items.porkchop,
+				Items.porkchop);
+		
+		// Animal Ingot Cooked
+		GameRegistry.addSmelting(animalIngotUncooked, new ItemStack(animalIngotCooked), 5.0f);
 	}
 }

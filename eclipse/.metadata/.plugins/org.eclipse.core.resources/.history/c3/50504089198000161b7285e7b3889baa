@@ -1,0 +1,15 @@
+package com.derf.btawc.items;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
+
+public class ItemMagnetItems extends ItemMagnet {
+	
+	private Class<? extends Entity> entities = {
+		EntityItem.class,
+		EntityXPOrbs.class
+	};
+	public ItemMagnetItems() {
+		super("magnet_items", )
+	}
+}

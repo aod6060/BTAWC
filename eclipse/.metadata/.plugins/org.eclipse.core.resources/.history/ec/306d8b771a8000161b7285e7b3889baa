@@ -1,0 +1,10 @@
+package com.derf.btawc.items;
+
+public class ItemMagnetAnimals extends ItemMagnet {
+
+	public ItemMagnetAnimals() {
+		super("magnet_animals", 16.0, 0.3);
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -7,11 +7,16 @@ item.growth_device_frame.name=Growth Device Frame
 item.growth_device.name=Growth Device (3x3) Slowest
 item.growth_device_super.name=Growth Device Super (5x5) Slow
 item.growth_device_mega.name=Growth Device Mega (7x7) Fast
-item.growth_device_ultimate.name=Growth Device Ultimate (9x9) Fastest
+item.growth_device_ultimate.name=Growth Device Ultimate (9x9) Its a bit overpowered!
 # Magnet
 item.magnet_frame.name=Magnet Frame
+item.magnet_items.name=Item Magnet
+item.magnet_animals.name=Animal Magnet
 # Flowtation Device
 item.flowtation_device_frame.name=Flowtation Device Frame
+item.flowtation_device.name=Flowtation Device
 # Misc
 item.nethar_star_mesh.name=Nethar Star Mesh
 item.nethar_star_ingot.name=Nethar Star Ingot
+item.animal_ingot_uncooked.name=Animal Ingot (Uncooked)
+item.animal_ingot_cooked.name=Animal Ingot (Cooked)

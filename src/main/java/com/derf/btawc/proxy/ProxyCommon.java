@@ -1,6 +1,7 @@
 package com.derf.btawc.proxy;
 
 import com.derf.btawc.creativetabs.CreativeTabsManager;
+import com.derf.btawc.handler.HandlerManager;
 import com.derf.btawc.items.ItemsManager;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -20,6 +21,7 @@ public class ProxyCommon implements IProxy {
 	@Override
 	public void init(FMLInitializationEvent e) {
 		ItemsManager.crafting();
+		HandlerManager.create();
 	}
 
 	@Override

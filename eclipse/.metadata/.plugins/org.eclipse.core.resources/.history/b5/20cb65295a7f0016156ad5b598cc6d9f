@@ -1,0 +1,38 @@
+package com.derf.btawc.items;
+
+import net.minecraft.item.Item;
+
+public class ItemsManager {
+	
+	// Growth Device
+	public static Item growthDeviceFrame;	// First item you needed for this mod...
+	public static Item growthDevice; 		// 3x3 slowest (Faster than a watering can)
+	public static Item growthDeviceSuper; 	// 5x5 slow
+	public static Item growthDeviceMega; 	// 7x7 fast
+	public static Item growthDeviceUltra; 	// 9x9 fastest
+	
+	// Magnets
+	public static Item magnetFrame;			// Magnet Frame
+	public static Item magnetItems;			// This is a simple Item magnet
+	public static Item magnetCreatures;		// This is a simple Magnet for farm animals
+	
+	// Flowtation Device
+	public static Item flowtationDeviceFrame;
+	public static Item flowtationDevice;
+	
+	// Misc
+	public static Item netharStarIngot;
+	public static Item animalIngot;
+	
+	public static final void create() {
+		
+	}
+	
+	public static final void register() {
+		
+	}
+	
+	public static final void creativeTabs() {
+		
+	}
+}

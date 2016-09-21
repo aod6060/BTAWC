@@ -1,0 +1,9 @@
+package com.derf.btawc.items;
+
+public class ItemGrowthDeviceSuper extends ItemGrowthDevice {
+
+	public ItemGrowthDeviceSuper() {
+		super("growth_device_super", 5, 3);
+	}
+
+}

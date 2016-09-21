@@ -1,0 +1,5 @@
+package com.derf.btawc.items;
+
+public class ItemGrowthBasic extends ItemGrowthDevice {
+
+}

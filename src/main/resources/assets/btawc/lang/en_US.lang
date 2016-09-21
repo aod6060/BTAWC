@@ -1,0 +1,17 @@
+# Primary Language file for the project.
+# Item Groups
+itemGroup.tabBTAWC=BTAWC
+# Items
+# Growth Device
+item.growth_device_frame.name=Growth Device Frame
+item.growth_device.name=Growth Device (3x3) Slowest
+item.growth_device_super.name=Growth Device Super (5x5) Slow
+item.growth_device_mega.name=Growth Device Mega (7x7) Fast
+item.growth_device_ultimate.name=Growth Device Ultimate (9x9) Fastest
+# Magnet
+item.magnet_frame.name=Magnet Frame
+# Flowtation Device
+item.flowtation_device_frame.name=Flowtation Device Frame
+# Misc
+item.nethar_star_mesh.name=Nethar Star Mesh
+item.nethar_star_ingot.name=Nethar Star Ingot

@@ -1,0 +1,14 @@
+package com.derf.btawc;
+
+import cpw.mods.fml.common.Mod;
+
+@Mod(modid=Loader.MODID, name=Loader.NAME, version=Loader.VERSION)
+public class Loader {
+	// Some meta data for the mod
+	public final static String MODID = "btawc";
+	public final static String NAME = "Better than a Watering Can!";
+	public final static String VERSION = "1.7.10_1.0.0_alpha";
+	// Instance for the mod
+	public static Loader INSTANCE = new Loader();
+	// 
+}

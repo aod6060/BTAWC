@@ -1,0 +1,88 @@
+package com.derf.btawc.items;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.derf.btawc.util.BlockPos;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+
+public abstract class ItemGrowthDevice extends ItemBasic {
+	
+	
+	protected int size;
+	protected int speed;
+	
+	public ItemGrowthDevice(String name, int size, int speed) {
+		super(name);
+		this.size = size;
+		this.speed = speed;
+	}
+
+	@Override
+	public boolean onItemUse(
+			ItemStack stack, 
+			EntityPlayer player, 
+			World world, 
+			int x,
+			int y, 
+			int z, 
+			int side, 
+			float px, 
+			float py, 
+			float pz) {
+		
+		boolean b = false;
+		
+		if(!world.isRemote) {
+			BlockPos pos = new BlockPos(x, y, z);
+			List<BlockPos> bp = this.getPosition(pos);
+			List<Block> blocks = this.getBlocks(world, bp);
+			
+			for(int i = 0; i < bp.size(); i++) {
+				
+				if(blocks.get(i) instanceof BlockCrops) {
+					
+				} else {
+					if(world.rand.nextInt(2) == 0) {
+						int x = bp.get(i).getX();
+						int y = bp.get(i).getZ();
+						blocks.get(i).updateTick(world, , p_149674_3_, p_149674_4_, p_149674_5_);
+					}
+				}
+			}
+		}
+		
+		return b;
+	}
+	
+	private List<BlockPos> getPosition(BlockPos pos) {
+		List<BlockPos> list = new ArrayList<BlockPos>();
+		
+		float halfSize = size / 2;
+		
+		for(int z = 0; z < this.size; z++) {
+			for(int x = 0; x < this.size; x++) {
+				int nx = (int) ((x - halfSize) + pos.getX());
+				int nz = (int) ((z - halfSize) + pos.getZ());
+				list.add(new BlockPos(nx, pos.getY(), nz));
+			}
+		}
+		
+		return list;
+	}
+	
+	private List<Block> getBlocks(World world, List<BlockPos> pos) {
+		List<Block> temp = new ArrayList<Block>();
+		
+		for(BlockPos p : pos) {
+			temp.add(world.getBlock(p.getX(), p.getY(), p.getZ()));
+		}
+		
+		return temp;
+	}
+}

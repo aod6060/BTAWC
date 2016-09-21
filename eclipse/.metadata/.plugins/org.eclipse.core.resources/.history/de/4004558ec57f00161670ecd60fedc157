@@ -1,0 +1,12 @@
+package com.derf.btawc.items;
+
+import net.minecraft.entity.Entity;
+
+public abstract class ItemMagnet extends ItemBasic {
+
+	public ItemMagnet(String name, Class<? extends Entity> clz, int range, int strength) {
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
+
+}

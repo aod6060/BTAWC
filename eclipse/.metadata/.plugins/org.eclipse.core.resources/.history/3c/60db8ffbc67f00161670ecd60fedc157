@@ -1,0 +1,25 @@
+package com.derf.btawc.items;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.entity.Entity;
+
+public abstract class ItemMagnet extends ItemBasic {
+
+	private List<Class<? extends Entity>> entities;
+	private int range;
+	private int strength;
+	
+	public ItemMagnet(String name, List<Class<? extends Entity>> entities, int range, int strength) {
+		super(name);
+		this.entities = new ArrayList<Class<? extends Entity>>();
+		for(Class<? extends Entity> entity : entities) {
+			this.entities.add(entity);
+		}
+		this.range = range;
+		this.strength = strength;
+	}
+	
+	
+}

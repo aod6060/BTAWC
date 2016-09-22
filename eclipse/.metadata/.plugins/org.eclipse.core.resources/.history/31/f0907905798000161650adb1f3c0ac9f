@@ -1,0 +1,13 @@
+package com.derf.btawc.blocks;
+
+public final class BlockManager {
+	
+	
+	public static final void create() {
+		
+	}
+	
+	public static final void register() {
+		
+	}
+}

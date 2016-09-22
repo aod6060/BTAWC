@@ -1,0 +1,7 @@
+package com.derf.btawc.blocks;
+
+import com.jcraft.jorbis.Block;
+
+public class BlockBasic extends Block {
+
+}

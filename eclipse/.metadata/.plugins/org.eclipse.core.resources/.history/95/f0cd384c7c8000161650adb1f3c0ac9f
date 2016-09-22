@@ -1,0 +1,5 @@
+package com.derf.btawc.blocks;
+
+public enum MultiBlockType {
+
+}

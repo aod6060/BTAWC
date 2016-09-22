@@ -20,3 +20,5 @@ item.nethar_star_mesh.name=Nethar Star Mesh
 item.nethar_star_ingot.name=Nethar Star Ingot
 item.animal_ingot_uncooked.name=Animal Ingot (Uncooked)
 item.animal_ingot_cooked.name=Animal Ingot (Cooked)
+# Tiles
+tile.creative_generator.name=Creative Generator (Creative Mode Only)

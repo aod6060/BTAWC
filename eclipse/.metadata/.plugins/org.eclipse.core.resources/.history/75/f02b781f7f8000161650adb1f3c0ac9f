@@ -1,0 +1,7 @@
+package com.derf.btawc.blocks.tileentity;
+
+public class TileEntityCreativeGenerator extends TileEntityBasic {
+	
+	
+	
+}

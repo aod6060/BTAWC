@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="net.minecraft.item.Item"/>
-<fullyQualifiedTypeName name="com.derf.btawc.Loader"/>
-<fullyQualifiedTypeName name="cpw.mods.fml.common.registry.GameRegistry"/>
 <fullyQualifiedTypeName name="net.minecraft.init.Blocks"/>
 <fullyQualifiedTypeName name="net.minecraft.init.Items"/>
-<fullyQualifiedTypeName name="net.minecraft.block.Block"/>
 <fullyQualifiedTypeName name="com.derf.btawc.util.Timer"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="net.minecraft.util.ChatComponentText"/>
 <fullyQualifiedTypeName name="com.derf.btawc.util.Vec3"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.Entity"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.item.EntityItem"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.item.EntityXPOrb"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.passive.EntityAnimal"/>
-<fullyQualifiedTypeName name="com.derf.btawc.creativetabs.CreativeTabsManager"/>
 <fullyQualifiedTypeName name="net.minecraft.item.ItemFood"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.player.EntityPlayer"/>
 <fullyQualifiedTypeName name="com.derf.btawc.items.ItemsManager"/>
 <fullyQualifiedTypeName name="net.minecraftforge.common.MinecraftForge"/>
 <fullyQualifiedTypeName name="com.derf.btawc.handler.HandlerManager"/>
+<fullyQualifiedTypeName name="net.minecraft.block.BlockContainer"/>
+<fullyQualifiedTypeName name="com.derf.btawc.blocks.MultiTextureType"/>
+<fullyQualifiedTypeName name="net.minecraft.block.material.Material"/>
+<fullyQualifiedTypeName name="com.derf.btawc.blocks.basic.BlockContainerMultiTextureBasic"/>
+<fullyQualifiedTypeName name="com.derf.btawc.blocks.basic.MultiTextureType"/>
+<fullyQualifiedTypeName name="com.derf.btawc.Loader"/>
+<fullyQualifiedTypeName name="cpw.mods.fml.common.registry.GameRegistry"/>
+<fullyQualifiedTypeName name="com.derf.btawc.blocks.tileentity.TileEntityCreativeGenerator"/>
+<fullyQualifiedTypeName name="com.derf.btawc.creativetabs.CreativeTabsManager"/>
+<fullyQualifiedTypeName name="com.derf.btawc.blocks.BlockManager"/>
+<fullyQualifiedTypeName name="net.minecraft.nbt.NBTTagCompound"/>
+<fullyQualifiedTypeName name="cofh.api.energy.IEnergyProvider"/>
+<fullyQualifiedTypeName name="net.minecraft.block.Block"/>
+<fullyQualifiedTypeName name="com.derf.btawc.blocks.tileentity.TileEntityBasic"/>
+<fullyQualifiedTypeName name="com.derf.btawc.energy.EnergyStorage"/>
+<fullyQualifiedTypeName name="com.derf.btawc.blocks.tileentity.energystorage.TileEntityEnergyStorageBasic"/>
+<fullyQualifiedTypeName name="com.derf.btawc.util.Holder"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="com.derf.btawc.util.WorldUtils"/>
 </qualifiedTypeNameHistroy>

@@ -25,3 +25,26 @@
 1474491949862	Rename local variable 'p_77663_3_'
 1474491958597	Rename local variable 'p_77663_4_'
 1474491963156	Rename local variable 'p_77663_5_'
+1474517074763	Delete element
+1474517129543	Rename local variable 'p_i45394_1_'
+1474517979351	Rename type 'BlockBasicMultitexture'
+1474518043072	Rename local variable 'p_149691_2_'
+1474519075016	Move compilation units
+1474519079543	Move compilation unit
+1474519340560	Rename local variable 'p_149915_1_'
+1474519346578	Rename local variable 'p_149915_2_'
+1474524263174	Rename local variable 'p_145839_1_'
+1474524267239	Rename local variable 'p_145841_1_'
+1474526118041	Rename local variable 'p_149727_1_'
+1474526133171	Rename local variable 'p_149727_4_'
+1474526137587	Rename local variable 'p_149727_5_'
+1474526142496	Rename local variable 'p_149727_6_'
+1474526149788	Rename local variable 'p_149727_7_'
+1474526152688	Rename local variable 'p_149727_8_'
+1474526156593	Rename local variable 'p_149727_9_'
+1474527838184	Move compilation unit
+1474527861784	Move compilation unit
+1474527880512	Rename package 'com.derf.btawc.blocks.storage'
+1474527983437	Move compilation units
+1474528702524	Rename local variable 'p_145839_1_'
+1474528712578	Rename local variable 'p_145841_1_'

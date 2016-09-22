@@ -1,0 +1,21 @@
+package com.derf.btawc.blocks;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+
+public class BlockBasic extends Block {
+
+	protected BlockBasic(
+			String name, 
+			Material material
+			float hardness,
+			float resistance,
+			float lightLevel,
+			String toolClass,
+			int level,
+			SoundType sound) {
+		super(material);
+		// TODO Auto-generated constructor stub
+	}
+
+}

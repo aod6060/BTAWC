@@ -1,0 +1,15 @@
+package com.derf.btawc.blocks;
+
+import com.derf.btawc.blocks.basic.BlockContainerBasic;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
+public abstract class BlockEnergyStorage extends BlockContainerBasic {
+
+	public BlockEnergyStorage(String name) {
+		super(name, Material.iron, 2.0f, 2.0f, 0, "pickaxe", 0, Block.soundTypeMetal);
+	}
+}

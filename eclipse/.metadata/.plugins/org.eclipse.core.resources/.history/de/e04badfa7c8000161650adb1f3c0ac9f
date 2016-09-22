@@ -1,0 +1,11 @@
+package com.derf.btawc.blocks;
+
+public enum MultiBlockType {
+	BOTTOM,
+	TOP,
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
+	SIDES
+}

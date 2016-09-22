@@ -46,5 +46,7 @@ public class BlockPos {
 		return "BlockPos [x=" + x + ", y=" + y + ", z=" + z + "]";
 	}
 	
-	
+	public static BlockPos add(BlockPos a, BlockPos b) {
+		return new BlockPos(a.getX() + b.getX(), a.getY() + b.getY(), a.getZ() + b.getZ());
+	}
 }

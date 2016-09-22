@@ -1,0 +1,5 @@
+package com.derf.btawc.blocks.tileentity.energystorage;
+
+public abstract class TileEntityEnergyStorage extends TileEntityBasic {
+
+}

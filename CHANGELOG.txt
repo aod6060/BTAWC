@@ -1,0 +1,10 @@
+1.0.0 alpha
+
+------------------------------------------------
+
+- Added Growth Devices (Regular, Super, Mega, and Ultimate, Frame)
+- Added Magnets (Items, Animal, Frame)
+- Added Flowtation Device (aka Creative Flight + Frame)
+- Added Nether Star Ingot
+- Added Nether Star Mesh
+- Added Animal Ingot (Uncooked and Cooked)

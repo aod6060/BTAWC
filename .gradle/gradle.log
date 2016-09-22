@@ -5,11 +5,8 @@
  R4wk, ZeuX, IngisKahn, bspkrs
  MCP Data version : unknown
 ****************************
-:eclipseClasspath
-:eclipseJdt
-:eclipseProject
-:eclipse
+:clean
 
 BUILD SUCCESSFUL
 
-Total time: 44.734 secs
+Total time: 29.662 secs

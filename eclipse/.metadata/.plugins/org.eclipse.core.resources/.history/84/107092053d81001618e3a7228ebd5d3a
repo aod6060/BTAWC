@@ -1,0 +1,32 @@
+package com.derf.btawc.blocks;
+
+import com.derf.btawc.Loader;
+import com.derf.btawc.blocks.basic.BlockContainerMultiTextureBasic;
+import com.derf.btawc.blocks.basic.MultiTextureType;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
+public class BlockSuperFurnace extends BlockContainerMultiTextureBasic {
+
+	public BlockSuperFurnace(int lightLevel, boolean on) {
+		super("super_furnace", Material.rock, 2.0f, 2.0f, lightLevel, "pickaxe", 0, Block.soundTypeStone);
+		this.setTextureName(MultiTextureType.SIDES, Loader.MODID + ":super_furnace_sides");
+		this.setTextureName(MultiTextureType.TOP, Loader.MODID + ":super_furnace_bottom_top");
+		this.setTextureName(MultiTextureType.BOTTOM, Loader.MODID + ":super_furnace_bottom_top");
+		if(on) {
+			this.setTextureName(MultiTextureType.SOUTH, Loader.MODID + ":super_furnace_front_on");
+		} else {
+			this.setTextureName(MultiTextureType.SOUTH, Loader.MODID + ":super_furnace_front");
+		}
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+		// TODO Auto-generated method stub
+		return new TileEntitySuperFurnace();
+	}
+
+}

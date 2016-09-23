@@ -1,0 +1,9 @@
+package com.derf.btawc.items.tools;
+
+public class ItemHoeOfGreedBasic extends ItemHoeOfGreed {
+
+	public ItemHoeOfGreedBasic() {
+		super("hoe_of_greed_basic", 1000, 3, 2);
+	}
+
+}

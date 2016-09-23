@@ -1,0 +1,112 @@
+package com.derf.btawc.blocks.tileentity;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+
+public class TileEntitySuperFurnace extends TileEntityBasic implements IInventory {
+	
+	// Furnace Inventory
+	// 0-8 input, 9-17 output, 19 fuel...
+	private ItemStack[] furnaceItemStack = new ItemStack[19];
+	public int furnaceBurnTime;
+	public int currentItemBurnTime;
+	public int furnaceCookTime;
+	private String name;
+	
+	@Override
+	public int getSizeInventory() {
+		// TODO Auto-generated method stub
+		return furnaceItemStack.length;
+	}
+
+	@Override
+	public ItemStack getStackInSlot(int index) {
+		// TODO Auto-generated method stub
+		return this.furnaceItemStack[index];
+	}
+
+	@Override
+	public ItemStack decrStackSize(int slot, int amount) {
+		if(this.furnaceItemStack[slot] != null) {
+			ItemStack stack;
+			if(this.furnaceItemStack[slot].stackSize <= amount) {
+				stack = this.furnaceItemStack[slot];
+				this.furnaceItemStack[slot] = null;
+				return stack;
+			} else {
+				stack = this.furnaceItemStack[slot].splitStack(amount);
+				
+				if(this.furnaceItemStack[slot].stackSize == 0) {
+					this.furnaceItemStack[slot] = null;
+				}
+				
+				return stack;
+			}
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public ItemStack getStackInSlotOnClosing(int slot) {
+		// TODO Auto-generated method stub
+		//return null;
+		if(this.furnaceItemStack[slot] != null) {
+			ItemStack stack = this.furnaceItemStack[slot];
+			this.furnaceItemStack[slot] = null;
+			return stack;
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public void setInventorySlotContents(int slot, ItemStack p_70299_2_) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getInventoryName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasCustomInventoryName() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int getInventoryStackLimit() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer p_70300_1_) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void openInventory() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void closeInventory() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	// Add stuff in a minute...
+}

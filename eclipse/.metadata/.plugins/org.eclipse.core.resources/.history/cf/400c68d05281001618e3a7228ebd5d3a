@@ -1,0 +1,5 @@
+package com.derf.btawc.blocks.tileentity;
+
+public class TileEntitySuperFurnace extends TileEntityBasic {
+	// Add stuff in a minute...
+}

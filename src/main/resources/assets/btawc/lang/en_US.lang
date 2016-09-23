@@ -5,9 +5,9 @@ itemGroup.tabBTAWC=BTAWC
 # Growth Device
 item.growth_device_frame.name=Growth Device Frame
 item.growth_device.name=Growth Device (3x3) Slowest
-item.growth_device_super.name=Growth Device Super (5x5) Slow
-item.growth_device_mega.name=Growth Device Mega (7x7) Fast
-item.growth_device_ultimate.name=Growth Device Ultimate (9x9) Its a bit overpowered!
+item.growth_device_super.name=Super Growth Device(5x5) Slow
+item.growth_device_mega.name=Mega Growth Device (7x7) Fast
+item.growth_device_ultimate.name=Ultimate Growth Device (9x9) Its a bit overpowered!
 # Magnet
 item.magnet_frame.name=Magnet Frame
 item.magnet_items.name=Item Magnet
@@ -15,10 +15,17 @@ item.magnet_animals.name=Animal Magnet
 # Flowtation Device
 item.flowtation_device_frame.name=Flowtation Device Frame
 item.flowtation_device.name=Flowtation Device
+# Hoe of Greed
+item.hoe_of_greed_basic.name=Hoe of Greed (3x3 area 2x produce)
+item.hoe_of_greed_super.name=Super Hoe of Greed (5x5 area 4x produce)
+item.hoe_of_greed_mega.name=Mega Hoe of Greed (7x7 area 8x produce)
+item.hoe_of_greed_ultra.name=Ultimate Hoe of Greed (9x9 area 16x produce)
 # Misc
 item.nethar_star_mesh.name=Nethar Star Mesh
 item.nethar_star_ingot.name=Nethar Star Ingot
 item.animal_ingot_uncooked.name=Animal Ingot (Uncooked)
 item.animal_ingot_cooked.name=Animal Ingot (Cooked)
+item.crystal_of_greed.name=Crystal of Greed (Very Greedy Crystal!)
 # Tiles
 tile.creative_generator.name=Creative Generator (Creative Mode Only)
+tile.energy_storage_basic.name=Energy Storage Basic (Stores 10000RF transfers 100 RF/t)

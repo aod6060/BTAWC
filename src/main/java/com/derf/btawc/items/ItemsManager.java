@@ -1,6 +1,15 @@
 package com.derf.btawc.items;
 
 import com.derf.btawc.creativetabs.CreativeTabsManager;
+import com.derf.btawc.items.growthdevice.ItemGrowthDeviceBasic;
+import com.derf.btawc.items.growthdevice.ItemGrowthDeviceMega;
+import com.derf.btawc.items.growthdevice.ItemGrowthDeviceSuper;
+import com.derf.btawc.items.growthdevice.ItemGrowthDeviceUltimate;
+import com.derf.btawc.items.magnet.ItemMagnetAnimals;
+import com.derf.btawc.items.magnet.ItemMagnetItems;
+import com.derf.btawc.items.misc.ItemAnimalIngotCooked;
+import com.derf.btawc.items.misc.ItemAnimalIngotUncooked;
+import com.derf.btawc.items.tools.ItemHoeOfGreed;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
@@ -26,11 +35,18 @@ public class ItemsManager {
 	public static Item flowtationDeviceFrame;	// Flowtation Device Frame
 	public static Item flowtationDevice;		// Flowtation Device, allows you to have creative flight
 	
+	// Hoe of Greed
+	public static Item hoeOfGreed;				// tier 1 hoe of greed, 3x3 space, and 2x produce
+	public static Item hoeOfGreedSuper;			// tier 2 hoe of greed, 5x5 space, and 4x produce
+	public static Item hoeOfGreedMega;			// tier 3 hoe of greed, 7x7 space, and 8x produce
+	public static Item hoeOfGreedUltra;			// tier 4 hoe of greed, 9x9 space, and 16x produce
+	
 	// Misc
 	public static Item netharStarMesh;
 	public static Item netharStarIngot;			// This is a new ingot that is made from nether star, diamonds, and iron...
 	public static Item animalIngotUncooked;		// This is a new ingot that is mode from steak, pork, chicken...
 	public static Item animalIngotCooked;		// Very good food source :D
+	public static Item crystalOfGreed;			// Very greedy crystal :)
 	
 	public static final void create() {
 		// Growth Device
@@ -46,12 +62,17 @@ public class ItemsManager {
 		// Flowtation Device
 		flowtationDeviceFrame = new ItemBasic("flowtation_device_frame");
 		flowtationDevice = new ItemFlowtationDevice();
+		// Hoe of Greed
+		hoeOfGreed = new ItemHoeOfGreed("hoe_of_greed_basic", 1000, 3, 2);
+		hoeOfGreedSuper = new ItemHoeOfGreed("hoe_of_greed_super", 2000, 5, 4);
+		hoeOfGreedMega = new ItemHoeOfGreed("hoe_of_greed_mega", 4000, 7, 8);
+		hoeOfGreedUltra = new ItemHoeOfGreed("hoe_of_greed_ultra", 8000, 9, 16);
 		// Misc
 		netharStarMesh = new ItemBasic("nethar_star_mesh");
 		netharStarIngot = new ItemBasic("nethar_star_ingot");
 		animalIngotUncooked = new ItemAnimalIngotUncooked();
 		animalIngotCooked = new ItemAnimalIngotCooked();
-		
+		crystalOfGreed = new ItemBasic("crystal_of_greed");
 	}
 	
 	public static final void register() {
@@ -68,11 +89,17 @@ public class ItemsManager {
 		// Flowtation Device
 		GameRegistry.registerItem(flowtationDeviceFrame, "flowtation_device_frame");
 		GameRegistry.registerItem(flowtationDevice, "flowtation_device");
+		// Hoe of Greed
+		GameRegistry.registerItem(hoeOfGreed, "hoe_of_greed_basic");
+		GameRegistry.registerItem(hoeOfGreedSuper, "hoe_of_greed_super");
+		GameRegistry.registerItem(hoeOfGreedMega, "hoe_of_greed_mega");
+		GameRegistry.registerItem(hoeOfGreedUltra, "hoe_of_greed_ultra");
 		// Misc
 		GameRegistry.registerItem(netharStarMesh, "nethar_star_mesh");
 		GameRegistry.registerItem(netharStarIngot, "nethar_star_ingot");
 		GameRegistry.registerItem(animalIngotUncooked, "animal_ingot_uncooked");
 		GameRegistry.registerItem(animalIngotCooked, "animal_ingot_cooked");
+		GameRegistry.registerItem(crystalOfGreed, "crystal_of_greed");
 	}
 	
 	public static final void creativeTabs() {
@@ -89,11 +116,17 @@ public class ItemsManager {
 		// Flowtation Device
 		flowtationDeviceFrame.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		flowtationDevice.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		// hoe of greed
+		hoeOfGreed.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		hoeOfGreedSuper.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		hoeOfGreedMega.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		hoeOfGreedUltra.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Misc
 		netharStarMesh.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		netharStarIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		animalIngotUncooked.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		animalIngotCooked.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		crystalOfGreed.setCreativeTab(CreativeTabsManager.tabBTAWC);
 	}
 	
 	public static final void crafting() {
@@ -191,6 +224,43 @@ public class ItemsManager {
 				'i', netharStarIngot,
 				'f', flowtationDeviceFrame);
 		
+		// Hoe of Greed
+		// Hoe of Greed Basic
+		GameRegistry.addShapedRecipe(
+				new ItemStack(hoeOfGreed), 
+				"igi",
+				"ghg",
+				"igi",
+				'i', Items.iron_ingot,
+				'g', crystalOfGreed,
+				'h', Items.diamond_hoe);
+		// Hoe of Greed Super
+		GameRegistry.addShapedRecipe(
+				new ItemStack(hoeOfGreedSuper), 
+				"igi",
+				"ghg",
+				"igi",
+				'i', Items.gold_ingot,
+				'g', crystalOfGreed,
+				'h', hoeOfGreed);
+		// Hoe of Greed Mega
+		GameRegistry.addShapedRecipe(
+				new ItemStack(hoeOfGreedMega), 
+				"igi",
+				"ghg",
+				"igi",
+				'i', Items.diamond,
+				'g', crystalOfGreed,
+				'h', hoeOfGreedSuper);
+		// Hoe of Greed Ultra
+		GameRegistry.addShapedRecipe(
+				new ItemStack(hoeOfGreedUltra), 
+				"igi",
+				"ghg",
+				"igi",
+				'i', netharStarIngot,
+				'g', crystalOfGreed,
+				'h', hoeOfGreedMega);
 		// Misc
 		
 		// Nethar Star Mesh
@@ -220,5 +290,16 @@ public class ItemsManager {
 		
 		// Animal Ingot Cooked
 		GameRegistry.addSmelting(animalIngotUncooked, new ItemStack(animalIngotCooked), 5.0f);
+		
+		// Crystal of Greed
+		GameRegistry.addShapedRecipe(
+				new ItemStack(crystalOfGreed), 
+				"lgl",
+				"idi",
+				"lgl",
+				'l', new ItemStack(Items.dye, 1, 4),
+				'i', Items.iron_ingot,
+				'g', Items.gold_ingot,
+				'd', Items.diamond);
 	}
 }

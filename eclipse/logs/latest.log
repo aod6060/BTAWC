@@ -1,115 +1,30 @@
-[02:50:54] [main/INFO]: Setting user: Player631
-[02:50:55] [Client thread/INFO]: LWJGL Version: 2.9.1
-[02:51:06] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:BTAWC
-[02:51:07] [Sound Library Loader/INFO]: Sound engine started
-[02:51:09] [Client thread/INFO]: Created: 16x16 textures/blocks-atlas
-[02:51:09] [Client thread/INFO]: Created: 16x16 textures/items-atlas
-[02:51:09] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:BTAWC
-[02:51:10] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
-[02:51:10] [Client thread/INFO]: Created: 256x256 textures/items-atlas
-[02:51:11] [Sound Library Loader/INFO]: Sound engine started
-[02:51:17] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
-[02:51:17] [Server thread/INFO]: Generating keypair
-[02:51:17] [Server thread/INFO]: Preparing start region for level 0
-[02:51:18] [Server thread/INFO]: Preparing spawn area: 91%
-[02:51:19] [Server thread/INFO]: Changing view distance to 7, from 10
-[02:51:19] [Server thread/INFO]: Player631[local:E:5b8dd701] logged in with entity id 98 at (1006.332337456071, 56.0, -173.95940392027194)
-[02:51:19] [Server thread/INFO]: Player631 joined the game
-[02:51:24] [Client thread/INFO]: [CHAT] Energy Level: [1000000/1000000] generates 100000 RF/t
-[02:51:24] [Client thread/INFO]: [CHAT] Energy Level: [1000000/1000000] generates 100000 RF/t
-[02:51:24] [Client thread/INFO]: [CHAT] Energy Level: [1000000/1000000] generates 100000 RF/t
-[02:51:25] [Client thread/INFO]: [CHAT] Energy Level: [1000000/1000000] generates 100000 RF/t
-[02:51:27] [Client thread/INFO]: [CHAT] Energy Level: [2200/10000] transfers 100 RF/t
-[02:51:27] [Client thread/INFO]: [CHAT] Energy Level: [2600/10000] transfers 100 RF/t
-[02:51:27] [Client thread/INFO]: [CHAT] Energy Level: [2900/10000] transfers 100 RF/t
-[02:51:27] [Client thread/INFO]: [CHAT] Energy Level: [3300/10000] transfers 100 RF/t
-[02:51:27] [Client thread/INFO]: [CHAT] Energy Level: [3900/10000] transfers 100 RF/t
-[02:51:28] [Client thread/INFO]: [CHAT] Energy Level: [4200/10000] transfers 100 RF/t
-[02:51:28] [Client thread/INFO]: [CHAT] Energy Level: [4500/10000] transfers 100 RF/t
-[02:51:30] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:31] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:31] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:31] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:31] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:31] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:32] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:32] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:32] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:32] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:33] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:33] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:33] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:33] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:33] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:33] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:34] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:34] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:35] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:35] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:35] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:35] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:35] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:36] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:36] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:36] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:36] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:38] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:41] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:41] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:41] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:41] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:41] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:42] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:42] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:42] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:42] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:42] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:42] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:43] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:43] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:43] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:43] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:44] [Client thread/INFO]: [CHAT] Energy Level: [0/10000] transfers 100 RF/t
-[02:51:44] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:44] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:44] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:45] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:46] [Client thread/INFO]: [CHAT] Energy Level: [1000000/1000000] generates 100000 RF/t
-[02:51:48] [Client thread/INFO]: [CHAT] Energy Level: [1900/10000] transfers 100 RF/t
-[02:51:48] [Client thread/INFO]: [CHAT] Energy Level: [2300/10000] transfers 100 RF/t
-[02:51:49] [Client thread/INFO]: [CHAT] Energy Level: [2600/10000] transfers 100 RF/t
-[02:51:49] [Client thread/INFO]: [CHAT] Energy Level: [2900/10000] transfers 100 RF/t
-[02:51:49] [Client thread/INFO]: [CHAT] Energy Level: [3200/10000] transfers 100 RF/t
-[02:51:49] [Client thread/INFO]: [CHAT] Energy Level: [3600/10000] transfers 100 RF/t
-[02:51:49] [Client thread/INFO]: [CHAT] Energy Level: [3900/10000] transfers 100 RF/t
-[02:51:49] [Client thread/INFO]: [CHAT] Energy Level: [4300/10000] transfers 100 RF/t
-[02:51:50] [Client thread/INFO]: [CHAT] Energy Level: [4500/10000] transfers 100 RF/t
-[02:51:50] [Client thread/INFO]: [CHAT] Energy Level: [4800/10000] transfers 100 RF/t
-[02:51:50] [Client thread/INFO]: [CHAT] Energy Level: [5200/10000] transfers 100 RF/t
-[02:51:50] [Client thread/INFO]: [CHAT] Energy Level: [5600/10000] transfers 100 RF/t
-[02:51:50] [Client thread/INFO]: [CHAT] Energy Level: [5900/10000] transfers 100 RF/t
-[02:51:50] [Client thread/INFO]: [CHAT] Energy Level: [6300/10000] transfers 100 RF/t
-[02:51:51] [Client thread/INFO]: [CHAT] Energy Level: [6600/10000] transfers 100 RF/t
-[02:51:51] [Client thread/INFO]: [CHAT] Energy Level: [6900/10000] transfers 100 RF/t
-[02:51:51] [Client thread/INFO]: [CHAT] Energy Level: [7200/10000] transfers 100 RF/t
-[02:51:51] [Client thread/INFO]: [CHAT] Energy Level: [7600/10000] transfers 100 RF/t
-[02:51:51] [Client thread/INFO]: [CHAT] Energy Level: [8000/10000] transfers 100 RF/t
-[02:51:51] [Client thread/INFO]: [CHAT] Energy Level: [8300/10000] transfers 100 RF/t
-[02:51:52] [Client thread/INFO]: [CHAT] Energy Level: [8700/10000] transfers 100 RF/t
-[02:51:52] [Client thread/INFO]: [CHAT] Energy Level: [9000/10000] transfers 100 RF/t
-[02:51:52] [Client thread/INFO]: [CHAT] Energy Level: [9400/10000] transfers 100 RF/t
-[02:51:52] [Client thread/INFO]: [CHAT] Energy Level: [9800/10000] transfers 100 RF/t
-[02:51:52] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:53] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:53] [Client thread/INFO]: [CHAT] Energy Level: [10000/10000] transfers 100 RF/t
-[02:51:55] [Server thread/INFO]: Saving and pausing game...
-[02:51:55] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[02:51:55] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[02:51:55] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[02:51:55] [Server thread/INFO]: Stopping server
-[02:51:55] [Server thread/INFO]: Saving players
-[02:51:55] [Server thread/INFO]: Saving worlds
-[02:51:55] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[02:51:55] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[02:51:55] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[02:51:56] [Client thread/INFO]: Stopping!
+[00:53:24] [main/INFO]: Setting user: Player956
+[00:53:25] [Client thread/INFO]: LWJGL Version: 2.9.1
+[00:53:36] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:BTAWC
+[00:53:37] [Sound Library Loader/INFO]: Sound engine started
+[00:53:39] [Client thread/INFO]: Created: 16x16 textures/blocks-atlas
+[00:53:39] [Client thread/INFO]: Created: 16x16 textures/items-atlas
+[00:53:39] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:BTAWC
+[00:53:40] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[00:53:40] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[00:53:41] [Sound Library Loader/INFO]: Sound engine started
+[00:53:45] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
+[00:53:45] [Server thread/INFO]: Generating keypair
+[00:53:46] [Server thread/INFO]: Preparing start region for level 0
+[00:53:47] [Server thread/INFO]: Preparing spawn area: 24%
+[00:53:48] [Server thread/INFO]: Changing view distance to 7, from 10
+[00:53:48] [Server thread/INFO]: Player956[local:E:5788d580] logged in with entity id 348 at (228.94742443378541, 68.0, 236.80195788616902)
+[00:53:48] [Server thread/INFO]: Player956 joined the game
+[00:54:01] [Server thread/INFO]: Player956 has just earned the achievement [Taking Inventory]
+[00:54:02] [Client thread/INFO]: [CHAT] Player956 has just earned the achievement [Taking Inventory]
+[00:54:34] [Server thread/INFO]: Saving and pausing game...
+[00:54:34] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[00:54:34] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[00:54:34] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[00:54:34] [Server thread/INFO]: Stopping server
+[00:54:34] [Server thread/INFO]: Saving players
+[00:54:34] [Server thread/INFO]: Saving worlds
+[00:54:34] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[00:54:35] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[00:54:35] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[00:54:36] [Client thread/INFO]: Stopping!

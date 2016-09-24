@@ -1,0 +1,22 @@
+package com.derf.btawc.client.gui;
+
+import com.derf.btawc.Loader;
+
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.inventory.Container;
+import net.minecraft.util.ResourceLocation;
+
+public class GuiContainerSuperFurnace extends GuiContainer {
+	private static final ResourceLocation superFurnaceGUI = new ResourceLocation(Loader.MODID + "textures/gui/container/super_furnace_gui.png");
+	public GuiContainerSuperFurnace(Container p_i1072_1_) {
+		super(p_i1072_1_);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -26,14 +26,14 @@ public final class BlockManager {
 	
 	public static final void create() {
 		creativeGenerator = new BlockCreativeGenerator();
-		energyStorageBasic = new BlockEnergyStorageBasic();
+		//energyStorageBasic = new BlockEnergyStorageBasic();
 		superFurnace = new BlockSuperFurnace(0, false);
 		superFurnaceOn = new BlockSuperFurnace(15, true);
 	}
 	
 	public static final void register() {
 		GameRegistry.registerBlock(creativeGenerator, "creative_generator");
-		GameRegistry.registerBlock(energyStorageBasic, "energy_storage_basic");
+		//GameRegistry.registerBlock(energyStorageBasic, "energy_storage_basic");
 		GameRegistry.registerBlock(superFurnace, "super_furnace");
 		GameRegistry.registerBlock(superFurnaceOn, "super_furnace_on");
 	}
@@ -42,14 +42,14 @@ public final class BlockManager {
 		// Generators
 		GameRegistry.registerTileEntity(TileEntityCreativeGenerator.class, "creative_generator");
 		// Storage
-		GameRegistry.registerTileEntity(TileEntityEnergyStorageBasic.class, "energy_storage_basic");
+		//GameRegistry.registerTileEntity(TileEntityEnergyStorageBasic.class, "energy_storage_basic");
 		// Super Furnace
 		GameRegistry.registerTileEntity(TileEntitySuperFurnace.class, "super_furnace");
 	}
 	
 	public static final void creativeTabs() {
 		creativeGenerator.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		energyStorageBasic.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		//energyStorageBasic.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		superFurnace.setCreativeTab(CreativeTabsManager.tabBTAWC);
 	}
 	

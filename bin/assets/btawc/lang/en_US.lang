@@ -1,4 +1,6 @@
 # Primary Language file for the project.
+# Containers
+container.super_furnace=Super Furnace
 # Item Groups
 itemGroup.tabBTAWC=BTAWC
 # Items
@@ -29,3 +31,4 @@ item.crystal_of_greed.name=Crystal of Greed (Very Greedy Crystal!)
 # Tiles
 tile.creative_generator.name=Creative Generator (Creative Mode Only)
 tile.energy_storage_basic.name=Energy Storage Basic (Stores 10000RF transfers 100 RF/t)
+tile.super_furnace.name=Super Furnace

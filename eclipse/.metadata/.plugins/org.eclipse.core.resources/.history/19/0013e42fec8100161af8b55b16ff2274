@@ -1,0 +1,126 @@
+package com.derf.btawc.blocks.inventory.container;
+
+import com.derf.btawc.blocks.tileentity.TileEntitySuperFurnace;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+
+public class ContainerSuperFurnace extends ContainerBasic {
+	
+	private TileEntitySuperFurnace superFurnace;
+	private int lastCookTime;
+	private int lastBurnTime;
+	private int lastItemBurnTime;
+	
+	public ContainerSuperFurnace(InventoryPlayer player, TileEntitySuperFurnace superFurnace) {
+		
+		// Create Input Slots for Super Furnace
+		for(int y = 0; y < 3; y++) {
+			for(int x = 0; x < 3; x++) {
+				this.addSlotToContainer(new Slot(superFurnace, y * 3 + x, x * 18 + 8, y * 18 + 8));
+			}
+		}
+		// Create Output Slots for Super Furnace
+		for(int y = 0; y < 3; y++) {
+			for(int x = 0; x < 3; x++) {
+				this.addSlotToContainer(new Slot(superFurnace, (y*3+x)+9, x * 18 + 114, y * 18 + 8) {
+					@Override
+					public boolean isItemValid(ItemStack p_75214_1_) {
+						return false;
+					}
+					
+				});
+			}
+		}
+		// Create Fuel Slot for Super Furnace
+		this.addSlotToContainer(new Slot(superFurnace, 18, 8, 88));
+		// Create Player Inventory
+		// Create Player Inventory slots 9 - 35
+		for(int y = 0; y < 3; y++) {
+			for(int x = 0; x < 9; x++) {
+				this.addSlotToContainer(new Slot(player, (y*9+x) + 9, x * 18 + 6, y * 18 + 124));
+			}
+		}
+		// Create Player Inventory slots 0 - 8
+		for(int x = 0; x < 9; x++) {
+			this.addSlotToContainer(new Slot(player, x, x * 18 + 6, 182));
+		}
+	}
+
+	@Override
+	public void addCraftingToCrafters(ICrafting handler) {
+		super.addCraftingToCrafters(handler);
+		handler.sendProgressBarUpdate(this, 0, this.superFurnace.furnaceCookTime);
+		handler.sendProgressBarUpdate(this, 1, this.superFurnace.furnaceBurnTime);
+		handler.sendProgressBarUpdate(this, 2, this.superFurnace.currentItemBurnTime);
+	}
+
+
+	@Override
+	public void detectAndSendChanges() {
+		super.detectAndSendChanges();
+		
+		for(int i = 0; i < this.crafters.size(); i++) {
+			ICrafting handler = (ICrafting) this.crafters.get(i);
+			
+			if(this.lastCookTime != this.superFurnace.furnaceCookTime) {
+				handler.sendProgressBarUpdate(this, 0, this.superFurnace.furnaceCookTime);
+			}
+			
+			if(this.lastBurnTime != this.superFurnace.furnaceBurnTime) {
+				handler.sendProgressBarUpdate(this, 1, this.superFurnace.furnaceBurnTime);
+			}
+			
+			if(this.lastItemBurnTime != this.superFurnace.currentItemBurnTime) {
+				handler.sendProgressBarUpdate(this, 2, this.superFurnace.currentItemBurnTime);
+			}
+		}
+		
+		this.lastCookTime = this.superFurnace.furnaceCookTime;
+		this.lastBurnTime = this.superFurnace.furnaceBurnTime;
+		this.lastItemBurnTime = this.superFurnace.currentItemBurnTime;
+	}
+
+
+	@Override
+	public void updateProgressBar(int index, int value) {
+		switch(index) {
+		case 0:
+			this.superFurnace.furnaceCookTime = value;
+			break;
+		case 1:
+			this.superFurnace.furnaceBurnTime = value;
+			break;
+		case 2:
+			this.superFurnace.currentItemBurnTime = value;
+			break;
+		default:
+			break;
+		}
+	}
+	
+	@Override
+	public boolean canInteractWith(EntityPlayer player) {
+		return superFurnace.isUseableByPlayer(player);
+	}
+
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer player, int index) {
+		ItemStack stack;
+		Slot slot = (Slot)this.inventorySlots.get(index);
+		
+		if(slot != null && slot.getHasStack()) {
+			ItemStack stack1 = slot.getStack();
+			stack = stack1.copy();
+			
+			if()
+		}
+		return stack = null;
+	}
+	
+	
+}

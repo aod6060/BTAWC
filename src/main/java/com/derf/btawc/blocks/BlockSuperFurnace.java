@@ -1,8 +1,11 @@
 package com.derf.btawc.blocks;
 
+import java.util.Random;
+
 import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.basic.BlockContainerBasic;
 import com.derf.btawc.blocks.tileentity.TileEntitySuperFurnace;
+import com.derf.btawc.client.gui.GuiHandler;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -10,7 +13,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
@@ -18,6 +24,11 @@ import net.minecraft.world.World;
 
 public class BlockSuperFurnace extends BlockContainerBasic {
 
+	private Random rand = new Random();
+	
+	private static boolean isChanging;
+	
+	
 	private boolean on;
 	@SideOnly(Side.CLIENT)
 	private IIcon bottom_top;
@@ -120,6 +131,73 @@ public class BlockSuperFurnace extends BlockContainerBasic {
 		this.blockIcon = reg.registerIcon(Loader.MODID + ":super_furnace_sides");
 		this.front = reg.registerIcon((this.on)? Loader.MODID + ":super_furnace_front_on" : Loader.MODID + ":super_furnace_front");
 		this.bottom_top = reg.registerIcon(Loader.MODID + ":super_furnace_bottom_top");
+	}
+
+	public static void updateFurnaceBlockState(boolean isWorking, World world, int x, int y, int z) {
+		int l = world.getBlockMetadata(x, y, z);
+		TileEntity entity = world.getTileEntity(x, y, z);
+		isChanging = true;
+		if(isWorking) {
+			world.setBlock(x, y, z, BlockManager.superFurnaceOn);
+		} else {
+			world.setBlock(x, y, z, BlockManager.superFurnace);
+		}
+		isChanging = false;
+		world.setBlockMetadataWithNotify(x, y, z, l, 2);
+		if(entity != null) {
+			entity.validate();
+			world.setTileEntity(x, y, z, entity);
+		}
+	}
+
+	@Override
+	public void breakBlock(World world, int x, int y, int z, Block block, int value) {
+		// TODO Auto-generated method stub
+		if(!isChanging) {
+			TileEntitySuperFurnace entity = (TileEntitySuperFurnace)world.getTileEntity(x, y, z);
+			
+			if(entity != null) {
+				for(int i = 0; i < entity.getSizeInventory(); i++) {
+					ItemStack stack = entity.getStackInSlot(i);
+					if(stack != null) {
+						float fx = this.rand.nextFloat() * 0.8f + 0.1f;
+						float fy = this.rand.nextFloat() * 0.8f + 0.1f;
+						float fz = this.rand.nextFloat() * 0.8f + 0.1f;
+						
+						EntityItem items = new EntityItem(world, x + fx, y + fy, z + fz, stack);
+						
+						if(stack.hasTagCompound()) {
+							items.getEntityItem().setTagCompound((NBTTagCompound) stack.getTagCompound().copy());
+						}
+						
+						world.spawnEntityInWorld(items);
+					}
+				}
+			}
+			
+			world.func_147453_f(x, y, z, block);
+		}
+		
+		super.breakBlock(world, x, y, z, block, value);
+	}
+
+	@Override
+	public boolean onBlockActivated(
+			World world, 
+			int x, 
+			int y, 
+			int z,
+			EntityPlayer player, 
+			int side, 
+			float tx, 
+			float ty, 
+			float tz) {
+		
+		if(!world.isRemote) {
+			player.openGui(Loader.INSTANCE, GuiHandler.SUPER_FURNACE_GUI, world, x, y, z);
+		}
+		
+		return true;
 	}
 	
 	

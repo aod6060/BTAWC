@@ -4,6 +4,7 @@ import com.derf.btawc.proxy.IProxy;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -16,6 +17,7 @@ public class Loader {
 	public final static String NAME = "BTAWC";
 	public final static String VERSION = "1.0.1 alpha";
 	// Instance for the mod
+	@Instance
 	public static Loader INSTANCE = new Loader();
 	// Proxy
 	@SidedProxy(clientSide="com.derf.btawc.proxy.ProxyClient", serverSide="com.derf.btawc.proxy.ProxyServer")

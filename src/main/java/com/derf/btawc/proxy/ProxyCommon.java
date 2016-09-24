@@ -1,6 +1,8 @@
 package com.derf.btawc.proxy;
 
+import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.BlockManager;
+import com.derf.btawc.client.gui.GuiHandler;
 import com.derf.btawc.creativetabs.CreativeTabsManager;
 import com.derf.btawc.handler.HandlerManager;
 import com.derf.btawc.items.ItemsManager;
@@ -8,6 +10,7 @@ import com.derf.btawc.items.ItemsManager;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 public class ProxyCommon implements IProxy {
 
@@ -28,6 +31,7 @@ public class ProxyCommon implements IProxy {
 		ItemsManager.crafting();
 		BlockManager.crafting();
 		HandlerManager.create();
+		NetworkRegistry.INSTANCE.registerGuiHandler(Loader.INSTANCE, new GuiHandler());
 	}
 
 	@Override

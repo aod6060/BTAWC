@@ -1,5 +1,0 @@
-package com.derf.btawc.blocks.tileentity;
-
-public class TileEntitySuperFurnace extends TileEntityBasic implements IInventory {
-	// Add stuff in a minute...
-}

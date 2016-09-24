@@ -1,7 +1,21 @@
+1.0.1 alpha
+------------------------------------------------------------------
+- Updated Growth Devices Speed
+	- Regular, Super and Mega are at the same speed.
+- Added Hoes of greed
+	- Regular: create 3x3 farmland at 2x produce
+	- Super: creates 5x5 farmland at 4x produce
+	- Mega: creates 7x7 farmland at 8x produce
+	- Ultimate: create 9x9 farmland at 16x produce (overpowered yes but very late game)
+- Added Super Furnace
+	- Cookes 9 different items at the same time
+	- Does it at the same fuel cost as a regular furnace
+- Added Creative RF Generator (to play around with RF stuff)
+- Added Crystal of Greed (yet another useless crafting item, well not so much if you don't want a how of greed).
+- Added a ton of internal stuff that doesn't effect the player directly.
+- More to come and more to fix...
 1.0.0 alpha
-
 ------------------------------------------------
-
 - Added Growth Devices (Regular, Super, Mega, and Ultimate, Frame)
 - Added Magnets (Items, Animal, Frame)
 - Added Flowtation Device (aka Creative Flight + Frame)

@@ -1,0 +1,21 @@
+package com.derf.btawc.client;
+
+public class RenderUtils {
+	public static final float COLOR_R = 1.0f / 255.0f;
+	
+	public static int getPackedColor(float red, float green, float blue) {
+		
+	}
+	
+	public static int getPackedColor(int red, int green, int blue) {
+		return (blue << 16) | (green << 8) | red;
+	}
+	
+	public static int convertFloatToIntColor(float f) {
+		return (int) (f * 255);
+	}
+	
+	public static float convertIntToFloatColor(int i) {
+		return i * COLOR_R;
+	}
+}

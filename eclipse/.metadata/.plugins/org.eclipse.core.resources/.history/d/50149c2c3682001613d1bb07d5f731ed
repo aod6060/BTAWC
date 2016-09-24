@@ -1,0 +1,53 @@
+package com.derf.btawc.items.tools;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.derf.btawc.util.OreDictionaryUtils;
+
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemStack;
+
+public class ItemPickaxeOfGreed extends ItemPickaxe {
+
+	private int count;
+	private static List<Block> blocks = new ArrayList<Block>();
+	
+	public ItemPickaxeOfGreed(String name, int count) {
+		super(ToolMaterial.EMERALD);
+	}
+	
+	public static void registerOres() {
+		List<List<ItemStack>> result = OreDictionaryUtils.searchForItemStack("ore");
+		
+		for(List<ItemStack> stacks : result) {
+			for(ItemStack stack : stacks) {
+				Block block = Block.getBlockFromItem(stack.getItem());
+				if(block != null) {
+					System.out.println("block added to PickaxeOfGreed: " + block.getLocalizedName());
+					blocks.add(block);
+				}
+			}
+		}
+	}
+	
+	public static boolean isBlockDuplicatable(Block block) {
+		boolean b = false;
+		
+		for(Block bl : blocks) {
+			if(bl == block) {
+				b = true;
+				break;
+			}
+		}
+		
+		return b;
+	}
+	
+	@Override
+	public boolean isFull3D() {
+		return true;
+	}
+	
+}

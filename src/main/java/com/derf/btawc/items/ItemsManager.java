@@ -10,6 +10,7 @@ import com.derf.btawc.items.magnet.ItemMagnetItems;
 import com.derf.btawc.items.misc.ItemAnimalIngotCooked;
 import com.derf.btawc.items.misc.ItemAnimalIngotUncooked;
 import com.derf.btawc.items.tools.ItemHoeOfGreed;
+import com.derf.btawc.items.tools.ItemPickaxeOfGreed;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
@@ -41,12 +42,24 @@ public class ItemsManager {
 	public static Item hoeOfGreedMega;			// tier 3 hoe of greed, 7x7 space, and 8x produce
 	public static Item hoeOfGreedUltra;			// tier 4 hoe of greed, 9x9 space, and 16x produce
 	
+	// Pickaxe of Greed
+	public static Item pickaxeOfGreed;			// tier 1, 2x produce on ores
+	public static Item pickaxeOfGreedSuper;		// tier 2, 4x produce on ores
+	public static Item pickaxeOfGreedMega;		// tier 3, 8x produce on ores
+	public static Item pickaxeOfGreedUltra;		// tier 4, 16x produce on ores
+	// Axe of Greed
+	// Shovel of Greed
+	// Sword of Greed
+	// Sword of Greedy Wrath
 	// Misc
 	public static Item netharStarMesh;
 	public static Item netharStarIngot;			// This is a new ingot that is made from nether star, diamonds, and iron...
 	public static Item animalIngotUncooked;		// This is a new ingot that is mode from steak, pork, chicken...
 	public static Item animalIngotCooked;		// Very good food source :D
 	public static Item crystalOfGreed;			// Very greedy crystal :)
+	public static Item mobIngot;				// Very scary ingot
+	public static Item crystalOfWrath;			// Very angry crystal :)
+	public static Item graphite;				// Used for solar and lunar panels
 	
 	public static final void create() {
 		// Growth Device
@@ -63,16 +76,24 @@ public class ItemsManager {
 		flowtationDeviceFrame = new ItemBasic("flowtation_device_frame");
 		flowtationDevice = new ItemFlowtationDevice();
 		// Hoe of Greed
-		hoeOfGreed = new ItemHoeOfGreed("hoe_of_greed_basic", 1000, 3, 2);
-		hoeOfGreedSuper = new ItemHoeOfGreed("hoe_of_greed_super", 2000, 5, 4);
-		hoeOfGreedMega = new ItemHoeOfGreed("hoe_of_greed_mega", 4000, 7, 8);
-		hoeOfGreedUltra = new ItemHoeOfGreed("hoe_of_greed_ultra", 8000, 9, 16);
+		hoeOfGreed = new ItemHoeOfGreed("hoe_of_greed_basic", 10000, 3, 2);
+		hoeOfGreedSuper = new ItemHoeOfGreed("hoe_of_greed_super", 20000, 5, 4);
+		hoeOfGreedMega = new ItemHoeOfGreed("hoe_of_greed_mega", 40000, 7, 8);
+		hoeOfGreedUltra = new ItemHoeOfGreed("hoe_of_greed_ultra", 80000, 9, 16);
+		// Pickaxe of Greed
+		pickaxeOfGreed = new ItemPickaxeOfGreed("pickaxe_of_greed_basic", 2);			
+		pickaxeOfGreedSuper = new ItemPickaxeOfGreed("pickaxe_of_greed_super", 4);		
+		pickaxeOfGreedMega = new ItemPickaxeOfGreed("pickaxe_of_greed_mega", 8);		
+		pickaxeOfGreedUltra = new ItemPickaxeOfGreed("pickaxe_of_greed_ultra", 16);
 		// Misc
 		netharStarMesh = new ItemBasic("nethar_star_mesh");
 		netharStarIngot = new ItemBasic("nethar_star_ingot");
 		animalIngotUncooked = new ItemAnimalIngotUncooked();
 		animalIngotCooked = new ItemAnimalIngotCooked();
 		crystalOfGreed = new ItemBasic("crystal_of_greed");
+		mobIngot = new ItemBasic("mob_ingot");
+		crystalOfWrath = new ItemBasic("crystal_of_wrath");
+		graphite = new ItemBasic("graphite");
 	}
 	
 	public static final void register() {
@@ -94,12 +115,20 @@ public class ItemsManager {
 		GameRegistry.registerItem(hoeOfGreedSuper, "hoe_of_greed_super");
 		GameRegistry.registerItem(hoeOfGreedMega, "hoe_of_greed_mega");
 		GameRegistry.registerItem(hoeOfGreedUltra, "hoe_of_greed_ultra");
+		// Pickaxe of Greed
+		GameRegistry.registerItem(pickaxeOfGreed, "pickaxe_of_greed_basic");
+		GameRegistry.registerItem(pickaxeOfGreedSuper, "pickaxe_of_greed_super");
+		GameRegistry.registerItem(pickaxeOfGreedMega, "pickaxe_of_greed_mega");
+		GameRegistry.registerItem(pickaxeOfGreedUltra, "pickaxe_of_greed_ultra");
 		// Misc
 		GameRegistry.registerItem(netharStarMesh, "nethar_star_mesh");
 		GameRegistry.registerItem(netharStarIngot, "nethar_star_ingot");
 		GameRegistry.registerItem(animalIngotUncooked, "animal_ingot_uncooked");
 		GameRegistry.registerItem(animalIngotCooked, "animal_ingot_cooked");
 		GameRegistry.registerItem(crystalOfGreed, "crystal_of_greed");
+		GameRegistry.registerItem(mobIngot, "mob_ingot");
+		GameRegistry.registerItem(crystalOfWrath, "crystal_of_wrath");
+		GameRegistry.registerItem(graphite, "graphite");
 	}
 	
 	public static final void creativeTabs() {
@@ -121,12 +150,20 @@ public class ItemsManager {
 		hoeOfGreedSuper.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		hoeOfGreedMega.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		hoeOfGreedUltra.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		// Pickaxe of Greed
+		pickaxeOfGreed.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		pickaxeOfGreedSuper.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		pickaxeOfGreedMega.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		pickaxeOfGreedUltra.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Misc
 		netharStarMesh.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		netharStarIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		animalIngotUncooked.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		animalIngotCooked.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		crystalOfGreed.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		mobIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		crystalOfWrath.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		graphite.setCreativeTab(CreativeTabsManager.tabBTAWC);
 	}
 	
 	public static final void crafting() {

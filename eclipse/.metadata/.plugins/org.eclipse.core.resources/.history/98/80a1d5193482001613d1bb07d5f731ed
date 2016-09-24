@@ -1,0 +1,12 @@
+package com.derf.btawc.items.tools;
+
+import net.minecraft.item.ItemPickaxe;
+
+public class ItemPickaxeOfGreed extends ItemPickaxe {
+
+	protected ItemPickaxeOfGreed(ToolMaterial p_i45347_1_) {
+		super(ToolMaterial.EMERALD);
+		// TODO Auto-generated constructor stub
+	}
+
+}

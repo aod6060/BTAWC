@@ -23,11 +23,14 @@ item.hoe_of_greed_super.name=Super Hoe of Greed (5x5 area 4x produce)
 item.hoe_of_greed_mega.name=Mega Hoe of Greed (7x7 area 8x produce)
 item.hoe_of_greed_ultra.name=Ultimate Hoe of Greed (9x9 area 16x produce)
 # Misc
-item.nethar_star_mesh.name=Nethar Star Mesh
-item.nethar_star_ingot.name=Nethar Star Ingot
+item.nethar_star_mesh.name=Nether Star Mesh
+item.nethar_star_ingot.name=Nether Star Ingot
 item.animal_ingot_uncooked.name=Animal Ingot (Uncooked)
 item.animal_ingot_cooked.name=Animal Ingot (Cooked)
 item.crystal_of_greed.name=Crystal of Greed (Very Greedy Crystal!)
+item.mob_ingot.name=Mob Ingot (Really scary ingot!)
+item.crystal_of_wrath.name=Crystal of Wrath (Very angry Crystal!)
+item.graphite.name=Graphite
 # Tiles
 tile.creative_generator.name=Creative Generator (Creative Mode Only)
 tile.energy_storage_basic.name=Energy Storage Basic (Stores 10000RF transfers 100 RF/t)

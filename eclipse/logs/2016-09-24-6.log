@@ -1,0 +1,55 @@
+[04:17:16] [main/INFO]: Setting user: Player592
+[04:17:17] [Client thread/INFO]: LWJGL Version: 2.9.1
+[04:17:29] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:BTAWC
+[04:17:30] [Sound Library Loader/INFO]: Sound engine started
+[04:17:31] [Client thread/INFO]: Created: 16x16 textures/blocks-atlas
+[04:17:31] [Client thread/INFO]: Created: 16x16 textures/items-atlas
+[04:17:32] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:BTAWC
+[04:17:33] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[04:17:34] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[04:17:34] [Sound Library Loader/INFO]: Sound engine started
+[04:17:40] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
+[04:17:40] [Server thread/INFO]: Generating keypair
+[04:17:40] [Server thread/INFO]: Preparing start region for level 0
+[04:17:41] [Server thread/INFO]: Preparing spawn area: 29%
+[04:17:42] [Server thread/INFO]: Changing view distance to 7, from 10
+[04:17:42] [Server thread/INFO]: Player592[local:E:8c42fb5f] logged in with entity id 361 at (226.5358627779627, 68.0, 249.64474415542446)
+[04:17:42] [Server thread/INFO]: Player592 joined the game
+[04:17:45] [Server thread/INFO]: Player592 has just earned the achievement [Taking Inventory]
+[04:17:45] [Client thread/INFO]: [CHAT] Player592 has just earned the achievement [Taking Inventory]
+[04:17:58] [Server thread/INFO]: [Player592: Set own game mode to Survival Mode]
+[04:17:58] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[04:18:10] [Server thread/INFO]: [Player592: Set own game mode to Creative Mode]
+[04:18:10] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[04:18:15] [Client thread/INFO]: [CHAT] Flowtation Device: is on
+[04:18:19] [Server thread/INFO]: [Player592: Set own game mode to Survival Mode]
+[04:18:19] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[04:18:28] [Server thread/INFO]: Saving and pausing game...
+[04:18:28] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[04:18:28] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[04:18:28] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[04:20:05] [Server thread/INFO]: [Player592: Set own game mode to Survival Mode]
+[04:20:05] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[04:20:09] [Server thread/INFO]: [Player592: Set own game mode to Creative Mode]
+[04:20:09] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[04:25:07] [Server thread/INFO]: [Player592: Set own game mode to Survival Mode]
+[04:25:07] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[04:27:56] [Server thread/INFO]: [Player592: Set the time to 0]
+[04:27:56] [Client thread/INFO]: [CHAT] Set the time to 0
+[04:28:34] [Server thread/INFO]: [Player592: Set own game mode to Creative Mode]
+[04:28:34] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[04:28:39] [Client thread/INFO]: [CHAT] Item Magnet: is on
+[04:29:17] [Server thread/INFO]: [Player592: Set own game mode to Survival Mode]
+[04:29:17] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[04:31:07] [Server thread/INFO]: [Player592: Set own game mode to Creative Mode]
+[04:31:07] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[04:32:12] [Server thread/INFO]: [Player592: Set own game mode to Survival Mode]
+[04:32:12] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[04:32:58] [Server thread/INFO]: [Player592: Set own game mode to Creative Mode]
+[04:32:58] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[04:33:23] [Server thread/INFO]: [Player592: Set own game mode to Survival Mode]
+[04:33:23] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[04:35:02] [Server thread/INFO]: Saving and pausing game...
+[04:35:02] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[04:35:02] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[04:35:02] [Server thread/INFO]: Saving chunks for level 'New World'/The End

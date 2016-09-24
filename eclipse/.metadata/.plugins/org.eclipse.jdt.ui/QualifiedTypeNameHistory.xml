@@ -21,7 +21,6 @@
 <fullyQualifiedTypeName name="com.derf.btawc.energy.EnergyStorage"/>
 <fullyQualifiedTypeName name="com.derf.btawc.blocks.tileentity.energystorage.TileEntityEnergyStorageBasic"/>
 <fullyQualifiedTypeName name="com.derf.btawc.util.Holder"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.derf.btawc.util.WorldUtils"/>
 <fullyQualifiedTypeName name="net.minecraftforge.common.MinecraftForge"/>
 <fullyQualifiedTypeName name="com.ibm.icu.util.BytesTrie.Result"/>
@@ -31,7 +30,6 @@
 <fullyQualifiedTypeName name="net.minecraft.util.MathHelper"/>
 <fullyQualifiedTypeName name="com.derf.btawc.blocks.basic.BlockContainerBasic"/>
 <fullyQualifiedTypeName name="net.minecraft.item.Item"/>
-<fullyQualifiedTypeName name="net.minecraft.block.Block"/>
 <fullyQualifiedTypeName name="net.minecraft.init.Blocks"/>
 <fullyQualifiedTypeName name="net.minecraft.item.ItemBlock"/>
 <fullyQualifiedTypeName name="net.minecraft.block.material.Material"/>
@@ -55,4 +53,11 @@
 <fullyQualifiedTypeName name="cpw.mods.fml.common.Loader"/>
 <fullyQualifiedTypeName name="com.derf.btawc.Loader"/>
 <fullyQualifiedTypeName name="com.derf.btawc.client.gui.GuiHandler"/>
+<fullyQualifiedTypeName name="net.minecraft.item.ItemTool"/>
+<fullyQualifiedTypeName name="net.minecraft.item.ItemPickaxe"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="net.minecraftforge.oredict.OreDictionary"/>
+<fullyQualifiedTypeName name="net.minecraft.block.Block"/>
+<fullyQualifiedTypeName name="com.derf.btawc.util.OreDictionaryUtils"/>
+<fullyQualifiedTypeName name="com.derf.btawc.items.tools.ItemPickaxeOfGreed"/>
 </qualifiedTypeNameHistroy>

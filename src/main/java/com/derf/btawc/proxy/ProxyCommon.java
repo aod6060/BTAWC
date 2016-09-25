@@ -6,7 +6,9 @@ import com.derf.btawc.client.gui.GuiHandler;
 import com.derf.btawc.creativetabs.CreativeTabsManager;
 import com.derf.btawc.handler.HandlerManager;
 import com.derf.btawc.items.ItemsManager;
+import com.derf.btawc.items.tools.ItemAxeOfGreed;
 import com.derf.btawc.items.tools.ItemPickaxeOfGreed;
+import com.derf.btawc.util.MobDropUtils;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -38,6 +40,8 @@ public class ProxyCommon implements IProxy {
 	@Override
 	public void postInit(FMLPostInitializationEvent e) {
 		ItemPickaxeOfGreed.registerOres();
+		ItemAxeOfGreed.registerLogs();
+		MobDropUtils.registerMobDrops();
 	}
 
 }

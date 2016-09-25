@@ -22,6 +22,21 @@ item.hoe_of_greed_basic.name=Hoe of Greed (3x3 area 2x produce)
 item.hoe_of_greed_super.name=Super Hoe of Greed (5x5 area 4x produce)
 item.hoe_of_greed_mega.name=Mega Hoe of Greed (7x7 area 8x produce)
 item.hoe_of_greed_ultra.name=Ultimate Hoe of Greed (9x9 area 16x produce)
+# Pickaxe of Greed
+item.pickaxe_of_greed_basic.name=Pickaxe of Greed
+item.pickaxe_of_greed_super.name=Super Pickaxe of Greed
+item.pickaxe_of_greed_mega.name=Mega Pickaxe of Greed
+item.pickaxe_of_greed_ultra.name=Ultimate Pickaxe of Greed
+# Pickaxe of Greed
+item.axe_of_greed_basic.name=Axe of Greed
+item.axe_of_greed_super.name=Super Axe of Greed
+item.axe_of_greed_mega.name=Mega Axe of Greed
+item.axe_of_greed_ultra.name=Ultimate Axe of Greed 
+# Sword of Greed
+item.sword_of_greed_basic.name=Sword of Greed
+item.sword_of_greed_super.name=Super Sword of Greed
+item.sword_of_greed_mega.name=Mega Sword of Greed
+item.sword_of_greed_ultra.name=Ultimate Sword of Greed 
 # Misc
 item.nethar_star_mesh.name=Nether Star Mesh
 item.nethar_star_ingot.name=Nether Star Ingot

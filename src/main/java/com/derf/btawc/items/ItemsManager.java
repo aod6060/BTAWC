@@ -9,8 +9,10 @@ import com.derf.btawc.items.magnet.ItemMagnetAnimals;
 import com.derf.btawc.items.magnet.ItemMagnetItems;
 import com.derf.btawc.items.misc.ItemAnimalIngotCooked;
 import com.derf.btawc.items.misc.ItemAnimalIngotUncooked;
+import com.derf.btawc.items.tools.ItemAxeOfGreed;
 import com.derf.btawc.items.tools.ItemHoeOfGreed;
 import com.derf.btawc.items.tools.ItemPickaxeOfGreed;
+import com.derf.btawc.items.tools.ItemSwordOfGreed;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
@@ -26,30 +28,33 @@ public class ItemsManager {
 	public static Item growthDeviceSuper; 		// 5x5 slow
 	public static Item growthDeviceMega; 		// 7x7 fast
 	public static Item growthDeviceUltra; 		// 9x9 fastest
-	
 	// Magnets
 	public static Item magnetFrame;				// Magnet Frame
 	public static Item magnetItems;				// This is a simple Item magnet
 	public static Item magnetAnimals;			// This is a simple Magnet for farm animals
-	
 	// Flowtation Device
 	public static Item flowtationDeviceFrame;	// Flowtation Device Frame
 	public static Item flowtationDevice;		// Flowtation Device, allows you to have creative flight
-	
 	// Hoe of Greed
 	public static Item hoeOfGreed;				// tier 1 hoe of greed, 3x3 space, and 2x produce
 	public static Item hoeOfGreedSuper;			// tier 2 hoe of greed, 5x5 space, and 4x produce
 	public static Item hoeOfGreedMega;			// tier 3 hoe of greed, 7x7 space, and 8x produce
 	public static Item hoeOfGreedUltra;			// tier 4 hoe of greed, 9x9 space, and 16x produce
-	
 	// Pickaxe of Greed
 	public static Item pickaxeOfGreed;			// tier 1, 2x produce on ores
 	public static Item pickaxeOfGreedSuper;		// tier 2, 4x produce on ores
 	public static Item pickaxeOfGreedMega;		// tier 3, 8x produce on ores
 	public static Item pickaxeOfGreedUltra;		// tier 4, 16x produce on ores
 	// Axe of Greed
-	// Shovel of Greed
+	public static Item axeOfGreed;				// tier 1, 2x produce on ores
+	public static Item axeOfGreedSuper;			// tier 2, 4x produce on ores
+	public static Item axeOfGreedMega;			// tier 3, 8x produce on ores
+	public static Item axeOfGreedUltra;			// tier 4, 16x produce on ores
 	// Sword of Greed
+	public static Item swordOfGreed;			// 2x mob drops, mob drop after hit 2x
+	public static Item swordOfGreedSuper;		// 4x mob drops, mob drop after hit 4x
+	public static Item swordOfGreedMega;		// 8x mob drops, mob drop after hit 8x
+	public static Item swordOfGreedUltra;		// 16x mob drops, mob drop after hit 16x
 	// Sword of Greedy Wrath
 	// Misc
 	public static Item netharStarMesh;
@@ -81,10 +86,20 @@ public class ItemsManager {
 		hoeOfGreedMega = new ItemHoeOfGreed("hoe_of_greed_mega", 40000, 7, 8);
 		hoeOfGreedUltra = new ItemHoeOfGreed("hoe_of_greed_ultra", 80000, 9, 16);
 		// Pickaxe of Greed
-		pickaxeOfGreed = new ItemPickaxeOfGreed("pickaxe_of_greed_basic", 2);			
-		pickaxeOfGreedSuper = new ItemPickaxeOfGreed("pickaxe_of_greed_super", 4);		
-		pickaxeOfGreedMega = new ItemPickaxeOfGreed("pickaxe_of_greed_mega", 8);		
-		pickaxeOfGreedUltra = new ItemPickaxeOfGreed("pickaxe_of_greed_ultra", 16);
+		pickaxeOfGreed = new ItemPickaxeOfGreed("pickaxe_of_greed_basic", 2, 10000);			
+		pickaxeOfGreedSuper = new ItemPickaxeOfGreed("pickaxe_of_greed_super", 4, 20000);		
+		pickaxeOfGreedMega = new ItemPickaxeOfGreed("pickaxe_of_greed_mega", 8, 40000);		
+		pickaxeOfGreedUltra = new ItemPickaxeOfGreed("pickaxe_of_greed_ultra", 16, 80000);
+		// Axe of Greed
+		axeOfGreed = new ItemAxeOfGreed("axe_of_greed_basic", 2, 10000);
+		axeOfGreedSuper = new ItemAxeOfGreed("axe_of_greed_super", 4, 20000);
+		axeOfGreedMega = new ItemAxeOfGreed("axe_of_greed_mega", 8, 40000);
+		axeOfGreedUltra = new ItemAxeOfGreed("axe_of_greed_ultra", 16, 80000);
+		// Sword of Greed
+		swordOfGreed = new ItemSwordOfGreed("sword_of_greed_basic", 10, 2, 10000);
+		swordOfGreedSuper = new ItemSwordOfGreed("sword_of_greed_super", 20, 4, 20000);
+		swordOfGreedMega = new ItemSwordOfGreed("sword_of_greed_mega", 40, 8, 40000);
+		swordOfGreedUltra = new ItemSwordOfGreed("sword_of_greed_ultra", 80, 16, 80000);
 		// Misc
 		netharStarMesh = new ItemBasic("nethar_star_mesh");
 		netharStarIngot = new ItemBasic("nethar_star_ingot");
@@ -120,6 +135,18 @@ public class ItemsManager {
 		GameRegistry.registerItem(pickaxeOfGreedSuper, "pickaxe_of_greed_super");
 		GameRegistry.registerItem(pickaxeOfGreedMega, "pickaxe_of_greed_mega");
 		GameRegistry.registerItem(pickaxeOfGreedUltra, "pickaxe_of_greed_ultra");
+		// Axe of Greed
+		GameRegistry.registerItem(axeOfGreed, "axe_of_greed_basic");
+		GameRegistry.registerItem(axeOfGreedSuper, "axe_of_greed_super");
+		GameRegistry.registerItem(axeOfGreedMega, "axe_of_greed_mega");
+		GameRegistry.registerItem(axeOfGreedUltra, "axe_of_greed_ultra");
+		// Sword of Greed
+		GameRegistry.registerItem(swordOfGreed, "sword_of_greed_basic");
+		GameRegistry.registerItem(swordOfGreedSuper, "sword_of_greed_super");
+		GameRegistry.registerItem(swordOfGreedMega, "sword_of_greed_mega");
+		GameRegistry.registerItem(swordOfGreedUltra, "sword_of_greed_ultra");
+		// Sword of Greed
+		GameRegistry.registerItem(swordOfGreed, "sword_of_greed_basic");
 		// Misc
 		GameRegistry.registerItem(netharStarMesh, "nethar_star_mesh");
 		GameRegistry.registerItem(netharStarIngot, "nethar_star_ingot");
@@ -155,6 +182,18 @@ public class ItemsManager {
 		pickaxeOfGreedSuper.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		pickaxeOfGreedMega.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		pickaxeOfGreedUltra.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		// Axe of Greed
+		axeOfGreed.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		axeOfGreedSuper.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		axeOfGreedMega.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		axeOfGreedUltra.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		// Sword of Greed
+		swordOfGreed.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		swordOfGreedSuper.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		swordOfGreedMega.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		swordOfGreedUltra.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		// Sword of Greed
+		swordOfGreed.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Misc
 		netharStarMesh.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		netharStarIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
@@ -298,6 +337,119 @@ public class ItemsManager {
 				'i', netharStarIngot,
 				'g', crystalOfGreed,
 				'h', hoeOfGreedMega);
+		// Pickaxe of Greed
+		// Hoe of Greed Basic
+		GameRegistry.addShapedRecipe(
+				new ItemStack(pickaxeOfGreed), 
+				"igi",
+				"ghg",
+				"igi",
+				'i', Items.iron_ingot,
+				'g', crystalOfGreed,
+				'h', Items.diamond_pickaxe);
+		// Hoe of Greed Super
+		GameRegistry.addShapedRecipe(
+				new ItemStack(pickaxeOfGreedSuper), 
+				"igi",
+				"ghg",
+				"igi",
+				'i', Items.gold_ingot,
+				'g', crystalOfGreed,
+				'h', pickaxeOfGreed);
+		// Hoe of Greed Mega
+		GameRegistry.addShapedRecipe(
+				new ItemStack(pickaxeOfGreedMega), 
+				"igi",
+				"ghg",
+				"igi",
+				'i', Items.diamond,
+				'g', crystalOfGreed,
+				'h', pickaxeOfGreedSuper);
+		// Hoe of Greed Ultra
+		GameRegistry.addShapedRecipe(
+				new ItemStack(pickaxeOfGreedUltra), 
+				"igi",
+				"ghg",
+				"igi",
+				'i', netharStarIngot,
+				'g', crystalOfGreed,
+				'h', pickaxeOfGreedMega);
+		// Axe of Greed
+		// Hoe of Greed Basic
+		GameRegistry.addShapedRecipe(
+				new ItemStack(axeOfGreed), 
+				"igi",
+				"ghg",
+				"igi",
+				'i', Items.iron_ingot,
+				'g', crystalOfGreed,
+				'h', Items.diamond_axe);
+		// Hoe of Greed Super
+		GameRegistry.addShapedRecipe(
+				new ItemStack(axeOfGreedSuper), 
+				"igi",
+				"ghg",
+				"igi",
+				'i', Items.gold_ingot,
+				'g', crystalOfGreed,
+				'h', axeOfGreed);
+		// Hoe of Greed Mega
+		GameRegistry.addShapedRecipe(
+				new ItemStack(axeOfGreedMega), 
+				"igi",
+				"ghg",
+				"igi",
+				'i', Items.diamond,
+				'g', crystalOfGreed,
+				'h', axeOfGreedSuper);
+		// Hoe of Greed Ultra
+		GameRegistry.addShapedRecipe(
+				new ItemStack(axeOfGreedUltra), 
+				"igi",
+				"ghg",
+				"igi",
+				'i', netharStarIngot,
+				'g', crystalOfGreed,
+				'h', axeOfGreedMega);
+		
+		// Sword of Greed
+		// Hoe of Greed Basic
+		GameRegistry.addShapedRecipe(
+				new ItemStack(swordOfGreed), 
+				"igi",
+				"ghg",
+				"igi",
+				'i', Items.iron_ingot,
+				'g', crystalOfGreed,
+				'h', Items.diamond_sword);
+		// Hoe of Greed Super
+		GameRegistry.addShapedRecipe(
+				new ItemStack(swordOfGreedSuper), 
+				"igi",
+				"ghg",
+				"igi",
+				'i', Items.gold_ingot,
+				'g', crystalOfGreed,
+				'h', swordOfGreed);
+		// Hoe of Greed Mega
+		GameRegistry.addShapedRecipe(
+				new ItemStack(swordOfGreedMega), 
+				"igi",
+				"ghg",
+				"igi",
+				'i', Items.diamond,
+				'g', crystalOfGreed,
+				'h', swordOfGreedSuper);
+		// Hoe of Greed Ultra
+		GameRegistry.addShapedRecipe(
+				new ItemStack(swordOfGreedUltra), 
+				"igi",
+				"ghg",
+				"igi",
+				'i', netharStarIngot,
+				'g', crystalOfGreed,
+				'h', swordOfGreedMega);
+		
 		// Misc
 		
 		// Nethar Star Mesh

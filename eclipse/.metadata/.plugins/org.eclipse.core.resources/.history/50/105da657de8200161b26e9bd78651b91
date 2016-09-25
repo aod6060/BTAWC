@@ -1,0 +1,50 @@
+package com.derf.btawc.items.tools;
+
+import com.derf.btawc.Loader;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+
+public class ItemSwordOfGreed extends ItemSword {
+
+	private int count;
+	private float damage;
+	
+	public ItemSwordOfGreed(String name, int damage, int count, int max) {
+		super(ToolMaterial.EMERALD);
+		this.damage = damage;
+		this.count = count;
+		this.setMaxDamage(max);
+		this.setUnlocalizedName(name);
+		this.setTextureName(Loader.MODID + ":" + name);
+	}
+	
+	@Override
+    public float func_150931_i()
+    {
+        return damage;
+    }
+	
+	@Override
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+		// TODO Auto-generated method stub
+		
+		if(entity instanceof EntityLivingBase) {
+			EntityLivingBase base = (EntityLivingBase)entity;
+			
+			for(EntityItem item : base.capturedDrops) {
+				System.out.println(item.getEntityItem().getDisplayName());
+			}
+		}
+		
+		return super.onLeftClickEntity(stack, player, entity);
+	}
+	
+	public int getCount() {
+		return count;
+	}
+}

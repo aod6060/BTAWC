@@ -1,0 +1,86 @@
+package com.derf.btawc.util;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
+
+public class MobDropUtils {
+	
+	public class Drops {
+		private ItemStack stack;
+		private int chance;
+		
+		public Drops(ItemStack stack, int chance) {
+			this.stack = stack;
+			this.chance = chance;
+		}
+		
+		public ItemStack getStack() {
+			return stack;
+		}
+		
+		public int getChance() {
+			return chance;
+		}
+		
+		
+	}
+	public static Map<Class<? extends Entity>, List<Drops>> stacks = new HashMap<Class<? extends Entity>, List<Drops>>();
+	
+	public static ItemStack getDropFromEntity(Entity entity) {
+		return stacks.get(entity.getClass());
+	}
+	
+	public static void registerMobDrops() {
+		/*
+		// Aggressive Mobs
+		addMobDrops(EntityBlaze.class, Items.blaze_rod);
+		addMobDrops(EntityCaveSpider.class, Items.string);
+		addMobDrops(EntityCreeper.class, Items.gunpowder);
+		addMobDrops(EntityEnderman.class, Items.ender_pearl);
+		addMobDrops(EntityGhast.class, Items.ghast_tear);
+		addMobDrops(EntityIronGolem.class, Items.iron_ingot);
+		addMobDrops(EntityMagmaCube.class, Items.magma_cream);
+		addMobDrops(EntityPigZombie.class, Items.gold_nugget);
+		addMobDrops(EntitySkeleton.class, Items.bone);
+		addMobDrops(EntitySlime.class, Items.slime_ball);
+		addMobDrops(EntitySnowman.class, Items.snowball);
+		addMobDrops(EntitySpider.class, Items.string);
+		addMobDrops(EntityWitch.class, Items.glowstone_dust);
+		addMobDrops(EntityZombie.class, Items.rotten_flesh);
+		// Passive Mobs
+		addMobDrops(EntityChicken.class, Items.feather);
+		addMobDrops(EntityCow.class, Items.beef);
+		addMobDrops(EntityHorse.class, Items.leather);
+		addMobDrops(EntityMooshroom.class, Items.beef);
+		addMobDrops(EntityPig.class, Items.porkchop);
+		addMobDrops(EntitySheep.class, Blocks.wool);
+		addMobDrops(EntityVillager.class, Items.emerald);
+		// Wither
+		addMobDrops(EntityWither.class, Items.nether_star);
+		// Ender Dragon
+		addMobDrops(EntityDragon.class, Blocks.dragon_egg);
+		addMobDrops(EntityDragonPart.class, Blocks.dragon_egg);
+		*/
+	}
+	
+	/*
+	public static void addMobDrops(Class<? extends Entity> clz, Block block) {
+		addMobDrops(clz, Item.getItemFromBlock(block));
+	}
+	
+	public static void addMobDrops(Class<? extends Entity> clz, Item item) {
+		addMobDrops(clz, new ItemStack(item));
+	}
+	
+	public static void addMobDrops(Class<? extends Entity> clz, ItemStack items) {
+		stacks.put(clz, items);
+	}
+	*/
+	
+	
+	
+}

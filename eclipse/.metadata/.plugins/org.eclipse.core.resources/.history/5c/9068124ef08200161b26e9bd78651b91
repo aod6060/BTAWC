@@ -1,0 +1,128 @@
+package com.derf.btawc.util;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.boss.EntityDragonPart;
+import net.minecraft.entity.boss.EntityWither;
+import net.minecraft.entity.monster.EntityBlaze;
+import net.minecraft.entity.monster.EntityCaveSpider;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntityGhast;
+import net.minecraft.entity.monster.EntityIronGolem;
+import net.minecraft.entity.monster.EntityMagmaCube;
+import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.monster.EntitySnowman;
+import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.EntityWitch;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityMooshroom;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+
+public class MobDropUtils {
+	
+	public static class Drops {
+		private ItemStack stack;
+		private int chance;
+		
+		public Drops(ItemStack stack, int chance) {
+			this.stack = stack;
+			this.chance = chance;
+		}
+		
+		public ItemStack getStack() {
+			return stack;
+		}
+		
+		public int getChance() {
+			return chance;
+		}
+		
+		public static Drops create(ItemStack stack, int chance) {
+			return new Drops(stack, chance);
+		}
+	}
+	
+	public static Map<Class<? extends Entity>, List<Drops>> drops = new HashMap<Class<? extends Entity>, List<Drops>>();
+	
+	public static List<Drops> getDropFromEntity(Entity entity) {
+		return drops.get(entity.getClass());
+	}
+	
+	public static void registerMobDrops() {
+		// Aggressive Mobs
+		addDrops(EntityBlaze.class, Items.blaze_rod, 10);
+		addDrops(EntityCaveSpider.class, Items.string, 10);
+		addDrops(EntityCreeper.class, Items.gunpowder, 10);
+		addDrops(EntityEnderman.class, Items.ender_pearl, 10);
+		addDrops(EntityGhast.class, Items.ghast_tear, 10);
+		addDrops(EntityIronGolem.class, Items.iron_ingot, 10);
+		addDrops(EntityMagmaCube.class, Items.magma_cream, 10);
+		addDrops(EntityPigZombie.class, Items.gold_nugget, 10);
+		addDrops(EntitySkeleton.class, Items.bone, 10);
+		addDrops(EntitySlime.class, Items.slime_ball, 10);
+		addDrops(EntitySnowman.class, Items.snowball, 10);
+		addDrops(EntitySpider.class, Items.string, 10);
+		addDrops(EntityWitch.class, Items.glowstone_dust, 10);
+		addDrops(EntityZombie.class, Items.rotten_flesh, 10);
+		// Passive Mobs
+		addDrops(EntityChicken.class, Items.feather, 10);
+		addDrops(EntityCow.class, Items.beef, 10);
+		addDrops(EntityHorse.class, Items.leather, 10);
+		addDrops(EntityMooshroom.class, Items.beef, 10);
+		addDrops(EntityPig.class, Items.porkchop, 10);
+		addDrops(EntitySheep.class, Blocks.wool, 10);
+		addDrops(EntityVillager.class, Items.emerald, 10);
+		// Wither
+		addDrops(EntityWither.class, Items.nether_star, 20);
+		// Ender Dragon
+		addDrops(EntityDragon.class, Blocks.dragon_egg, 20);
+		addDrops(EntityDragonPart.class, Blocks.dragon_egg, 20);
+	}
+	
+	/*
+	public static void addMobDrops(Class<? extends Entity> clz, Block block) {
+		addMobDrops(clz, Item.getItemFromBlock(block));
+	}
+	
+	public static void addMobDrops(Class<? extends Entity> clz, Item item) {
+		addMobDrops(clz, new ItemStack(item));
+	}
+	
+	public static void addMobDrops(Class<? extends Entity> clz, ItemStack items) {
+		stacks.put(clz, items);
+	}
+	*/
+	
+	public static void addDrops(Class<? extends Entity> clz, Block block, int chance) {
+		addDrops(clz, Item.getItemFromBlock(block), chance);
+	}
+	
+	public static void addDrops(Class<? extends Entity> clz, Item item, int chance) {
+		addDrops(clz, new ItemStack(item, 1), chance);
+	}
+	
+	public static void addDrops(Class<? extends Entity> clz, ItemStack stack, int chance) {
+		if(!drops.containsKey(clz)) {
+			drops.put(clz, new ArrayList<Drops>());
+		}
+		drops.get(clz).add(MobDropUtils.Drops.create(stack, chance));
+	}
+}

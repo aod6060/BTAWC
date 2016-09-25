@@ -1,0 +1,14 @@
+package com.derf.btawc.items.tools;
+
+import net.minecraft.item.ItemSword;
+
+public class ItemSwordOfGreed extends ItemSword {
+
+	private int count;
+	
+	public ItemSwordOfGreed() {
+		super(ToolMaterial.EMERALD);
+		// TODO Auto-generated constructor stub
+	}
+
+}

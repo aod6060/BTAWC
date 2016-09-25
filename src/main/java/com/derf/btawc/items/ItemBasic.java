@@ -11,4 +11,5 @@ public class ItemBasic extends Item{
 		this.setUnlocalizedName(name);
 		this.setTextureName(Loader.MODID + ":" + name);
 	}
+	
 }

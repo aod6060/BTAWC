@@ -19,11 +19,12 @@ public class ItemPickaxeOfGreed extends ItemPickaxe {
 	
 	private static List<Block> blocks = new ArrayList<Block>();
 	
-	public ItemPickaxeOfGreed(String name, int count) {
+	public ItemPickaxeOfGreed(String name, int count, int maxDamage) {
 		super(ToolMaterial.EMERALD);
 		this.count = count;
 		this.setUnlocalizedName(name);
 		this.setTextureName(Loader.MODID + ":" + name);
+		this.setMaxDamage(maxDamage);
 	}
 	
 	public static void registerOres() {

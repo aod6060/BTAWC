@@ -1,0 +1,54 @@
+package com.derf.btawc.util;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntityBlaze;
+import net.minecraft.entity.monster.EntityCaveSpider;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntityGhast;
+import net.minecraft.entity.monster.EntityGolem;
+import net.minecraft.entity.monster.EntityIronGolem;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+
+public class MobDropUtils {
+	
+	
+	public static Map<Class<? extends Entity>, ItemStack> stacks = new HashMap<Class<? extends Entity>, ItemStack>();
+	
+	public static ItemStack getDropFromEntity(Entity entity, int count) {
+		ItemStack stack = null;
+		
+		return stack;
+	}
+	
+	public static void registerMobDrops() {
+		addMobDrops(EntityBlaze.class, Items.blaze_rod);
+		addMobDrops(EntityCaveSpider.class, Items.string);
+		addMobDrops(EntityCreeper.class, Items.gunpowder);
+		addMobDrops(EntityEnderman.class, Items.ender_pearl);
+		addMobDrops(EntityGhast.class, Items.ghast_tear);
+		addMobDrops(EntityGolem.class, Items.snowball);
+		addMobDrops(EntityIronGolem.class, Items.iron_ingot);
+		
+	}
+	
+	public static void addMobDrops(Class<? extends Entity> clz, Block block) {
+		addMobDrops(clz, Item.getItemFromBlock(block));
+	}
+	
+	public static void addMobDrops(Class<? extends Entity> clz, Item item) {
+		addMobDrops(clz, new ItemStack(item, 1));
+	}
+	
+	public static void addMobDrops(Class<? extends Entity> clz, ItemStack items) {
+		stacks.put(clz, items);
+	}
+	
+	
+}

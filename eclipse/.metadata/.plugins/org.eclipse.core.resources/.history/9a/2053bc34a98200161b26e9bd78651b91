@@ -1,0 +1,5 @@
+package com.derf.btawc.items.tools;
+
+public class ItemAxeOfGreed extends ItemAxe {
+
+}

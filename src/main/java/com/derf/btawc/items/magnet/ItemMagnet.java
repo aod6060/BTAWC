@@ -83,9 +83,13 @@ public abstract class ItemMagnet extends ItemBasic {
 				item.motionX += delta.getX();
 				item.motionY += delta.getY();
 				item.motionZ += delta.getZ();
+				
+				onMagnetEntityUpdate(item);
 			}
 		}
 	}
+
+	public void onMagnetEntityUpdate(Entity item) {} // Does Nothing
 
 	private void toggle(ItemStack stack) {
 		this.setToggle(stack, !this.isToggle(stack));

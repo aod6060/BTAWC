@@ -1,0 +1,20 @@
+package com.derf.btawc.items.tools;
+
+import net.minecraft.item.ItemSword;
+
+public class ItemSwordOfGreed extends ItemSword {
+
+	private int count;
+	private float damage;
+	
+	public ItemSwordOfGreed(String name, int damage, int count) {
+		super(ToolMaterial.EMERALD);
+		this.damage = damage;
+	}
+	
+	@Override
+    public float func_150931_i()
+    {
+        return damage;
+    }
+}

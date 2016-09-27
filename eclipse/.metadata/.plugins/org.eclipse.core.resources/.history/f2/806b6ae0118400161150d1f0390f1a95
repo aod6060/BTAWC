@@ -1,0 +1,9 @@
+package com.derf.btawc.items.magnet;
+
+public class ItemMagnetMobs extends ItemMagnet {
+
+	public ItemMagnetMobs() {
+		super("magnet_mobs", 32, 4, 0.5);
+	}
+
+}

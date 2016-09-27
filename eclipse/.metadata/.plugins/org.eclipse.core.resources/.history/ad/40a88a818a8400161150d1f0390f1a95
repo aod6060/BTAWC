@@ -1,0 +1,5 @@
+package com.derf.btawc.client.gui;
+
+public class GuiContainerAlloyFurnace extends GuiContainer {
+
+}

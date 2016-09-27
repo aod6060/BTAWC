@@ -1,6 +1,7 @@
 # Primary Language file for the project.
 # Containers
 container.super_furnace=Super Furnace
+container.alloy_furnace=Alloy Furnace
 # Item Groups
 itemGroup.tabBTAWC=BTAWC
 # Items
@@ -14,6 +15,8 @@ item.growth_device_ultimate.name=Ultimate Growth Device (9x9) Its a bit overpowe
 item.magnet_frame.name=Magnet Frame
 item.magnet_items.name=Item Magnet
 item.magnet_animals.name=Animal Magnet
+item.magnet_mobs.name=Mob Magnet
+item.magnet_wither.name=Wither Magnet
 # Flowtation Device
 item.flowtation_device_frame.name=Flowtation Device Frame
 item.flowtation_device.name=Flowtation Device
@@ -37,6 +40,8 @@ item.sword_of_greed_basic.name=Sword of Greed
 item.sword_of_greed_super.name=Super Sword of Greed
 item.sword_of_greed_mega.name=Mega Sword of Greed
 item.sword_of_greed_ultra.name=Ultimate Sword of Greed 
+# Pulsator
+item.pulsator.name=Pulsator
 # Misc
 item.nethar_star_mesh.name=Nether Star Mesh
 item.nethar_star_ingot.name=Nether Star Ingot
@@ -47,6 +52,15 @@ item.mob_ingot.name=Mob Ingot (Really scary ingot!)
 item.crystal_of_wrath.name=Crystal of Wrath (Very angry Crystal!)
 item.graphite.name=Graphite
 # Tiles
+# Generators
 tile.creative_generator.name=Creative Generator (Creative Mode Only)
+# Energy Storage
 tile.energy_storage_basic.name=Energy Storage Basic (Stores 10000RF transfers 100 RF/t)
+# Super Furnace
 tile.super_furnace.name=Super Furnace
+# Wither Proof Blocks
+tile.wither_proof.name=Wither Proof Block
+tile.wither_proof_glass.name=Wither Proof Glass
+tile.wither_proof_light.name=Wither Proof Lamp
+# Alloy Furnace
+tile.alloy_furnace.name=Alloy Furnace

@@ -6,7 +6,7 @@ import net.minecraft.entity.item.EntityXPOrb;
 
 public class ItemMagnetItems extends ItemMagnet {
 	public ItemMagnetItems() {
-		super("magnet_items", 16.0, 0.1);
+		super("magnet_items", 16.0, 0.5, 0.2);
 		this.addEntity(EntityItem.class);
 		this.addEntity(EntityXPOrb.class);
 	}

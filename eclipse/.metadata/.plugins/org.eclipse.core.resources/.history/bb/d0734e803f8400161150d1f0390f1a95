@@ -1,0 +1,10 @@
+package com.derf.btawc.blocks.witherproof;
+
+public class BlockWitherProofGlass extends BlockWitherProof {
+
+	public BlockWitherProofGlass(String name, float lightlevel) {
+		super("wither_proof_glass", lightlevel);
+		// TODO Auto-generated constructor stub
+	}
+
+}

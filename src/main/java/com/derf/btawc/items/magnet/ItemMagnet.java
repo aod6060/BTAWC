@@ -18,9 +18,10 @@ public abstract class ItemMagnet extends ItemBasic {
 
 	private List<Class<? extends Entity>> entities;
 	private double range;
+	private double innerRange;
 	private double strength;
 	
-	public ItemMagnet(String name, double range, double strength) {
+	public ItemMagnet(String name, double range, double innerRange, double strength) {
 		super(name);
 		this.entities = new ArrayList<Class<? extends Entity>>();
 		for(Class<? extends Entity> entity : entities) {
@@ -28,6 +29,7 @@ public abstract class ItemMagnet extends ItemBasic {
 		}
 		this.range = range;
 		this.strength = strength;
+		this.innerRange = innerRange;
 		this.setMaxStackSize(1);
 	}
 
@@ -71,8 +73,10 @@ public abstract class ItemMagnet extends ItemBasic {
 	}
 
 	private void onMagnetUpdate(ItemStack stack, World world, Entity entity) {
-		AxisAlignedBB box = this.createBox(entity);
+		AxisAlignedBB box = this.createBox(entity, this.range);
+		
 		Vec3 pp = new Vec3(entity.posX, entity.posY, entity.posZ);
+		
 		for(Class<? extends Entity> e : this.entities) {
 			List<Entity> list = this.getEntitesWithinAABB(world, e, box);
 			for(Entity item : list) {
@@ -84,12 +88,28 @@ public abstract class ItemMagnet extends ItemBasic {
 				item.motionY += delta.getY();
 				item.motionZ += delta.getZ();
 				
-				onMagnetEntityUpdate(item);
+				onMagnetEntityUpdate(stack, world, entity, item);
+			}
+		}
+		
+		box = this.createBox(entity, this.innerRange);
+		
+		for(Class<? extends Entity> e : this.entities) {
+			List<Entity> list = this.getEntitesWithinAABB(world, e, box);
+			for(Entity item : list) {
+				Vec3 v = new Vec3(item.posX, item.posY, item.posZ);
+				Vec3 delta = Vec3.sub(v, pp);
+				delta = Vec3.unit(delta);
+				delta = Vec3.mul(delta, this.strength);
+				item.motionX += delta.getX();
+				item.motionY += delta.getY();
+				item.motionZ += delta.getZ();
+				this.onMagnetEntityUpdate(stack, world, entity, item);
 			}
 		}
 	}
 
-	public void onMagnetEntityUpdate(Entity item) {} // Does Nothing
+	public void onMagnetEntityUpdate(ItemStack stack, World world, Entity entity, Entity item) {} // Does Nothing
 
 	private void toggle(ItemStack stack) {
 		this.setToggle(stack, !this.isToggle(stack));
@@ -103,14 +123,15 @@ public abstract class ItemMagnet extends ItemBasic {
 		stack.getTagCompound().setBoolean("toggle", value);
 	}
 	
-	private AxisAlignedBB createBox(Entity player) {
+	private AxisAlignedBB createBox(Entity player, double range) {
+		double r = range * 0.5;
 		AxisAlignedBB box = AxisAlignedBB.getBoundingBox(
-				player.posX - range,
-				player.posY - range,
-				player.posZ - range,
-				player.posX + range,
-				player.posY + range,
-				player.posZ + range
+				player.posX - r,
+				player.posY - r,
+				player.posZ - r,
+				player.posX + r,
+				player.posY + r,
+				player.posZ + r
 		);
 		
 		return box;

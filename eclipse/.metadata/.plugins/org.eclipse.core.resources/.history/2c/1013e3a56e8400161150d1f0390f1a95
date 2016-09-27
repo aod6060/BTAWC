@@ -1,0 +1,114 @@
+package com.derf.btawc.blocks;
+
+import java.util.Random;
+
+import com.derf.btawc.Loader;
+import com.derf.btawc.blocks.basic.BlockContainerBasic;
+import com.derf.btawc.blocks.tileentity.TileEntityAlloyFurnace;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
+
+public class BlockAlloyFurnace extends BlockContainerBasic {
+	private boolean on;
+	@SideOnly(Side.CLIENT)
+	private IIcon bottom_top;
+	@SideOnly(Side.CLIENT)
+	private IIcon front;
+	
+	public BlockAlloyFurnace(int lightLevel, boolean on) {
+		super("alloy_furnace", Material.rock, 2.0f, 2.0f, lightLevel, "pickaxe", 0, Block.soundTypeStone);
+		this.on = on;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+		// TODO Auto-generated method stub
+		return new TileEntityAlloyFurnace();
+	}
+
+	@Override
+	public IIcon getIcon(int side, int meta) {
+		// TODO Auto-generated method stub
+		IIcon temp = null;
+		
+		if(side == 1 || side == 0) {
+			temp = this.bottom_top;
+		} else if(side != meta) {
+			temp = this.blockIcon;
+		} else {
+			temp = this.front;
+		}
+		
+		return temp;
+	}
+
+	@Override
+	public void registerBlockIcons(IIconRegister reg) {
+		this.blockIcon = reg.registerIcon(Loader.MODID + ":alloy_furnace_side");
+		String f = (this.on)? ":alloy_furnace_front_on" : ":alloy_furnace_front";
+		this.front = reg.registerIcon(Loader.MODID + f);
+		this.bottom_top = reg.registerIcon(Loader.MODID + ":alloy_furnace_bottom_top");
+	}
+
+	@Override
+	public void onBlockAdded(World world, int x, int y, int z) {
+		// TODO Auto-generated method stub
+		super.onBlockAdded(world, x, y, z);
+		
+		if(!world.isRemote) {
+			Block north = world.getBlock(x, y, z-1);
+			Block south = world.getBlock(x, y, z+1);
+			Block west = world.getBlock(x-1, y, z);
+			Block east = world.getBlock(x+1, y, z);
+			byte meta = 3;
+			
+			if(north.func_149730_j() && !south.func_149730_j()) {
+				meta = 3;
+			}
+			
+			if(south.func_149730_j() && !north.func_149730_j()) {
+				meta = 2;
+			}
+			
+			if(west.func_149730_j() && !east.func_149730_j()) {
+				meta = 5;
+			}
+			
+			if(east.func_149730_j() && !west.func_149730_j()) {
+				meta = 4;
+			}
+			
+			world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+		}
+	}
+
+	@Override
+	public void onBlockPlacedBy(
+			World world, 
+			int x, 
+			int y, 
+			int z,
+			EntityLivingBase entity, 
+			ItemStack stack) {
+		// TODO Auto-generated method stub
+		super.onBlockPlacedBy(world, x, y, z, entity, stack);
+	}
+
+	@Override
+	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+		// TODO Auto-generated method stub
+		return Item.getItemFromBlock(this);
+	}
+	
+	
+}

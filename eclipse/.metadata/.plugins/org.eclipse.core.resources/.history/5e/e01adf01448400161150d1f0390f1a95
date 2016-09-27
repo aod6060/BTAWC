@@ -1,0 +1,9 @@
+package com.derf.btawc.items;
+
+public class ItemPulsator extends ItemBasic {
+
+	public ItemPulsator() {
+		super("pulsator");
+	}
+
+}

@@ -1,0 +1,7 @@
+package com.derf.btawc.items;
+
+import com.derf.btawc.items.magnet.ItemMagnet;
+
+public class ItemWitherMagnet extends ItemMagnet {
+
+}

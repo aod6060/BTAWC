@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -113,7 +114,6 @@ public class BlockSuperFurnace extends BlockContainerBasic {
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 		IIcon temp = null;
-		
 		if(side == 1 || side == 0) {
 			temp = this.bottom_top;
 		} else if(side != meta) {
@@ -121,7 +121,6 @@ public class BlockSuperFurnace extends BlockContainerBasic {
 		} else {
 			temp = this.front;
 		}
-		
 		return temp;
 	}
 
@@ -200,5 +199,15 @@ public class BlockSuperFurnace extends BlockContainerBasic {
 		return true;
 	}
 	
-	
+	@Override
+	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+		// TODO Auto-generated method stub
+		return Item.getItemFromBlock(this);
+	}
+
+	@Override
+	public Item getItem(World p_149694_1_, int p_149694_2_, int p_149694_3_, int p_149694_4_) {
+		// TODO Auto-generated method stub
+		return Item.getItemFromBlock(this);
+	}
 }

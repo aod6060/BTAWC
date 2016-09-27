@@ -1,0 +1,14 @@
+package com.derf.btawc.items;
+
+import com.derf.btawc.items.magnet.ItemMagnet;
+
+import net.minecraft.entity.boss.EntityWither;
+
+public class ItemWitherMagnet extends ItemMagnet {
+
+	public ItemWitherMagnet() {
+		super("magnet_wither", 64.0f, 4.0f, 32.0f);
+		this.addEntity(EntityWither.class);
+	}
+
+}

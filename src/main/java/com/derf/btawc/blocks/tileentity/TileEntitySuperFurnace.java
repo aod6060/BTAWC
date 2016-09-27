@@ -155,7 +155,7 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 		return getItemBurnTime(stack) > 0;
 	}
 
-	private int getItemBurnTime(ItemStack stack) {
+	private static int getItemBurnTime(ItemStack stack) {
 		// TODO Auto-generated method stub
 		int burnTime = 0;
 		
@@ -200,7 +200,6 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
-		// TODO Auto-generated method stub
 		super.readFromNBT(tag);
 		NBTTagList list = tag.getTagList("Items", Constants.NBT.TAG_COMPOUND);
 		this.furnaceItemStack = new ItemStack[this.getSizeInventory()];
@@ -223,7 +222,6 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
-		// TODO Auto-generated method stub
 		super.writeToNBT(tag);
 		tag.setInteger("BurnTime", this.furnaceBurnTime);
 		tag.setInteger("CookTime", this.furnaceCookTime);
@@ -317,13 +315,13 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 			// Using Fuel
 			if(this.furnaceBurnTime != 0 || this.furnaceItemStack[FUEL_SLOT] != null && this.checkIfInputAreAllNull()) {
 				if(this.furnaceBurnTime == 0 && this.canSmelt()) {
-					this.currentItemBurnTime = this.furnaceBurnTime = this.getItemBurnTime(this.furnaceItemStack[FUEL_SLOT]);
+					this.currentItemBurnTime = this.furnaceBurnTime = getItemBurnTime(this.furnaceItemStack[FUEL_SLOT]);
 					
 					if(this.furnaceBurnTime > 0) {
 						flag1 = true;
 						if(this.furnaceItemStack[FUEL_SLOT] != null) {
 							--this.furnaceItemStack[FUEL_SLOT].stackSize;
-							if(this.furnaceItemStack[FUEL_SLOT].stackSize == 0) {
+							if(this.furnaceItemStack[FUEL_SLOT].stackSize <= 0) {
 								this.furnaceItemStack[FUEL_SLOT] = this.furnaceItemStack[FUEL_SLOT].getItem().getContainerItem(this.furnaceItemStack[FUEL_SLOT]);
 							}
 						}
@@ -356,7 +354,6 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 	}
 
 	public boolean isBurning() {
-		// TODO Auto-generated method stub
 		return this.furnaceBurnTime > 0;
 	}
 	

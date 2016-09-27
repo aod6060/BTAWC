@@ -1,0 +1,37 @@
+package com.derf.btawc.items;
+
+import java.util.List;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
+
+public class ItemPulsator extends ItemBasic {
+
+	private double strength;
+	private double range;
+	
+	public ItemPulsator() {
+		super("pulsator");
+	}
+	
+	private AxisAlignedBB createBox(Entity player, double range) {
+		double r = range * 0.5;
+		AxisAlignedBB box = AxisAlignedBB.getBoundingBox(
+				player.posX - r,
+				player.posY - r,
+				player.posZ - r,
+				player.posX + r,
+				player.posY + r,
+				player.posZ + r
+		);
+		
+		return box;
+	}
+	
+	private List<Entity> getEntitesWithinAABB(World world, Class clz, AxisAlignedBB box) {
+		List<Entity> temp;
+		temp = world.getEntitiesWithinAABB(clz, box);
+		return temp;
+	}
+}

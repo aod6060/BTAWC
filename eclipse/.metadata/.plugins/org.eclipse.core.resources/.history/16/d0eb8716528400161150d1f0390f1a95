@@ -1,0 +1,5 @@
+package com.derf.btawc.recipe;
+
+public final class AlloyRecipeManager {
+
+}

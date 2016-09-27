@@ -1,0 +1,51 @@
+package com.derf.btawc.blocks.inventory.container;
+
+import com.derf.btawc.blocks.tileentity.TileEntityAlloyFurnace;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+
+public class ContainerAlloyFurnace extends ContainerBasic {
+
+	private static final int COOKING_SPEED = 400;
+	
+	// Stuff for the container...
+	private final InventoryPlayer player;
+	private TileEntityAlloyFurnace furnace;
+	private int lastCookTime;
+	private int lastBurnTime;
+	private int lastItemBurnTime;
+	
+	public ContainerAlloyFurnace(InventoryPlayer player, TileEntityAlloyFurnace furnace) {
+		// Set Instance Variables
+		this.player = player;
+		this.furnace = furnace;
+		// Create Input Slots 0-3
+		for(int y = 0; y < 2; y++) {
+			for(int x = 0; x < 2; x++) {
+				this.addSlotToContainer(new Slot(furnace, y * 2 + x, x * 18 + 16, y * 18 + 16));
+			}
+		}
+		// Create Output Slots 4 [139, 22]
+		this.addSlotToContainer(new Slot(furnace, 4, 139, 2) {
+
+			@Override
+			public boolean isItemValid(ItemStack p_75214_1_) {
+				return false;
+			}
+			
+		});
+		// Create Fuel Slots 5 [26, 69]
+		
+		// Create Player Inventory 9 - 35 
+		// Create Player Inventory 0 - 8
+	}
+	@Override
+	public boolean canInteractWith(EntityPlayer p_75145_1_) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

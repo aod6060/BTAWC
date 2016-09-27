@@ -1,0 +1,12 @@
+package com.derf.btawc.items;
+
+public class ItemPulsator extends ItemBasic {
+
+	private double strength;
+	private double range;
+	
+	public ItemPulsator() {
+		super("pulsator");
+	}
+
+}

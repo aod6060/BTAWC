@@ -1,0 +1,13 @@
+package com.derf.btawc.recipe;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public final class AlloyRecipeManager {
+	
+	private static List<AlloyRecipe> recipes = new ArrayList<AlloyRecipe>();
+	
+	public static void addRecipe(AlloyRecipe recipe) {
+		recipes.add(recipe);
+	}
+}

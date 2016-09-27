@@ -1,0 +1,14 @@
+package com.derf.btawc.blocks;
+
+import com.derf.btawc.blocks.basic.BlockBasic;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+
+public class BlockAlloyFurnace extends BlockBasic {
+
+	public BlockAlloyFurnace(int lightLevel, boolean on) {
+		super("alloy_furnace", Material.rock, 2.0f, 2.0f, lightLevel, "pickaxe", 0, Block.soundTypeStone);
+	}
+
+}

@@ -1,0 +1,71 @@
+package com.derf.btawc.recipe;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.item.ItemStack;
+
+public class AlloyRecipe {
+	// Input Stuff
+	private ItemStack input1 = null;
+	private ItemStack input2 = null;
+	private ItemStack input3 = null;
+	private ItemStack input4 = null;
+	// Output Result
+	private ItemStack result = null;
+	
+	// Blocks and Items
+	
+	public AlloyRecipe(ItemStack input1, ItemStack input2, ItemStack result) {
+		this(input1, input2, null, result);
+	}
+	
+	// Blocks and Items
+	public AlloyRecipe(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack result) {
+		this(input1, input2, input3, null, result);
+	}
+	
+	
+	
+	// Blocks and Items
+	public AlloyRecipe(Item item1, Item item2, Item item3, Item item4, ItemStack result) {
+		
+	}
+	
+	public AlloyRecipe(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4 , ItemStack result) {	
+		this.input1 = input1;
+		this.input2 = input2;
+		this.input3 = input3;
+		this.input4 = input4;
+		this.result = result;
+	}
+	
+	public ItemStack getInput1() {
+		return input1;
+	}
+	
+	public ItemStack getInput2() {
+		return input2;
+	}
+	
+	public ItemStack getInput3() {
+		return input3;
+	}
+	
+	public ItemStack getInput4() {
+		return input4;
+	}
+	
+	public ItemStack getResult() {
+		return result;
+	}
+	
+	public List<ItemStack> getInputs() {
+		List<ItemStack> temp = new ArrayList<ItemStack>();
+		temp.add(input1);
+		temp.add(input2);
+		temp.add(input3);
+		temp.add(input4);
+		return temp;
+	}
+}

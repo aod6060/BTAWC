@@ -1,0 +1,25 @@
+package com.derf.btawc.recipe;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import net.minecraft.item.ItemStack;
+
+public final class AlloyRecipeManager {
+	
+	//private static List<AlloyRecipe> recipes = new ArrayList<AlloyRecipe>();
+	private static Map<AlloyRecipe, ItemStack> recipes = new HashMap<AlloyRecipe, ItemStack>();
+	
+	
+	public static void addRecipe(AlloyRecipe recipe, ItemStack output) {
+		recipes.put(recipe, output);
+	}
+	
+	public static void addRecipe(Item item1, Item item2, Item item3, Item item4, ItemStack result) {
+		
+	}
+	
+	public static void addRecipe(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4, ItemStack result) {
+		recipes.put(new AlloyRecipe(input1, input2, input3, input4), result);
+	}
+}

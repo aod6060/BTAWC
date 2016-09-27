@@ -7,12 +7,16 @@ import com.derf.btawc.items.growthdevice.ItemGrowthDeviceSuper;
 import com.derf.btawc.items.growthdevice.ItemGrowthDeviceUltimate;
 import com.derf.btawc.items.magnet.ItemMagnetAnimals;
 import com.derf.btawc.items.magnet.ItemMagnetItems;
+import com.derf.btawc.items.magnet.ItemMagnetMobs;
+import com.derf.btawc.items.magnet.ItemMagnetWither;
 import com.derf.btawc.items.misc.ItemAnimalIngotCooked;
 import com.derf.btawc.items.misc.ItemAnimalIngotUncooked;
 import com.derf.btawc.items.tools.ItemAxeOfGreed;
 import com.derf.btawc.items.tools.ItemHoeOfGreed;
 import com.derf.btawc.items.tools.ItemPickaxeOfGreed;
 import com.derf.btawc.items.tools.ItemSwordOfGreed;
+import com.derf.btawc.recipe.AlloyRecipe;
+import com.derf.btawc.recipe.AlloyRecipeManager;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
@@ -32,6 +36,8 @@ public class ItemsManager {
 	public static Item magnetFrame;				// Magnet Frame
 	public static Item magnetItems;				// This is a simple Item magnet
 	public static Item magnetAnimals;			// This is a simple Magnet for farm animals
+	public static Item magnetMobs;				// This is the Mob magnet
+	public static Item magnetWither;			// This is the Wither magnet...
 	// Flowtation Device
 	public static Item flowtationDeviceFrame;	// Flowtation Device Frame
 	public static Item flowtationDevice;		// Flowtation Device, allows you to have creative flight
@@ -55,7 +61,8 @@ public class ItemsManager {
 	public static Item swordOfGreedSuper;		// 4x mob drops, mob drop after hit 4x
 	public static Item swordOfGreedMega;		// 8x mob drops, mob drop after hit 8x
 	public static Item swordOfGreedUltra;		// 16x mob drops, mob drop after hit 16x
-	// Sword of Greedy Wrath
+	// Pulsator
+	public static Item pulsator;				// Makes Creatures fly lol :D
 	// Misc
 	public static Item netharStarMesh;
 	public static Item netharStarIngot;			// This is a new ingot that is made from nether star, diamonds, and iron...
@@ -77,6 +84,8 @@ public class ItemsManager {
 		magnetFrame = new ItemBasic("magnet_frame");
 		magnetItems = new ItemMagnetItems();
 		magnetAnimals = new ItemMagnetAnimals();
+		magnetMobs = new ItemMagnetMobs();
+		magnetWither = new ItemMagnetWither();
 		// Flowtation Device
 		flowtationDeviceFrame = new ItemBasic("flowtation_device_frame");
 		flowtationDevice = new ItemFlowtationDevice();
@@ -100,6 +109,8 @@ public class ItemsManager {
 		swordOfGreedSuper = new ItemSwordOfGreed("sword_of_greed_super", 20, 4, 20000);
 		swordOfGreedMega = new ItemSwordOfGreed("sword_of_greed_mega", 40, 8, 40000);
 		swordOfGreedUltra = new ItemSwordOfGreed("sword_of_greed_ultra", 80, 16, 80000);
+		// Pulsator
+		pulsator = new ItemPulsator(2, 32.0f);
 		// Misc
 		netharStarMesh = new ItemBasic("nethar_star_mesh");
 		netharStarIngot = new ItemBasic("nethar_star_ingot");
@@ -122,6 +133,8 @@ public class ItemsManager {
 		GameRegistry.registerItem(magnetFrame, "magnet_frame");
 		GameRegistry.registerItem(magnetItems, "magnet_items");
 		GameRegistry.registerItem(magnetAnimals, "magnet_animals");
+		GameRegistry.registerItem(magnetMobs, "magnet_mobs");
+		GameRegistry.registerItem(magnetWither, "magnet_wither");
 		// Flowtation Device
 		GameRegistry.registerItem(flowtationDeviceFrame, "flowtation_device_frame");
 		GameRegistry.registerItem(flowtationDevice, "flowtation_device");
@@ -145,8 +158,8 @@ public class ItemsManager {
 		GameRegistry.registerItem(swordOfGreedSuper, "sword_of_greed_super");
 		GameRegistry.registerItem(swordOfGreedMega, "sword_of_greed_mega");
 		GameRegistry.registerItem(swordOfGreedUltra, "sword_of_greed_ultra");
-		// Sword of Greed
-		GameRegistry.registerItem(swordOfGreed, "sword_of_greed_basic");
+		// Pulsator
+		GameRegistry.registerItem(pulsator, "pulsator");
 		// Misc
 		GameRegistry.registerItem(netharStarMesh, "nethar_star_mesh");
 		GameRegistry.registerItem(netharStarIngot, "nethar_star_ingot");
@@ -169,6 +182,8 @@ public class ItemsManager {
 		magnetFrame.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		magnetItems.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		magnetAnimals.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		magnetMobs.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		magnetWither.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Flowtation Device
 		flowtationDeviceFrame.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		flowtationDevice.setCreativeTab(CreativeTabsManager.tabBTAWC);
@@ -192,8 +207,8 @@ public class ItemsManager {
 		swordOfGreedSuper.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		swordOfGreedMega.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		swordOfGreedUltra.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// Sword of Greed
-		swordOfGreed.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		// Pulsator
+		pulsator.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Misc
 		netharStarMesh.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		netharStarIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
@@ -279,6 +294,22 @@ public class ItemsManager {
 				'i', animalIngotCooked,
 				'r', Blocks.redstone_block,
 				'm', magnetFrame);
+		GameRegistry.addShapedRecipe(
+				new ItemStack(magnetMobs), 
+				" i ",
+				"imi",
+				" r ",
+				'i', mobIngot,
+				'r', Blocks.redstone_block,
+				'm', magnetFrame);
+		GameRegistry.addShapedRecipe(
+				new ItemStack(magnetWither), 
+				" i ",
+				"imi",
+				" r ",
+				'i', netharStarIngot,
+				'r', Blocks.redstone_block,
+				'm', magnetMobs);
 		
 		// Flowtation Device
 		
@@ -449,7 +480,16 @@ public class ItemsManager {
 				'i', netharStarIngot,
 				'g', crystalOfGreed,
 				'h', swordOfGreedMega);
-		
+		// Pulsator
+		GameRegistry.addShapedRecipe(
+				new ItemStack(pulsator), 
+				"gmg",
+				"ara",
+				"gmg",
+				'g', Items.gold_ingot,
+				'm', mobIngot,
+				'a', animalIngotCooked,
+				'r', Blocks.redstone_block);
 		// Misc
 		
 		// Nethar Star Mesh
@@ -463,7 +503,12 @@ public class ItemsManager {
 				'n', Items.nether_star);
 		// Nethar Star Ingot
 		GameRegistry.addSmelting(netharStarMesh, new ItemStack(netharStarIngot), 255.0f);
-		
+		AlloyRecipeManager.addRecipe(
+				new ItemStack(Items.gold_ingot), 
+				new ItemStack(Items.diamond), 
+				new ItemStack(Items.nether_star), 
+				null,
+				new ItemStack(netharStarIngot));
 		// Animal Ingot Uncooked
 		GameRegistry.addShapelessRecipe(
 				new ItemStack(animalIngotUncooked), 
@@ -479,7 +524,12 @@ public class ItemsManager {
 		
 		// Animal Ingot Cooked
 		GameRegistry.addSmelting(animalIngotUncooked, new ItemStack(animalIngotCooked), 5.0f);
-		
+		AlloyRecipeManager.addRecipe(
+				new ItemStack(Items.chicken), 
+				new ItemStack(Items.beef),
+				new ItemStack(Items.porkchop), 
+				null, 
+				new ItemStack(animalIngotCooked));
 		// Crystal of Greed
 		GameRegistry.addShapedRecipe(
 				new ItemStack(crystalOfGreed), 
@@ -490,5 +540,34 @@ public class ItemsManager {
 				'i', Items.iron_ingot,
 				'g', Items.gold_ingot,
 				'd', Items.diamond);
+		AlloyRecipeManager.addRecipe(
+				new ItemStack(Items.dye, 1, 4), 
+				new ItemStack(Items.iron_ingot), 
+				new ItemStack(Items.gold_ingot), 
+				new ItemStack(Items.diamond), 
+				new ItemStack(crystalOfGreed));
+		// Mob Ingot
+		AlloyRecipeManager.addRecipe(
+				new ItemStack(Items.gunpowder), 
+				new ItemStack(Items.string), 
+				new ItemStack(Items.rotten_flesh), 
+				null, 
+				new ItemStack(mobIngot));
+		// Crystal of Wrath
+		AlloyRecipeManager.addRecipe(
+				new ItemStack(crystalOfGreed), 
+				new ItemStack(Items.blaze_powder), 
+				new ItemStack(Items.magma_cream), 
+				new ItemStack(Items.ender_pearl), 
+				new ItemStack(crystalOfWrath));
+		
+		// Graphite
+		AlloyRecipeManager.addRecipe(
+				new ItemStack(Items.coal), 
+				new ItemStack(Blocks.sand), 
+				null, 
+				null, 
+				new ItemStack(graphite));
+		
 	}
 }

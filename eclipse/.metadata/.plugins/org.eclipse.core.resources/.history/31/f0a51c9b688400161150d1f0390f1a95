@@ -1,0 +1,14 @@
+package com.derf.btawc.blocks;
+
+import com.derf.btawc.blocks.basic.BlockBasic;
+
+import net.minecraft.block.material.Material;
+
+public class BlockAlloyFurnace extends BlockBasic {
+
+	public BlockAlloyFurnace(String name, Material material, float hardness, float resistance, float lightLevel,
+			String toolClass, int level, SoundType sound) {
+		super(name, material, hardness, resistance, lightLevel, toolClass, level, sound);
+	}
+
+}

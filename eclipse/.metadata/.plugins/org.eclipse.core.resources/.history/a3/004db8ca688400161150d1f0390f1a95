@@ -1,0 +1,23 @@
+package com.derf.btawc.blocks;
+
+import com.derf.btawc.blocks.basic.BlockBasic;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.util.IIcon;
+
+public class BlockAlloyFurnace extends BlockBasic {
+	private boolean on;
+	@SideOnly(Side.CLIENT)
+	private IIcon bottom_top;
+	@SideOnly(Side.CLIENT)
+	private IIcon front;
+	
+	public BlockAlloyFurnace(int lightLevel, boolean on) {
+		super("alloy_furnace", Material.rock, 2.0f, 2.0f, lightLevel, "pickaxe", 0, Block.soundTypeStone);
+		this.on = on;
+	}
+
+}

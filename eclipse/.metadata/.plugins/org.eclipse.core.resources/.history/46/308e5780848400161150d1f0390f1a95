@@ -1,0 +1,18 @@
+package com.derf.btawc.blocks.inventory.container;
+
+import net.minecraft.entity.player.EntityPlayer;
+
+public class ContainerAlloyFurnace extends ContainerBasic {
+
+	private static final int COOKING_SPEED = 400;
+	
+	// Stuff for the container...
+	private final InventoryPlayer player;
+	
+	@Override
+	public boolean canInteractWith(EntityPlayer p_75145_1_) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

@@ -1,0 +1,12 @@
+package com.derf.btawc.items.magnet;
+
+import net.minecraft.entity.monster.EntityMob;
+
+public class ItemMagnetMobs extends ItemMagnet {
+
+	public ItemMagnetMobs() {
+		super("magnet_mobs", 32, 4, 0.5);
+		this.addEntity(EntityMob.class);
+	}
+
+}

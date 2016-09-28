@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="net.minecraft.entity.monster.EntityCreeper"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.monster.EntityEnderman"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.monster.EntityGolem"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.monster.EntityIronGolem"/>
@@ -15,7 +14,6 @@
 <fullyQualifiedTypeName name="net.minecraft.entity.passive.EntityCow"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.passive.EntityHorse"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.passive.EntityMooshroom"/>
-<fullyQualifiedTypeName name="net.minecraft.init.Items"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.passive.EntityPig"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.passive.EntitySheep"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.passive.EntitySquid"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="com.derf.btawc.recipe.AlloyRecipeManager"/>
 <fullyQualifiedTypeName name="java.util.Map.Entry"/>
 <fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="net.minecraft.init.Items"/>
+<fullyQualifiedTypeName name="net.minecraftforge.oredict.OreDictionary"/>
 </qualifiedTypeNameHistroy>

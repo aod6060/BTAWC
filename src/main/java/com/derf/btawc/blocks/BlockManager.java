@@ -136,4 +136,8 @@ public final class BlockManager {
 				'i', Blocks.iron_block);
 		
 	}
+
+	public static void addToOreDictionary() {
+		// Add stuff if needed
+	}
 }

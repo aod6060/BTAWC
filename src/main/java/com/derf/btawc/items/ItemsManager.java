@@ -23,6 +23,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemsManager {
 	
@@ -72,6 +73,8 @@ public class ItemsManager {
 	public static Item mobIngot;				// Very scary ingot
 	public static Item crystalOfWrath;			// Very angry crystal :)
 	public static Item graphite;				// Used for solar and lunar panels
+	public static Item gironIngot;				// Used for machines
+	public static Item steelIngot;				// Used for machines
 	
 	public static final void create() {
 		// Growth Device
@@ -120,6 +123,8 @@ public class ItemsManager {
 		mobIngot = new ItemBasic("mob_ingot");
 		crystalOfWrath = new ItemBasic("crystal_of_wrath");
 		graphite = new ItemBasic("graphite");
+		gironIngot = new ItemBasic("giron_ingot");
+		steelIngot = new ItemBasic("steel_ingot");
 	}
 	
 	public static final void register() {
@@ -169,6 +174,8 @@ public class ItemsManager {
 		GameRegistry.registerItem(mobIngot, "mob_ingot");
 		GameRegistry.registerItem(crystalOfWrath, "crystal_of_wrath");
 		GameRegistry.registerItem(graphite, "graphite");
+		GameRegistry.registerItem(gironIngot, "giron_ingont");
+		GameRegistry.registerItem(steelIngot, "steel_ingot");
 	}
 	
 	public static final void creativeTabs() {
@@ -218,6 +225,8 @@ public class ItemsManager {
 		mobIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		crystalOfWrath.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		graphite.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		gironIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		steelIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
 	}
 	
 	public static final void crafting() {
@@ -568,6 +577,29 @@ public class ItemsManager {
 				null, 
 				null, 
 				new ItemStack(graphite));
-		
+		// Giron Ingot
+		AlloyRecipeManager.addRecipe(
+				new ItemStack(Items.iron_ingot),
+				new ItemStack(Items.gold_ingot),
+				null,
+				null,
+				new ItemStack(gironIngot));
+		// Steel Ingot
+		AlloyRecipeManager.addRecipe(
+				new ItemStack(Items.coal),
+				new ItemStack(Items.iron_ingot),
+				null,
+				null,
+				new ItemStack(steelIngot));
+	}
+	
+	public static void addToOreDictionary() {
+		OreDictionary.registerOre("ingotNetharStar", netharStarIngot);
+		OreDictionary.registerOre("ingotAnimal", animalIngotCooked);
+		OreDictionary.registerOre("ingotMob", mobIngot);
+		OreDictionary.registerOre("ingotGiron", gironIngot);
+		OreDictionary.registerOre("ingotSteel", steelIngot);
+		OreDictionary.registerOre("crystalGreed", crystalOfGreed);
+		OreDictionary.registerOre("crystalWrath", crystalOfWrath);
 	}
 }

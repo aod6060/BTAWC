@@ -39,6 +39,8 @@ public class ProxyCommon implements IProxy {
 
 	@Override
 	public void postInit(FMLPostInitializationEvent e) {
+		ItemsManager.addToOreDictionary();
+		BlockManager.addToOreDictionary();
 		ItemPickaxeOfGreed.registerOres();
 		ItemAxeOfGreed.registerLogs();
 		MobDropUtils.registerMobDrops();

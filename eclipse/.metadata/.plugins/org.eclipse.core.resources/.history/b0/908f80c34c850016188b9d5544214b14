@@ -1,0 +1,73 @@
+package com.derf.btawc.client.gui.furnace;
+
+import com.derf.btawc.Loader;
+import com.derf.btawc.blocks.inventory.container.furnace.ContainerAlloyFurnace;
+import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
+import com.derf.btawc.client.Color;
+import com.derf.btawc.client.gui.GuiContainerBasic;
+import com.derf.btawc.util.GuiRect;
+import com.derf.btawc.util.Vec2;
+
+import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
+
+public class GuiContainerAlloyFurnace extends GuiContainerBasic {
+	private static final ResourceLocation alloyFurnaceGUI = new ResourceLocation(Loader.MODID + ":textures/gui/container/alloy_furnace_gui.png");
+	private final InventoryPlayer player;
+	private TileEntityAlloyFurnace entity;
+	
+	private GuiRect recipeRect = new GuiRect(162, 4, 9, 9);
+	private boolean toggleRecipe = false;
+	
+	public GuiContainerAlloyFurnace(InventoryPlayer player, TileEntityAlloyFurnace entity) {
+		super(new ContainerAlloyFurnace(player, entity));
+		this.player = player;
+		this.entity = entity;
+		this.xSize = 175;
+		this.ySize = 175;
+	}
+
+	
+	@Override
+	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
+		String s = this.entity.hasCustomInventoryName()? this.entity.getInventoryName() : this.getLangString(this.entity.getInventoryName());
+		this.renderString(s, this.xSize / 2 - this.stringWidth(s) / 2, 6, Color.BLACK);
+		String s2 = this.getLangString("container.inventory");
+		this.renderFormatedString("container.inventory", this.xSize - (this.stringWidth(s2) + 9), 79, Color.BLACK);
+	}
+
+
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
+		this.renderBackgroundImage(alloyFurnaceGUI);
+		int k = this.getK();
+		int l = this.getL();
+		
+		if(this.entity.isBurning()) {
+			int i1 = this.entity.getBurnTimeRemainingScaled(17);
+			this.drawTexturedModalRect(k + 26, l + 53 + 14 - i1, 175, 14 - i1, 14, i1 + 1);
+			i1 = this.entity.getCookProgressScaled(24);
+			this.drawTexturedModalRect(k + 78, l + 24, 175, 15, i1 + 1, 15);
+		}
+	}
+	
+	
+	@Override
+	protected void mouseClicked(int x, int y, int button) {
+		// TODO Auto-generated method stub
+		super.mouseClicked(x, y, button);
+		
+		
+		if(button == 0 || button == 1) {
+			Vec2 mc = new Vec2(x, y);
+			
+			if(recipeRect.collide(mc)) {
+				this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
+				toggleRecipe = !toggleRecipe;
+			}
+		}
+	}
+	
+	
+}

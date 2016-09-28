@@ -1,13 +1,17 @@
 package com.derf.btawc.blocks.tileentity.generators;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+
 import com.derf.btawc.blocks.tileentity.TileEntityBasic;
 import com.derf.btawc.energy.EnergyStorage;
 import com.derf.btawc.energy.IEnergyLevelPrintable;
 
 import cofh.api.energy.IEnergyProvider;
-import net.minecraft.entity.player.EntityPlayer;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.network.Packet;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityGenerator extends TileEntityBasic implements IEnergyProvider, IEnergyLevelPrintable {
@@ -60,10 +64,23 @@ public abstract class TileEntityGenerator extends TileEntityBasic implements IEn
 		super.writeToNBT(tag);
 		storage.writeToNBT(tag);
 	}
-
+	
 	@Override
-	public void printEnergyValue(EntityPlayer player) {
-		String s = String.format("Energy Level: [%d/%d] generates %d RF/t", this.getEnergyStored(ForgeDirection.UNKNOWN), this.getMaxEnergyStored(ForgeDirection.UNKNOWN), this.storage.getMaxReceive());
-		player.addChatMessage(new ChatComponentText(s));
+	public String printEnergyValue() {
+		String s = String.format("[%d/%d] %d RF/t", this.storage.getEnergyStored(), this.storage.getMaxEnergyStored(), this.storage.getMaxReceive());
+		return s;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public int getEnergyLevelScaled(int scale) {
+		if(this.storage.getEnergyStored() == 0) {
+			return 0;
+		} else {
+			return this.storage.getEnergyStored() * scale / this.storage.getMaxEnergyStored();
+		}
+	}
+	
+	public EnergyStorage getStorage() {
+		return this.storage;
 	}
 }

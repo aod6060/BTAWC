@@ -50,12 +50,18 @@ public abstract class TileEntityEnergyStorage extends TileEntityBasic implements
 		return true;
 	}
 
+	/*
 	@Override
 	public void printEnergyValue(EntityPlayer player) {
 		String s = String.format("Energy Level: [%d/%d] transfers %d RF/t", this.getEnergyStored(ForgeDirection.UNKNOWN), this.getMaxEnergyStored(ForgeDirection.UNKNOWN), this.storage.getMaxReceive());
 		player.addChatMessage(new ChatComponentText(s));
 	}
-
+	*/
+	@Override
+	public String printEnergyValue() {
+		String s = String.format("Energy Level: [%d/%d] transfers %d RF/t", this.storage.getEnergyStored(), this.storage.getMaxEnergyStored(), this.storage.getMaxReceive());
+		return s;
+	}
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
 		return this.storage.receiveEnergy(maxReceive, simulate);

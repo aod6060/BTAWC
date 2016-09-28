@@ -1,7 +1,10 @@
 package com.derf.btawc.recipe;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import net.minecraft.item.ItemStack;
@@ -33,5 +36,14 @@ public final class AlloyRecipeManager {
 	
 	public static Map<AlloyRecipe, ItemStack> getList() {
 		return recipes;
+	}
+	
+	public static List<Entry<AlloyRecipe, ItemStack>> getListOfRecipes() {
+		Set<Map.Entry<AlloyRecipe, ItemStack>> es = recipes.entrySet();
+		List<Map.Entry<AlloyRecipe, ItemStack>> temp = new ArrayList<Map.Entry<AlloyRecipe, ItemStack>>();
+		for(Map.Entry<AlloyRecipe, ItemStack> e : es) {
+			temp.add(e);
+		}
+		return temp;
 	}
 }

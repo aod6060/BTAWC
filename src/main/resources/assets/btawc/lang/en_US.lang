@@ -2,6 +2,7 @@
 # Containers
 container.super_furnace=Super Furnace
 container.alloy_furnace=Alloy Furnace
+container.creative_generator=Creative Generator
 # Item Groups
 itemGroup.tabBTAWC=BTAWC
 # Items
@@ -45,11 +46,11 @@ item.pulsator.name=Pulsator
 # Misc
 item.nethar_star_mesh.name=Nether Star Mesh
 item.nethar_star_ingot.name=Nether Star Ingot
-item.animal_ingot_uncooked.name=Animal Ingot (Uncooked)
-item.animal_ingot_cooked.name=Animal Ingot (Cooked)
-item.crystal_of_greed.name=Crystal of Greed (Very Greedy Crystal!)
-item.mob_ingot.name=Mob Ingot (Really scary ingot!)
-item.crystal_of_wrath.name=Crystal of Wrath (Very angry Crystal!)
+item.animal_ingot_uncooked.name=Animal Ingot(Uncooked)
+item.animal_ingot_cooked.name=Animal Ingot(Cooked)
+item.crystal_of_greed.name=Crystal of Greed
+item.mob_ingot.name=Mob Ingot
+item.crystal_of_wrath.name=Crystal of Wrath
 item.graphite.name=Graphite
 # Tiles
 # Generators

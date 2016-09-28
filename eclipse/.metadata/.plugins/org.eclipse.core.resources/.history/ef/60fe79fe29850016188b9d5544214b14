@@ -1,0 +1,5 @@
+package com.derf.btawc.client.gui;
+
+public abstract class GuiContainerBasic extends GuiContainer {
+
+}

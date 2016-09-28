@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="furnace" key="selection"/>
+		<item value="SoundHandler" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="SoundHandler"/>
+			<item value="p_73864_3_"/>
+			<item value="ore"/>
 			<item value="furnace"/>
 			<item value="getRenderBlockPass"/>
 			<item value="renderBlockPass"/>
 			<item value="block"/>
 			<item value="capturedDrops"/>
-			<item value="onDeath"/>
-			<item value="dropFewItems"/>
-			<item value="getDropItem"/>
 		</list>
 		<list key="replacehistory">
 		</list>

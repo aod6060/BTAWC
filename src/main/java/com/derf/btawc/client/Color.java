@@ -117,10 +117,6 @@ public class Color {
 	}
 	
 	public int toColor16() {
-		return (getConvertedBlue() << 16) | (getConvertedGreen() << 8) | getConvertedRed();
-	}
-	
-	public int toColor24() {
-		return (getConvertedAlpha() << 24) | (getConvertedBlue() << 16) | (getConvertedGreen() << 8) | getConvertedRed();
+		return (getConvertedRed() << 16) | (getConvertedGreen() << 8) | getConvertedBlue();
 	}
 }

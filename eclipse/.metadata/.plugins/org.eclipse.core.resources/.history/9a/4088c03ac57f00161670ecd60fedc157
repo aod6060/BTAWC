@@ -1,5 +1,0 @@
-package com.derf.btawc.items;
-
-public abstract class ItemMagnet extends ItemBasic {
-
-}

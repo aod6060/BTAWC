@@ -1,5 +1,0 @@
-package com.derf.btawc.proxy;
-
-public class ProxyClient extends ProxyCommon {
-
-}

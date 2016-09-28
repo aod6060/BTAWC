@@ -1,0 +1,59 @@
+package com.derf.btawc.blocks.inventory.container.generator;
+
+import com.derf.btawc.blocks.inventory.container.ContainerBasic;
+import com.derf.btawc.blocks.tileentity.TileEntityAlloyFurnace;
+import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ICrafting;
+import net.minecraftforge.common.util.ForgeDirection;
+
+public class ContainerCreativeGenerator extends ContainerBasic {
+
+	// Stuff for the container...
+	private final InventoryPlayer player;
+	private TileEntityCreativeGenerator generator;
+	private int currentEnergy;
+	private int maxEnergy;
+	
+	public ContainerCreativeGenerator(InventoryPlayer player, TileEntityCreativeGenerator generator) {
+		this.player = player;
+		this.generator = generator;
+		// Create Player Inventory [8, 92], [8, 150]
+		this.createPlayerInventory(player, 8, 92, 8, 150);
+	}
+	
+	@Override
+	public boolean canInteractWith(EntityPlayer p_75145_1_) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void addCraftingToCrafters(ICrafting handler) {
+		// TODO Auto-generated method stub
+		super.addCraftingToCrafters(handler);
+		handler.sendProgressBarUpdate(this, 0, this.generator.getEnergyStored(ForgeDirection.UP));
+		handler.sendProgressBarUpdate(this, 1, this.generator.getMaxEnergyStored(ForgeDirection.UP));
+	}
+
+	@Override
+	public void detectAndSendChanges() {
+		// TODO Auto-generated method stub
+		super.detectAndSendChanges();
+		
+		for(int i = 0; i < this.crafters.size(); i++) {
+			ICrafting handler = (ICrafting)this.crafters.get(i);
+			if(this.currentEnergy != this.generator.getEnergyStored(ForgeDirection.UP)) {
+				handler.sendProgressBarUpdate(this, 0, this.generator.getEnergyStored(ForgeDirection.UP));
+			}
+			
+			if(this.maxEnergy != this.generator.getMaxEnergyStored(ForgeDirection.UP)) {
+				
+			}
+		}
+	}
+	
+	
+}

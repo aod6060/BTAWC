@@ -1,0 +1,105 @@
+---- Minecraft Crash Report ----
+// On the bright side, I bought you a teddy bear!
+
+Time: 9/28/16 3:02 AM
+Description: Rendering screen
+
+java.lang.NullPointerException: Rendering screen
+	at net.minecraft.client.renderer.entity.RenderItem.renderItemIntoGUI(RenderItem.java:419)
+	at net.minecraft.client.renderer.entity.RenderItem.renderItemIntoGUI(RenderItem.java:414)
+	at com.derf.btawc.client.gui.furnace.GuiContainerAlloyFurnace.drawGuiContainerBackgroundLayer(GuiContainerAlloyFurnace.java:78)
+	at net.minecraft.client.gui.inventory.GuiContainer.drawScreen(GuiContainer.java:93)
+	at net.minecraft.client.renderer.EntityRenderer.updateCameraAndRender(EntityRenderer.java:1137)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1067)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:962)
+	at net.minecraft.client.main.Main.main(Main.java:164)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source)
+	at GradleStart.main(Unknown Source)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at net.minecraft.client.renderer.entity.RenderItem.renderItemIntoGUI(RenderItem.java:419)
+	at net.minecraft.client.renderer.entity.RenderItem.renderItemIntoGUI(RenderItem.java:414)
+	at com.derf.btawc.client.gui.furnace.GuiContainerAlloyFurnace.drawGuiContainerBackgroundLayer(GuiContainerAlloyFurnace.java:78)
+	at net.minecraft.client.gui.inventory.GuiContainer.drawScreen(GuiContainer.java:93)
+
+-- Screen render details --
+Details:
+	Screen name: com.derf.btawc.client.gui.furnace.GuiContainerAlloyFurnace
+	Mouse location: Scaled: (293, 42). Absolute: (586, 395)
+	Screen size: Scaled: (427, 240). Absolute: (854, 480). Scale factor of 2
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityClientPlayerMP['Player279'/283, l='MpServer', x=230.92, y=69.62, z=245.65]]
+	Chunk stats: MultiplayerChunkCache: 225, 225
+	Level seed: 0
+	Level generator: ID 00 - default, ver 1. Features enabled: false
+	Level generator options: 
+	Level spawn location: World: (236,64,256), Chunk: (at 12,4,0 in 14,16; contains blocks 224,0,256 to 239,255,271), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Level time: 439653 game time, 105235 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: true), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 19 total; [EntityMinecartChest['entity.MinecartChest.name'/130, l='MpServer', x=236.50, y=38.50, z=236.50], EntityItemFrame['entity.ItemFrame.name'/131, l='MpServer', x=224.06, y=69.50, z=250.50], EntityItemFrame['entity.ItemFrame.name'/132, l='MpServer', x=224.06, y=69.50, z=249.50], EntityItemFrame['entity.ItemFrame.name'/133, l='MpServer', x=224.06, y=69.50, z=248.50], EntitySquid['Squid'/169, l='MpServer', x=271.47, y=48.00, z=189.43], EntityBat['Bat'/170, l='MpServer', x=285.41, y=38.10, z=239.25], EntityWitherSkull['entity.WitherSkull.name'/171, l='MpServer', x=278.97, y=61.09, z=239.53], EntityMinecartChest['entity.MinecartChest.name'/111, l='MpServer', x=185.50, y=43.34, z=301.88], EntityMinecartChest['entity.MinecartChest.name'/146, l='MpServer', x=248.50, y=38.50, z=251.50], EntityBat['Bat'/114, l='MpServer', x=197.25, y=38.10, z=271.75], EntityBat['Bat'/147, l='MpServer', x=247.25, y=30.10, z=270.75], EntityMinecartChest['entity.MinecartChest.name'/115, l='MpServer', x=203.50, y=38.50, z=286.50], EntityBat['Bat'/148, l='MpServer', x=253.88, y=40.01, z=275.45], EntityMinecartChest['entity.MinecartChest.name'/123, l='MpServer', x=215.50, y=32.50, z=237.50], EntitySheep['Sheep'/155, l='MpServer', x=260.14, y=64.00, z=212.68], EntityBat['Bat'/187, l='MpServer', x=295.38, y=38.10, z=238.31], EntityClientPlayerMP['Player279'/283, l='MpServer', x=230.92, y=69.62, z=245.65], EntityMinecartChest['entity.MinecartChest.name'/124, l='MpServer', x=221.50, y=38.50, z=251.50], EntityMinecartChest['entity.MinecartChest.name'/156, l='MpServer', x=269.50, y=40.50, z=228.50]]
+	Retry entities: 0 total; []
+	Server brand: fml,forge
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:415)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2566)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:984)
+	at net.minecraft.client.main.Main.main(Main.java:164)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source)
+	at GradleStart.main(Unknown Source)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 7 (amd64) version 6.1
+	Java Version: 1.8.0_73, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 669261384 bytes (638 MB) / 1037959168 bytes (989 MB) up to 1037959168 bytes (989 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 12, tallocated: 94
+	FML: MCP v9.05 FML v7.10.99.99 Minecraft Forge 10.13.4.1566 4 mods loaded, 4 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCHIJAAAA	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) 
+	UCHIJAAAA	FML{7.10.99.99} [Forge Mod Loader] (forgeSrc-1.7.10-10.13.4.1566-1.7.10.jar) 
+	UCHIJAAAA	Forge{10.13.4.1566} [Minecraft Forge] (forgeSrc-1.7.10-10.13.4.1566-1.7.10.jar) 
+	UCHIJAAAA	btawc{1.0.2 alpha} [BTAWC] (bin) 
+	GL info: ' Vendor: 'ATI Technologies Inc.' Version: '4.5.13447 Compatibility Profile Context 16.300.2311.0' Renderer: 'AMD Radeon HD 7700 Series'
+	Launched Version: 1.7.10
+	LWJGL: 2.9.1
+	OpenGL: AMD Radeon HD 7700 Series GL version 4.5.13447 Compatibility Profile Context 16.300.2311.0, ATI Technologies Inc.
+	GL Caps: Using GL 1.3 multitexturing.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Anisotropic filtering is supported and maximum anisotropy is 16.
+Shaders are available because OpenGL 2.1 is supported.
+
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: Off (1)

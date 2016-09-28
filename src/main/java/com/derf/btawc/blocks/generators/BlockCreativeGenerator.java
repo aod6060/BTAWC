@@ -4,6 +4,7 @@ import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.basic.BlockContainerMultiTextureBasic;
 import com.derf.btawc.blocks.basic.MultiTextureType;
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
+import com.derf.btawc.client.gui.GuiHandler;
 import com.derf.btawc.energy.IEnergyLevelPrintable;
 import com.derf.btawc.util.BlockPos;
 import com.derf.btawc.util.WorldUtils;
@@ -40,21 +41,12 @@ public class BlockCreativeGenerator extends BlockContainerMultiTextureBasic {
 			float tx, 
 			float ty, 
 			float tz) {
-		// TODO Auto-generated method stub
-		
 		boolean b = false;
 		
 		if(!world.isRemote) {
-			BlockPos pos = new BlockPos(x, y, z);
-			
-			TileEntity entity = WorldUtils.getTileEntity(world, pos);
-			
-			if(entity instanceof IEnergyLevelPrintable) {
-				IEnergyLevelPrintable handler = (IEnergyLevelPrintable)entity;
-				handler.printEnergyValue(player);
-				b = true;
-			}
+			player.openGui(Loader.INSTANCE, GuiHandler.CREATIVE_GENERATOR_GUI, world, x, y, z);
 		}
+		
 		return b;
 	}
 	

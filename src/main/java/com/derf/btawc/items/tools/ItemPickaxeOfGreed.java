@@ -9,6 +9,7 @@ import com.derf.btawc.util.OreDictionaryUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -39,6 +40,8 @@ public class ItemPickaxeOfGreed extends ItemPickaxe {
 				}
 			}
 		}
+		
+		blocks.add(Blocks.lit_redstone_ore);
 	}
 	
 	public static boolean isBlockDuplicatable(Block block) {
@@ -70,6 +73,7 @@ public class ItemPickaxeOfGreed extends ItemPickaxe {
 			EntityLivingBase entity) {
 			if(!world.isRemote) {
 				if(this.isBlockDuplicatable(block)) {
+					
 					for(int i = 0; i < this.count - 1; i++) {
 						
 						List<ItemStack> stacks = block.getDrops(world, x, y, z, world.getBlockMetadata(x, y, z), this.itemRand.nextInt(4));

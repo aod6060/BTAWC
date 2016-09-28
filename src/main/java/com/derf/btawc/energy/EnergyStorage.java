@@ -87,7 +87,28 @@ public class EnergyStorage implements IEnergyStorage {
 	public int getMaxExtract() {
 		return maxExtract;
 	}
-	
-	
-	
+
+	public int getEnergy() {
+		return energy;
+	}
+
+	public void setEnergy(int energy) {
+		this.energy = energy;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	public void setMaxReceive(int maxReceive) {
+		this.maxReceive = maxReceive;
+	}
+
+	public void setMaxExtract(int maxExtract) {
+		this.maxExtract = maxExtract;
+	}
 }

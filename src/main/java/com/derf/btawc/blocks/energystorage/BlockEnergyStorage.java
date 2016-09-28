@@ -33,6 +33,7 @@ public abstract class BlockEnergyStorage extends BlockContainerBasic {
 		boolean b = false;
 		
 		if(!world.isRemote) {
+			/*
 			BlockPos pos = new BlockPos(x, y, z);
 			
 			TileEntity entity = WorldUtils.getTileEntity(world, pos);
@@ -42,6 +43,7 @@ public abstract class BlockEnergyStorage extends BlockContainerBasic {
 				handler.printEnergyValue(player);
 				b = true;
 			}
+			*/
 		}
 		
 		return b;

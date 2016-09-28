@@ -1,0 +1,13 @@
+package com.derf.btawc.blocks.inventory.container;
+
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+
+public abstract class ContainerBasic extends Container {
+	
+	protected void createPlayerInventory(InventoryPlayer inventory, int x1, int y1, int x2, int y2) {
+		// Create Player Inventory 9 - 35
+		
+		// Create Player Inventory 0 - 8
+	}
+}

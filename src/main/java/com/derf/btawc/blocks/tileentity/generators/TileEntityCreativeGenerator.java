@@ -19,7 +19,7 @@ public class TileEntityCreativeGenerator extends TileEntityGenerator {
 	
 	public TileEntityCreativeGenerator() {
 		super();
-		this.storage = new EnergyStorage(1000000, 100000);
+		this.storage = new EnergyStorage(1000000, 1000);
 	}
 	
 	protected void updateTileEntities() {

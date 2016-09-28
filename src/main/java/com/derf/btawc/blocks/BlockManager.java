@@ -1,10 +1,12 @@
 package com.derf.btawc.blocks;
 
 import com.derf.btawc.blocks.energystorage.BlockEnergyStorageBasic;
+import com.derf.btawc.blocks.furnace.BlockAlloyFurnace;
+import com.derf.btawc.blocks.furnace.BlockSuperFurnace;
 import com.derf.btawc.blocks.generators.BlockCreativeGenerator;
-import com.derf.btawc.blocks.tileentity.TileEntityAlloyFurnace;
-import com.derf.btawc.blocks.tileentity.TileEntitySuperFurnace;
 import com.derf.btawc.blocks.tileentity.energystorage.TileEntityEnergyStorageBasic;
+import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
+import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
 import com.derf.btawc.blocks.witherproof.BlockWitherProof;
 import com.derf.btawc.blocks.witherproof.BlockWitherProofGlass;

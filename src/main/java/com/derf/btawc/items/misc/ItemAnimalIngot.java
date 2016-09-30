@@ -1,4 +1,4 @@
-package com.derf.btawc.items;
+package com.derf.btawc.items.misc;
 
 import com.derf.btawc.Loader;
 

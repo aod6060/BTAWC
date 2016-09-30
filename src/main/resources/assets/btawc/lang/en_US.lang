@@ -8,10 +8,10 @@ itemGroup.tabBTAWC=BTAWC
 # Items
 # Growth Device
 item.growth_device_frame.name=Growth Device Frame
-item.growth_device.name=Growth Device (3x3) Slowest
-item.growth_device_super.name=Super Growth Device(5x5) Slow
-item.growth_device_mega.name=Mega Growth Device (7x7) Fast
-item.growth_device_ultimate.name=Ultimate Growth Device (9x9) Its a bit overpowered!
+item.growth_device.name=Growth Device (3x3)
+item.growth_device_super.name=Super Growth Device(5x5)
+item.growth_device_mega.name=Mega Growth Device (7x7)
+item.growth_device_ultra.name=Ultimate Growth Device (9x9)
 # Magnet
 item.magnet_frame.name=Magnet Frame
 item.magnet_items.name=Item Magnet
@@ -35,19 +35,17 @@ item.pickaxe_of_greed_ultra.name=Ultimate Pickaxe of Greed
 item.axe_of_greed_basic.name=Axe of Greed
 item.axe_of_greed_super.name=Super Axe of Greed
 item.axe_of_greed_mega.name=Mega Axe of Greed
-item.axe_of_greed_ultra.name=Ultimate Axe of Greed 
+item.axe_of_greed_ultra.name=Ultimate Axe of Greed
 # Sword of Greed
 item.sword_of_greed_basic.name=Sword of Greed
 item.sword_of_greed_super.name=Super Sword of Greed
 item.sword_of_greed_mega.name=Mega Sword of Greed
-item.sword_of_greed_ultra.name=Ultimate Sword of Greed 
+item.sword_of_greed_ultra.name=Ultimate Sword of Greed
 # Pulsator
 item.pulsator.name=Pulsator
 # Misc
-item.nethar_star_mesh.name=Nether Star Mesh
-item.nethar_star_ingot.name=Nether Star Ingot
-item.animal_ingot_uncooked.name=Animal Ingot(Uncooked)
-item.animal_ingot_cooked.name=Animal Ingot(Cooked)
+item.nether_star_ingot.name=Nether Star Ingot
+item.animal_ingot.name=Animal Ingot
 item.crystal_of_greed.name=Crystal of Greed
 item.mob_ingot.name=Mob Ingot
 item.crystal_of_wrath.name=Crystal of Wrath

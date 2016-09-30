@@ -1,27 +1,19 @@
 package com.derf.btawc.items;
 
+import com.derf.btawc.ModRegistry;
 import com.derf.btawc.creativetabs.CreativeTabsManager;
-import com.derf.btawc.items.growthdevice.ItemGrowthDeviceBasic;
-import com.derf.btawc.items.growthdevice.ItemGrowthDeviceMega;
-import com.derf.btawc.items.growthdevice.ItemGrowthDeviceSuper;
-import com.derf.btawc.items.growthdevice.ItemGrowthDeviceUltimate;
 import com.derf.btawc.items.magnet.ItemMagnetAnimals;
 import com.derf.btawc.items.magnet.ItemMagnetItems;
 import com.derf.btawc.items.magnet.ItemMagnetMobs;
 import com.derf.btawc.items.magnet.ItemMagnetWither;
 import com.derf.btawc.items.misc.ItemAnimalIngotCooked;
-import com.derf.btawc.items.misc.ItemAnimalIngotUncooked;
-import com.derf.btawc.items.tools.ItemAxeOfGreed;
-import com.derf.btawc.items.tools.ItemHoeOfGreed;
-import com.derf.btawc.items.tools.ItemPickaxeOfGreed;
-import com.derf.btawc.items.tools.ItemSwordOfGreed;
-import com.derf.btawc.recipe.AlloyRecipe;
-import com.derf.btawc.recipe.AlloyRecipeManager;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemsManager {
@@ -64,10 +56,12 @@ public class ItemsManager {
 	// Pulsator
 	public static Item pulsator;				// Makes Creatures fly lol :D
 	// Misc
-	public static Item netharStarMesh;
-	public static Item netharStarIngot;			// This is a new ingot that is made from nether star, diamonds, and iron...
-	public static Item animalIngotUncooked;		// This is a new ingot that is mode from steak, pork, chicken...
-	public static Item animalIngotCooked;		// Very good food source :D
+	// Not needed
+	//public static Item netharStarMesh;
+	public static Item netherStarIngot;			// This is a new ingot that is made from nether star, diamonds, and iron...
+	// Not needed
+	//public static Item animalIngotUncooked;		// This is a new ingot that is mode from steak, pork, chicken...
+	public static Item animalIngot;		// Very good food source :D
 	public static Item crystalOfGreed;			// Very greedy crystal :)
 	public static Item mobIngot;				// Very scary ingot
 	public static Item crystalOfWrath;			// Very angry crystal :)
@@ -76,13 +70,13 @@ public class ItemsManager {
 	public static Item steelIngot;				// Used for machines
 	
 	public static final void create() {
-		/*
+		
 		// Growth Device
 		growthDeviceFrame = new ItemBasic("growth_device_frame");
-		growthDevice = new ItemGrowthDeviceBasic();
-		growthDeviceSuper = new ItemGrowthDeviceSuper();
-		growthDeviceMega = new ItemGrowthDeviceMega();
-		growthDeviceUltra = new ItemGrowthDeviceUltimate();
+		growthDevice = new ItemGrowthDevice("growth_device", 3, 1);
+		growthDeviceSuper = new ItemGrowthDevice("growth_device_super", 5, 1);
+		growthDeviceMega = new ItemGrowthDevice("growth_device_mega", 7, 1);
+		growthDeviceUltra = new ItemGrowthDevice("growth_device_ultra", 9, 0);
 		// Magnet
 		magnetFrame = new ItemBasic("magnet_frame");
 		magnetItems = new ItemMagnetItems();
@@ -92,6 +86,7 @@ public class ItemsManager {
 		// Flowtation Device
 		flowtationDeviceFrame = new ItemBasic("flowtation_device_frame");
 		flowtationDevice = new ItemFlowtationDevice();
+		/*
 		// Hoe of Greed
 		hoeOfGreed = new ItemHoeOfGreed("hoe_of_greed_basic", 10000, 3, 2);
 		hoeOfGreedSuper = new ItemHoeOfGreed("hoe_of_greed_super", 20000, 5, 4);
@@ -114,37 +109,35 @@ public class ItemsManager {
 		swordOfGreedUltra = new ItemSwordOfGreed("sword_of_greed_ultra", 80, 16, 80000);
 		// Pulsator
 		pulsator = new ItemPulsator(2, 32.0f);
+		*/
 		// Misc
-		netharStarMesh = new ItemBasic("nethar_star_mesh");
-		netharStarIngot = new ItemBasic("nethar_star_ingot");
-		animalIngotUncooked = new ItemAnimalIngotUncooked();
-		animalIngotCooked = new ItemAnimalIngotCooked();
+		netherStarIngot = new ItemBasic("nether_star_ingot");
+		animalIngot = new ItemAnimalIngotCooked();
 		crystalOfGreed = new ItemBasic("crystal_of_greed");
 		mobIngot = new ItemBasic("mob_ingot");
 		crystalOfWrath = new ItemBasic("crystal_of_wrath");
 		graphite = new ItemBasic("graphite");
 		gironIngot = new ItemBasic("giron_ingot");
 		steelIngot = new ItemBasic("steel_ingot");
-		*/
 	}
 	
 	public static final void register() {
-		/*
 		// Growth Device
-		GameRegistry.registerItem(growthDeviceFrame, "growth_device_frame");
-		GameRegistry.registerItem(growthDevice, "growth_device");
-		GameRegistry.registerItem(growthDeviceSuper, "growth_device_super");
-		GameRegistry.registerItem(growthDeviceMega, "growth_device_mega");
-		GameRegistry.registerItem(growthDeviceUltra, "growth_device_ultimate");
+		ModRegistry.registerItem(growthDeviceFrame, "growth_device_frame");
+		ModRegistry.registerItem(growthDevice, "growth_device");
+		ModRegistry.registerItem(growthDeviceSuper, "growth_device_super");
+		ModRegistry.registerItem(growthDeviceMega, "growth_device_mega");
+		ModRegistry.registerItem(growthDeviceUltra, "growth_device_ultra");
 		// Magnet
-		GameRegistry.registerItem(magnetFrame, "magnet_frame");
-		GameRegistry.registerItem(magnetItems, "magnet_items");
-		GameRegistry.registerItem(magnetAnimals, "magnet_animals");
-		GameRegistry.registerItem(magnetMobs, "magnet_mobs");
-		GameRegistry.registerItem(magnetWither, "magnet_wither");
+		ModRegistry.registerItem(magnetFrame, "magnet_frame");
+		ModRegistry.registerItem(magnetItems, "magnet_items");
+		ModRegistry.registerItem(magnetAnimals, "magnet_animals");
+		ModRegistry.registerItem(magnetMobs, "magnet_mobs");
+		ModRegistry.registerItem(magnetWither, "magnet_wither");
 		// Flowtation Device
-		GameRegistry.registerItem(flowtationDeviceFrame, "flowtation_device_frame");
-		GameRegistry.registerItem(flowtationDevice, "flowtation_device");
+		ModRegistry.registerItem(flowtationDeviceFrame, "flowtation_device_frame");
+		ModRegistry.registerItem(flowtationDevice, "flowtation_device");
+		/*
 		// Hoe of Greed
 		GameRegistry.registerItem(hoeOfGreed, "hoe_of_greed_basic");
 		GameRegistry.registerItem(hoeOfGreedSuper, "hoe_of_greed_super");
@@ -167,22 +160,20 @@ public class ItemsManager {
 		GameRegistry.registerItem(swordOfGreedUltra, "sword_of_greed_ultra");
 		// Pulsator
 		GameRegistry.registerItem(pulsator, "pulsator");
-		// Misc
-		GameRegistry.registerItem(netharStarMesh, "nethar_star_mesh");
-		GameRegistry.registerItem(netharStarIngot, "nethar_star_ingot");
-		GameRegistry.registerItem(animalIngotUncooked, "animal_ingot_uncooked");
-		GameRegistry.registerItem(animalIngotCooked, "animal_ingot_cooked");
-		GameRegistry.registerItem(crystalOfGreed, "crystal_of_greed");
-		GameRegistry.registerItem(mobIngot, "mob_ingot");
-		GameRegistry.registerItem(crystalOfWrath, "crystal_of_wrath");
-		GameRegistry.registerItem(graphite, "graphite");
-		GameRegistry.registerItem(gironIngot, "giron_ingont");
-		GameRegistry.registerItem(steelIngot, "steel_ingot");
 		*/
+		// Misc
+		ModRegistry.registerItem(netherStarIngot, "nether_star_ingot");
+		ModRegistry.registerItem(animalIngot, "animal_ingot");
+		ModRegistry.registerItem(crystalOfGreed, "crystal_of_greed");
+		ModRegistry.registerItem(mobIngot, "mob_ingot");
+		ModRegistry.registerItem(crystalOfWrath, "crystal_of_wrath");
+		ModRegistry.registerItem(graphite, "graphite");
+		ModRegistry.registerItem(gironIngot, "giron_ingot");
+		ModRegistry.registerItem(steelIngot, "steel_ingot");
 	}
 	
 	public static final void creativeTabs() {
-		/*
+		
 		// Growth Device
 		growthDeviceFrame.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		growthDevice.setCreativeTab(CreativeTabsManager.tabBTAWC);
@@ -198,6 +189,7 @@ public class ItemsManager {
 		// Flowtation Device
 		flowtationDeviceFrame.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		flowtationDevice.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		/*
 		// hoe of greed
 		hoeOfGreed.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		hoeOfGreedSuper.setCreativeTab(CreativeTabsManager.tabBTAWC);
@@ -220,132 +212,130 @@ public class ItemsManager {
 		swordOfGreedUltra.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Pulsator
 		pulsator.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		*/
 		// Misc
-		netharStarMesh.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		netharStarIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		animalIngotUncooked.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		animalIngotCooked.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		//netharStarMesh.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		netherStarIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		//animalIngotUncooked.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		animalIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		crystalOfGreed.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		mobIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		crystalOfWrath.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		graphite.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		gironIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		steelIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		*/
 	}
 	
 	public static final void crafting() {
-		/*
 		// Grow Device
 		
 		// Grow Device Frame
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(growthDeviceFrame),
 				"wbw",
 				"bib",
 				"wbw",
-				'w', Blocks.planks,
-				'b', new ItemStack(Items.dye, 1, 15),
-				'i', Items.iron_ingot
+				'w', Blocks.PLANKS,
+				'b', new ItemStack(Items.DYE, 1, 15),
+				'i', Items.IRON_INGOT
 		);
+		
 		// Growth Device
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(growthDevice), 
 				" i ",
 				"ifi",
 				" i ",
-				'i', Items.iron_ingot,
+				'i', Items.IRON_INGOT,
 				'f', growthDeviceFrame);
 		// Growth Device Super
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(growthDeviceSuper), 
 				" g ",
 				"gfg",
 				" g ",
-				'g', Items.gold_ingot,
+				'g', Items.GOLD_INGOT,
 				'f', growthDevice);
 		// Growth Device Mega
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(growthDeviceMega), 
 				" d ",
 				"dfd",
 				" d ",
-				'd', Items.diamond,
+				'd', Items.DIAMOND,
 				'f', growthDeviceSuper);
 		// Growth Device Ultimate
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(growthDeviceUltra), 
 				" n ",
 				"nfn",
 				" n ",
-				'n', netharStarIngot,
+				'n', netherStarIngot,
 				'f', growthDeviceMega);
 		// Magnet
 		
 		// Magnet Frame
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(magnetFrame), 
 				"i i",
 				"i i",
 				"ggg",
-				'i', Items.iron_ingot,
-				'g', Items.gold_ingot);
-		
+				'i', Items.IRON_INGOT,
+				'g', Items.GOLD_INGOT);
 		// Magnet Items
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(magnetItems), 
 				" i ",
 				"imi",
 				" r ",
-				'i', Items.iron_ingot,
-				'r', Blocks.redstone_block,
+				'i', Items.IRON_INGOT,
+				'r', Blocks.REDSTONE_BLOCK,
 				'm', magnetFrame);
 		
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(magnetAnimals), 
 				" i ",
 				"imi",
 				" r ",
-				'i', animalIngotCooked,
-				'r', Blocks.redstone_block,
+				'i', animalIngot,
+				'r', Blocks.REDSTONE_BLOCK,
 				'm', magnetFrame);
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(magnetMobs), 
 				" i ",
 				"imi",
 				" r ",
 				'i', mobIngot,
-				'r', Blocks.redstone_block,
+				'r', Blocks.REDSTONE_BLOCK,
 				'm', magnetFrame);
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(magnetWither), 
 				" i ",
 				"imi",
 				" r ",
-				'i', netharStarIngot,
-				'r', Blocks.redstone_block,
+				'i', netherStarIngot,
+				'r', Blocks.REDSTONE_BLOCK,
 				'm', magnetMobs);
 		
 		// Flowtation Device
 		
 		// Flowtation Device Frame
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(flowtationDeviceFrame), 
 				" s ",
 				"sfs",
 				"fff",
-				's', Items.stick,
-				'f', Items.feather);
-		
+				's', Items.STICK,
+				'f', Items.FEATHER);
 		// Flowtation Device
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(flowtationDevice), 
 				" i ",
 				"ifi",
 				" i ",
-				'i', netharStarIngot,
+				'i', netherStarIngot,
 				'f', flowtationDeviceFrame);
-		
+		/*
 		// Hoe of Greed
 		// Hoe of Greed Basic
 		GameRegistry.addShapedRecipe(
@@ -505,110 +495,117 @@ public class ItemsManager {
 				'm', mobIngot,
 				'a', animalIngotCooked,
 				'r', Blocks.redstone_block);
+				*/
 		// Misc
 		
-		// Nethar Star Mesh
-		GameRegistry.addShapedRecipe(
-				new ItemStack(netharStarMesh),
-				"gdg",
-				"dnd",
-				"gdg",
-				'g', Items.gold_ingot,
-				'd', Items.diamond,
-				'n', Items.nether_star);
-		// Nethar Star Ingot
-		GameRegistry.addSmelting(netharStarMesh, new ItemStack(netharStarIngot), 255.0f);
-		AlloyRecipeManager.addRecipe(
-				new ItemStack(Items.gold_ingot), 
-				new ItemStack(Items.diamond), 
-				new ItemStack(Items.nether_star), 
+		// Nether Star Ingot
+		ModRegistry.addAlloyFurnaceRecipe(
+				new ItemStack(Items.GOLD_INGOT), 
+				new ItemStack(Items.DIAMOND), 
+				new ItemStack(Items.NETHER_STAR), 
 				null,
-				new ItemStack(netharStarIngot));
-		// Animal Ingot Uncooked
-		GameRegistry.addShapelessRecipe(
-				new ItemStack(animalIngotUncooked), 
-				Items.chicken,
-				Items.chicken,
-				Items.chicken,
-				Items.beef,
-				Items.beef,
-				Items.beef,
-				Items.porkchop,
-				Items.porkchop,
-				Items.porkchop);
+				new ItemStack(netherStarIngot));
 		
-		// Animal Ingot Cooked
-		GameRegistry.addSmelting(animalIngotUncooked, new ItemStack(animalIngotCooked), 5.0f);
-		AlloyRecipeManager.addRecipe(
-				new ItemStack(Items.chicken), 
-				new ItemStack(Items.beef),
-				new ItemStack(Items.porkchop), 
+		// Animal Ingot
+		ModRegistry.addAlloyFurnaceRecipe(
+				new ItemStack(Items.CHICKEN), 
+				new ItemStack(Items.BEEF),
+				new ItemStack(Items.PORKCHOP), 
 				null, 
-				new ItemStack(animalIngotCooked));
+				new ItemStack(animalIngot));
 		// Crystal of Greed
-		GameRegistry.addShapedRecipe(
-				new ItemStack(crystalOfGreed), 
-				"lgl",
-				"idi",
-				"lgl",
-				'l', new ItemStack(Items.dye, 1, 4),
-				'i', Items.iron_ingot,
-				'g', Items.gold_ingot,
-				'd', Items.diamond);
-		AlloyRecipeManager.addRecipe(
-				new ItemStack(Items.dye, 1, 4), 
-				new ItemStack(Items.iron_ingot), 
-				new ItemStack(Items.gold_ingot), 
-				new ItemStack(Items.diamond), 
+		ModRegistry.addAlloyFurnaceRecipe(
+				new ItemStack(Items.DYE, 1, 4), 
+				new ItemStack(Items.IRON_INGOT), 
+				new ItemStack(Items.GOLD_INGOT), 
+				new ItemStack(Items.DIAMOND), 
 				new ItemStack(crystalOfGreed));
 		// Mob Ingot
-		AlloyRecipeManager.addRecipe(
-				new ItemStack(Items.gunpowder), 
-				new ItemStack(Items.string), 
-				new ItemStack(Items.rotten_flesh), 
+		ModRegistry.addAlloyFurnaceRecipe(
+				new ItemStack(Items.GUNPOWDER), 
+				new ItemStack(Items.STRING), 
+				new ItemStack(Items.ROTTEN_FLESH), 
 				null, 
 				new ItemStack(mobIngot));
 		// Crystal of Wrath
-		AlloyRecipeManager.addRecipe(
+		ModRegistry.addAlloyFurnaceRecipe(
 				new ItemStack(crystalOfGreed), 
-				new ItemStack(Items.blaze_powder), 
-				new ItemStack(Items.magma_cream), 
-				new ItemStack(Items.ender_pearl), 
+				new ItemStack(Items.BLAZE_POWDER), 
+				new ItemStack(Items.MAGMA_CREAM), 
+				new ItemStack(Items.ENDER_PEARL), 
 				new ItemStack(crystalOfWrath));
 		
 		// Graphite
-		AlloyRecipeManager.addRecipe(
-				new ItemStack(Items.coal), 
-				new ItemStack(Blocks.sand), 
+		ModRegistry.addAlloyFurnaceRecipe(
+				new ItemStack(Items.COAL), 
+				new ItemStack(Blocks.SAND), 
 				null, 
 				null, 
 				new ItemStack(graphite));
 		// Giron Ingot
-		AlloyRecipeManager.addRecipe(
-				new ItemStack(Items.iron_ingot),
-				new ItemStack(Items.gold_ingot),
+		ModRegistry.addAlloyFurnaceRecipe(
+				new ItemStack(Items.IRON_INGOT),
+				new ItemStack(Items.GOLD_INGOT),
 				null,
 				null,
 				new ItemStack(gironIngot));
 		// Steel Ingot
-		AlloyRecipeManager.addRecipe(
-				new ItemStack(Items.coal),
-				new ItemStack(Items.iron_ingot),
+		ModRegistry.addAlloyFurnaceRecipe(
+				new ItemStack(Items.COAL),
+				new ItemStack(Items.IRON_INGOT),
 				null,
 				null,
 				new ItemStack(steelIngot));
-				*/
 	}
 	
 	public static void addToOreDictionary() {
-		/*
-		OreDictionary.registerOre("ingotNetharStar", netharStarIngot);
-		OreDictionary.registerOre("ingotAnimal", animalIngotCooked);
+		OreDictionary.registerOre("ingotNetharStar", netherStarIngot);
+		OreDictionary.registerOre("ingotAnimal", animalIngot);
 		OreDictionary.registerOre("ingotMob", mobIngot);
 		OreDictionary.registerOre("ingotGiron", gironIngot);
 		OreDictionary.registerOre("ingotSteel", steelIngot);
 		OreDictionary.registerOre("crystalGreed", crystalOfGreed);
-		OreDictionary.registerOre("crystalWrath", crystalOfWrath)
-		*/
+		OreDictionary.registerOre("crystalWrath", crystalOfWrath);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public static void registerRenderer() {
+		// Growth Device
+		ModRegistry.registerRender(growthDeviceFrame, "growth_device_frame");
+		ModRegistry.registerRender(growthDevice, "growth_device");
+		ModRegistry.registerRender(growthDeviceSuper, "growth_device_super");
+		ModRegistry.registerRender(growthDeviceMega, "growth_device_mega");
+		ModRegistry.registerRender(growthDeviceUltra, "growth_device_ultra");
+		// Magnets
+		ModRegistry.registerRender(magnetFrame, "magnet_frame");
+		ModRegistry.registerRender(magnetItems, "magnet_items");
+		ModRegistry.registerRender(magnetAnimals, "magnet_animals");
+		ModRegistry.registerRender(magnetMobs, "magnet_mobs");
+		ModRegistry.registerRender(magnetWither, "magnet_wither");
+		// Flowtation Device
+		ModRegistry.registerRender(flowtationDeviceFrame, "flowtation_device_frame");
+		ModRegistry.registerRender(flowtationDevice, "flowtation_device");
+		// Hoe of Greed
+		// Pickaxe of Greed
+		// Axe of Greed
+		// Sword of Greed
+		// Pulsator
+		// Misc
+		// Nether Star Ingot
+		ModRegistry.registerRender(netherStarIngot, "nether_star_ingot");
+		// Animal Ingot
+		ModRegistry.registerRender(animalIngot, "animal_ingot");
+		// Crystal of Greed
+		ModRegistry.registerRender(crystalOfGreed, "crystal_of_greed");
+		// Mob Ingot
+		ModRegistry.registerRender(mobIngot, "mob_ingot");
+		// Crystal of Wrath
+		ModRegistry.registerRender(crystalOfWrath, "crystal_of_wrath");
+		// graphite
+		ModRegistry.registerRender(graphite, "graphite");
+		// Giron Ingot
+		ModRegistry.registerRender(gironIngot, "giron_ingot");
+		// Steel Ingot
+		ModRegistry.registerRender(steelIngot, "steel_ingot");
 	}
 }

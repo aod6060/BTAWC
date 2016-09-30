@@ -1,9 +1,9 @@
 package com.derf.btawc.items.misc;
 
-import com.derf.btawc.items.ItemAnimalIngot;
-
+@Deprecated
 public class ItemAnimalIngotUncooked extends ItemAnimalIngot {
 
+	@Deprecated
 	public ItemAnimalIngotUncooked() {
 		super("animal_ingot_uncooked", 1, 0.1f, true);
 	}

@@ -5,6 +5,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 public class ItemFlowtationDevice extends ItemBasic {
@@ -13,15 +16,13 @@ public class ItemFlowtationDevice extends ItemBasic {
 		super("flowtation_device");
 		this.setMaxStackSize(1);
 	}
-
-	/*
+	
 	@Override
-	public ItemStack onItemRightClick(
+	public ActionResult<ItemStack> onItemRightClick(
 			ItemStack stack, 
 			World world, 
-			EntityPlayer player) {
-		// TODO Auto-generated method stub
-		
+			EntityPlayer player,
+			EnumHand hand) {
 		if(stack.getTagCompound() == null) {
 			NBTTagCompound tag = new NBTTagCompound();
 			tag.setBoolean("toggle", false);
@@ -34,13 +35,13 @@ public class ItemFlowtationDevice extends ItemBasic {
 		
 		if(!world.isRemote) {
 			String s = String.format("%s: is %s", stack.getDisplayName(), ((isToggle(stack))? "on" : "off"));
-			player.addChatMessage(new ChatComponentText(s));
+			player.addChatMessage(new TextComponentString(s));
 		}
 		
-		return super.onItemRightClick(stack, world, player);
+		return super.onItemRightClick(stack, world, player, hand);
 	}
-	*/
-	
+
+
 	private void onFlied(ItemStack stack, EntityPlayer player, boolean toggle) {
 		if(!player.capabilities.isCreativeMode) {
 			player.capabilities.allowFlying = toggle;

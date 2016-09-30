@@ -7,9 +7,13 @@ import com.derf.btawc.items.ItemBasic;
 import com.derf.btawc.util.Vec3;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 public abstract class ItemMagnet extends ItemBasic {
@@ -30,10 +34,13 @@ public abstract class ItemMagnet extends ItemBasic {
 		this.innerRange = innerRange;
 		this.setMaxStackSize(1);
 	}
-
-	/*
+	
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	public ActionResult<ItemStack> onItemRightClick(
+			ItemStack stack, 
+			World world, 
+			EntityPlayer player,
+			EnumHand hand) {
 		// TODO Auto-generated method stub
 		
 		if(!world.isRemote) {
@@ -48,16 +55,14 @@ public abstract class ItemMagnet extends ItemBasic {
 			}
 			
 			String s = String.format("%s: is %s", stack.getDisplayName(), ((isToggle(stack))? "on" : "off"));
-			player.addChatMessage(new ChatComponentText(s));
+			player.addChatMessage(new TextComponentString(s));
 		}
-		
-		return super.onItemRightClick(stack, world, player);
+		return super.onItemRightClick(stack, world, player, hand);
 	}
-	*/
-	
+
+
 	@Override
 	public void onUpdate(ItemStack stack, World world, Entity entity, int meta, boolean b) {
-		// TODO Auto-generated method stub
 		super.onUpdate(stack, world, entity, meta, b);
 		
 		if(stack.getTagCompound() == null) {
@@ -142,7 +147,11 @@ public abstract class ItemMagnet extends ItemBasic {
 		return temp;
 	}
 	
-	protected void addEntity(Class<? extends Entity> entity) {
+	public void addEntity(Class<? extends Entity> entity) {
 		this.entities.add(entity);
+	}
+	
+	public List<Class<? extends Entity>> getEntities() {
+		return this.entities;
 	}
 }

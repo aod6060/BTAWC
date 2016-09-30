@@ -1,5 +1,7 @@
 package com.derf.btawc;
 
+import com.derf.btawc.recipe.AlloyRecipeManager;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -121,4 +123,8 @@ public final class ModRegistry {
 		GameRegistry.addSmelting(input, output, xp);
 	}
 	
+	// Adding Mod Recipes Handlers
+	public static void addAlloyFurnaceRecipe(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4, ItemStack result) {
+		AlloyRecipeManager.addRecipe(input1, input2, input3, input4, result);
+	}
 }

@@ -1,3 +1,96 @@
+1.0.2 alpha
+------------------------------------------------------------------
+- Added Alloy Furnace
+	- This is the primary way to craft alloys
+		- Nether Star Ingot
+		- Animal Ingot
+		- Crystal of Greed
+		- Mob Ingot
+		- Graphite (Useless at the mometh)
+		- Crystal of Wrath (Useless for the moment)
+		- Giron Ingot (Useless for the moment)
+		- Steel Ingot (Useless for the moment, note its in the ore dictionary)
+	- I don't have NEI intergration for this Furnace, however it contains a recipe system
+	  that you can toggle to see recipes for the ingots and other alloy furnce items.
+- Added UI for creative generator
+	- It simply shows info of what the creative generator can do
+- Added wither proof blocks (regular, glass, and lamp)
+	- It basically prevents the wither from ecaping and prevents block damage too
+	- The wither won't be able to dig through this stuff
+- Added Pickaxe of Greed
+	- Regular Give 2x the ore with a random chance of fortune...
+	- Super Give 4x the ore with a random chance of fortune...
+	- Mega Give 8x the ore with a random chance of fortune...
+	- Ultimate Give 16x the ore with a random chance of fortune...
+	Can be used on modded ores
+- Added Axe of Greed
+	- Regular Gives you 2x the wood amount...
+	- Super Gives you 4x the wood amount...
+	- Mega Gives you 8x the wood amount...
+	- Ultimate Gives you 16x the wood amount...
+- Added Sword of Greed
+	- Gives you a chance to get mob drops while attacking vanilla mobs
+		- Regular 2x mob drops when attacking 
+		- Regular 4x mob drops when attacking 
+		- Regular 8x mob drops when attacking 
+		- Regular 16x mob drops when attacking 
+	- Supported mobs are vanilla
+		- Aggressive Mobs
+			- Blaze
+			- Cave Spider
+			- Creeper
+			- Enerman
+			- Ghast
+			- Iron Golumn
+			- Zombie Pigman
+			- Skeleton and Wither Skeleton
+			- Slime
+			- Snow Golumn
+			- Spider
+			- Witch
+			- Zombie
+		- Passive Mobs
+			- Chicken
+			- Cow
+			- Horse
+			- Mooshroom
+			- Pig
+			- Sheep
+			- Villager
+		- Bosses
+			- Wither
+			- Ender Dragon
+	- For Modded Mobs I'm not real sure what to do about it. I think forge should add an
+	  Entity Dictionary that is similar to OreDictionary but for Entity classes.
+- Updated Magent System
+	- Added a way to prevent an inner bounding box to prevent entites from blocking your view.
+	- Made several changes to make the magnets more stable.
+- Added Mob Magnet
+	- This Magnet makes aggressive mobs attacked to you, litterally attracked to you.
+- Added Wither Magnet
+	- This magnet will prevent the wither from getting away from you...
+- Added Pulsator
+	- Fun little items that seends all mobs flying up and get damaged from fall damange. Great 
+	  way to get mobs away from you
+- Added Crafting Materials
+	- Mob Ingot
+	- Crystal of Wrath (Currently no use)
+	- Graphite (Currently no use)
+	- Giron (Currently no use)
+	- Steel Ingot (Currently no use in the mod, but its oredictionaried so it could be used with other mods)
+- Note:
+	- This is the final version for 1.7.10 for minecraft. The next release with be for 1.10.2 version of minecraft.
+	  The reason why I'm doing this is obious... There is really no point of working on a 1.7.10 mod when there are
+	  several new version of minecraft that really needs mods. Plus I really like what they changed in 1.10.2 and 
+	  I've played around with it recently so to me its no big deal to changed to that version of minecraft. The next
+	  release will pretty much be what this release contains. After that I'll be addeding new features.
+	 - Version numbering: I'm going to explain what my version numbering system and how it works. So here is the run
+	   down and it goes like this [minecraft-version].[forge-version].[my-build]. For example this version is 1.0.2,
+	   1 is for minecraft version 1.7.10, 0 is for forge version, the current version I'm using is 10.13.4.1566, 2 is
+	   my second build. Just some information that might help you navagate my alpha for my little silly mod. The next
+	   version will be 2.0.0 for 1.10.2 look forward to it. Also if I do a bug fix for my mod it will contain a forth
+	   number... For example 1.0.2.1 would be a bug fix build for my mod. ~Cheers derf6060
+
 1.0.1 alpha
 ------------------------------------------------------------------
 - Updated Growth Devices Speed

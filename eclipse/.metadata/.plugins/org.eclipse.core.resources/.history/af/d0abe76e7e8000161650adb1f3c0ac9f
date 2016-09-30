@@ -1,7 +1,0 @@
-package com.derf.btawc.blocks;
-
-import com.derf.btawc.blocks.basic.BlockMultiTextureBasic;
-
-public class BlockCreativeGenerator extends BlockMultiTextureBasic {
-
-}

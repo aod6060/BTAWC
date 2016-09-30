@@ -1,7 +1,0 @@
-package com.derf.btawc.blocks;
-
-import net.minecraft.block.Block;
-
-public class BlockBasic extends Block {
-
-}

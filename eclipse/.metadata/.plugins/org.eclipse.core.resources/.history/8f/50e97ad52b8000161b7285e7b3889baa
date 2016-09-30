@@ -1,9 +1,0 @@
-package com.derf.btawc.items;
-
-public class ItemAnimalIngotUncooked extends ItemAnimalIngot {
-
-	public ItemAnimalIngotUncooked() {
-		super("animal_ingot_uncook", 1, 0.1f, true);
-	}
-
-}

@@ -1,7 +1,0 @@
-package com.derf.btawc.blocks.tileentity;
-
-import net.minecraft.tileentity.TileEntity;
-
-public abstract class TileEntityBasic extends TileEntity {
-
-}

@@ -4,7 +4,6 @@ import com.derf.btawc.blocks.furnace.BlockAlloyFurnace;
 import com.derf.btawc.blocks.tileentity.TileEntityBasic;
 import com.derf.btawc.recipe.AlloyRecipeManager;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -53,14 +52,14 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements IInventor
 		}
 		this.burnTime = tag.getInteger("BurnTime");
 		this.cookTime = tag.getInteger("CookTime");
-		this.currentItemBurnTime = this.getItemBurnTime(this.inventory[FUEL_SLOT]);
+		//this.currentItemBurnTime = this.getItemBurnTime(this.inventory[FUEL_SLOT]);
 		if(tag.hasKey("CustomName")) {
 			this.name = tag.getString("CustomName");
 		}
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound tag) {
+	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		tag.setInteger("BurnTime", this.burnTime);
 		tag.setInteger("CookTime", this.cookTime);
@@ -74,9 +73,12 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements IInventor
 			}
 		}
 		tag.setTag("Items", list);
+		/*
 		if(this.hasCustomInventoryName()) {
 			tag.setString("CustomName", this.name);
 		}
+		*/
+		return tag;
 	}
 
 	@Override
@@ -109,6 +111,7 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements IInventor
 		}
 	}
 
+	/*
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slot) {
 		if(this.inventory[slot] != null) {
@@ -119,7 +122,8 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements IInventor
 			return null;
 		}
 	}
-
+	*/
+	
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
 		this.inventory[slot] = stack;
@@ -133,16 +137,20 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements IInventor
 		this.name = name;
 	}
 	
+	/*
 	@Override
 	public String getInventoryName() {
 		return this.hasCustomInventoryName()? this.name : "container.alloy_furnace";
 	}
-
+	*/
+	
+	/*
 	@Override
 	public boolean hasCustomInventoryName() {
 		return this.name != null && this.name.length() > 0;
 	}
-
+	*/
+	
 	@Override
 	public int getInventoryStackLimit() {
 		return 64;
@@ -150,15 +158,12 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements IInventor
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this? false : player.getDistanceSq(this.xCoord + 0.5, this.yCoord + 0.5, this.zCoord + 0.5) <= 64.0;
+		return false;
+		//return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this? false : player.getDistanceSq(this.xCoord + 0.5, this.yCoord + 0.5, this.zCoord + 0.5) <= 64.0;
+		
 	}
 
-	@Override
-	public void openInventory() {}
-
-	@Override
-	public void closeInventory() {}
-
+	/*
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
 		// 0-3 input, 4 output, fuel 5
@@ -181,11 +186,15 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements IInventor
 		
 		return b;
 	}
+	*/
 	
+	/*
 	public static boolean isItemFuel(ItemStack stack) {
 		return getItemBurnTime(stack) > 0;
 	}
+	*/
 	
+	/*
 	public static int getItemBurnTime(ItemStack stack) {
 		int burnTime = 0;
 		
@@ -227,6 +236,7 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements IInventor
 		
 		return burnTime;
 	}
+	*/
 	
 	private boolean canSmelt() {
 		// Input is 0 - 3, Output 4
@@ -286,6 +296,7 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements IInventor
 		return this.inventory[slot] == null;
 	}
 	
+	/*
 	@Override
 	public void updateEntity() {
 		boolean flag = this.burnTime > 0;
@@ -334,6 +345,7 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements IInventor
 			this.markDirty();
 		}
 	}
+	*/
 	
 	public boolean isBurning() {
 		return this.burnTime > 0;
@@ -348,5 +360,65 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements IInventor
 	
 	public int getCookProgressScaled(int scale) {
 		return this.cookTime * scale / COOKING_SPEED;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasCustomName() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ItemStack removeStackFromSlot(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void openInventory(EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void closeInventory(EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int index, ItemStack stack) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int getField(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getFieldCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
 	}
 }

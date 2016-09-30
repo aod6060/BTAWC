@@ -2,11 +2,11 @@ package com.derf.btawc.handler;
 
 import com.derf.btawc.items.ItemsManager;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class PlayerHandler {
 	
@@ -14,8 +14,8 @@ public class PlayerHandler {
 	public void onEntityUpdateEvent(LivingUpdateEvent e) {
 		
 		
-		if(e.entityLiving instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer)e.entityLiving;
+		if(e.getEntityLiving() instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer)e.getEntityLiving();
 			
 			ItemStack stack = grabFlowtationDevice(player);
 			

@@ -18,7 +18,6 @@ import com.derf.btawc.items.tools.ItemSwordOfGreed;
 import com.derf.btawc.recipe.AlloyRecipe;
 import com.derf.btawc.recipe.AlloyRecipeManager;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -77,6 +76,7 @@ public class ItemsManager {
 	public static Item steelIngot;				// Used for machines
 	
 	public static final void create() {
+		/*
 		// Growth Device
 		growthDeviceFrame = new ItemBasic("growth_device_frame");
 		growthDevice = new ItemGrowthDeviceBasic();
@@ -125,9 +125,11 @@ public class ItemsManager {
 		graphite = new ItemBasic("graphite");
 		gironIngot = new ItemBasic("giron_ingot");
 		steelIngot = new ItemBasic("steel_ingot");
+		*/
 	}
 	
 	public static final void register() {
+		/*
 		// Growth Device
 		GameRegistry.registerItem(growthDeviceFrame, "growth_device_frame");
 		GameRegistry.registerItem(growthDevice, "growth_device");
@@ -176,9 +178,11 @@ public class ItemsManager {
 		GameRegistry.registerItem(graphite, "graphite");
 		GameRegistry.registerItem(gironIngot, "giron_ingont");
 		GameRegistry.registerItem(steelIngot, "steel_ingot");
+		*/
 	}
 	
 	public static final void creativeTabs() {
+		/*
 		// Growth Device
 		growthDeviceFrame.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		growthDevice.setCreativeTab(CreativeTabsManager.tabBTAWC);
@@ -227,9 +231,11 @@ public class ItemsManager {
 		graphite.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		gironIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		steelIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		*/
 	}
 	
 	public static final void crafting() {
+		/*
 		// Grow Device
 		
 		// Grow Device Frame
@@ -591,15 +597,18 @@ public class ItemsManager {
 				null,
 				null,
 				new ItemStack(steelIngot));
+				*/
 	}
 	
 	public static void addToOreDictionary() {
+		/*
 		OreDictionary.registerOre("ingotNetharStar", netharStarIngot);
 		OreDictionary.registerOre("ingotAnimal", animalIngotCooked);
 		OreDictionary.registerOre("ingotMob", mobIngot);
 		OreDictionary.registerOre("ingotGiron", gironIngot);
 		OreDictionary.registerOre("ingotSteel", steelIngot);
 		OreDictionary.registerOre("crystalGreed", crystalOfGreed);
-		OreDictionary.registerOre("crystalWrath", crystalOfWrath);
+		OreDictionary.registerOre("crystalWrath", crystalOfWrath)
+		*/
 	}
 }

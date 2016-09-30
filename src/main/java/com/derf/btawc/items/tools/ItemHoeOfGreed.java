@@ -1,18 +1,12 @@
 package com.derf.btawc.items.tools;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.derf.btawc.items.ItemBasic;
-import com.derf.btawc.util.BlockPos;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ItemHoeOfGreed extends ItemBasic {
@@ -28,6 +22,7 @@ public class ItemHoeOfGreed extends ItemBasic {
 		this.count = count;
 	}
 
+	/*
 	@Override
 	public boolean onItemUse(
 			ItemStack stack, 
@@ -60,7 +55,7 @@ public class ItemHoeOfGreed extends ItemBasic {
 		}
 		return b;
 	}
-
+	*/
 	protected void onHoeUsed(
 			ItemStack stack, 
 			EntityPlayer player, 
@@ -69,7 +64,7 @@ public class ItemHoeOfGreed extends ItemBasic {
 			int y, 
 			int z, 
 			int side) {
-		Block block = world.getBlock(x, y, z);
+		/*Block block = world.getBlock(x, y, z);
 		
 		if(side != 0 && world.getBlock(x, y+1, z).isAir(world, x, y+1, z) && (block == Blocks.grass || block == Blocks.dirt)) {
 			Block temp = Blocks.farmland;
@@ -85,8 +80,10 @@ public class ItemHoeOfGreed extends ItemBasic {
 				stack.damageItem(1, player);
 			}
 		}
+		*/
 	}
 	
+	/*
 	@Override
 	public boolean onBlockDestroyed(
 			ItemStack stack, 
@@ -121,7 +118,8 @@ public class ItemHoeOfGreed extends ItemBasic {
 		
 		return super.onBlockDestroyed(stack, world, block, x, y, z, entity);
 	}
-
+	*/
+	
 	@Override
 	public boolean isFull3D() {
 		return true;

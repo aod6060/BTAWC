@@ -22,19 +22,20 @@ public class ItemSwordOfGreed extends ItemSword {
 	private float damage;
 	
 	public ItemSwordOfGreed(String name, int damage, int count, int max) {
-		super(ToolMaterial.EMERALD);
+		super(ToolMaterial.DIAMOND);
 		this.damage = damage;
 		this.count = count;
 		this.setMaxDamage(max);
 		this.setUnlocalizedName(name);
-		this.setTextureName(Loader.MODID + ":" + name);
 	}
 	
+	/*
 	@Override
     public float func_150931_i()
     {
         return damage;
     }
+	*/
 	
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
@@ -74,8 +75,10 @@ public class ItemSwordOfGreed extends ItemSword {
      */
     public Multimap getItemAttributeModifiers()
     {
-        Multimap multimap = super.getItemAttributeModifiers();
+       /* Multimap multimap = super.getItemAttributeModifiers();
         multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", (double)(this.damage + 4.0f), 0));
         return multimap;
+        */
+    	return null;
     }
 }

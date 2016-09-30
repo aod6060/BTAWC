@@ -1,10 +1,8 @@
 package com.derf.btawc.blocks;
 
-import com.derf.btawc.blocks.energystorage.BlockEnergyStorageBasic;
 import com.derf.btawc.blocks.furnace.BlockAlloyFurnace;
 import com.derf.btawc.blocks.furnace.BlockSuperFurnace;
 import com.derf.btawc.blocks.generators.BlockCreativeGenerator;
-import com.derf.btawc.blocks.tileentity.energystorage.TileEntityEnergyStorageBasic;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
@@ -13,10 +11,10 @@ import com.derf.btawc.blocks.witherproof.BlockWitherProofGlass;
 import com.derf.btawc.creativetabs.CreativeTabsManager;
 import com.derf.btawc.items.ItemsManager;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public final class BlockManager {
 	
@@ -38,6 +36,7 @@ public final class BlockManager {
 	// Misc
 	
 	public static final void create() {
+		/*
 		// Generator
 		creativeGenerator = new BlockCreativeGenerator();
 		//energyStorageBasic = new BlockEnergyStorageBasic();
@@ -51,9 +50,11 @@ public final class BlockManager {
 		// Alloy Furnace
 		alloyFurnace = new BlockAlloyFurnace(0, false);
 		alloyFurnaceOn = new BlockAlloyFurnace(1, true);
+		*/
 	}
 	
 	public static final void register() {
+		/*
 		// Generators
 		GameRegistry.registerBlock(creativeGenerator, "creative_generator");
 		//GameRegistry.registerBlock(energyStorageBasic, "energy_storage_basic");
@@ -67,10 +68,12 @@ public final class BlockManager {
 		// Alloy Furnace
 		GameRegistry.registerBlock(alloyFurnace, "alloy_furnace");
 		GameRegistry.registerBlock(alloyFurnaceOn, "alloy_furnace_on");
+		*/
 		
 	}
 	
 	public static final void registerTileEntities() {
+		/*
 		// Generators
 		GameRegistry.registerTileEntity(TileEntityCreativeGenerator.class, "creative_generator");
 		// Storage
@@ -79,9 +82,11 @@ public final class BlockManager {
 		GameRegistry.registerTileEntity(TileEntitySuperFurnace.class, "super_furnace");
 		// Alloy Furnace
 		GameRegistry.registerTileEntity(TileEntityAlloyFurnace.class, "alloy_furnace");
+		*/
 	}
 	
 	public static final void creativeTabs() {
+		/*
 		// Generators
 		creativeGenerator.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		//energyStorageBasic.setCreativeTab(CreativeTabsManager.tabBTAWC);
@@ -93,9 +98,11 @@ public final class BlockManager {
 		witherProofGlass.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Alloy Furnace
 		alloyFurnace.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		*/
 	}
 	
 	public static final void crafting() {
+		/*
 		// Super Furnace
 		GameRegistry.addShapedRecipe(
 				new ItemStack(superFurnace), 
@@ -134,6 +141,7 @@ public final class BlockManager {
 				" f ",
 				'f', Blocks.furnace,
 				'i', Blocks.iron_block);
+				*/
 		
 	}
 

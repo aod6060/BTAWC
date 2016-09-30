@@ -7,11 +7,9 @@ import com.derf.btawc.items.ItemBasic;
 import com.derf.btawc.util.Vec3;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public abstract class ItemMagnet extends ItemBasic {
@@ -33,6 +31,7 @@ public abstract class ItemMagnet extends ItemBasic {
 		this.setMaxStackSize(1);
 	}
 
+	/*
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		// TODO Auto-generated method stub
@@ -54,7 +53,7 @@ public abstract class ItemMagnet extends ItemBasic {
 		
 		return super.onItemRightClick(stack, world, player);
 	}
-	
+	*/
 	
 	@Override
 	public void onUpdate(ItemStack stack, World world, Entity entity, int meta, boolean b) {
@@ -125,7 +124,7 @@ public abstract class ItemMagnet extends ItemBasic {
 	
 	private AxisAlignedBB createBox(Entity player, double range) {
 		double r = range * 0.5;
-		AxisAlignedBB box = AxisAlignedBB.getBoundingBox(
+		AxisAlignedBB box = new AxisAlignedBB(
 				player.posX - r,
 				player.posY - r,
 				player.posZ - r,

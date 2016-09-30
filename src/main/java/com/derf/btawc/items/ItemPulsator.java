@@ -5,14 +5,9 @@ import java.util.List;
 import com.derf.btawc.util.Vec3;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityFlying;
-import net.minecraft.entity.boss.EntityDragon;
-import net.minecraft.entity.boss.EntityWither;
-import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class ItemPulsator extends ItemBasic {
@@ -27,7 +22,7 @@ public class ItemPulsator extends ItemBasic {
 		this.setMaxStackSize(1);
 	}
 	
-	
+	/*
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		
@@ -42,7 +37,7 @@ public class ItemPulsator extends ItemBasic {
 		
 		return super.onItemRightClick(stack, world, player);
 	}
-
+	*/
 
 	private void onPulsated(ItemStack stack, World world, EntityPlayer player, Class<? extends Entity> entity) {
 		AxisAlignedBB box = this.createBox(player, this.range);
@@ -64,7 +59,7 @@ public class ItemPulsator extends ItemBasic {
 	
 	private AxisAlignedBB createBox(Entity player, double range) {
 		double r = range * 0.5;
-		AxisAlignedBB box = AxisAlignedBB.getBoundingBox(
+		AxisAlignedBB box = new AxisAlignedBB(
 				player.posX - r,
 				player.posY - r,
 				player.posZ - r,

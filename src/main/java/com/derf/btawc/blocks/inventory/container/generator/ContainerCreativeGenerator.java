@@ -5,10 +5,8 @@ import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class ContainerCreativeGenerator extends ContainerBasic {
 
@@ -33,6 +31,7 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 		return true;
 	}
 
+	/*
 	@Override
 	public void addCraftingToCrafters(ICrafting handler) {
 		// TODO Auto-generated method stub
@@ -42,12 +41,12 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 		handler.sendProgressBarUpdate(this, 2, this.generator.getStorage().getMaxReceive());
 		handler.sendProgressBarUpdate(this, 3, this.generator.getStorage().getMaxExtract());
 	}
-
+	*/
 	@Override
 	public void detectAndSendChanges() {
 		// TODO Auto-generated method stub
 		super.detectAndSendChanges();
-		
+		/*
 		for(int i = 0; i < this.crafters.size(); i++) {
 			ICrafting handler = (ICrafting)this.crafters.get(i);
 			if(this.currentEnergy != this.generator.getEnergyStored(ForgeDirection.UP)) {
@@ -66,9 +65,11 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 				handler.sendProgressBarUpdate(this, 3, this.generator.getStorage().getMaxExtract());
 			}
 		}
-		
+		*/
+		/*
 		this.currentEnergy = this.generator.getEnergyStored(ForgeDirection.UP);
 		this.maxEnergy = this.generator.getMaxEnergyStored(ForgeDirection.UP);
+		*/
 		this.maxReceive = this.generator.getStorage().getMaxReceive();
 		this.maxExtract = this.generator.getStorage().getMaxExtract();
 	}

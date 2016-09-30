@@ -10,10 +10,10 @@ import com.derf.btawc.items.tools.ItemAxeOfGreed;
 import com.derf.btawc.items.tools.ItemPickaxeOfGreed;
 import com.derf.btawc.util.MobDropUtils;
 
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class ProxyCommon implements IProxy {
 
@@ -35,6 +35,7 @@ public class ProxyCommon implements IProxy {
 		BlockManager.crafting();
 		HandlerManager.create();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Loader.INSTANCE, new GuiHandler());
+		//NetworkRegistry.INSTANCE.registerGuiHandler(Loader.INSTANCE, new GuiHandler());
 	}
 
 	@Override

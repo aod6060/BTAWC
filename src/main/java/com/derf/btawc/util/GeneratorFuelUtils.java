@@ -1,6 +1,6 @@
 package com.derf.btawc.util;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+//import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -20,7 +20,7 @@ public class GeneratorFuelUtils {
 	public static int getItemBurnTime(ItemStack stack) {
 		// TODO Auto-generated method stub
 		int burnTime = 0;
-		
+		/*
 		if(stack == null) {
 			burnTime = 0;
 		} else {
@@ -56,7 +56,7 @@ public class GeneratorFuelUtils {
 				burnTime = GameRegistry.getFuelValue(stack);
 			}
 		}
-		
+		*/
 		return burnTime;
 	}
 }

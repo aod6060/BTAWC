@@ -1,8 +1,8 @@
 package com.derf.btawc.handler;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class MobDropHandler {
 	

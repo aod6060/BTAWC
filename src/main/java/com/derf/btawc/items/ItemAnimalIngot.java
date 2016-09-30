@@ -9,6 +9,5 @@ public abstract class ItemAnimalIngot extends ItemFood {
 	public ItemAnimalIngot(String name, int heal, float saturation, boolean wolfLikes) {
 		super(heal, saturation, wolfLikes);
 		this.setUnlocalizedName(name);
-		this.setTextureName(Loader.MODID + ":" + name);
 	}
 }

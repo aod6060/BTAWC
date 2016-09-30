@@ -1,24 +1,20 @@
 package com.derf.btawc.blocks.tileentity.generators;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-
 import com.derf.btawc.blocks.tileentity.TileEntityBasic;
 import com.derf.btawc.energy.EnergyStorage;
 import com.derf.btawc.energy.IEnergyLevelPrintable;
 
 import cofh.api.energy.IEnergyProvider;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.Packet;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class TileEntityGenerator extends TileEntityBasic implements IEnergyProvider, IEnergyLevelPrintable {
 	
 	protected EnergyStorage storage = null;
 	
-	
+	/*
 	@Override
 	public void updateEntity() {
 		// TODO Auto-generated method stub
@@ -28,29 +24,34 @@ public abstract class TileEntityGenerator extends TileEntityBasic implements IEn
 		// Update TileEntities with the internal storage
 		updateTileEntities();
 	}
-
+	*/
+	
 	protected abstract void updateTileEntities();
 
 	protected abstract void updateGeneratorInternalStorage();
 
 	@Override
-	public boolean canConnectEnergy(ForgeDirection from) {
-		return true;
+	public int getEnergyStored(EnumFacing from) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
-	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
-		return storage.extractEnergy(maxExtract, simulate);
+	public int getMaxEnergyStored(EnumFacing from) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
-	public int getEnergyStored(ForgeDirection from) {
-		return storage.getEnergyStored();
+	public boolean canConnectEnergy(EnumFacing from) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
-	public int getMaxEnergyStored(ForgeDirection from) {
-		return storage.getMaxEnergyStored();
+	public int extractEnergy(EnumFacing from, int maxExtract, boolean simulate) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
@@ -60,9 +61,10 @@ public abstract class TileEntityGenerator extends TileEntityBasic implements IEn
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound tag) {
+	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		storage.writeToNBT(tag);
+		return tag;
 	}
 	
 	@Override

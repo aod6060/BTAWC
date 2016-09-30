@@ -5,7 +5,6 @@ import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -49,6 +48,7 @@ public class ContainerSuperFurnace extends ContainerBasic {
 		this.createPlayerInventory(player, 6, 124, 6, 182);
 	}
 
+	/*
 	@Override
 	public void addCraftingToCrafters(ICrafting handler) {
 		super.addCraftingToCrafters(handler);
@@ -56,12 +56,12 @@ public class ContainerSuperFurnace extends ContainerBasic {
 		handler.sendProgressBarUpdate(this, 1, this.superFurnace.furnaceBurnTime);
 		handler.sendProgressBarUpdate(this, 2, this.superFurnace.currentItemBurnTime);
 	}
-
+	*/
 
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-		
+		/*
 		for(int i = 0; i < this.crafters.size(); i++) {
 			ICrafting handler = (ICrafting) this.crafters.get(i);
 			
@@ -77,7 +77,7 @@ public class ContainerSuperFurnace extends ContainerBasic {
 				handler.sendProgressBarUpdate(this, 2, this.superFurnace.currentItemBurnTime);
 			}
 		}
-		
+		*/
 		this.lastCookTime = this.superFurnace.furnaceCookTime;
 		this.lastBurnTime = this.superFurnace.furnaceBurnTime;
 		this.lastItemBurnTime = this.superFurnace.currentItemBurnTime;
@@ -122,7 +122,7 @@ public class ContainerSuperFurnace extends ContainerBasic {
 				
 				slot.onSlotChange(stack1,  stack);
 			} else if(!this.isFuel(index) && !this.isInput(index)) {
-				if(FurnaceRecipes.smelting().getSmeltingResult(stack1) != null) {
+				if(FurnaceRecipes.instance().getSmeltingResult(stack1) != null) {
 					if(!this.mergeItemStack(stack1, 0, 9, false)) {
 						return null;
 					}

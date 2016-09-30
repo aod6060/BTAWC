@@ -8,11 +8,9 @@ import com.derf.btawc.blocks.basic.BlockContainerBasic;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.client.gui.GuiHandler;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,8 +18,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class BlockAlloyFurnace extends BlockContainerBasic {
@@ -30,13 +26,14 @@ public class BlockAlloyFurnace extends BlockContainerBasic {
 	private static boolean isChanging = false;
 	
 	private boolean on;
+	/*
 	@SideOnly(Side.CLIENT)
 	private IIcon bottom_top;
 	@SideOnly(Side.CLIENT)
 	private IIcon front;
-	
+	*/
 	public BlockAlloyFurnace(int lightLevel, boolean on) {
-		super("alloy_furnace", Material.rock, 2.0f, 2.0f, lightLevel, "pickaxe", 0, Block.soundTypeStone);
+		super("alloy_furnace", Material.ROCK, 2.0f, 2.0f, lightLevel, "pickaxe", 0, SoundType.STONE);
 		this.on = on;
 	}
 
@@ -45,33 +42,8 @@ public class BlockAlloyFurnace extends BlockContainerBasic {
 		// TODO Auto-generated method stub
 		return new TileEntityAlloyFurnace();
 	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		// TODO Auto-generated method stub
-		IIcon temp = null;
-		
-		if(side == 1 || side == 0) {
-			temp = this.bottom_top;
-		} else if(side != meta) {
-			temp = this.blockIcon;
-		} else {
-			temp = this.front;
-		}
-		
-		return temp;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
-		this.blockIcon = reg.registerIcon(Loader.MODID + ":alloy_furnace_side");
-		String f = (this.on)? ":alloy_furnace_front_on" : ":alloy_furnace_front";
-		this.front = reg.registerIcon(Loader.MODID + f);
-		this.bottom_top = reg.registerIcon(Loader.MODID + ":alloy_furnace_bottom_top");
-	}
-
+	
+	/*
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z) {
 		// TODO Auto-generated method stub
@@ -103,7 +75,9 @@ public class BlockAlloyFurnace extends BlockContainerBasic {
 			world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 		}
 	}
-
+	*/
+	
+	/*
 	@Override
 	public void onBlockPlacedBy(
 			World world, 
@@ -136,19 +110,25 @@ public class BlockAlloyFurnace extends BlockContainerBasic {
 			furnace.setName(stack.getDisplayName());
 		}
 	}
-
+	*/
+	
+	/*
 	@Override
 	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
 		return Item.getItemFromBlock(this);
 	}
-
+	*/
+	
+	/*
 	@Override
 	public Item getItem(World p_149694_1_, int p_149694_2_, int p_149694_3_, int p_149694_4_) {
 		return Item.getItemFromBlock(this);
 	}
-
+	*/
+	
+	
 	public static void updateAlloyFurnaceBlockState(boolean isWorking, World world, int x, int y, int z) {
-		int l = world.getBlockMetadata(x, y, z);
+		/*int l = world.getBlockMetadata(x, y, z);
 		TileEntity entity = world.getTileEntity(x, y, z);
 		isChanging = true;
 		if(isWorking) {
@@ -162,8 +142,10 @@ public class BlockAlloyFurnace extends BlockContainerBasic {
 			entity.validate();
 			world.setTileEntity(x, y, z, entity);
 		}
+		*/
 	}
-
+	
+	/*
 	@Override
 	public void breakBlock(
 			World world, 
@@ -192,7 +174,9 @@ public class BlockAlloyFurnace extends BlockContainerBasic {
 		}
 		super.breakBlock(world, x, y, z, block, side);
 	}
-
+	*/
+	
+	/*
 	@Override
 	public boolean onBlockActivated(
 			World world, 
@@ -211,7 +195,7 @@ public class BlockAlloyFurnace extends BlockContainerBasic {
 		
 		return true;
 	}
-	
+	*/
 	
 	
 }

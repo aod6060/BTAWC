@@ -1,27 +1,22 @@
 package com.derf.btawc.blocks.generators;
 
 import com.derf.btawc.Loader;
-import com.derf.btawc.blocks.basic.BlockContainerMultiTextureBasic;
-import com.derf.btawc.blocks.basic.MultiTextureType;
+import com.derf.btawc.blocks.basic.BlockContainerBasic;
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
 import com.derf.btawc.client.gui.GuiHandler;
 import com.derf.btawc.energy.IEnergyLevelPrintable;
-import com.derf.btawc.util.BlockPos;
-import com.derf.btawc.util.WorldUtils;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockCreativeGenerator extends BlockContainerMultiTextureBasic {
+public class BlockCreativeGenerator extends BlockContainerBasic {
 	
 	public BlockCreativeGenerator() {
-		super("creative_generator", Material.iron, 2.0f, 2.0f, 0, "pickaxe", 0, Block.soundTypeMetal);
-		this.setTextureName(MultiTextureType.BOTTOM, Loader.MODID + ":creative_generator_bottom_top");
-		this.setTextureName(MultiTextureType.TOP, Loader.MODID + ":creative_generator_bottom_top");
-		this.setTextureName(MultiTextureType.SIDES, Loader.MODID + ":creative_generator_sides");
+		super("creative_generator", Material.IRON, 2.0f, 2.0f, 0, "pickaxe", 0, SoundType.METAL);
 	}
 
 	@Override
@@ -30,6 +25,7 @@ public class BlockCreativeGenerator extends BlockContainerMultiTextureBasic {
 		return new TileEntityCreativeGenerator();
 	}
 
+	/*
 	@Override
 	public boolean onBlockActivated(
 			World world, 
@@ -49,6 +45,5 @@ public class BlockCreativeGenerator extends BlockContainerMultiTextureBasic {
 		
 		return b;
 	}
-	
-	
+	*/
 }

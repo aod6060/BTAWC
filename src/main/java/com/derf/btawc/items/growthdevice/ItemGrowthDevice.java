@@ -4,16 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.derf.btawc.items.ItemBasic;
-import com.derf.btawc.util.BlockPos;
 import com.derf.btawc.util.Timer;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockCactus;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.block.BlockReed;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class ItemGrowthDevice extends ItemBasic {
@@ -30,6 +24,7 @@ public abstract class ItemGrowthDevice extends ItemBasic {
 		this.setMaxStackSize(1);
 	}
 
+	/*
 	@Override
 	public boolean onItemUse(
 			ItemStack stack, 
@@ -79,15 +74,16 @@ public abstract class ItemGrowthDevice extends ItemBasic {
 		
 		return b;
 	}
+	*/
 	
 	private void updateCrop(BlockPos pos, Block block, World world) {
-		int l = world.getBlockMetadata(pos.getX(), pos.getY(), pos.getZ());
+		/*int l = world.getBlockMetadata(pos.getX(), pos.getY(), pos.getZ());
 		if(l < 7) {
 			if(world.rand.nextInt(2) == 0) {
 				++l;
 				world.setBlockMetadataWithNotify(pos.getX(), pos.getY(), pos.getZ(), l, 2);
 			}
-		}
+		}*/
 	}
 	
 	private List<BlockPos> getPosition(BlockPos pos) {
@@ -114,7 +110,7 @@ public abstract class ItemGrowthDevice extends ItemBasic {
 		List<Block> temp = new ArrayList<Block>();
 		
 		for(BlockPos p : pos) {
-			temp.add(world.getBlock(p.getX(), p.getY(), p.getZ()));
+			//temp.add(world.getBlock(p.getX(), p.getY(), p.getZ()));
 		}
 		
 		return temp;

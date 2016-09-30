@@ -1,8 +1,7 @@
 package com.derf.btawc.blocks.basic;
 
-import com.derf.btawc.Loader;
-
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
 public class BlockBasic extends Block {
@@ -15,15 +14,14 @@ public class BlockBasic extends Block {
 			float lightLevel,
 			String toolClass,
 			int level,
-			SoundType sound) {
+			SoundType type) {
 		super(material);
-		this.setBlockName(name);
-		this.setBlockTextureName(Loader.MODID + ":" + name);
+		this.setUnlocalizedName(name);
 		this.setHardness(hardness);
 		this.setResistance(resistance);
 		this.setLightLevel(lightLevel);
 		this.setHarvestLevel(toolClass, level);
-		this.setStepSound(sound);
+		this.setSoundType(type);
 	}
 
 }

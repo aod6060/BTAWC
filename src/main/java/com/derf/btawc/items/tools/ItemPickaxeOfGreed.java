@@ -21,10 +21,10 @@ public class ItemPickaxeOfGreed extends ItemPickaxe {
 	private static List<Block> blocks = new ArrayList<Block>();
 	
 	public ItemPickaxeOfGreed(String name, int count, int maxDamage) {
-		super(ToolMaterial.EMERALD);
+		super(ToolMaterial.DIAMOND);
 		this.count = count;
 		this.setUnlocalizedName(name);
-		this.setTextureName(Loader.MODID + ":" + name);
+		//this.setTextureName(Loader.MODID + ":" + name);
 		this.setMaxDamage(maxDamage);
 	}
 	
@@ -41,7 +41,7 @@ public class ItemPickaxeOfGreed extends ItemPickaxe {
 			}
 		}
 		
-		blocks.add(Blocks.lit_redstone_ore);
+		blocks.add(Blocks.LIT_REDSTONE_ORE);
 	}
 	
 	public static boolean isBlockDuplicatable(Block block) {
@@ -62,6 +62,7 @@ public class ItemPickaxeOfGreed extends ItemPickaxe {
 		return true;
 	}
 	
+	/*
 	@Override
 	public boolean onBlockDestroyed(
 			ItemStack stack, 
@@ -88,4 +89,5 @@ public class ItemPickaxeOfGreed extends ItemPickaxe {
 		
 		return super.onBlockDestroyed(stack, world, block, x, y, z, entity);
 	}
+	*/
 }

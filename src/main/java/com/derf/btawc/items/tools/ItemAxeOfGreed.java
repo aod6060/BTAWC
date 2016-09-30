@@ -19,13 +19,14 @@ public class ItemAxeOfGreed extends ItemAxe {
 	private static List<Block> blocks = new ArrayList<Block>();
 	
 	public ItemAxeOfGreed(String name, int count, int maxDamage) {
-		super(ToolMaterial.EMERALD);
+		super(ToolMaterial.DIAMOND);
 		this.setUnlocalizedName(name);
-		this.setTextureName(Loader.MODID + ":" + name);
+		//this.setTextureName(Loader.MODID + ":" + name);
 		this.count = count;
 		this.setMaxDamage(maxDamage);
 	}
 
+	/*
 	@Override
 	public boolean onBlockDestroyed(
 			ItemStack stack, 
@@ -51,6 +52,7 @@ public class ItemAxeOfGreed extends ItemAxe {
 		}
 		return super.onBlockDestroyed(stack, world, block, x, y, z,entity);
 	}
+	*/
 	
 	public static void registerLogs() {
 		List<List<ItemStack>> result = OreDictionaryUtils.searchForItemStack("log");

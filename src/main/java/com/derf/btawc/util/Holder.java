@@ -3,9 +3,8 @@ package com.derf.btawc.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraftforge.common.util.ForgeDirection;
-
 public class Holder {
+	/*
 	private BlockPos pos;
 	private ForgeDirection direction;
 	
@@ -42,4 +41,5 @@ public class Holder {
 		
 		return temp;
 	}
+	*/
 }

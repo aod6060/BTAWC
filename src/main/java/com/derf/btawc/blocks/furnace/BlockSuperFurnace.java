@@ -8,11 +8,9 @@ import com.derf.btawc.blocks.basic.BlockContainerBasic;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 import com.derf.btawc.client.gui.GuiHandler;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,8 +18,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class BlockSuperFurnace extends BlockContainerBasic {
@@ -32,13 +28,14 @@ public class BlockSuperFurnace extends BlockContainerBasic {
 	
 	
 	private boolean on;
+	/*
 	@SideOnly(Side.CLIENT)
 	private IIcon bottom_top;
 	@SideOnly(Side.CLIENT)
 	private IIcon front;
-	
+	*/
 	public BlockSuperFurnace(int lightLevel, boolean on) {
-		super("super_furnace", Material.rock, 2.0f, 2.0f, lightLevel, "pickaxe", 0, Block.soundTypeStone);
+		super("super_furnace", Material.ROCK, 2.0f, 2.0f, lightLevel, "pickaxe", 0, SoundType.STONE);
 		this.on = on;
 	}
 
@@ -47,7 +44,7 @@ public class BlockSuperFurnace extends BlockContainerBasic {
 		return new TileEntitySuperFurnace();
 	}
 
-	
+	/*
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z) {
 		super.onBlockAdded(world, x, y, z);
@@ -78,7 +75,8 @@ public class BlockSuperFurnace extends BlockContainerBasic {
 			world.setBlockMetadataWithNotify(x, y, z, meta, 2);
 		}
 	}
-
+	*/
+	/*
 	@Override
 	public void onBlockPlacedBy(
 			World world, 
@@ -110,7 +108,8 @@ public class BlockSuperFurnace extends BlockContainerBasic {
 			furnace.setName(stack.getDisplayName());
 		}
 	}
-
+	*/
+	/*
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
@@ -132,8 +131,10 @@ public class BlockSuperFurnace extends BlockContainerBasic {
 		this.front = reg.registerIcon((this.on)? Loader.MODID + ":super_furnace_front_on" : Loader.MODID + ":super_furnace_front");
 		this.bottom_top = reg.registerIcon(Loader.MODID + ":super_furnace_bottom_top");
 	}
-
+	*/
+	
 	public static void updateFurnaceBlockState(boolean isWorking, World world, int x, int y, int z) {
+		/*
 		int l = world.getBlockMetadata(x, y, z);
 		TileEntity entity = world.getTileEntity(x, y, z);
 		isChanging = true;
@@ -148,8 +149,10 @@ public class BlockSuperFurnace extends BlockContainerBasic {
 			entity.validate();
 			world.setTileEntity(x, y, z, entity);
 		}
+		*/
 	}
 
+	/*
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int value) {
 		// TODO Auto-generated method stub
@@ -180,7 +183,9 @@ public class BlockSuperFurnace extends BlockContainerBasic {
 		
 		super.breakBlock(world, x, y, z, block, value);
 	}
-
+	*/
+	
+	/*
 	@Override
 	public boolean onBlockActivated(
 			World world, 
@@ -199,16 +204,20 @@ public class BlockSuperFurnace extends BlockContainerBasic {
 		
 		return true;
 	}
-	
+	*/
+	/*
 	@Override
 	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
 		// TODO Auto-generated method stub
 		return Item.getItemFromBlock(this);
 	}
-
+	*/
+	
+	/*
 	@Override
 	public Item getItem(World p_149694_1_, int p_149694_2_, int p_149694_3_, int p_149694_4_) {
 		// TODO Auto-generated method stub
 		return Item.getItemFromBlock(this);
 	}
+	*/
 }

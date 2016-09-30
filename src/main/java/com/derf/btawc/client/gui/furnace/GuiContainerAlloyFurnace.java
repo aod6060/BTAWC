@@ -47,8 +47,8 @@ public class GuiContainerAlloyFurnace extends GuiContainerBasic {
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-		String s = this.entity.hasCustomInventoryName()? this.entity.getInventoryName() : this.getLangString(this.entity.getInventoryName());
-		this.renderString(s, this.xSize / 2 - this.stringWidth(s) / 2, 6, Color.BLACK);
+		//String s = this.entity.hasCustomInventoryName()? this.entity.getInventoryName() : this.getLangString(this.entity.getInventoryName());
+		//this.renderString(s, this.xSize / 2 - this.stringWidth(s) / 2, 6, Color.BLACK);
 		String s2 = this.getLangString("container.inventory");
 		this.renderFormatedString("container.inventory", this.xSize - (this.stringWidth(s2) + 9), 79, Color.BLACK);
 		
@@ -84,13 +84,13 @@ public class GuiContainerAlloyFurnace extends GuiContainerBasic {
 			for(int y = 0; y < 2; y++) {
 				for(int x = 0; x < 2; x++) {
 					if(stacks.get(y*2+x) != null) {
-						this.itemRender.renderItemIntoGUI(this.fontRendererObj, this.mc.getTextureManager(), stacks.get(y*2+x), x * 18 + 9 + this.xSize + k, y * 18 + 17 + l);
+						//this.itemRender.renderItemIntoGUI(this.fontRendererObj, this.mc.getTextureManager(), stacks.get(y*2+x), x * 18 + 9 + this.xSize + k, y * 18 + 17 + l);
 					}
 				}
 			}
 			
 			if(recipes.get(index).getValue() != null) {
-				this.itemRender.renderItemIntoGUI(this.fontRendererObj, this.mc.getTextureManager(), recipes.get(index).getValue(), this.xSize + 56 + k, 25 + l);
+				//this.itemRender.renderItemIntoGUI(this.fontRendererObj, this.mc.getTextureManager(), recipes.get(index).getValue(), this.xSize + 56 + k, 25 + l);
 			}
 		}
 	}
@@ -99,7 +99,7 @@ public class GuiContainerAlloyFurnace extends GuiContainerBasic {
 	@Override
 	protected void mouseClicked(int x, int y, int button) {
 		// TODO Auto-generated method stub
-		super.mouseClicked(x, y, button);
+		//super.mouseClicked(x, y, button);
 		
 		int k = this.getK();
 		int l = this.getL();
@@ -108,7 +108,7 @@ public class GuiContainerAlloyFurnace extends GuiContainerBasic {
 			Vec2 mc = new Vec2(x - k, y - l);
 			
 			if(recipeRect.collide(mc)) {
-				this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
+				//this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
 				toggleRecipe = !toggleRecipe;
 			}
 			
@@ -116,7 +116,7 @@ public class GuiContainerAlloyFurnace extends GuiContainerBasic {
 				
 				if(leftRect.collide(mc)) {
 					// Do something
-					this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
+					//this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
 					--this.index;
 					
 					if(this.index < 0) {
@@ -126,7 +126,7 @@ public class GuiContainerAlloyFurnace extends GuiContainerBasic {
 				
 				if(rightRect.collide(mc)) {
 					// Do something
-					this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
+					//this.mc.getSoundHandler().playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
 					++this.index;
 					
 					if(this.index > recipes.size() - 1) {

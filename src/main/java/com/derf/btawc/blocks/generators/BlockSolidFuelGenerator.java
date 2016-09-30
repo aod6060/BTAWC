@@ -2,6 +2,7 @@ package com.derf.btawc.blocks.generators;
 
 import com.derf.btawc.blocks.basic.BlockContainerBasic;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

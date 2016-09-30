@@ -1,27 +1,16 @@
 package com.derf.btawc.blocks.tileentity.furnace;
 
-import com.derf.btawc.blocks.furnace.BlockSuperFurnace;
 import com.derf.btawc.blocks.tileentity.TileEntityBasic;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntitySuperFurnace extends TileEntityBasic implements IInventory {
 	
@@ -68,6 +57,7 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 		}
 	}
 
+	/*
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slot) {
 		if(this.furnaceItemStack[slot] != null) {
@@ -78,7 +68,8 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 			return null;
 		}
 	}
-
+	*/
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -91,16 +82,19 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 		}
 	}
 
+	/*
 	@Override
 	public String getInventoryName() {
 		return this.hasCustomInventoryName()? this.name : "container.super_furnace";
 	}
-
+	*/
+	/*
 	@Override
 	public boolean hasCustomInventoryName() {
 		return this.name != null && this.name.length() > 0;
 	}
-
+	*/
+	
 	@Override
 	public int getInventoryStackLimit() {
 		return 64;
@@ -108,15 +102,18 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this? false : player.getDistanceSq(this.xCoord + 0.5, this.yCoord + 0.5, this.zCoord + 0.5) <= 64.0;
+		//return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this? false : player.getDistanceSq(this.xCoord + 0.5, this.yCoord + 0.5, this.zCoord + 0.5) <= 64.0;
+		return false;
 	}
 
+	/*
 	@Override
 	public void openInventory() {}
 
 	@Override
 	public void closeInventory() {}
-
+	*/
+	
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
 		// 0-8 input, 9-17 output, 19 fuel.
@@ -153,9 +150,10 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 	}
 	
 	private boolean isItemFuel(ItemStack stack) {
-		return getItemBurnTime(stack) > 0;
+		return false;
 	}
-
+	
+	/*
 	private static int getItemBurnTime(ItemStack stack) {
 		// TODO Auto-generated method stub
 		int burnTime = 0;
@@ -198,7 +196,8 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 		
 		return burnTime;
 	}
-
+	*/
+	
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
@@ -214,7 +213,7 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 		}
 		this.furnaceBurnTime = tag.getInteger("BurnTime");
 		this.furnaceCookTime = tag.getInteger("CookTime");
-		this.currentItemBurnTime = this.getItemBurnTime(this.furnaceItemStack[FUEL_SLOT]);
+		//this.currentItemBurnTime = this.getItemBurnTime(this.furnaceItemStack[FUEL_SLOT]);
 		
 		if(tag.hasKey("CustomName")) {
 			this.name = tag.getString("CustomName");
@@ -222,7 +221,7 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound tag) {
+	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		tag.setInteger("BurnTime", this.furnaceBurnTime);
 		tag.setInteger("CookTime", this.furnaceCookTime);
@@ -241,9 +240,12 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 		
 		tag.setTag("Items", list);
 		
+		/*
 		if(this.hasCustomInventoryName()) {
 			tag.setString("CustomName", this.name);
 		}
+		*/
+		return tag;
 	}
 	
 	private boolean canSmelt() {
@@ -260,7 +262,7 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 		if(this.furnaceItemStack[inputSlot] == null) {
 			return false;
 		} else {
-			ItemStack stack = FurnaceRecipes.smelting().getSmeltingResult(this.furnaceItemStack[inputSlot]);
+			ItemStack stack = FurnaceRecipes.instance().getSmeltingResult(this.furnaceItemStack[inputSlot]);
 			if(stack == null) return false;
 			if(this.furnaceItemStack[outputSlot] == null) return true;
 			if(!this.furnaceItemStack[outputSlot].isItemEqual(stack)) return false;
@@ -277,7 +279,7 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 	
 	private void smeltItem(int inputSlot, int outputSlot) {
 		if(this.canSmelt(inputSlot, outputSlot)) {
-			ItemStack stack = FurnaceRecipes.smelting().getSmeltingResult(furnaceItemStack[inputSlot]);
+			ItemStack stack = FurnaceRecipes.instance().getSmeltingResult(furnaceItemStack[inputSlot]);
 			
 			if(this.furnaceItemStack[outputSlot] == null) {
 				this.furnaceItemStack[outputSlot] = stack.copy();
@@ -303,6 +305,7 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 		return b;
 	}
 	
+	/*
 	@Override
 	public void updateEntity() {
 		boolean flag = this.furnaceBurnTime > 0;
@@ -353,10 +356,12 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 			this.markDirty();
 		}
 	}
-
+	*/
+	
 	public boolean isBurning() {
 		return this.furnaceBurnTime > 0;
 	}
+	
 	
 	@SideOnly(Side.CLIENT)
 	public int getBurnTimeRemainingScaled(int scale) {
@@ -370,5 +375,59 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 	@SideOnly(Side.CLIENT)
 	public int getCookProgressScaled(int scale) {
 		return this.furnaceCookTime * scale / COOKING_SPEED;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasCustomName() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ItemStack removeStackFromSlot(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void openInventory(EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void closeInventory(EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getField(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getFieldCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
 	}
 }

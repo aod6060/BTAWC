@@ -5,7 +5,6 @@ import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
@@ -45,7 +44,7 @@ public class ContainerAlloyFurnace extends ContainerBasic {
 		this.createPlayerInventory(player, 8, 92, 8, 150);
 	}
 	
-	
+	/*
 	@Override
 	public void addCraftingToCrafters(ICrafting handler) {
 		super.addCraftingToCrafters(handler);
@@ -53,11 +52,12 @@ public class ContainerAlloyFurnace extends ContainerBasic {
 		handler.sendProgressBarUpdate(this, 1, this.furnace.burnTime);
 		handler.sendProgressBarUpdate(this, 2, this.furnace.currentItemBurnTime);
 	}
-
+	*/
 	
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
+		/*
 		for(int i = 0; i < this.crafters.size(); i++) {
 			ICrafting handler = (ICrafting)this.crafters.get(i);
 			if(this.lastCookTime != this.furnace.cookTime) {
@@ -70,6 +70,7 @@ public class ContainerAlloyFurnace extends ContainerBasic {
 				handler.sendProgressBarUpdate(this, 2, this.furnace.currentItemBurnTime);
 			}
 		}
+		*/
 		this.lastCookTime = this.furnace.cookTime;
 		this.lastBurnTime = this.furnace.burnTime;
 		this.lastItemBurnTime = this.furnace.currentItemBurnTime;
@@ -129,11 +130,11 @@ public class ContainerAlloyFurnace extends ContainerBasic {
 					if(!this.mergeItemStack(stack1, 3, 4, false)) {
 						return null;
 					}
-				} else if(TileEntityAlloyFurnace.isItemFuel(stack1)) {
+				} /*else if(TileEntityAlloyFurnace.isItemFuel(stack1)) {
 					if(!this.mergeItemStack(stack1, 5, 6, true)) {
 						return null;
 					}
-				} else if(this.isPlayerHiddenInventory(index)) {
+				}*/ else if(this.isPlayerHiddenInventory(index)) {
 					if(!this.mergeItemStack(stack1, 33, 42, false)) {
 						return null;
 					}

@@ -3,17 +3,13 @@ package com.derf.btawc.blocks.tileentity.generators;
 import java.util.List;
 
 import com.derf.btawc.energy.EnergyStorage;
-import com.derf.btawc.util.BlockPos;
 import com.derf.btawc.util.Holder;
-import com.derf.btawc.util.WorldUtils;
 
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityCreativeGenerator extends TileEntityGenerator {
 	
@@ -23,6 +19,7 @@ public class TileEntityCreativeGenerator extends TileEntityGenerator {
 	}
 	
 	protected void updateTileEntities() {
+		/*
 		BlockPos pos = new BlockPos(this.xCoord, this.yCoord, this.zCoord);
 		List<Holder> sides = Holder.getHolders(pos);
 		for(Holder side : sides) {
@@ -35,6 +32,7 @@ public class TileEntityCreativeGenerator extends TileEntityGenerator {
 				handler.receiveEnergy(side.getDirection().getOpposite(), er, false);
 			}
 		}
+		*/
 	}
 
 	protected void updateGeneratorInternalStorage() {

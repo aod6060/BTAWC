@@ -5,7 +5,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
 public class ItemFlowtationDevice extends ItemBasic {
@@ -15,6 +14,7 @@ public class ItemFlowtationDevice extends ItemBasic {
 		this.setMaxStackSize(1);
 	}
 
+	/*
 	@Override
 	public ItemStack onItemRightClick(
 			ItemStack stack, 
@@ -39,7 +39,8 @@ public class ItemFlowtationDevice extends ItemBasic {
 		
 		return super.onItemRightClick(stack, world, player);
 	}
-
+	*/
+	
 	private void onFlied(ItemStack stack, EntityPlayer player, boolean toggle) {
 		if(!player.capabilities.isCreativeMode) {
 			player.capabilities.allowFlying = toggle;

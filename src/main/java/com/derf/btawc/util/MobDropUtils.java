@@ -67,6 +67,7 @@ public class MobDropUtils {
 	}
 	
 	public static void registerMobDrops() {
+		/*
 		// Aggressive Mobs
 		// blaze
 		addDrops(EntityBlaze.class, Items.blaze_powder, 3);
@@ -140,6 +141,7 @@ public class MobDropUtils {
 		// Ender Dragon
 		addDrops(EntityDragon.class, Blocks.dragon_egg, 5);
 		addDrops(EntityDragonPart.class, Blocks.dragon_egg, 5);
+		*/
 	}
 	
 	public static void addDrops(Class<? extends Entity> clz, Block block, int chance) {

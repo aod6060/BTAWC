@@ -1,0 +1,69 @@
+# Primary Language file for the project.
+# Containers
+container.super_furnace=Super Furnace
+container.alloy_furnace=Alloy Furnace
+container.creative_generator=Creative Generator
+# Item Groups
+itemGroup.tabBTAWC=BTAWC
+# Items
+# Growth Device
+item.growth_device_frame.name=Growth Device Frame
+item.growth_device.name=Growth Device (3x3) Slowest
+item.growth_device_super.name=Super Growth Device(5x5) Slow
+item.growth_device_mega.name=Mega Growth Device (7x7) Fast
+item.growth_device_ultimate.name=Ultimate Growth Device (9x9) Its a bit overpowered!
+# Magnet
+item.magnet_frame.name=Magnet Frame
+item.magnet_items.name=Item Magnet
+item.magnet_animals.name=Animal Magnet
+item.magnet_mobs.name=Mob Magnet
+item.magnet_wither.name=Wither Magnet
+# Flowtation Device
+item.flowtation_device_frame.name=Flowtation Device Frame
+item.flowtation_device.name=Flowtation Device
+# Hoe of Greed
+item.hoe_of_greed_basic.name=Hoe of Greed (3x3 area 2x produce)
+item.hoe_of_greed_super.name=Super Hoe of Greed (5x5 area 4x produce)
+item.hoe_of_greed_mega.name=Mega Hoe of Greed (7x7 area 8x produce)
+item.hoe_of_greed_ultra.name=Ultimate Hoe of Greed (9x9 area 16x produce)
+# Pickaxe of Greed
+item.pickaxe_of_greed_basic.name=Pickaxe of Greed
+item.pickaxe_of_greed_super.name=Super Pickaxe of Greed
+item.pickaxe_of_greed_mega.name=Mega Pickaxe of Greed
+item.pickaxe_of_greed_ultra.name=Ultimate Pickaxe of Greed
+# Pickaxe of Greed
+item.axe_of_greed_basic.name=Axe of Greed
+item.axe_of_greed_super.name=Super Axe of Greed
+item.axe_of_greed_mega.name=Mega Axe of Greed
+item.axe_of_greed_ultra.name=Ultimate Axe of Greed 
+# Sword of Greed
+item.sword_of_greed_basic.name=Sword of Greed
+item.sword_of_greed_super.name=Super Sword of Greed
+item.sword_of_greed_mega.name=Mega Sword of Greed
+item.sword_of_greed_ultra.name=Ultimate Sword of Greed 
+# Pulsator
+item.pulsator.name=Pulsator
+# Misc
+item.nethar_star_mesh.name=Nether Star Mesh
+item.nethar_star_ingot.name=Nether Star Ingot
+item.animal_ingot_uncooked.name=Animal Ingot(Uncooked)
+item.animal_ingot_cooked.name=Animal Ingot(Cooked)
+item.crystal_of_greed.name=Crystal of Greed
+item.mob_ingot.name=Mob Ingot
+item.crystal_of_wrath.name=Crystal of Wrath
+item.graphite.name=Graphite
+item.giron_ingot.name=Giron Ingot
+item.steel_ingot.name=Steel Ingot
+# Tiles
+# Generators
+tile.creative_generator.name=Creative Generator (Creative Mode Only)
+# Energy Storage
+tile.energy_storage_basic.name=Energy Storage Basic (Stores 10000RF transfers 100 RF/t)
+# Super Furnace
+tile.super_furnace.name=Super Furnace
+# Wither Proof Blocks
+tile.wither_proof.name=Wither Proof Block
+tile.wither_proof_glass.name=Wither Proof Glass
+tile.wither_proof_light.name=Wither Proof Lamp
+# Alloy Furnace
+tile.alloy_furnace.name=Alloy Furnace

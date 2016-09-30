@@ -1,0 +1,16 @@
+[
+{
+  "modid": "btawc",
+  "name": "BTAWC",
+  "description": "This is a simple mod that add some farming utilities",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["derf6060 (aka aod6060)"],
+  "credits": "Hmm, credits, yeah me lol. :)",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

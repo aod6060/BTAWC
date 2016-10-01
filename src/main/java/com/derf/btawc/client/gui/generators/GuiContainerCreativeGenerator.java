@@ -1,10 +1,10 @@
 package com.derf.btawc.client.gui.generators;
 
 import com.derf.btawc.Loader;
-import com.derf.btawc.blocks.inventory.container.generator.ContainerCreativeGenerator;
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
 import com.derf.btawc.client.Color;
 import com.derf.btawc.client.gui.GuiContainerBasic;
+import com.derf.btawc.inventory.ContainerCreativeGenerator;
 import com.derf.btawc.util.GuiRect;
 import com.derf.btawc.util.Vec2;
 

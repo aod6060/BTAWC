@@ -1,14 +1,14 @@
 package com.derf.btawc.client.gui;
 
-import com.derf.btawc.blocks.inventory.container.furnace.ContainerAlloyFurnace;
-import com.derf.btawc.blocks.inventory.container.furnace.ContainerSuperFurnace;
-import com.derf.btawc.blocks.inventory.container.generator.ContainerCreativeGenerator;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
 import com.derf.btawc.client.gui.furnace.GuiContainerAlloyFurnace;
 import com.derf.btawc.client.gui.furnace.GuiContainerSuperFurnace;
 import com.derf.btawc.client.gui.generators.GuiContainerCreativeGenerator;
+import com.derf.btawc.inventory.ContainerAlloyFurnace;
+import com.derf.btawc.inventory.ContainerCreativeGenerator;
+import com.derf.btawc.inventory.ContainerSuperFurnace;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

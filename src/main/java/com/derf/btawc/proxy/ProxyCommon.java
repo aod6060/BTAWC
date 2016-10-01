@@ -6,6 +6,7 @@ import com.derf.btawc.client.gui.GuiHandler;
 import com.derf.btawc.creativetabs.CreativeTabsManager;
 import com.derf.btawc.handler.HandlerManager;
 import com.derf.btawc.items.ItemsManager;
+import com.derf.btawc.items.growthdevice.ItemGrowthDevice;
 import com.derf.btawc.items.tools.ItemAxeOfGreed;
 import com.derf.btawc.items.tools.ItemPickaxeOfGreed;
 import com.derf.btawc.util.MobDropUtils;
@@ -35,13 +36,13 @@ public class ProxyCommon implements IProxy {
 		BlockManager.crafting();
 		HandlerManager.create();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Loader.INSTANCE, new GuiHandler());
-		//NetworkRegistry.INSTANCE.registerGuiHandler(Loader.INSTANCE, new GuiHandler());
 	}
 
 	@Override
 	public void postInit(FMLPostInitializationEvent e) {
 		ItemsManager.addToOreDictionary();
 		BlockManager.addToOreDictionary();
+		ItemGrowthDevice.registerGrowthDeviceStrategies();
 		ItemPickaxeOfGreed.registerOres();
 		ItemAxeOfGreed.registerLogs();
 		MobDropUtils.registerMobDrops();

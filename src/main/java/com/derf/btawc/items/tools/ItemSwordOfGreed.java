@@ -29,14 +29,6 @@ public class ItemSwordOfGreed extends ItemSword {
 		this.setUnlocalizedName(name);
 	}
 	
-	/*
-	@Override
-    public float func_150931_i()
-    {
-        return damage;
-    }
-	*/
-	
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
 		
@@ -69,16 +61,4 @@ public class ItemSwordOfGreed extends ItemSword {
 	public int getCount() {
 		return count;
 	}
-	
-    /**
-     * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
-     */
-    public Multimap getItemAttributeModifiers()
-    {
-       /* Multimap multimap = super.getItemAttributeModifiers();
-        multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Weapon modifier", (double)(this.damage + 4.0f), 0));
-        return multimap;
-        */
-    	return null;
-    }
 }

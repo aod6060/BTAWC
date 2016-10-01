@@ -1,0 +1,6 @@
+{
+  "parent": "btawc:item/item_tools",
+  "textures": {
+    "layer0": "btawc:items/axe_of_greed_ultra"
+  }
+}

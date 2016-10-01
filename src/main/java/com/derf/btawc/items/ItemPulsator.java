@@ -5,8 +5,15 @@ import java.util.List;
 import com.derf.btawc.util.Vec3;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityFlying;
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.boss.EntityWither;
+import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -22,9 +29,13 @@ public class ItemPulsator extends ItemBasic {
 		this.setMaxStackSize(1);
 	}
 	
-	/*
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	public ActionResult<ItemStack> onItemRightClick(
+			ItemStack stack,
+			World world, 
+			EntityPlayer player,
+			EnumHand hand) {
+		// TODO Auto-generated method stub
 		
 		if(!world.isRemote) {
 			this.onPulsated(stack, world, player, EntityCreature.class);
@@ -32,13 +43,10 @@ public class ItemPulsator extends ItemBasic {
 			this.onPulsated(stack, world, player, EntityFlying.class);
 			this.onPulsated(stack, world, player, EntityWither.class);
 			this.onPulsated(stack, world, player, EntityDragon.class);
-			this.onPulsated(stack, world, player, EntityPlayer.class);
 		}
-		
-		return super.onItemRightClick(stack, world, player);
+		return super.onItemRightClick(stack, world, player, hand);
 	}
-	*/
-
+	
 	private void onPulsated(ItemStack stack, World world, EntityPlayer player, Class<? extends Entity> entity) {
 		AxisAlignedBB box = this.createBox(player, this.range);
 		List<Entity> list = this.getEntitesWithinAABB(world, entity, box);

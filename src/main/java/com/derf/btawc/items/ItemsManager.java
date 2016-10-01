@@ -2,11 +2,16 @@ package com.derf.btawc.items;
 
 import com.derf.btawc.ModRegistry;
 import com.derf.btawc.creativetabs.CreativeTabsManager;
+import com.derf.btawc.items.growthdevice.ItemGrowthDevice;
 import com.derf.btawc.items.magnet.ItemMagnetAnimals;
 import com.derf.btawc.items.magnet.ItemMagnetItems;
 import com.derf.btawc.items.magnet.ItemMagnetMobs;
 import com.derf.btawc.items.magnet.ItemMagnetWither;
 import com.derf.btawc.items.misc.ItemAnimalIngotCooked;
+import com.derf.btawc.items.tools.ItemAxeOfGreed;
+import com.derf.btawc.items.tools.ItemHoeOfGreed;
+import com.derf.btawc.items.tools.ItemPickaxeOfGreed;
+import com.derf.btawc.items.tools.ItemSwordOfGreed;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -56,11 +61,7 @@ public class ItemsManager {
 	// Pulsator
 	public static Item pulsator;				// Makes Creatures fly lol :D
 	// Misc
-	// Not needed
-	//public static Item netharStarMesh;
 	public static Item netherStarIngot;			// This is a new ingot that is made from nether star, diamonds, and iron...
-	// Not needed
-	//public static Item animalIngotUncooked;		// This is a new ingot that is mode from steak, pork, chicken...
 	public static Item animalIngot;		// Very good food source :D
 	public static Item crystalOfGreed;			// Very greedy crystal :)
 	public static Item mobIngot;				// Very scary ingot
@@ -86,7 +87,6 @@ public class ItemsManager {
 		// Flowtation Device
 		flowtationDeviceFrame = new ItemBasic("flowtation_device_frame");
 		flowtationDevice = new ItemFlowtationDevice();
-		/*
 		// Hoe of Greed
 		hoeOfGreed = new ItemHoeOfGreed("hoe_of_greed_basic", 10000, 3, 2);
 		hoeOfGreedSuper = new ItemHoeOfGreed("hoe_of_greed_super", 20000, 5, 4);
@@ -109,7 +109,6 @@ public class ItemsManager {
 		swordOfGreedUltra = new ItemSwordOfGreed("sword_of_greed_ultra", 80, 16, 80000);
 		// Pulsator
 		pulsator = new ItemPulsator(2, 32.0f);
-		*/
 		// Misc
 		netherStarIngot = new ItemBasic("nether_star_ingot");
 		animalIngot = new ItemAnimalIngotCooked();
@@ -137,30 +136,28 @@ public class ItemsManager {
 		// Flowtation Device
 		ModRegistry.registerItem(flowtationDeviceFrame, "flowtation_device_frame");
 		ModRegistry.registerItem(flowtationDevice, "flowtation_device");
-		/*
 		// Hoe of Greed
-		GameRegistry.registerItem(hoeOfGreed, "hoe_of_greed_basic");
-		GameRegistry.registerItem(hoeOfGreedSuper, "hoe_of_greed_super");
-		GameRegistry.registerItem(hoeOfGreedMega, "hoe_of_greed_mega");
-		GameRegistry.registerItem(hoeOfGreedUltra, "hoe_of_greed_ultra");
+		ModRegistry.registerItem(hoeOfGreed, "hoe_of_greed_basic");
+		ModRegistry.registerItem(hoeOfGreedSuper, "hoe_of_greed_super");
+		ModRegistry.registerItem(hoeOfGreedMega, "hoe_of_greed_mega");
+		ModRegistry.registerItem(hoeOfGreedUltra, "hoe_of_greed_ultra");
 		// Pickaxe of Greed
-		GameRegistry.registerItem(pickaxeOfGreed, "pickaxe_of_greed_basic");
-		GameRegistry.registerItem(pickaxeOfGreedSuper, "pickaxe_of_greed_super");
-		GameRegistry.registerItem(pickaxeOfGreedMega, "pickaxe_of_greed_mega");
-		GameRegistry.registerItem(pickaxeOfGreedUltra, "pickaxe_of_greed_ultra");
+		ModRegistry.registerItem(pickaxeOfGreed, "pickaxe_of_greed_basic");
+		ModRegistry.registerItem(pickaxeOfGreedSuper, "pickaxe_of_greed_super");
+		ModRegistry.registerItem(pickaxeOfGreedMega, "pickaxe_of_greed_mega");
+		ModRegistry.registerItem(pickaxeOfGreedUltra, "pickaxe_of_greed_ultra");
 		// Axe of Greed
-		GameRegistry.registerItem(axeOfGreed, "axe_of_greed_basic");
-		GameRegistry.registerItem(axeOfGreedSuper, "axe_of_greed_super");
-		GameRegistry.registerItem(axeOfGreedMega, "axe_of_greed_mega");
-		GameRegistry.registerItem(axeOfGreedUltra, "axe_of_greed_ultra");
+		ModRegistry.registerItem(axeOfGreed, "axe_of_greed_basic");
+		ModRegistry.registerItem(axeOfGreedSuper, "axe_of_greed_super");
+		ModRegistry.registerItem(axeOfGreedMega, "axe_of_greed_mega");
+		ModRegistry.registerItem(axeOfGreedUltra, "axe_of_greed_ultra");
 		// Sword of Greed
-		GameRegistry.registerItem(swordOfGreed, "sword_of_greed_basic");
-		GameRegistry.registerItem(swordOfGreedSuper, "sword_of_greed_super");
-		GameRegistry.registerItem(swordOfGreedMega, "sword_of_greed_mega");
-		GameRegistry.registerItem(swordOfGreedUltra, "sword_of_greed_ultra");
+		ModRegistry.registerItem(swordOfGreed, "sword_of_greed_basic");
+		ModRegistry.registerItem(swordOfGreedSuper, "sword_of_greed_super");
+		ModRegistry.registerItem(swordOfGreedMega, "sword_of_greed_mega");
+		ModRegistry.registerItem(swordOfGreedUltra, "sword_of_greed_ultra");
 		// Pulsator
-		GameRegistry.registerItem(pulsator, "pulsator");
-		*/
+		ModRegistry.registerItem(pulsator, "pulsator");
 		// Misc
 		ModRegistry.registerItem(netherStarIngot, "nether_star_ingot");
 		ModRegistry.registerItem(animalIngot, "animal_ingot");
@@ -189,7 +186,6 @@ public class ItemsManager {
 		// Flowtation Device
 		flowtationDeviceFrame.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		flowtationDevice.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		/*
 		// hoe of greed
 		hoeOfGreed.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		hoeOfGreedSuper.setCreativeTab(CreativeTabsManager.tabBTAWC);
@@ -212,7 +208,6 @@ public class ItemsManager {
 		swordOfGreedUltra.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Pulsator
 		pulsator.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		*/
 		// Misc
 		//netharStarMesh.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		netherStarIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
@@ -335,167 +330,165 @@ public class ItemsManager {
 				" i ",
 				'i', netherStarIngot,
 				'f', flowtationDeviceFrame);
-		/*
 		// Hoe of Greed
 		// Hoe of Greed Basic
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(hoeOfGreed), 
 				"igi",
 				"ghg",
 				"igi",
-				'i', Items.iron_ingot,
+				'i', Items.IRON_INGOT,
 				'g', crystalOfGreed,
-				'h', Items.diamond_hoe);
+				'h', Items.DIAMOND_HOE);
 		// Hoe of Greed Super
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(hoeOfGreedSuper), 
 				"igi",
 				"ghg",
 				"igi",
-				'i', Items.gold_ingot,
+				'i', Items.GOLD_INGOT,
 				'g', crystalOfGreed,
 				'h', hoeOfGreed);
 		// Hoe of Greed Mega
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(hoeOfGreedMega), 
 				"igi",
 				"ghg",
 				"igi",
-				'i', Items.diamond,
+				'i', Items.DIAMOND,
 				'g', crystalOfGreed,
 				'h', hoeOfGreedSuper);
 		// Hoe of Greed Ultra
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(hoeOfGreedUltra), 
 				"igi",
 				"ghg",
 				"igi",
-				'i', netharStarIngot,
+				'i', netherStarIngot,
 				'g', crystalOfGreed,
 				'h', hoeOfGreedMega);
 		// Pickaxe of Greed
 		// Hoe of Greed Basic
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(pickaxeOfGreed), 
 				"igi",
 				"ghg",
 				"igi",
-				'i', Items.iron_ingot,
+				'i', Items.IRON_INGOT,
 				'g', crystalOfGreed,
-				'h', Items.diamond_pickaxe);
+				'h', Items.DIAMOND_PICKAXE);
 		// Hoe of Greed Super
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(pickaxeOfGreedSuper), 
 				"igi",
 				"ghg",
 				"igi",
-				'i', Items.gold_ingot,
+				'i', Items.GOLD_INGOT,
 				'g', crystalOfGreed,
 				'h', pickaxeOfGreed);
 		// Hoe of Greed Mega
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(pickaxeOfGreedMega), 
 				"igi",
 				"ghg",
 				"igi",
-				'i', Items.diamond,
+				'i', Items.DIAMOND,
 				'g', crystalOfGreed,
 				'h', pickaxeOfGreedSuper);
 		// Hoe of Greed Ultra
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(pickaxeOfGreedUltra), 
 				"igi",
 				"ghg",
 				"igi",
-				'i', netharStarIngot,
+				'i', netherStarIngot,
 				'g', crystalOfGreed,
 				'h', pickaxeOfGreedMega);
 		// Axe of Greed
 		// Hoe of Greed Basic
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(axeOfGreed), 
 				"igi",
 				"ghg",
 				"igi",
-				'i', Items.iron_ingot,
+				'i', Items.IRON_INGOT,
 				'g', crystalOfGreed,
-				'h', Items.diamond_axe);
+				'h', Items.DIAMOND_AXE);
 		// Hoe of Greed Super
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(axeOfGreedSuper), 
 				"igi",
 				"ghg",
 				"igi",
-				'i', Items.gold_ingot,
+				'i', Items.GOLD_INGOT,
 				'g', crystalOfGreed,
 				'h', axeOfGreed);
 		// Hoe of Greed Mega
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(axeOfGreedMega), 
 				"igi",
 				"ghg",
 				"igi",
-				'i', Items.diamond,
+				'i', Items.DIAMOND,
 				'g', crystalOfGreed,
 				'h', axeOfGreedSuper);
 		// Hoe of Greed Ultra
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(axeOfGreedUltra), 
 				"igi",
 				"ghg",
 				"igi",
-				'i', netharStarIngot,
+				'i', netherStarIngot,
 				'g', crystalOfGreed,
 				'h', axeOfGreedMega);
 		
 		// Sword of Greed
 		// Hoe of Greed Basic
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(swordOfGreed), 
 				"igi",
 				"ghg",
 				"igi",
-				'i', Items.iron_ingot,
+				'i', Items.IRON_INGOT,
 				'g', crystalOfGreed,
-				'h', Items.diamond_sword);
+				'h', Items.DIAMOND_SWORD);
 		// Hoe of Greed Super
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(swordOfGreedSuper), 
 				"igi",
 				"ghg",
 				"igi",
-				'i', Items.gold_ingot,
+				'i', Items.GOLD_INGOT,
 				'g', crystalOfGreed,
 				'h', swordOfGreed);
 		// Hoe of Greed Mega
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(swordOfGreedMega), 
 				"igi",
 				"ghg",
 				"igi",
-				'i', Items.diamond,
+				'i', Items.DIAMOND,
 				'g', crystalOfGreed,
 				'h', swordOfGreedSuper);
 		// Hoe of Greed Ultra
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(swordOfGreedUltra), 
 				"igi",
 				"ghg",
 				"igi",
-				'i', netharStarIngot,
+				'i', netherStarIngot,
 				'g', crystalOfGreed,
 				'h', swordOfGreedMega);
 		// Pulsator
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(pulsator), 
 				"gmg",
 				"ara",
 				"gmg",
-				'g', Items.gold_ingot,
+				'g', Items.GOLD_INGOT,
 				'm', mobIngot,
-				'a', animalIngotCooked,
-				'r', Blocks.redstone_block);
-				*/
+				'a', animalIngot,
+				'r', Blocks.REDSTONE_BLOCK);
 		// Misc
 		
 		// Nether Star Ingot
@@ -586,10 +579,27 @@ public class ItemsManager {
 		ModRegistry.registerRender(flowtationDeviceFrame, "flowtation_device_frame");
 		ModRegistry.registerRender(flowtationDevice, "flowtation_device");
 		// Hoe of Greed
+		ModRegistry.registerRender(hoeOfGreed, "hoe_of_greed_basic");
+		ModRegistry.registerRender(hoeOfGreedSuper, "hoe_of_greed_super");
+		ModRegistry.registerRender(hoeOfGreedMega, "hoe_of_greed_mega");
+		ModRegistry.registerRender(hoeOfGreedUltra, "hoe_of_greed_ultra");
 		// Pickaxe of Greed
+		ModRegistry.registerRender(pickaxeOfGreed, "pickaxe_of_greed_basic");
+		ModRegistry.registerRender(pickaxeOfGreedSuper, "pickaxe_of_greed_super");
+		ModRegistry.registerRender(pickaxeOfGreedMega, "pickaxe_of_greed_mega");
+		ModRegistry.registerRender(pickaxeOfGreedUltra, "pickaxe_of_greed_ultra");
 		// Axe of Greed
+		ModRegistry.registerRender(axeOfGreed, "axe_of_greed_basic");
+		ModRegistry.registerRender(axeOfGreedSuper, "axe_of_greed_super");
+		ModRegistry.registerRender(axeOfGreedMega, "axe_of_greed_mega");
+		ModRegistry.registerRender(axeOfGreedUltra, "axe_of_greed_ultra");
 		// Sword of Greed
+		ModRegistry.registerRender(swordOfGreed, "sword_of_greed_basic");
+		ModRegistry.registerRender(swordOfGreedSuper, "sword_of_greed_super");
+		ModRegistry.registerRender(swordOfGreedMega, "sword_of_greed_mega");
+		ModRegistry.registerRender(swordOfGreedUltra, "sword_of_greed_ultra");
 		// Pulsator
+		ModRegistry.registerRender(pulsator, "pulsator");
 		// Misc
 		// Nether Star Ingot
 		ModRegistry.registerRender(netherStarIngot, "nether_star_ingot");

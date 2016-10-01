@@ -1,20 +1,17 @@
 package com.derf.btawc.blocks;
 
-import com.derf.btawc.blocks.furnace.BlockAlloyFurnace;
-import com.derf.btawc.blocks.furnace.BlockSuperFurnace;
-import com.derf.btawc.blocks.generators.BlockCreativeGenerator;
-import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
-import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
-import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
+import com.derf.btawc.ModRegistry;
 import com.derf.btawc.blocks.witherproof.BlockWitherProof;
 import com.derf.btawc.blocks.witherproof.BlockWitherProofGlass;
 import com.derf.btawc.creativetabs.CreativeTabsManager;
 import com.derf.btawc.items.ItemsManager;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public final class BlockManager {
 	
@@ -43,10 +40,12 @@ public final class BlockManager {
 		// Super Furnace
 		superFurnace = new BlockSuperFurnace(0, false);
 		superFurnaceOn = new BlockSuperFurnace(1, true);
+		*/
 		// Wither Proof Block
-		witherProofBlock = new BlockWitherProof("wither_proof", 0.0f, Block.soundTypeStone);
-		witherProofLight = new BlockWitherProof("wither_proof_light", 1.0f, Block.soundTypeGlass);
-		witherProofGlass = new BlockWitherProofGlass("wither_proof_glass", 0.0f, Block.soundTypeGlass);
+		witherProofBlock = new BlockWitherProof("wither_proof", 0.0f, SoundType.STONE);
+		witherProofLight = new BlockWitherProof("wither_proof_light", 1.0f, SoundType.GLASS);
+		witherProofGlass = new BlockWitherProofGlass("wither_proof_glass", 0.0f, SoundType.GLASS);
+		/*
 		// Alloy Furnace
 		alloyFurnace = new BlockAlloyFurnace(0, false);
 		alloyFurnaceOn = new BlockAlloyFurnace(1, true);
@@ -61,10 +60,12 @@ public final class BlockManager {
 		// Super Furnace
 		GameRegistry.registerBlock(superFurnace, "super_furnace");
 		GameRegistry.registerBlock(superFurnaceOn, "super_furnace_on");
+		*/
 		// Wither Proof Block
-		GameRegistry.registerBlock(witherProofBlock, "wither_proof");
-		GameRegistry.registerBlock(witherProofLight, "wither_proof_light");
-		GameRegistry.registerBlock(witherProofGlass, "wither_proof_glass");
+		ModRegistry.registerBlock(witherProofBlock, "wither_proof");
+		ModRegistry.registerBlock(witherProofLight, "wither_proof_light");
+		ModRegistry.registerBlock(witherProofGlass, "wither_proof_glass");
+		/*
 		// Alloy Furnace
 		GameRegistry.registerBlock(alloyFurnace, "alloy_furnace");
 		GameRegistry.registerBlock(alloyFurnaceOn, "alloy_furnace_on");
@@ -92,10 +93,12 @@ public final class BlockManager {
 		//energyStorageBasic.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Super Furnace
 		superFurnace.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		*/
 		// Wither Proof Block
 		witherProofBlock.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		witherProofLight.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		witherProofGlass.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		/*
 		// Alloy Furnace
 		alloyFurnace.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		*/
@@ -110,29 +113,31 @@ public final class BlockManager {
 				"fff",
 				"fff",
 				'f', Blocks.furnace);
+				*/
 		// Wither Proof Block
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(witherProofBlock, 4), 
 				"oio",
 				"ioi",
 				"oio",
 				'i', ItemsManager.mobIngot,
-				'o', Blocks.obsidian);
-		GameRegistry.addShapedRecipe(
+				'o', Blocks.OBSIDIAN);
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(witherProofLight, 8), 
 				"lll",
 				"lpl",
 				"lll",
 				'l', witherProofBlock,
-				'p', Blocks.glowstone);
+				'p', Blocks.GLOWSTONE);
 		
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(witherProofGlass, 8), 
 				"ggg",
 				"gpg",
 				"ggg",
 				'g', witherProofBlock,
-				'p', Blocks.glass);
+				'p', Blocks.GLASS);
+		/*
 		// Alloy Furnace
 		GameRegistry.addShapedRecipe(
 				new ItemStack(alloyFurnace), 
@@ -148,4 +153,20 @@ public final class BlockManager {
 	public static void addToOreDictionary() {
 		// Add stuff if needed
 	}
+
+	@SideOnly(Side.CLIENT)
+	public static void registerVarients() {
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public static void registerRenderer() {
+		// Super Furnace
+		// Wither Proof
+		ModRegistry.registerRender(witherProofBlock, "wither_proof");
+		ModRegistry.registerRender(witherProofGlass, "wither_proof_glass");
+		ModRegistry.registerRender(witherProofLight, "wither_proof_light");
+		// Alloy Furnace
+	}
+
+
 }

@@ -1,5 +1,6 @@
 package com.derf.btawc.proxy;
 
+import com.derf.btawc.blocks.BlockManager;
 import com.derf.btawc.items.ItemsManager;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -12,6 +13,7 @@ public class ProxyClient extends ProxyCommon {
 	public void preInit(FMLPreInitializationEvent e) {
 		// TODO Auto-generated method stub
 		super.preInit(e);
+		BlockManager.registerVarients();
 	}
 
 	@Override
@@ -19,6 +21,7 @@ public class ProxyClient extends ProxyCommon {
 		// TODO Auto-generated method stub
 		super.init(e);
 		ItemsManager.registerRenderer();
+		BlockManager.registerRenderer();
 	}
 
 	@Override

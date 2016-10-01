@@ -5,9 +5,11 @@ import com.derf.btawc.blocks.basic.BlockBasic;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -18,17 +20,14 @@ public class BlockWitherProof extends BlockBasic {
 		super(name, Material.ROCK, 2.0f, 100.0f, lightlevel, "pickaxe", 2, type);
 	}
 
-	/*
 	@Override
-	public void onBlockExploded(World world, int x, int y, int z, Explosion explosion) {
-		// Does nothing because this block can't be destroyed by a wither
+	public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {
+		super.onBlockExploded(world, pos, explosion);
 	}
-	*/
-	
-	/*
+
 	@Override
-	public boolean canEntityDestroy(IBlockAccess world, int x, int y, int z, Entity entity) {
-		boolean b = super.canEntityDestroy(world, x, y, z, entity);
+	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
+		boolean b = super.canEntityDestroy(state, world, pos, entity);
 		
 		if(entity instanceof EntityWither) {
 			return false;
@@ -36,6 +35,5 @@ public class BlockWitherProof extends BlockBasic {
 		
 		return b;
 	}
-	*/
 	
 }

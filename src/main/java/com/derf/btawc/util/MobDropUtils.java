@@ -67,81 +67,80 @@ public class MobDropUtils {
 	}
 	
 	public static void registerMobDrops() {
-		/*
 		// Aggressive Mobs
 		// blaze
-		addDrops(EntityBlaze.class, Items.blaze_powder, 3);
-		addDrops(EntityBlaze.class, Items.blaze_rod, 5);
+		addDrops(EntityBlaze.class, Items.BLAZE_POWDER, 3);
+		addDrops(EntityBlaze.class, Items.BLAZE_ROD, 5);
 		// Cave Spider
-		addDrops(EntityCaveSpider.class, Items.string, 3);
-		addDrops(EntityCaveSpider.class, Items.spider_eye, 5);
+		addDrops(EntityCaveSpider.class, Items.STRING, 3);
+		addDrops(EntityCaveSpider.class, Items.SPIDER_EYE, 5);
 		// Creeper
-		addDrops(EntityCreeper.class, Items.gunpowder, 3);
+		addDrops(EntityCreeper.class, Items.GUNPOWDER, 3);
 		// Enderman
-		addDrops(EntityEnderman.class, Items.ender_pearl, 3);
+		addDrops(EntityEnderman.class, Items.ENDER_PEARL, 3);
 		// Ghast
-		addDrops(EntityGhast.class, Items.ghast_tear, 3);
+		addDrops(EntityGhast.class, Items.GHAST_TEAR, 3);
 		// Iron Golumn
-		addDrops(EntityIronGolem.class, Items.iron_ingot, 3);
+		addDrops(EntityIronGolem.class, Items.IRON_INGOT, 3);
 		// Magma Cube
-		addDrops(EntityMagmaCube.class, Items.magma_cream, 3);
+		addDrops(EntityMagmaCube.class, Items.MAGMA_CREAM, 3);
 		// Zombie Pigman
-		addDrops(EntityPigZombie.class, Items.rotten_flesh, 3);
-		addDrops(EntityPigZombie.class, Items.gold_nugget, 5);
+		addDrops(EntityPigZombie.class, Items.ROTTEN_FLESH, 3);
+		addDrops(EntityPigZombie.class, Items.GOLD_NUGGET, 5);
 		// Skeleton + wither Skeleton
-		addDrops(EntitySkeleton.class, Items.bone, 3);
-		addDrops(EntitySkeleton.class, new ItemStack(Items.skull, 1, 1), 10);
+		addDrops(EntitySkeleton.class, Items.BONE, 3);
+		addDrops(EntitySkeleton.class, new ItemStack(Items.SKULL, 1, 1), 10);
 		// Slime
-		addDrops(EntitySlime.class, Items.slime_ball, 3);
+		addDrops(EntitySlime.class, Items.SLIME_BALL, 3);
 		// Snowgolem
-		addDrops(EntitySnowman.class, Items.snowball, 3);
+		addDrops(EntitySnowman.class, Items.SNOWBALL, 3);
 		// Spider
-		addDrops(EntitySpider.class, Items.string, 3);
-		addDrops(EntitySpider.class, Items.spider_eye, 5);
+		addDrops(EntitySpider.class, Items.STRING, 3);
+		addDrops(EntitySpider.class, Items.SPIDER_EYE, 5);
 		// Witch
-		addDrops(EntityWitch.class, Items.glowstone_dust, 5);
-		addDrops(EntityWitch.class, Items.gunpowder, 5);
-		addDrops(EntityWitch.class, Items.glass_bottle, 5);
-		addDrops(EntityWitch.class, Items.redstone, 5);
-		addDrops(EntityWitch.class, Items.spider_eye, 5);
-		addDrops(EntityWitch.class, Items.sugar, 5);
-		addDrops(EntityWitch.class, Items.stick, 3);
+		addDrops(EntityWitch.class, Items.GLOWSTONE_DUST, 5);
+		addDrops(EntityWitch.class, Items.GUNPOWDER, 5);
+		addDrops(EntityWitch.class, Items.GLASS_BOTTLE, 5);
+		addDrops(EntityWitch.class, Items.REDSTONE, 5);
+		addDrops(EntityWitch.class, Items.SPIDER_EYE, 5);
+		addDrops(EntityWitch.class, Items.SUGAR, 5);
+		addDrops(EntityWitch.class, Items.STICK, 3);
 		// Zombie
-		addDrops(EntityZombie.class, Items.rotten_flesh, 3);
+		addDrops(EntityZombie.class, Items.ROTTEN_FLESH, 3);
 		// Passive Mobs
 		// Chicken
-		addDrops(EntityChicken.class, Items.feather, 3);
-		addDrops(EntityChicken.class, Items.chicken, 5);
+		addDrops(EntityChicken.class, Items.FEATHER, 3);
+		addDrops(EntityChicken.class, Items.CHICKEN, 5);
 		// Cow
-		addDrops(EntityCow.class, Items.beef, 3);
-		addDrops(EntityCow.class, Items.leather, 5);
+		addDrops(EntityCow.class, Items.BEEF, 3);
+		addDrops(EntityCow.class, Items.LEATHER, 5);
 		// Horse
-		addDrops(EntityHorse.class, Items.leather, 3);
-		addDrops(EntityHorse.class, Items.saddle, 5);
-		addDrops(EntityHorse.class, Items.iron_horse_armor, 10);
-		addDrops(EntityHorse.class, Items.golden_horse_armor, 15);
-		addDrops(EntityHorse.class, Items.diamond_horse_armor, 20);
+		addDrops(EntityHorse.class, Items.LEATHER, 3);
+		addDrops(EntityHorse.class, Items.SADDLE, 50);
+		addDrops(EntityHorse.class, Items.IRON_HORSE_ARMOR, 100);
+		addDrops(EntityHorse.class, Items.GOLDEN_HORSE_ARMOR, 150);
+		addDrops(EntityHorse.class, Items.DIAMOND_HORSE_ARMOR, 200);
 		// Mooshroom
-		addDrops(EntityMooshroom.class, Items.beef, 3);
-		addDrops(EntityMooshroom.class, Blocks.red_mushroom, 3);
-		addDrops(EntityMooshroom.class, Blocks.brown_mushroom, 3);
-		addDrops(EntityMooshroom.class, Items.leather, 5);
+		addDrops(EntityMooshroom.class, Items.BEEF, 3);
+		addDrops(EntityMooshroom.class, Blocks.RED_MUSHROOM, 3);
+		addDrops(EntityMooshroom.class, Blocks.BROWN_MUSHROOM, 3);
+		addDrops(EntityMooshroom.class, Items.LEATHER, 5);
 		// Pig
-		addDrops(EntityPig.class, Items.porkchop, 3);
-		addDrops(EntityPig.class, Items.saddle, 20);
-		addDrops(EntityPig.class, Items.carrot_on_a_stick, 20);
+		addDrops(EntityPig.class, Items.PORKCHOP, 3);
+		addDrops(EntityPig.class, Items.SADDLE, 200);
+		addDrops(EntityPig.class, Items.CARROT_ON_A_STICK, 200);
 		// Sheep
-		addDrops(EntitySheep.class, Blocks.wool, 3);
+		addDrops(EntitySheep.class, Blocks.WOOL, 5);
+		addDrops(EntitySheep.class, Items.MUTTON, 3);
 		// Villager
-		addDrops(EntityVillager.class, Items.emerald, 3);
+		addDrops(EntityVillager.class, Items.EMERALD, 3);
 		// Bosses
 		// Wither
-		addDrops(EntityWither.class, new ItemStack(Items.skull, 1, 1), 3);
-		addDrops(EntityWither.class, Items.nether_star, 5);
+		addDrops(EntityWither.class, new ItemStack(Items.SKULL, 1, 1), 3);
+		addDrops(EntityWither.class, Items.NETHER_STAR, 5);
 		// Ender Dragon
-		addDrops(EntityDragon.class, Blocks.dragon_egg, 5);
-		addDrops(EntityDragonPart.class, Blocks.dragon_egg, 5);
-		*/
+		addDrops(EntityDragon.class, Blocks.DRAGON_EGG, 5);
+		addDrops(EntityDragonPart.class, Blocks.DRAGON_EGG, 5);
 	}
 	
 	public static void addDrops(Class<? extends Entity> clz, Block block, int chance) {

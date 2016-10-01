@@ -1,0 +1,6 @@
+{
+	"parent": "btawc:item/item_block",
+	"textures": {
+		"all": "btawc:blocks/wither_proof_glass"
+	}
+}

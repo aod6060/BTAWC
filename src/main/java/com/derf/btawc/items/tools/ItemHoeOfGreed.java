@@ -3,9 +3,22 @@ package com.derf.btawc.items.tools;
 import java.util.List;
 
 import com.derf.btawc.items.ItemBasic;
+import com.derf.btawc.util.Utils;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
+import net.minecraft.block.BlockDirt;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -21,119 +34,91 @@ public class ItemHoeOfGreed extends ItemBasic {
 		this.size = size;
 		this.count = count;
 	}
-
-	/*
+	
 	@Override
-	public boolean onItemUse(
+	public EnumActionResult onItemUse(
 			ItemStack stack, 
 			EntityPlayer player, 
 			World world, 
-			int x,
-			int y, 
-			int z, 
-			int side, 
-			float tx, 
-			float ty, 
-			float tz) {
+			BlockPos pos,
+			EnumHand hand, 
+			EnumFacing facing, 
+			float hitX, 
+			float hitY,
+			float hitZ) {
+		EnumActionResult result = EnumActionResult.PASS;
 		
-		
-		boolean b = false;
-		
-		if(!player.canPlayerEdit(x, y, z, side, stack)) {
-			b = false;
-		} else {
+		if(player.canPlayerEdit(pos, facing, stack)) {
+			List<BlockPos> bps = Utils.getBlockPositions(pos, EnumFacing.UP, size);
+			List<IBlockState> states = Utils.getStates(world, bps);
 			
-			List<BlockPos> ps = new ArrayList<BlockPos>();
-			
-			this.createPosition(ps, new BlockPos(x, y, z));
-			
-			for(BlockPos p : ps) {
-				onHoeUsed(stack, player, world, p.getX(), p.getY(), p.getZ(), side);
+			for(int i = 0; i < states.size(); i++) {
+				BlockPos p = bps.get(i);
+				IBlockState state = states.get(i);
+				Block block = state.getBlock();
+				
+				if(facing != EnumFacing.DOWN && world.isAirBlock(p.up())) {
+					if(block == Blocks.GRASS || block == Blocks.GRASS_PATH) {
+						this.setBlock(stack, player, world, p, Blocks.FARMLAND.getDefaultState());
+					}
+					
+					if(block == Blocks.DIRT) {
+						switch((BlockDirt.DirtType)state.getValue(BlockDirt.VARIANT)) {
+						case DIRT:
+							this.setBlock(stack, player, world, p, Blocks.FARMLAND.getDefaultState());
+							break;
+						case COARSE_DIRT:
+							this.setBlock(stack, player, world, p, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
+							break;
+						default:
+							break;
+							
+						}
+					}
+				}
 			}
 			
-			b = true;
+			result = EnumActionResult.SUCCESS;
 		}
-		return b;
-	}
-	*/
-	protected void onHoeUsed(
-			ItemStack stack, 
-			EntityPlayer player, 
-			World world, 
-			int x,
-			int y, 
-			int z, 
-			int side) {
-		/*Block block = world.getBlock(x, y, z);
 		
-		if(side != 0 && world.getBlock(x, y+1, z).isAir(world, x, y+1, z) && (block == Blocks.grass || block == Blocks.dirt)) {
-			Block temp = Blocks.farmland;
-			world.playSoundEffect(
-					x+0.5f, 
-					y+1, 
-					z, 
-					temp.stepSound.getStepResourcePath(), 
-					(temp.stepSound.getVolume() + 1) * 0.5f, 
-					temp.stepSound.getPitch() * 0.8f);
-			if(!world.isRemote) {
-				world.setBlock(x, y, z, temp);
-				stack.damageItem(1, player);
-			}
-		}
-		*/
+		return result;
 	}
 	
-	/*
+	private void setBlock(ItemStack stack, EntityPlayer player, World world, BlockPos pos, IBlockState state) {
+		world.playSound(player, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
+		if(!world.isRemote) {
+			world.setBlockState(pos, state);
+			stack.damageItem(1, player);
+		}
+	}
+
 	@Override
 	public boolean onBlockDestroyed(
 			ItemStack stack, 
 			World world, 
-			Block block, 
-			int x,
-			int y, 
-			int z, 
-			EntityLivingBase entity) {
+			IBlockState state, 
+			BlockPos pos,
+			EntityLivingBase entityLiving) {
 		
-		
-		
-		if(block instanceof BlockCrops) {
-			// Execute
-			
+		if(state.getBlock() instanceof BlockCrops) {
 			if(!world.isRemote) {
-				
 				for(int i = 0; i < this.count - 1; i++) {
 					
-					if(world.getBlockMetadata(x, y, z) == 7) {
-						List<ItemStack> drops = block.getDrops(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-						
-						for(ItemStack d : drops) {
-							world.spawnEntityInWorld(new EntityItem(world, x, y, z, d));
+					if(state.getValue(BlockCrops.AGE) == 7) {
+						List<ItemStack> drops = state.getBlock().getDrops(world, pos, state, 0);
+						for(ItemStack s : drops) {
+							world.spawnEntityInWorld(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), s));
 						}
-					} else {
-						continue;
 					}
 				}
 			}
 		}
 		
-		return super.onBlockDestroyed(stack, world, block, x, y, z, entity);
+		return super.onBlockDestroyed(stack, world, state, pos, entityLiving);
 	}
-	*/
-	
+
 	@Override
 	public boolean isFull3D() {
 		return true;
-	}
-	
-	private void createPosition(List<BlockPos> list, BlockPos c) {
-		float halfSize = size / 2;
-		
-		for(int z = 0; z < this.size; z++) {
-			for(int x = 0; x < this.size; x++) {
-				int nx = (int) ((x - halfSize) + c.getX());
-				int nz = (int) ((z - halfSize) + c.getZ());
-				list.add(new BlockPos(nx, c.getY(), nz));
-			}
-		}
 	}
 }

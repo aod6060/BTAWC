@@ -3,15 +3,17 @@ package com.derf.btawc.items.tools;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.derf.btawc.Loader;
 import com.derf.btawc.util.OreDictionaryUtils;
+import com.derf.btawc.util.Utils;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ItemPickaxeOfGreed extends ItemPickaxe {
@@ -24,7 +26,6 @@ public class ItemPickaxeOfGreed extends ItemPickaxe {
 		super(ToolMaterial.DIAMOND);
 		this.count = count;
 		this.setUnlocalizedName(name);
-		//this.setTextureName(Loader.MODID + ":" + name);
 		this.setMaxDamage(maxDamage);
 	}
 	
@@ -61,33 +62,28 @@ public class ItemPickaxeOfGreed extends ItemPickaxe {
 	public boolean isFull3D() {
 		return true;
 	}
-	
-	/*
+
 	@Override
 	public boolean onBlockDestroyed(
 			ItemStack stack, 
 			World world, 
-			Block block, 
-			int x,
-			int y, 
-			int z, 
-			EntityLivingBase entity) {
-			if(!world.isRemote) {
-				if(this.isBlockDuplicatable(block)) {
+			IBlockState state, 
+			BlockPos pos,
+			EntityLivingBase entityLiving) {
+		
+		if(!world.isRemote) {
+			if(this.isBlockDuplicatable(state.getBlock())) {
+				for(int i = 0; i < this.count - 1; i++) {
+					List<ItemStack> stacks = state.getBlock().getDrops(world, pos, state, Utils.rand.nextInt(4));
 					
-					for(int i = 0; i < this.count - 1; i++) {
-						
-						List<ItemStack> stacks = block.getDrops(world, x, y, z, world.getBlockMetadata(x, y, z), this.itemRand.nextInt(4));
-						
-						for(ItemStack s : stacks) {
-							EntityItem items = new EntityItem(world, x, y, z, s);
-							world.spawnEntityInWorld(items);
-						}
+					for(ItemStack s : stacks) {
+						world.spawnEntityInWorld(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), s));
 					}
 				}
 			}
+		}
 		
-		return super.onBlockDestroyed(stack, world, block, x, y, z, entity);
+		return super.onBlockDestroyed(stack, world, state, pos, entityLiving);
 	}
-	*/
+	
 }

@@ -7,10 +7,12 @@ import com.derf.btawc.Loader;
 import com.derf.btawc.util.OreDictionaryUtils;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ItemAxeOfGreed extends ItemAxe {
@@ -21,41 +23,47 @@ public class ItemAxeOfGreed extends ItemAxe {
 	public ItemAxeOfGreed(String name, int count, int maxDamage) {
 		super(ToolMaterial.DIAMOND);
 		this.setUnlocalizedName(name);
-		//this.setTextureName(Loader.MODID + ":" + name);
 		this.count = count;
 		this.setMaxDamage(maxDamage);
 	}
-
-	/*
+	
 	@Override
 	public boolean onBlockDestroyed(
 			ItemStack stack, 
 			World world, 
-			Block block, 
-			int x,
-			int y, 
-			int z, 
-			EntityLivingBase entity) {
-		
+			IBlockState state, 
+			BlockPos pos,
+			EntityLivingBase entityLiving) {
 		
 		if(!world.isRemote) {
-			if(isBlockDuplicatable(block)) {
+			if(this.isBlockDuplicatable(state.getBlock())) {
 				for(int i = 0; i < this.count - 1; i++) {
-					List<ItemStack> stacks = block.getDrops(world, x, y, z, world.getBlockMetadata(x, y, z), itemRand.nextInt(4));
+					List<ItemStack> stacks = state.getBlock().getDrops(world, pos, state, 0);
 					
 					for(ItemStack s : stacks) {
-						EntityItem items = new EntityItem(world, x, y, z, s);
-						world.spawnEntityInWorld(items);
+						world.spawnEntityInWorld(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), s));
 					}
 				}
 			}
 		}
-		return super.onBlockDestroyed(stack, world, block, x, y, z,entity);
+		return super.onBlockDestroyed(stack, world, state, pos, entityLiving);
 	}
-	*/
-	
+
+
 	public static void registerLogs() {
 		List<List<ItemStack>> result = OreDictionaryUtils.searchForItemStack("log");
+		
+		for(List<ItemStack> stacks : result) {
+			for(ItemStack stack : stacks) {
+				Block block = Block.getBlockFromItem(stack.getItem());
+				if(block != null) {
+					System.out.println("block added to AxeOfGreed: " + block.getLocalizedName());
+					blocks.add(block);
+				}
+			}
+		}
+		
+		result = OreDictionaryUtils.searchForItemStack("wood");
 		
 		for(List<ItemStack> stacks : result) {
 			for(ItemStack stack : stacks) {

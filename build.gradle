@@ -85,3 +85,18 @@ processResources
         exclude 'mcmod.info'
     }
 }
+
+repositories {
+  maven {
+    // location of the maven that hosts JEI files
+    url "http://dvs1.progwml6.com/files/maven"
+  }
+}
+
+
+dependencies {
+  // compile against the JEI API
+  deobfCompile "mezz.jei:jei_1.10.2:3.12.3.292:api"
+  // at runtime, use the full JEI jar
+  runtime "mezz.jei:jei_1.10.2:3.12.3.292"
+}

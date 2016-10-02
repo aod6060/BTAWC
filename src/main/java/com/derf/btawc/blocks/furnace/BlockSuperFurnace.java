@@ -23,17 +23,11 @@ import net.minecraft.world.World;
 public class BlockSuperFurnace extends BlockContainerBasic {
 
 	private Random rand = new Random();
-	
-	private static boolean isChanging;
+	private static boolean keepInventory;
 	
 	
 	private boolean on;
-	/*
-	@SideOnly(Side.CLIENT)
-	private IIcon bottom_top;
-	@SideOnly(Side.CLIENT)
-	private IIcon front;
-	*/
+	
 	public BlockSuperFurnace(int lightLevel, boolean on) {
 		super("super_furnace", Material.ROCK, 2.0f, 2.0f, lightLevel, "pickaxe", 0, SoundType.STONE);
 		this.on = on;

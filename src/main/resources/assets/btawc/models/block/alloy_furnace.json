@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "btawc:blocks/alloy_furnace_bottom_top",
+    "bottom": "btawc:blocks/alloy_furnace_bottom_top",
+    "front": "btawc:blocks/alloy_furnace_front",
+    "side": "btawc:blocks/alloy_furnace_side"
+  }
+}

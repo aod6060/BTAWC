@@ -11,6 +11,7 @@ import com.derf.btawc.inventory.ContainerCreativeGenerator;
 import com.derf.btawc.inventory.ContainerSuperFurnace;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
@@ -22,14 +23,37 @@ public class GuiHandler implements IGuiHandler {
 	public final static int ALLOY_FURNACE_GUI = 1;
 	// Creative Generator
 	public final static int CREATIVE_GENERATOR_GUI = 2;
+	
+	
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		// TODO Auto-generated method stub
+		BlockPos pos = new BlockPos(x, y, z);
+		
+		switch(ID) {
+		case SUPER_FURNACE_GUI:
+			return new ContainerSuperFurnace(player.inventory, (TileEntitySuperFurnace) world.getTileEntity(pos));
+		case ALLOY_FURNACE_GUI:
+			return new ContainerAlloyFurnace(player.inventory, (TileEntityAlloyFurnace)world.getTileEntity(pos));
+		case CREATIVE_GENERATOR_GUI:
+			return new ContainerCreativeGenerator(player.inventory, (TileEntityCreativeGenerator)world.getTileEntity(pos));
+		}
+		
 		return null;
 	}
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-		// TODO Auto-generated method stub
+		
+		BlockPos pos = new BlockPos(x, y, z);
+		
+		switch(ID) {
+		case SUPER_FURNACE_GUI:
+			return new GuiContainerSuperFurnace(player.inventory, (TileEntitySuperFurnace)world.getTileEntity(pos));
+		case ALLOY_FURNACE_GUI:
+			return new GuiContainerAlloyFurnace(player.inventory, (TileEntityAlloyFurnace)world.getTileEntity(pos));
+		case CREATIVE_GENERATOR_GUI:
+			return new GuiContainerCreativeGenerator(player.inventory, (TileEntityCreativeGenerator)world.getTileEntity(pos));
+		}
+		
 		return null;
 	}
 

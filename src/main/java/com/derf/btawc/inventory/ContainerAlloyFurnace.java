@@ -1,9 +1,11 @@
 package com.derf.btawc.inventory;
 
 import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
+import com.derf.btawc.util.FuelUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
@@ -14,9 +16,9 @@ public class ContainerAlloyFurnace extends ContainerBasic {
 	// Stuff for the container...
 	private final InventoryPlayer player;
 	private TileEntityAlloyFurnace furnace;
-	private int lastCookTime;
-	private int lastBurnTime;
-	private int lastItemBurnTime;
+	private int burnTime;
+	private int currentItemBurnTime;
+	private int cookTime;
 	
 	public ContainerAlloyFurnace(InventoryPlayer player, TileEntityAlloyFurnace furnace) {
 		// Set Instance Variables
@@ -43,53 +45,40 @@ public class ContainerAlloyFurnace extends ContainerBasic {
 		this.createPlayerInventory(player, 8, 92, 8, 150);
 	}
 	
-	/*
 	@Override
-	public void addCraftingToCrafters(ICrafting handler) {
-		super.addCraftingToCrafters(handler);
-		handler.sendProgressBarUpdate(this, 0, this.furnace.cookTime);
-		handler.sendProgressBarUpdate(this, 1, this.furnace.burnTime);
-		handler.sendProgressBarUpdate(this, 2, this.furnace.currentItemBurnTime);
+	public void addListener(IContainerListener listener) {
+		super.addListener(listener);
+		listener.sendAllWindowProperties(this, this.furnace);
 	}
-	*/
-	
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-		/*
-		for(int i = 0; i < this.crafters.size(); i++) {
-			ICrafting handler = (ICrafting)this.crafters.get(i);
-			if(this.lastCookTime != this.furnace.cookTime) {
-				handler.sendProgressBarUpdate(this, 0, this.furnace.cookTime);
+		
+		for(int i = 0; i < this.listeners.size(); i++) {
+			IContainerListener listener = this.listeners.get(i);
+			
+			if(this.burnTime != this.furnace.getField(0)) {
+				listener.sendProgressBarUpdate(this, 0, this.furnace.getField(0));
 			}
-			if(this.lastBurnTime != this.furnace.burnTime) {
-				handler.sendProgressBarUpdate(this, 1, this.furnace.burnTime);
+			
+			if(this.currentItemBurnTime != this.furnace.getField(1)) {
+				listener.sendProgressBarUpdate(this, 1, this.furnace.getField(1));
 			}
-			if(this.lastItemBurnTime != this.furnace.currentItemBurnTime) {
-				handler.sendProgressBarUpdate(this, 2, this.furnace.currentItemBurnTime);
+			
+			if(this.cookTime != this.furnace.getField(2)) {
+				listener.sendProgressBarUpdate(this, 2, this.furnace.getField(2));
 			}
 		}
-		*/
-		this.lastCookTime = this.furnace.cookTime;
-		this.lastBurnTime = this.furnace.burnTime;
-		this.lastItemBurnTime = this.furnace.currentItemBurnTime;
+		
+		this.burnTime = this.furnace.getField(0);
+		this.currentItemBurnTime = this.furnace.getField(1);
+		this.cookTime = this.furnace.getField(2);
+		
 	}
-	
 	
 	@Override
 	public void updateProgressBar(int index, int value) {
-		super.updateProgressBar(index, value);
-		switch(index) {
-		case 0:
-			this.furnace.cookTime = value;
-			break;
-		case 1:
-			this.furnace.burnTime = value;
-			break;
-		case 2:
-			this.furnace.currentItemBurnTime = value;
-			break;
-		}
+		this.furnace.setField(index, value);
 	}
 	
 	@Override
@@ -129,11 +118,11 @@ public class ContainerAlloyFurnace extends ContainerBasic {
 					if(!this.mergeItemStack(stack1, 3, 4, false)) {
 						return null;
 					}
-				} /*else if(TileEntityAlloyFurnace.isItemFuel(stack1)) {
+				} else if(FuelUtils.isItemFuel(stack1)) {
 					if(!this.mergeItemStack(stack1, 5, 6, true)) {
 						return null;
 					}
-				}*/ else if(this.isPlayerHiddenInventory(index)) {
+				} else if(this.isPlayerHiddenInventory(index)) {
 					if(!this.mergeItemStack(stack1, 33, 42, false)) {
 						return null;
 					}

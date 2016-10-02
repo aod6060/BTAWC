@@ -1,7 +1,0 @@
-package com.derf.btawc.client;
-
-public class RenderUtils {
-	public static int getColor(int red, int green, int blue) {
-		return (blue << 16) | (green << 8) | red;
-	}
-}

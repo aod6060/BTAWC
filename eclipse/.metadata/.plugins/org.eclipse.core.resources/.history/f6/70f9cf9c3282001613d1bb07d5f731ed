@@ -1,5 +1,0 @@
-package com.derf.btawc.items.tools;
-
-public class ItemPickaxeOfGreed extends ItemBasic {
-
-}

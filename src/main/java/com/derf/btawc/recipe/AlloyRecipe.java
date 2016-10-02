@@ -47,25 +47,37 @@ public class AlloyRecipe {
 	}
 	
 	public boolean isRecipe(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4) {
-		if(input1 == null && input2 == null && input3 == null && input4 == null) {
-			return false;
-		} else if(input1 != null && input2 != null && input3 == null && input4 == null) {
-			return this.input1.getItem() == input1.getItem() && 
-				   this.input2.getItem() == input2.getItem() &&
-				   this.input3 == null &&
-				   this.input4 == null;
-		} else if(input1 != null && input2 != null && input3 != null && input4 == null) {
-			return this.input1.getItem() == input1.getItem() && 
-				   this.input2.getItem() == input2.getItem() &&
-				   this.input3.getItem() == input3.getItem() &&
-				   this.input4 == null;
-		} else if(input1 != null && input2 != null && input3 != null && input4 != null) {
-			return this.input1.getItem() == input1.getItem() && 
-				   this.input2.getItem() == input2.getItem() &&
-				   this.input3.getItem() == input3.getItem() &&
-				   this.input4.getItem() == input4.getItem();
-		} else {
-			return false;
+		
+		List<ItemStack> recipeStacks = this.getInputs();
+		List<ItemStack> stacks = this.createItemStack(input1, input2, input3, input4);
+		boolean b = true;
+		
+		for(int i = 0; i < 4; i++) {
+			if(recipeStacks.get(i) != null && stacks.get(i) != null) {
+				if(recipeStacks.get(i).getItem() == stacks.get(i).getItem()) {
+					b = b && true;
+				} else {
+					b = b && false;
+				}
+			} else if(recipeStacks.get(i) != null && stacks.get(i) == null) {
+				b = b && false;
+			} else if(recipeStacks.get(i) == null && stacks.get(i) != null) {
+				b = b && false;
+			} else {
+				b = b && true;
+			}
 		}
+		
+		return b;
+	}
+	
+	
+	private List<ItemStack> createItemStack(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4) {
+		List<ItemStack> temp = new ArrayList<ItemStack>();
+		temp.add(input1);
+		temp.add(input2);
+		temp.add(input3);
+		temp.add(input4);
+		return temp;
 	}
 }

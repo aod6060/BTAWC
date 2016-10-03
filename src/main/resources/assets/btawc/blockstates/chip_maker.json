@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": {"model": "btawc:chip_maker"},
+    "facing=south": {"model": "btawc:chip_maker", "y": 180},
+    "facing=west": {"model": "btawc:chip_maker", "y": 270},
+    "facing=east": {"model": "btawc:chip_maker", "y": 90}
+  }
+}

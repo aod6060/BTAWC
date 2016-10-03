@@ -34,11 +34,11 @@ public final class AlloyRecipeManager {
 		return result;
 	}
 	
-	public static Map<AlloyRecipe, ItemStack> getList() {
+	public static Map<AlloyRecipe, ItemStack> getRecipeMap() {
 		return recipes;
 	}
 	
-	public static List<Entry<AlloyRecipe, ItemStack>> getListOfRecipes() {
+	public static List<Entry<AlloyRecipe, ItemStack>> toList() {
 		Set<Map.Entry<AlloyRecipe, ItemStack>> es = recipes.entrySet();
 		List<Map.Entry<AlloyRecipe, ItemStack>> temp = new ArrayList<Map.Entry<AlloyRecipe, ItemStack>>();
 		for(Map.Entry<AlloyRecipe, ItemStack> e : es) {

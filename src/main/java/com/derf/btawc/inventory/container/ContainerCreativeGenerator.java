@@ -1,4 +1,4 @@
-package com.derf.btawc.inventory;
+package com.derf.btawc.inventory.container;
 
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
 

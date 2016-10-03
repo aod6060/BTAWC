@@ -1,9 +1,11 @@
 package com.derf.btawc.blocks;
 
 import com.derf.btawc.ModRegistry;
+import com.derf.btawc.blocks.chipmaker.BlockChipMaker;
 import com.derf.btawc.blocks.furnace.BlockAlloyFurnace;
 import com.derf.btawc.blocks.furnace.BlockSuperFurnace;
 import com.derf.btawc.blocks.generators.BlockCreativeGenerator;
+import com.derf.btawc.blocks.tileentity.chipmaker.TileEntityChipMaker;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
@@ -36,6 +38,9 @@ public final class BlockManager {
 	// Alloy Furnace
 	public static Block alloyFurnace;
 	public static Block alloyFurnaceOn;
+	// Chip Maker, This is used to create the chipMaker
+	public static Block chipMaker;
+	public static Block chipMakerOn;
 	// Misc
 	
 	public static final void create() {
@@ -52,6 +57,9 @@ public final class BlockManager {
 		// Alloy Furnace
 		alloyFurnace = new BlockAlloyFurnace(0, false);
 		alloyFurnaceOn = new BlockAlloyFurnace(1, true);
+		// Chip Maker
+		chipMaker = new BlockChipMaker(0, false);
+		chipMakerOn = new BlockChipMaker(1, false);
 	}
 	
 	public static final void register() {
@@ -68,6 +76,9 @@ public final class BlockManager {
 		// Alloy Furnace
 		ModRegistry.registerBlock(alloyFurnace, "alloy_furnace");
 		ModRegistry.registerBlock(alloyFurnaceOn, "alloy_furnace_on");
+		// Chip Maker
+		ModRegistry.registerBlock(chipMaker, "chip_maker");
+		ModRegistry.registerBlock(chipMakerOn, "chip_maker_on");
 	}
 	
 	public static final void registerTileEntities() {
@@ -79,6 +90,8 @@ public final class BlockManager {
 		ModRegistry.registerTileEntity(TileEntitySuperFurnace.class, "super_furnace");
 		// Alloy Furnace
 		ModRegistry.registerTileEntity(TileEntityAlloyFurnace.class, "alloy_furnace");
+		// Chip Maker
+		ModRegistry.registerTileEntity(TileEntityChipMaker.class, "chip_maker");
 	}
 	
 	public static final void creativeTabs() {
@@ -93,6 +106,8 @@ public final class BlockManager {
 		witherProofGlass.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Alloy Furnace
 		alloyFurnace.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		// Chip Maker
+		chipMaker.setCreativeTab(CreativeTabsManager.tabBTAWC);
 	}
 	
 	public static final void crafting() {
@@ -134,11 +149,20 @@ public final class BlockManager {
 				" f ",
 				'f', Blocks.FURNACE,
 				'i', Blocks.IRON_BLOCK);
+		// Chip Maker
+		ModRegistry.addShapedCraftingRecipe(
+				new ItemStack(chipMaker), 
+				" g ",
+				"sfs",
+				" r ",
+				'g', ItemsManager.gironIngot,
+				's', ItemsManager.steelIngot,
+				'f', Blocks.FURNACE,
+				'r', Blocks.REDSTONE_BLOCK);
 		
 	}
 
 	public static void addToOreDictionary() {
-		// Add stuff if needed
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -159,6 +183,10 @@ public final class BlockManager {
 		// Alloy Furnace
 		ModRegistry.registerRender(alloyFurnace, "alloy_furnace");
 		ModRegistry.registerRender(alloyFurnaceOn, "alloy_furnace_on");
+		// Chip Maker
+		ModRegistry.registerRender(chipMaker, "chip_maker");
+		ModRegistry.registerRender(chipMakerOn, "chip_maker_on");
+		
 	}
 
 

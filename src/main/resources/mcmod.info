@@ -2,13 +2,13 @@
 {
   "modid": "btawc",
   "name": "BTAWC",
-  "description": "This is a simple mod that add some farming utilities",
-  "version": "2.0.0 alpha",
+  "description": "This is a simple mod that add some farming utilities, and other fun and some times overpowered items.",
+  "version": "2.0.1 alpha",
   "mcversion": "1.10.2",
-  "url": "",
+  "url": "https://minecraft.curseforge.com/projects/btawc",
   "updateUrl": "",
   "authorList": ["derf6060 (aka aod6060)"],
-  "credits": "Hmm, credits, yeah me lol. :)",
+  "credits": "Hello, World its credits. :)",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

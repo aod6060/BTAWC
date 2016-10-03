@@ -6,7 +6,7 @@ import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 import com.derf.btawc.client.Color;
 import com.derf.btawc.client.gui.GuiContainerBasic;
-import com.derf.btawc.inventory.ContainerSuperFurnace;
+import com.derf.btawc.inventory.container.ContainerSuperFurnace;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;

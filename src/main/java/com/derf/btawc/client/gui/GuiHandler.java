@@ -6,9 +6,9 @@ import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
 import com.derf.btawc.client.gui.furnace.GuiContainerAlloyFurnace;
 import com.derf.btawc.client.gui.furnace.GuiContainerSuperFurnace;
 import com.derf.btawc.client.gui.generators.GuiContainerCreativeGenerator;
-import com.derf.btawc.inventory.ContainerAlloyFurnace;
-import com.derf.btawc.inventory.ContainerCreativeGenerator;
-import com.derf.btawc.inventory.ContainerSuperFurnace;
+import com.derf.btawc.inventory.container.ContainerAlloyFurnace;
+import com.derf.btawc.inventory.container.ContainerCreativeGenerator;
+import com.derf.btawc.inventory.container.ContainerSuperFurnace;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;

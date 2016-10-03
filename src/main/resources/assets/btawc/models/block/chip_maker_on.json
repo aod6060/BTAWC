@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "btawc:blocks/chip_maker_bottom_top",
+    "bottom": "btawc:blocks/chip_maker_bottom_top",
+    "front": "btawc:blocks/chip_maker_front_on",
+    "side": "btawc:blocks/chip_maker_sides"
+  }
+}

@@ -8,7 +8,7 @@ import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.client.Color;
 import com.derf.btawc.client.gui.GuiContainerBasic;
-import com.derf.btawc.inventory.ContainerAlloyFurnace;
+import com.derf.btawc.inventory.container.ContainerAlloyFurnace;
 import com.derf.btawc.recipe.AlloyRecipe;
 import com.derf.btawc.recipe.AlloyRecipeManager;
 import com.derf.btawc.util.GuiRect;
@@ -22,7 +22,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiContainerAlloyFurnace extends GuiContainerBasic {
 	private static final ResourceLocation alloyFurnaceGUI = new ResourceLocation(Loader.MODID + ":textures/gui/container/alloy_furnace_gui.png");
-	private static final List<Entry<AlloyRecipe, ItemStack>> recipes = AlloyRecipeManager.getListOfRecipes();
+	private static final List<Entry<AlloyRecipe, ItemStack>> recipes = AlloyRecipeManager.toList();
 	
 	private final InventoryPlayer player;
 	private TileEntityAlloyFurnace entity;

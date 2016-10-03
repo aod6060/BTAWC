@@ -3,6 +3,7 @@
 container.super_furnace=Super Furnace
 container.alloy_furnace=Alloy Furnace
 container.creative_generator=Creative Generator
+container.chip_maker=Chip Maker
 # Item Groups
 itemGroup.tabBTAWC=BTAWC
 # Items
@@ -52,6 +53,11 @@ item.crystal_of_wrath.name=Crystal of Wrath
 item.graphite.name=Graphite
 item.giron_ingot.name=Giron Ingot
 item.steel_ingot.name=Steel Ingot
+# Chips
+item.iron_chip.name=Iron Chip
+item.gold_chip.name=Gold Chip
+item.giron_chip.name=Giron Chip
+item.pulsating_chip.name=Pulsating Chip
 # Tiles
 # Generators
 tile.creative_generator.name=Creative Generator (Creative Mode Only)
@@ -65,3 +71,5 @@ tile.wither_proof_glass.name=Wither Proof Glass
 tile.wither_proof_light.name=Wither Proof Lamp
 # Alloy Furnace
 tile.alloy_furnace.name=Alloy Furnace
+# Chip Maker
+tile.chip_maker.name=Chip Maker

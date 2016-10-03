@@ -60,15 +60,24 @@ public class ItemsManager {
 	public static Item swordOfGreedUltra;		// 16x mob drops, mob drop after hit 16x
 	// Pulsator
 	public static Item pulsator;				// Makes Creatures fly lol :D
-	// Misc
+	// Ingots	
 	public static Item netherStarIngot;			// This is a new ingot that is made from nether star, diamonds, and iron...
-	public static Item animalIngot;		// Very good food source :D
-	public static Item crystalOfGreed;			// Very greedy crystal :)
-	public static Item mobIngot;				// Very scary ingot
-	public static Item crystalOfWrath;			// Very angry crystal :)
-	public static Item graphite;				// Used for solar and lunar panels
+	public static Item animalIngot;				// Very good food source :D	
+	public static Item mobIngot;				// Very scary ingot	
 	public static Item gironIngot;				// Used for machines
 	public static Item steelIngot;				// Used for machines
+	// Crystal	
+	public static Item crystalOfGreed;			// Very greedy crystal :)
+	public static Item crystalOfWrath;			// Very angry crystal :)
+	// Non Metals
+	public static Item graphite;				// Used for solar and lunar panels
+	// Chips - These are used to for make machines
+	public static Item ironChip;
+	public static Item goldChip;
+	public static Item gironChip;
+	public static Item pulsatingChip;
+	
+
 	
 	public static final void create() {
 		
@@ -118,6 +127,11 @@ public class ItemsManager {
 		graphite = new ItemBasic("graphite");
 		gironIngot = new ItemBasic("giron_ingot");
 		steelIngot = new ItemBasic("steel_ingot");
+		// Chips
+		ironChip = new ItemBasic("iron_chip");
+		goldChip = new ItemBasic("gold_chip");
+		gironChip = new ItemBasic("giron_chip");
+		pulsatingChip = new ItemBasic("pulsating_chip");
 	}
 	
 	public static final void register() {
@@ -167,6 +181,11 @@ public class ItemsManager {
 		ModRegistry.registerItem(graphite, "graphite");
 		ModRegistry.registerItem(gironIngot, "giron_ingot");
 		ModRegistry.registerItem(steelIngot, "steel_ingot");
+		// Chips
+		ModRegistry.registerItem(ironChip, "iron_chip");
+		ModRegistry.registerItem(goldChip, "gold_chip");
+		ModRegistry.registerItem(gironChip, "giron_chip");
+		ModRegistry.registerItem(pulsatingChip, "pulsating_chip");
 	}
 	
 	public static final void creativeTabs() {
@@ -209,9 +228,7 @@ public class ItemsManager {
 		// Pulsator
 		pulsator.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Misc
-		//netharStarMesh.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		netherStarIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		//animalIngotUncooked.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		animalIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		crystalOfGreed.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		mobIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
@@ -219,6 +236,12 @@ public class ItemsManager {
 		graphite.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		gironIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		steelIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		// Chips
+		ironChip.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		goldChip.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		gironChip.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		pulsatingChip.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		
 	}
 	
 	public static final void crafting() {
@@ -549,6 +572,8 @@ public class ItemsManager {
 				null,
 				null,
 				new ItemStack(steelIngot));
+		
+		// Chips
 	}
 	
 	public static void addToOreDictionary() {
@@ -617,5 +642,10 @@ public class ItemsManager {
 		ModRegistry.registerRender(gironIngot, "giron_ingot");
 		// Steel Ingot
 		ModRegistry.registerRender(steelIngot, "steel_ingot");
+		// Chips
+		ModRegistry.registerRender(ironChip, "iron_chip");
+		ModRegistry.registerRender(goldChip, "gold_chip");
+		ModRegistry.registerRender(gironChip, "giron_chip");
+		ModRegistry.registerRender(pulsatingChip, "pulsating_chip");
 	}
 }

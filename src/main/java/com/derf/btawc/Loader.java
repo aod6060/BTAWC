@@ -15,7 +15,7 @@ public class Loader {
 	// Some meta data for the mod
 	public final static String MODID = "btawc";
 	public final static String NAME = "BTAWC";
-	public final static String VERSION = "1.0.2 alpha";
+	public final static String VERSION = "2.0.1 alpha";
 	// Instance for the mod
 	@Instance
 	public static Loader INSTANCE = new Loader();

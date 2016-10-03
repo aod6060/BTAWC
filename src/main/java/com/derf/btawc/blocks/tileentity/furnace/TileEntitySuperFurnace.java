@@ -1,99 +1,79 @@
 package com.derf.btawc.blocks.tileentity.furnace;
 
+import javax.annotation.Nullable;
+
+import com.derf.btawc.blocks.furnace.BlockSuperFurnace;
 import com.derf.btawc.blocks.tileentity.TileEntityBasic;
+import com.derf.btawc.util.FuelUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntitySuperFurnace extends TileEntityBasic implements IInventory {
-	
+public class TileEntitySuperFurnace extends TileEntityBasic implements IInventory, ITickable {
+	// Inputs 0-8
+	public static final int INPUT_1 = 0;
+	public static final int INPUT_2 = 1;
+	public static final int INPUT_3 = 2;
+	public static final int INPUT_4 = 3;
+	public static final int INPUT_5 = 4;
+	public static final int INPUT_6 = 5;
+	public static final int INPUT_7 = 6;
+	public static final int INPUT_8 = 7;
+	public static final int INPUT_9 = 8;
+	// Outputs 9-18
+	public static final int OUTPUT_1 = 9;
+	public static final int OUTPUT_2 = 10;
+	public static final int OUTPUT_3 = 11;
+	public static final int OUTPUT_4 = 12;
+	public static final int OUTPUT_5 = 13;
+	public static final int OUTPUT_6 = 14;
+	public static final int OUTPUT_7 = 15;
+	public static final int OUTPUT_8 = 16;
+	public static final int OUTPUT_9 = 17;
 	public static final int FUEL_SLOT = 18;
 	public static final int COOKING_SPEED = 200;
-	
 	// Furnace Inventory
 	// 0-8 input, 9-17 output, 18 fuel...
-	private ItemStack[] furnaceItemStack = new ItemStack[19];
-	public int furnaceBurnTime;
+	private ItemStack[] inventory = new ItemStack[19];
+	public int burnTime;
 	public int currentItemBurnTime;
-	public int furnaceCookTime;
+	public int cookTime;
 	private String name;
 	
 	@Override
 	public int getSizeInventory() {
-		return furnaceItemStack.length;
+		return inventory.length;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int index) {
-		return this.furnaceItemStack[index];
+		return this.inventory[index];
 	}
 
 	@Override
 	public ItemStack decrStackSize(int slot, int amount) {
-		if(this.furnaceItemStack[slot] != null) {
-			ItemStack stack;
-			if(this.furnaceItemStack[slot].stackSize <= amount) {
-				stack = this.furnaceItemStack[slot];
-				this.furnaceItemStack[slot] = null;
-				return stack;
-			} else {
-				stack = this.furnaceItemStack[slot].splitStack(amount);
-				
-				if(this.furnaceItemStack[slot].stackSize == 0) {
-					this.furnaceItemStack[slot] = null;
-				}
-				
-				return stack;
-			}
-		} else {
-			return null;
-		}
+		return ItemStackHelper.getAndSplit(this.inventory, slot, amount);
 	}
-
-	/*
-	@Override
-	public ItemStack getStackInSlotOnClosing(int slot) {
-		if(this.furnaceItemStack[slot] != null) {
-			ItemStack stack = this.furnaceItemStack[slot];
-			this.furnaceItemStack[slot] = null;
-			return stack;
-		} else {
-			return null;
-		}
-	}
-	*/
 	
-	public void setName(String name) {
-		this.name = name;
-	}
 	@Override
-	public void setInventorySlotContents(int slot, ItemStack stack) {
-		this.furnaceItemStack[slot] = stack;
+	public void setInventorySlotContents(int slot, @Nullable ItemStack stack) {
+		this.inventory[slot] = stack;
 		
 		if(stack != null && stack.stackSize > this.getInventoryStackLimit()) {
 			stack.stackSize = this.getInventoryStackLimit();
 		}
 	}
-
-	/*
-	@Override
-	public String getInventoryName() {
-		return this.hasCustomInventoryName()? this.name : "container.super_furnace";
-	}
-	*/
-	/*
-	@Override
-	public boolean hasCustomInventoryName() {
-		return this.name != null && this.name.length() > 0;
-	}
-	*/
 	
 	@Override
 	public int getInventoryStackLimit() {
@@ -102,150 +82,48 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		//return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this? false : player.getDistanceSq(this.xCoord + 0.5, this.yCoord + 0.5, this.zCoord + 0.5) <= 64.0;
-		return false;
+		return this.worldObj.getTileEntity(pos) != this? false : player.getDistanceSq(pos.add(0.5, 0.5, 0.5)) <= 64.0;
 	}
-
-	/*
-	@Override
-	public void openInventory() {}
-
-	@Override
-	public void closeInventory() {}
-	*/
 	
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack stack) {
 		// 0-8 input, 9-17 output, 19 fuel.
 		boolean b = false;
 		
-		switch(slot) {
-		case 0:
-		case 1:
-		case 2:
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		case 7:
-		case 8:
-			b = true;
-			break;
-		case 9:
-		case 10:
-		case 11:
-		case 12:
-		case 13:
-		case 14:
-		case 15:
-		case 16:
-		case 17:
+		if(this.isOutput(slot)) {
 			b = false;
-			break;
-		case FUEL_SLOT:
-			b = isItemFuel(stack);
-			break;
+		} else if(this.isInput(slot)) {
+			b = true;
+		} else {
+			ItemStack fuelStack = this.inventory[FUEL_SLOT];
+			b = FuelUtils.isItemFuel(stack) || SlotFurnaceFuel.isBucket(stack) && (fuelStack == null || fuelStack.getItem() != Items.BUCKET);
 		}
+		
 		return b;
 	}
 	
-	private boolean isItemFuel(ItemStack stack) {
-		return false;
+	private boolean isInput(int slot) {
+		return INPUT_1 == slot||
+			   INPUT_2 == slot||
+			   INPUT_3 == slot||
+			   INPUT_4 == slot||
+			   INPUT_5 == slot||
+			   INPUT_6 == slot||
+			   INPUT_7 == slot||
+			   INPUT_8 == slot||
+			   INPUT_9 == slot;
 	}
 	
-	/*
-	private static int getItemBurnTime(ItemStack stack) {
-		// TODO Auto-generated method stub
-		int burnTime = 0;
-		
-		if(stack == null) {
-			burnTime = 0;
-		} else {
-			Item item = stack.getItem();
-			
-			if(item instanceof ItemBlock && Block.getBlockFromItem(item) != Blocks.air) {
-				Block block = Block.getBlockFromItem(item);
-				
-				if(block == Blocks.wooden_slab) {
-					burnTime = 150;
-				} else if(block.getMaterial() == Material.wood) {
-					burnTime = 300;
-				} else if(block == Blocks.coal_block) {
-					burnTime = 16000;
-				}
-			} else if(item instanceof ItemTool && ((ItemTool)item).getToolMaterialName().equals("WOOD")) {
-				burnTime = 200;
-			} else if(item instanceof ItemSword && ((ItemSword)item).getToolMaterialName().equals("WOOD")) {
-				burnTime = 200;
-			} else if(item instanceof ItemHoe && ((ItemHoe)item).getToolMaterialName().equals("WOOD")) {
-				burnTime = 200;
-			} else if(item == Items.stick) {
-				burnTime = 100;
-			} else if(item == Items.coal) {
-				burnTime = 1600;
-			} else if(item == Items.lava_bucket) {
-				burnTime = 20000;
-			} else if(item == Item.getItemFromBlock(Blocks.sapling)) {
-				burnTime = 100;
-			} else if(item == Items.blaze_rod) {
-				burnTime = 2400;
-			} else {
-				burnTime = GameRegistry.getFuelValue(stack);
-			}
-		}
-		
-		return burnTime;
-	}
-	*/
-	
-	@Override
-	public void readFromNBT(NBTTagCompound tag) {
-		super.readFromNBT(tag);
-		NBTTagList list = tag.getTagList("Items", Constants.NBT.TAG_COMPOUND);
-		this.furnaceItemStack = new ItemStack[this.getSizeInventory()];
-		
-		for(int i = 0; i < list.tagCount(); i++) {
-			NBTTagCompound comp = list.getCompoundTagAt(i);
-			int index = comp.getInteger("Slot");
-			if(index >= 0 && index < this.getSizeInventory()) {
-				this.furnaceItemStack[index] = ItemStack.loadItemStackFromNBT(comp);
-			}
-		}
-		this.furnaceBurnTime = tag.getInteger("BurnTime");
-		this.furnaceCookTime = tag.getInteger("CookTime");
-		//this.currentItemBurnTime = this.getItemBurnTime(this.furnaceItemStack[FUEL_SLOT]);
-		
-		if(tag.hasKey("CustomName")) {
-			this.name = tag.getString("CustomName");
-		}
-	}
-
-	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
-		super.writeToNBT(tag);
-		tag.setInteger("BurnTime", this.furnaceBurnTime);
-		tag.setInteger("CookTime", this.furnaceCookTime);
-		NBTTagList list = new NBTTagList();
-		
-		for(int i =0; i < this.furnaceItemStack.length; i++) {
-			
-			if(this.furnaceItemStack[i] != null) {
-				NBTTagCompound comp = new NBTTagCompound();
-				comp.setInteger("Slot", i);
-				this.furnaceItemStack[i].writeToNBT(comp);
-				list.appendTag(comp);
-			}
-			
-		}
-		
-		tag.setTag("Items", list);
-		
-		/*
-		if(this.hasCustomInventoryName()) {
-			tag.setString("CustomName", this.name);
-		}
-		*/
-		return tag;
+	private boolean isOutput(int slot) {
+		return OUTPUT_1 == slot||
+			   OUTPUT_2 == slot||
+			   OUTPUT_3 == slot||
+			   OUTPUT_4 == slot||
+			   OUTPUT_5 == slot||
+			   OUTPUT_6 == slot||
+			   OUTPUT_7 == slot||
+			   OUTPUT_8 == slot||
+			   OUTPUT_9 == slot;
 	}
 	
 	private boolean canSmelt() {
@@ -259,15 +137,15 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 	}
 	
 	private boolean canSmelt(int inputSlot, int outputSlot) {
-		if(this.furnaceItemStack[inputSlot] == null) {
+		if(this.inventory[inputSlot] == null) {
 			return false;
 		} else {
-			ItemStack stack = FurnaceRecipes.instance().getSmeltingResult(this.furnaceItemStack[inputSlot]);
+			ItemStack stack = FurnaceRecipes.instance().getSmeltingResult(this.inventory[inputSlot]);
 			if(stack == null) return false;
-			if(this.furnaceItemStack[outputSlot] == null) return true;
-			if(!this.furnaceItemStack[outputSlot].isItemEqual(stack)) return false;
-			int result = furnaceItemStack[outputSlot].stackSize + stack.stackSize;
-			return result <= this.getInventoryStackLimit() && result <= this.furnaceItemStack[outputSlot].getMaxStackSize();
+			if(this.inventory[outputSlot] == null) return true;
+			if(!this.inventory[outputSlot].isItemEqual(stack)) return false;
+			int result = inventory[outputSlot].stackSize + stack.stackSize;
+			return result <= this.getInventoryStackLimit() && result <= this.inventory[outputSlot].getMaxStackSize();
 		}
 	}
 	
@@ -279,18 +157,18 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 	
 	private void smeltItem(int inputSlot, int outputSlot) {
 		if(this.canSmelt(inputSlot, outputSlot)) {
-			ItemStack stack = FurnaceRecipes.instance().getSmeltingResult(furnaceItemStack[inputSlot]);
+			ItemStack stack = FurnaceRecipes.instance().getSmeltingResult(inventory[inputSlot]);
 			
-			if(this.furnaceItemStack[outputSlot] == null) {
-				this.furnaceItemStack[outputSlot] = stack.copy();
-			} else if(this.furnaceItemStack[outputSlot].getItem() == stack.getItem()) {
-				this.furnaceItemStack[outputSlot].stackSize += stack.stackSize;
+			if(this.inventory[outputSlot] == null) {
+				this.inventory[outputSlot] = stack.copy();
+			} else if(this.inventory[outputSlot].getItem() == stack.getItem()) {
+				this.inventory[outputSlot].stackSize += stack.stackSize;
 			}
 			
-			--this.furnaceItemStack[inputSlot].stackSize;
+			--this.inventory[inputSlot].stackSize;
 			
-			if(this.furnaceItemStack[inputSlot].stackSize <= 0) {
-				this.furnaceItemStack[inputSlot] = null;
+			if(this.inventory[inputSlot].stackSize <= 0) {
+				this.inventory[inputSlot] = null;
 			}
 		}
 	}
@@ -299,67 +177,14 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 		boolean b = false;
 		
 		for(int i = 0; i < 9; i++) {
-			b = b || this.furnaceItemStack[i] != null;
+			b = b || this.inventory[i] != null;
 		}
 		
 		return b;
 	}
 	
-	/*
-	@Override
-	public void updateEntity() {
-		boolean flag = this.furnaceBurnTime > 0;
-		boolean flag1 = false;
-		// Decrement Burning time...
-		if(this.furnaceBurnTime > 0) {
-			--this.furnaceBurnTime;
-		}
-		
-		if(!this.worldObj.isRemote) {
-			// Using Fuel
-			if(this.furnaceBurnTime != 0 || this.furnaceItemStack[FUEL_SLOT] != null && this.checkIfInputAreAllNull()) {
-				if(this.furnaceBurnTime == 0 && this.canSmelt()) {
-					this.currentItemBurnTime = this.furnaceBurnTime = getItemBurnTime(this.furnaceItemStack[FUEL_SLOT]);
-					
-					if(this.furnaceBurnTime > 0) {
-						flag1 = true;
-						if(this.furnaceItemStack[FUEL_SLOT] != null) {
-							--this.furnaceItemStack[FUEL_SLOT].stackSize;
-							if(this.furnaceItemStack[FUEL_SLOT].stackSize <= 0) {
-								this.furnaceItemStack[FUEL_SLOT] = this.furnaceItemStack[FUEL_SLOT].getItem().getContainerItem(this.furnaceItemStack[FUEL_SLOT]);
-							}
-						}
-					}
-				}
-				
-				if(this.isBurning() && this.canSmelt()) {
-					++this.furnaceCookTime;
-					if(this.furnaceCookTime >= COOKING_SPEED) {
-						this.furnaceCookTime = 0;
-						this.smeltItems();
-						flag1 = true;
-					}
-				} else {
-					this.furnaceCookTime = 0;
-				}
-				
-			}
-			
-			if(flag != this.furnaceBurnTime > 0) {
-				flag1 = true;
-				// Update Furnace State
-				BlockSuperFurnace.updateFurnaceBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
-			}
-		}
-		
-		if(flag1) {
-			this.markDirty();
-		}
-	}
-	*/
-	
 	public boolean isBurning() {
-		return this.furnaceBurnTime > 0;
+		return this.burnTime > 0;
 	}
 	
 	
@@ -369,65 +194,179 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 			this.currentItemBurnTime = COOKING_SPEED;
 		}
 		
-		return this.furnaceBurnTime * scale / this.currentItemBurnTime;
+		return this.burnTime * scale / this.currentItemBurnTime;
 	}
 	
 	@SideOnly(Side.CLIENT)
 	public int getCookProgressScaled(int scale) {
-		return this.furnaceCookTime * scale / COOKING_SPEED;
+		return this.cookTime * scale / COOKING_SPEED;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.hasCustomName()? this.name : "container.super_furnace";
 	}
 
 	@Override
 	public boolean hasCustomName() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.name != null && !this.name.isEmpty();
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return ItemStackHelper.getAndRemove(this.inventory, index);
 	}
 
 	@Override
-	public void openInventory(EntityPlayer player) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void openInventory(EntityPlayer player) {}
 
 	@Override
-	public void closeInventory(EntityPlayer player) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void closeInventory(EntityPlayer player) {}
 
 	@Override
 	public int getField(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		int value = 0;
+		switch(id) {
+		case 0:
+			value = this.burnTime;
+			break;
+		case 1:
+			value = this.currentItemBurnTime;
+			break;
+		case 2:
+			value = this.cookTime;
+			break;
+		}
+		return value;
 	}
 
 	@Override
 	public void setField(int id, int value) {
-		// TODO Auto-generated method stub
-		
+		switch(id) {
+		case 0:
+			this.burnTime = value;
+			break;
+		case 1:
+			this.currentItemBurnTime = value;
+			break;
+		case 2:
+			this.cookTime = value;
+			break;
+		}
 	}
 
 	@Override
 	public int getFieldCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 3;
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
+		for(ItemStack s : this.inventory) {
+			s = null;
+		}
+	}
+
+	@Override
+	public void update() {
+		boolean flag = this.burnTime > 0;
+		boolean flag1 = false;
+		// Decrement Burning time...
+		if(this.burnTime > 0) {
+			--this.burnTime;
+		}
 		
+		if(!this.worldObj.isRemote) {
+			// Using Fuel
+			if(this.burnTime != 0 || this.inventory[FUEL_SLOT] != null && this.checkIfInputAreAllNull()) {
+				if(this.burnTime == 0 && this.canSmelt()) {
+					this.currentItemBurnTime = this.burnTime = FuelUtils.getItemBurnTime(this.inventory[FUEL_SLOT]);
+					
+					if(this.burnTime > 0) {
+						flag1 = true;
+						if(this.inventory[FUEL_SLOT] != null) {
+							--this.inventory[FUEL_SLOT].stackSize;
+							if(this.inventory[FUEL_SLOT].stackSize <= 0) {
+								this.inventory[FUEL_SLOT] = this.inventory[FUEL_SLOT].getItem().getContainerItem(this.inventory[FUEL_SLOT]);
+							}
+						}
+					}
+				}
+				
+				if(this.isBurning() && this.canSmelt()) {
+					++this.cookTime;
+					if(this.cookTime >= COOKING_SPEED) {
+						this.cookTime = 0;
+						this.smeltItems();
+						flag1 = true;
+					}
+				} else {
+					this.cookTime = 0;
+				}
+				
+			}
+			
+			if(flag != this.burnTime > 0) {
+				flag1 = true;
+				// Update Furnace State
+				BlockSuperFurnace.setSuperFurnaceState(this.burnTime > 0, this.worldObj, this.pos);
+			}
+		}
+		
+		if(flag1) {
+			this.markDirty();
+		}
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound tag) {
+		super.readFromNBT(tag);
+		NBTTagList list = tag.getTagList("Items", Constants.NBT.TAG_COMPOUND);
+		this.inventory = new ItemStack[this.getSizeInventory()];
+		
+		for(int i = 0; i < list.tagCount(); i++) {
+			NBTTagCompound comp = list.getCompoundTagAt(i);
+			int index = comp.getInteger("Slot");
+			if(index >= 0 && index < this.getSizeInventory()) {
+				this.inventory[index] = ItemStack.loadItemStackFromNBT(comp);
+			}
+		}
+		this.burnTime = tag.getInteger("BurnTime");
+		this.cookTime = tag.getInteger("CookTime");
+		this.currentItemBurnTime = FuelUtils.getItemBurnTime(this.inventory[FUEL_SLOT]);
+		
+		if(tag.hasKey("CustomName")) {
+			this.name = tag.getString("CustomName");
+		}
+	}
+
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+		super.writeToNBT(tag);
+		tag.setInteger("BurnTime", this.burnTime);
+		tag.setInteger("CookTime", this.cookTime);
+		NBTTagList list = new NBTTagList();
+		
+		for(int i =0; i < this.inventory.length; i++) {
+			
+			if(this.inventory[i] != null) {
+				NBTTagCompound comp = new NBTTagCompound();
+				comp.setInteger("Slot", i);
+				this.inventory[i].writeToNBT(comp);
+				list.appendTag(comp);
+			}
+			
+		}
+		
+		tag.setTag("Items", list);
+		
+		if(this.hasCustomName()) {
+			tag.setString("CustomName", this.name);
+		}
+		return tag;
 	}
 }

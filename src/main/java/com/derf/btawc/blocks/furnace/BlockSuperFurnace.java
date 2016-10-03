@@ -8,20 +8,30 @@ import com.derf.btawc.blocks.basic.BlockContainerBasic;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 import com.derf.btawc.client.gui.GuiHandler;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.Rotation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockSuperFurnace extends BlockContainerBasic {
 
+	public static PropertyDirection FACING = BlockHorizontal.FACING;
+	
 	private Random rand = new Random();
 	private static boolean keepInventory;
 	
@@ -37,181 +47,156 @@ public class BlockSuperFurnace extends BlockContainerBasic {
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntitySuperFurnace();
 	}
-
-	/*
+	
 	@Override
-	public void onBlockAdded(World world, int x, int y, int z) {
-		super.onBlockAdded(world, x, y, z);
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return Item.getItemFromBlock(BlockManager.superFurnace);
+	}
+
+	@Override
+	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+		return new ItemStack(BlockManager.superFurnace);
+	}
+	
+	
+	@Override
+	public void onBlockAdded(
+			World world, 
+			BlockPos pos, 
+			IBlockState state) {
 		
 		if(!world.isRemote) {
-			Block north = world.getBlock(x, y, z - 1);
-			Block south = world.getBlock(x, y, z + 1);
-			Block west = world.getBlock(x - 1, y, z);
-			Block east = world.getBlock(x + 1, y, z);
-			byte meta = 3;
+			IBlockState north = world.getBlockState(pos.north());
+			IBlockState south = world.getBlockState(pos.south());
+			IBlockState west = world.getBlockState(pos.west());
+			IBlockState east = world.getBlockState(pos.east());
+			EnumFacing facing = (EnumFacing)state.getValue(FACING);
 			
-			if(north.func_149730_j() && !south.func_149730_j()) {
-				meta = 3;
+			if(facing == EnumFacing.NORTH && north.isFullBlock() && !south.isFullBlock()) {
+				facing = EnumFacing.SOUTH;
+			} else if(facing == EnumFacing.SOUTH && south.isFullBlock() && !north.isFullBlock()) {
+				facing = EnumFacing.NORTH;
+			} else if(facing == EnumFacing.WEST && west.isFullBlock() && !west.isFullBlock()) {
+				facing = EnumFacing.EAST;
+			} else if(facing == EnumFacing.EAST && east.isFullBlock() && !west.isFullBlock()) {
+				facing = EnumFacing.WEST;
 			}
 			
-			if(south.func_149730_j() && !north.func_149730_j()) {
-				meta = 2;
-			}
-			
-			if(west.func_149730_j() && !east.func_149730_j()) {
-				meta = 5;
-			}
-			
-			if(east.func_149730_j() && !west.func_149730_j()) {
-				meta = 4;
-			}
-			
-			world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+			world.setBlockState(pos, state.withProperty(FACING, facing), 2);
 		}
 	}
-	*/
-	/*
+	
+	
+	@Override
+	public IBlockState onBlockPlaced(
+			World world, 
+			BlockPos pos, 
+			EnumFacing facing, 
+			float hitX, 
+			float hitY, 
+			float hitZ,
+			int meta, 
+			EntityLivingBase placer) {
+		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	}
+
 	@Override
 	public void onBlockPlacedBy(
 			World world, 
-			int x, 
-			int y, 
-			int z,
-			EntityLivingBase entity, 
+			BlockPos pos, 
+			IBlockState state, 
+			EntityLivingBase placer,
 			ItemStack stack) {
-		int l = MathHelper.floor_double((double)(entity.rotationYaw * 4.0f / 360.0f) + 0.5) & 3;
-		
-		if(l == 0) {
-			world.setBlockMetadataWithNotify(x, y, z, 2, 2);
-		}
-		
-		if(l == 1) {
-			world.setBlockMetadataWithNotify(x, y, z, 5, 2);
-		}
-		
-		if(l == 2) {
-			world.setBlockMetadataWithNotify(x, y, z, 3, 2);
-		}
-		
-		if(l == 3) {
-			world.setBlockMetadataWithNotify(x, y, z, 4, 2);
-		}
+		world.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()));
 		
 		if(stack.hasDisplayName()) {
-			TileEntitySuperFurnace furnace = (TileEntitySuperFurnace)world.getTileEntity(x, y, z);
-			furnace.setName(stack.getDisplayName());
-		}
-	}
-	*/
-	/*
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta) {
-		IIcon temp = null;
-		if(side == 1 || side == 0) {
-			temp = this.bottom_top;
-		} else if(side != meta) {
-			temp = this.blockIcon;
-		} else {
-			temp = this.front;
-		}
-		return temp;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
-		this.blockIcon = reg.registerIcon(Loader.MODID + ":super_furnace_sides");
-		this.front = reg.registerIcon((this.on)? Loader.MODID + ":super_furnace_front_on" : Loader.MODID + ":super_furnace_front");
-		this.bottom_top = reg.registerIcon(Loader.MODID + ":super_furnace_bottom_top");
-	}
-	*/
-	
-	public static void updateFurnaceBlockState(boolean isWorking, World world, int x, int y, int z) {
-		/*
-		int l = world.getBlockMetadata(x, y, z);
-		TileEntity entity = world.getTileEntity(x, y, z);
-		isChanging = true;
-		if(isWorking) {
-			world.setBlock(x, y, z, BlockManager.superFurnaceOn);
-		} else {
-			world.setBlock(x, y, z, BlockManager.superFurnace);
-		}
-		isChanging = false;
-		world.setBlockMetadataWithNotify(x, y, z, l, 2);
-		if(entity != null) {
-			entity.validate();
-			world.setTileEntity(x, y, z, entity);
-		}
-		*/
-	}
-
-	/*
-	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int value) {
-		// TODO Auto-generated method stub
-		if(!isChanging) {
-			TileEntitySuperFurnace entity = (TileEntitySuperFurnace)world.getTileEntity(x, y, z);
 			
-			if(entity != null) {
-				for(int i = 0; i < entity.getSizeInventory(); i++) {
-					ItemStack stack = entity.getStackInSlot(i);
-					if(stack != null) {
-						float fx = this.rand.nextFloat() * 0.8f + 0.1f;
-						float fy = this.rand.nextFloat() * 0.8f + 0.1f;
-						float fz = this.rand.nextFloat() * 0.8f + 0.1f;
-						
-						EntityItem items = new EntityItem(world, x + fx, y + fy, z + fz, stack);
-						
-						if(stack.hasTagCompound()) {
-							items.getEntityItem().setTagCompound((NBTTagCompound) stack.getTagCompound().copy());
-						}
-						
-						world.spawnEntityInWorld(items);
-					}
-				}
+			if(world.getTileEntity(pos) != null && world.getTileEntity(pos) instanceof TileEntitySuperFurnace) {
+				TileEntitySuperFurnace entity = (TileEntitySuperFurnace)world.getTileEntity(pos);
+				entity.setName(stack.getDisplayName());
 			}
-			
-			world.func_147453_f(x, y, z, block);
 		}
-		
-		super.breakBlock(world, x, y, z, block, value);
 	}
-	*/
 	
-	/*
+	
+	@Override
+	public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		// Do something here :)
+		if(!keepInventory) {
+			TileEntity entity = world.getTileEntity(pos);
+			if(entity instanceof TileEntitySuperFurnace) {
+				// Commented it out until I 
+				InventoryHelper.dropInventoryItems(world, pos, (TileEntitySuperFurnace)entity);
+			}
+		}
+		super.breakBlock(world, pos, state);
+	}
+	
+	
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		EnumFacing facing = EnumFacing.getFront(meta);
+		
+		if(facing.getAxis() == EnumFacing.Axis.Y) {
+			facing = EnumFacing.NORTH;
+		}
+		return this.getDefaultState().withProperty(FACING, facing);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return ((EnumFacing)state.getValue(FACING)).getIndex();
+	}
+
+	@Override
+	public IBlockState withRotation(IBlockState state, Rotation rot) {
+		return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
+	}
+
+	@Override
+	public IBlockState withMirror(IBlockState state, Mirror mirror) {
+		return state.withRotation(mirror.toRotation((EnumFacing)state.getValue(FACING)));
+	}
+
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] {FACING});
+	}
+
+	
 	@Override
 	public boolean onBlockActivated(
 			World world, 
-			int x, 
-			int y, 
-			int z,
-			EntityPlayer player, 
-			int side, 
-			float tx, 
-			float ty, 
-			float tz) {
+			BlockPos pos, 
+			IBlockState state, 
+			EntityPlayer player,
+			EnumHand hand, 
+			ItemStack heldItem, 
+			EnumFacing side, 
+			float hitX, 
+			float hitY, 
+			float hitZ) {
 		
 		if(!world.isRemote) {
-			player.openGui(Loader.INSTANCE, GuiHandler.SUPER_FURNACE_GUI, world, x, y, z);
+			// Activate Gui for the player
+			player.openGui(Loader.INSTANCE, GuiHandler.SUPER_FURNACE_GUI, world, pos.getX(), pos.getY(), pos.getZ());
 		}
-		
 		return true;
 	}
-	*/
-	/*
-	@Override
-	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
-		// TODO Auto-generated method stub
-		return Item.getItemFromBlock(this);
+
+	public static void setSuperFurnaceState(boolean active, World world, BlockPos pos) {
+		IBlockState state = world.getBlockState(pos);
+		TileEntity entity = world.getTileEntity(pos);
+		keepInventory = true;
+		if(active) {
+			world.setBlockState(pos, BlockManager.superFurnaceOn.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
+		} else {
+			world.setBlockState(pos, BlockManager.superFurnace.getDefaultState().withProperty(FACING,  state.getValue(FACING)), 3);
+		}
+		keepInventory = false;
+		if(entity != null) {
+			entity.validate();
+			world.setTileEntity(pos, entity);
+		}
 	}
-	*/
-	
-	/*
-	@Override
-	public Item getItem(World p_149694_1_, int p_149694_2_, int p_149694_3_, int p_149694_4_) {
-		// TODO Auto-generated method stub
-		return Item.getItemFromBlock(this);
-	}
-	*/
 }

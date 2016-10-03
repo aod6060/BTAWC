@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": {"model": "btawc:super_furnace"},
+    "facing=south": {"model": "btawc:super_furnace", "y": 180},
+    "facing=west": {"model": "btawc:super_furnace", "y": 270},
+    "facing=east": {"model": "btawc:super_furnace", "y": 90}
+  }
+}

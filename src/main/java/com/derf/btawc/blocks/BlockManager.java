@@ -2,7 +2,11 @@ package com.derf.btawc.blocks;
 
 import com.derf.btawc.ModRegistry;
 import com.derf.btawc.blocks.furnace.BlockAlloyFurnace;
+import com.derf.btawc.blocks.furnace.BlockSuperFurnace;
+import com.derf.btawc.blocks.generators.BlockCreativeGenerator;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
+import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
+import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
 import com.derf.btawc.blocks.witherproof.BlockWitherProof;
 import com.derf.btawc.blocks.witherproof.BlockWitherProofGlass;
 import com.derf.btawc.creativetabs.CreativeTabsManager;
@@ -35,14 +39,12 @@ public final class BlockManager {
 	// Misc
 	
 	public static final void create() {
-		/*
 		// Generator
 		creativeGenerator = new BlockCreativeGenerator();
 		//energyStorageBasic = new BlockEnergyStorageBasic();
 		// Super Furnace
 		superFurnace = new BlockSuperFurnace(0, false);
 		superFurnaceOn = new BlockSuperFurnace(1, true);
-		*/
 		// Wither Proof Block
 		witherProofBlock = new BlockWitherProof("wither_proof", 0.0f, SoundType.STONE);
 		witherProofLight = new BlockWitherProof("wither_proof_light", 1.0f, SoundType.GLASS);
@@ -53,14 +55,12 @@ public final class BlockManager {
 	}
 	
 	public static final void register() {
-		/*
 		// Generators
-		GameRegistry.registerBlock(creativeGenerator, "creative_generator");
+		ModRegistry.registerBlock(creativeGenerator, "creative_generator");
 		//GameRegistry.registerBlock(energyStorageBasic, "energy_storage_basic");
 		// Super Furnace
-		GameRegistry.registerBlock(superFurnace, "super_furnace");
-		GameRegistry.registerBlock(superFurnaceOn, "super_furnace_on");
-		*/
+		ModRegistry.registerBlock(superFurnace, "super_furnace");
+		ModRegistry.registerBlock(superFurnaceOn, "super_furnace_on");
 		// Wither Proof Block
 		ModRegistry.registerBlock(witherProofBlock, "wither_proof");
 		ModRegistry.registerBlock(witherProofLight, "wither_proof_light");
@@ -71,26 +71,22 @@ public final class BlockManager {
 	}
 	
 	public static final void registerTileEntities() {
-		/*
 		// Generators
-		GameRegistry.registerTileEntity(TileEntityCreativeGenerator.class, "creative_generator");
+		ModRegistry.registerTileEntity(TileEntityCreativeGenerator.class, "creative_generator");
 		// Storage
 		//GameRegistry.registerTileEntity(TileEntityEnergyStorageBasic.class, "energy_storage_basic");
 		// Super Furnace
-		GameRegistry.registerTileEntity(TileEntitySuperFurnace.class, "super_furnace");
-		*/
+		ModRegistry.registerTileEntity(TileEntitySuperFurnace.class, "super_furnace");
 		// Alloy Furnace
 		ModRegistry.registerTileEntity(TileEntityAlloyFurnace.class, "alloy_furnace");
 	}
 	
 	public static final void creativeTabs() {
-		/*
 		// Generators
 		creativeGenerator.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		//energyStorageBasic.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Super Furnace
 		superFurnace.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		*/
 		// Wither Proof Block
 		witherProofBlock.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		witherProofLight.setCreativeTab(CreativeTabsManager.tabBTAWC);
@@ -100,15 +96,13 @@ public final class BlockManager {
 	}
 	
 	public static final void crafting() {
-		/*
 		// Super Furnace
-		GameRegistry.addShapedRecipe(
+		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(superFurnace), 
 				"fff",
 				"fff",
 				"fff",
-				'f', Blocks.furnace);
-				*/
+				'f', Blocks.FURNACE);
 		// Wither Proof Block
 		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(witherProofBlock, 4), 
@@ -153,7 +147,11 @@ public final class BlockManager {
 	
 	@SideOnly(Side.CLIENT)
 	public static void registerRenderer() {
+		// Creative Generator
+		ModRegistry.registerRender(creativeGenerator, "creative_generator");
 		// Super Furnace
+		ModRegistry.registerRender(superFurnace, "super_furnace");
+		ModRegistry.registerRender(superFurnaceOn, "super_furnace_on");
 		// Wither Proof
 		ModRegistry.registerRender(witherProofBlock, "wither_proof");
 		ModRegistry.registerRender(witherProofGlass, "wither_proof_glass");

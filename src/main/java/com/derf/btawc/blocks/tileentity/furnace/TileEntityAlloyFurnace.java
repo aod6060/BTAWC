@@ -17,6 +17,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable, IInventory {
 	// Static Stuff
@@ -37,47 +39,6 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable
 	public int currentItemBurnTime;
 	public int cookTime;
 	private String name;
-	
-	@Override
-	public void readFromNBT(NBTTagCompound tag) {
-		super.readFromNBT(tag);
-		NBTTagList list = tag.getTagList("Items", Constants.NBT.TAG_COMPOUND);
-		this.inventory = new ItemStack[this.getSizeInventory()];
-		for(int i = 0; i < list.tagCount(); i++) {
-			NBTTagCompound comp = list.getCompoundTagAt(i);
-			int index = comp.getInteger("Slot");
-			if(index >= 0 && index < this.getSizeInventory()) {
-				this.inventory[index] = ItemStack.loadItemStackFromNBT(comp);
-			}
-		}
-		this.burnTime = tag.getInteger("BurnTime");
-		this.cookTime = tag.getInteger("CookTime");
-		this.currentItemBurnTime = FuelUtils.getItemBurnTime(this.inventory[FUEL_SLOT]);
-		if(tag.hasKey("CustomName")) {
-			this.name = tag.getString("CustomName");
-		}
-	}
-
-	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
-		super.writeToNBT(tag);
-		tag.setInteger("BurnTime", this.burnTime);
-		tag.setInteger("CookTime", this.cookTime);
-		NBTTagList list = new NBTTagList();
-		for(int i = 0; i < this.inventory.length; i++) {
-			if(this.inventory[i] != null) {
-				NBTTagCompound comp = new NBTTagCompound();
-				comp.setInteger("Slot", i);
-				inventory[i].writeToNBT(comp);
-				list.appendTag(comp);
-			}
-		}
-		tag.setTag("Items", list);
-		if(this.hasCustomName()) {
-			tag.setString("CustomName", this.name);
-		}
-		return tag;
-	}
 
 	@Override
 	public int getSizeInventory() {
@@ -101,10 +62,6 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable
 		if(stack != null && stack.stackSize > this.getInventoryStackLimit()) {
 			stack.stackSize = this.getInventoryStackLimit();
 		}
-	}
-	
-	public void setName(String name) {
-		this.name = name;
 	}
 	
 	@Override
@@ -183,6 +140,7 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable
 		return inventory.getField(0) > 0;
 	}
 	
+	@SideOnly(Side.CLIENT)
 	public int getBurnTimeRemainingScaled(int scale) {
 		if(this.currentItemBurnTime == 0) {
 			this.currentItemBurnTime = COOKING_SPEED;
@@ -190,10 +148,15 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable
 		return this.burnTime * scale / this.currentItemBurnTime;
 	}
 	
+	@SideOnly(Side.CLIENT)
 	public int getCookProgressScaled(int scale) {
 		return this.cookTime * scale / COOKING_SPEED;
 	}
-
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	@Override
 	public String getName() {
 		return this.hasCustomName()? this.name : "container.alloy_furnace";
@@ -221,7 +184,7 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable
 		
 		if(index == this.OUTPUT) {
 			b = false;
-		} else if(index != this.FUEL_SLOT) {
+		} else if(index != FUEL_SLOT) {
 			b = true;
 		} else {
 			ItemStack fuelStack = this.inventory[FUEL_SLOT];
@@ -321,5 +284,46 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable
 		if(flag1) {
 			this.markDirty();
 		}
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound tag) {
+		super.readFromNBT(tag);
+		NBTTagList list = tag.getTagList("Items", Constants.NBT.TAG_COMPOUND);
+		this.inventory = new ItemStack[this.getSizeInventory()];
+		for(int i = 0; i < list.tagCount(); i++) {
+			NBTTagCompound comp = list.getCompoundTagAt(i);
+			int index = comp.getInteger("Slot");
+			if(index >= 0 && index < this.getSizeInventory()) {
+				this.inventory[index] = ItemStack.loadItemStackFromNBT(comp);
+			}
+		}
+		this.burnTime = tag.getInteger("BurnTime");
+		this.cookTime = tag.getInteger("CookTime");
+		this.currentItemBurnTime = FuelUtils.getItemBurnTime(this.inventory[FUEL_SLOT]);
+		if(tag.hasKey("CustomName")) {
+			this.name = tag.getString("CustomName");
+		}
+	}
+
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+		super.writeToNBT(tag);
+		tag.setInteger("BurnTime", this.burnTime);
+		tag.setInteger("CookTime", this.cookTime);
+		NBTTagList list = new NBTTagList();
+		for(int i = 0; i < this.inventory.length; i++) {
+			if(this.inventory[i] != null) {
+				NBTTagCompound comp = new NBTTagCompound();
+				comp.setInteger("Slot", i);
+				inventory[i].writeToNBT(comp);
+				list.appendTag(comp);
+			}
+		}
+		tag.setTag("Items", list);
+		if(this.hasCustomName()) {
+			tag.setString("CustomName", this.name);
+		}
+		return tag;
 	}
 }

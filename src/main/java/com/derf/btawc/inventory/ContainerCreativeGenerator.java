@@ -4,8 +4,10 @@ import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 
 public class ContainerCreativeGenerator extends ContainerBasic {
 
@@ -26,49 +28,47 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 	
 	@Override
 	public boolean canInteractWith(EntityPlayer p_75145_1_) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
-	/*
+	
 	@Override
-	public void addCraftingToCrafters(ICrafting handler) {
+	public void addListener(IContainerListener listener) {
 		// TODO Auto-generated method stub
-		super.addCraftingToCrafters(handler);
-		handler.sendProgressBarUpdate(this, 0, this.generator.getEnergyStored(ForgeDirection.UP));
-		handler.sendProgressBarUpdate(this, 1, this.generator.getMaxEnergyStored(ForgeDirection.UP));
-		handler.sendProgressBarUpdate(this, 2, this.generator.getStorage().getMaxReceive());
-		handler.sendProgressBarUpdate(this, 3, this.generator.getStorage().getMaxExtract());
+		super.addListener(listener);
+		listener.sendProgressBarUpdate(this, 0, this.generator.getStorage().getEnergyStored());
+		listener.sendProgressBarUpdate(this, 1, this.generator.getStorage().getCapacity());
+		listener.sendProgressBarUpdate(this, 2, this.generator.getStorage().getMaxReceive());
+		listener.sendProgressBarUpdate(this, 3, this.generator.getStorage().getMaxExtract());
 	}
-	*/
+	
 	@Override
 	public void detectAndSendChanges() {
 		// TODO Auto-generated method stub
 		super.detectAndSendChanges();
-		/*
-		for(int i = 0; i < this.crafters.size(); i++) {
-			ICrafting handler = (ICrafting)this.crafters.get(i);
-			if(this.currentEnergy != this.generator.getEnergyStored(ForgeDirection.UP)) {
-				handler.sendProgressBarUpdate(this, 0, this.generator.getEnergyStored(ForgeDirection.UP));
+		
+		for(int i = 0; i < this.listeners.size(); i++) {
+			IContainerListener listener = this.listeners.get(i);
+			
+			if(this.currentEnergy != this.generator.getStorage().getEnergy()) {
+				listener.sendProgressBarUpdate(this, 0, this.generator.getStorage().getEnergy());
 			}
 			
-			if(this.maxEnergy != this.generator.getMaxEnergyStored(ForgeDirection.UP)) {
-				handler.sendProgressBarUpdate(this, 1, this.generator.getMaxEnergyStored(ForgeDirection.UP));
+			if(this.maxEnergy != this.generator.getStorage().getEnergy()) {
+				listener.sendProgressBarUpdate(this, 1, this.generator.getStorage().getCapacity());
 			}
 			
-			if(this.maxReceive != this.generator.getStorage().getMaxReceive()) {
-				handler.sendProgressBarUpdate(this, 2, this.generator.getStorage().getMaxReceive());
+			if(this.maxReceive != this.generator.getStorage().getEnergy()) {
+				listener.sendProgressBarUpdate(this, 2, this.generator.getStorage().getMaxReceive());
 			}
 			
-			if(this.maxExtract != this.generator.getStorage().getMaxExtract()) {
-				handler.sendProgressBarUpdate(this, 3, this.generator.getStorage().getMaxExtract());
+			if(this.maxExtract != this.generator.getStorage().getEnergy()) {
+				listener.sendProgressBarUpdate(this, 3, this.generator.getStorage().getMaxExtract());
 			}
 		}
-		*/
-		/*
-		this.currentEnergy = this.generator.getEnergyStored(ForgeDirection.UP);
-		this.maxEnergy = this.generator.getMaxEnergyStored(ForgeDirection.UP);
-		*/
+		
+		this.currentEnergy = this.generator.getStorage().getEnergy();
+		this.maxEnergy = this.generator.getStorage().getCapacity();
 		this.maxReceive = this.generator.getStorage().getMaxReceive();
 		this.maxExtract = this.generator.getStorage().getMaxExtract();
 	}

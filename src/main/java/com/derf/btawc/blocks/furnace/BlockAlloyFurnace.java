@@ -113,7 +113,12 @@ public class BlockAlloyFurnace extends BlockContainerBasic {
 		world.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
 		
 		if(stack.hasDisplayName()) {
-			// Do Something with entity
+			
+			if(world.getTileEntity(pos) != null && world.getTileEntity(pos) instanceof TileEntityAlloyFurnace) {
+				TileEntityAlloyFurnace entity = (TileEntityAlloyFurnace) world.getTileEntity(pos);
+				entity.setName(stack.getDisplayName());
+			}
+			
 		}
 	}
 
@@ -188,15 +193,12 @@ public class BlockAlloyFurnace extends BlockContainerBasic {
 		IBlockState state = world.getBlockState(pos);
 		TileEntity entity = world.getTileEntity(pos);
 		keepInventory = true;
-		
 		if(active) {
 			world.setBlockState(pos, BlockManager.alloyFurnaceOn.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
 		} else {
 			world.setBlockState(pos, BlockManager.alloyFurnace.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
 		}
-		
 		keepInventory = false;
-		
 		if(entity != null) {
 			entity.validate();
 			world.setTileEntity(pos, entity);

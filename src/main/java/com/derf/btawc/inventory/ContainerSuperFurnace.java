@@ -4,6 +4,7 @@ import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -11,16 +12,17 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntityFurnace;
 
 public class ContainerSuperFurnace extends ContainerBasic {
-	private final InventoryPlayer player;
+	// Statics
 	private static final int COOKING_SPEED = 200;
-	
-	private TileEntitySuperFurnace superFurnace;
-	private int lastCookTime;
-	private int lastBurnTime;
-	private int lastItemBurnTime;
+	// 
+	private final InventoryPlayer player;
+	private TileEntitySuperFurnace furnace;
+	private int burnTime;
+	private int currentItemBurnTime;
+	private int cookTime;
 	
 	public ContainerSuperFurnace(InventoryPlayer player, TileEntitySuperFurnace superFurnace) {
-		this.superFurnace = superFurnace;
+		this.furnace = superFurnace;
 		this.player = player;
 		
 		// Create Input Slots for Super Furnace
@@ -47,62 +49,46 @@ public class ContainerSuperFurnace extends ContainerBasic {
 		this.createPlayerInventory(player, 6, 124, 6, 182);
 	}
 
-	/*
+	
 	@Override
-	public void addCraftingToCrafters(ICrafting handler) {
-		super.addCraftingToCrafters(handler);
-		handler.sendProgressBarUpdate(this, 0, this.superFurnace.furnaceCookTime);
-		handler.sendProgressBarUpdate(this, 1, this.superFurnace.furnaceBurnTime);
-		handler.sendProgressBarUpdate(this, 2, this.superFurnace.currentItemBurnTime);
+	public void addListener(IContainerListener listener) {
+		super.addListener(listener);
+		listener.sendAllWindowProperties(this, this.furnace);
 	}
-	*/
+
 
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-		/*
-		for(int i = 0; i < this.crafters.size(); i++) {
-			ICrafting handler = (ICrafting) this.crafters.get(i);
+		for(int i = 0; i < this.listeners.size(); i++) {
+			IContainerListener listener = this.listeners.get(i);
 			
-			if(this.lastCookTime != this.superFurnace.furnaceCookTime) {
-				handler.sendProgressBarUpdate(this, 0, this.superFurnace.furnaceCookTime);
+			if(this.burnTime != this.furnace.getField(0)) {
+				listener.sendProgressBarUpdate(this, 0, this.furnace.getField(0));
 			}
 			
-			if(this.lastBurnTime != this.superFurnace.furnaceBurnTime) {
-				handler.sendProgressBarUpdate(this, 1, this.superFurnace.furnaceBurnTime);
+			if(this.currentItemBurnTime != this.furnace.getField(1)) {
+				listener.sendProgressBarUpdate(this, 1, this.furnace.getField(1));
 			}
 			
-			if(this.lastItemBurnTime != this.superFurnace.currentItemBurnTime) {
-				handler.sendProgressBarUpdate(this, 2, this.superFurnace.currentItemBurnTime);
+			if(this.cookTime != this.furnace.getField(2)) {
+				listener.sendProgressBarUpdate(this, 2, this.furnace.getField(2));
 			}
 		}
-		*/
-		this.lastCookTime = this.superFurnace.furnaceCookTime;
-		this.lastBurnTime = this.superFurnace.furnaceBurnTime;
-		this.lastItemBurnTime = this.superFurnace.currentItemBurnTime;
+		this.burnTime = this.furnace.getField(0);
+		this.currentItemBurnTime = this.furnace.getField(1);
+		this.cookTime = this.furnace.getField(2);
 	}
 
 
 	@Override
 	public void updateProgressBar(int index, int value) {
-		switch(index) {
-		case 0:
-			this.superFurnace.furnaceCookTime = value;
-			break;
-		case 1:
-			this.superFurnace.furnaceBurnTime = value;
-			break;
-		case 2:
-			this.superFurnace.currentItemBurnTime = value;
-			break;
-		default:
-			break;
-		}
+		this.furnace.setField(index, value);
 	}
 	
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
-		return superFurnace.isUseableByPlayer(player);
+		return furnace.isUseableByPlayer(player);
 	}
 
 	@Override

@@ -1,3 +1,18 @@
+2.0.0 alpha
+------------------------------------------------------------------
+- Ported everything from 1.0.2.1 to minecraft forge 1.10.2. There are 
+  2 that got removed I'll listed them below. 
+- Removed Neter Star Mesh (Remove due to recipe using a new recipe machanic, use the alloy smelter)
+- Removed Uncooked Animal Ingot (Remove due to recipe using a new recipe machanic, use the alloy smelter)
+- Note: Alright time to add new content. All new content will be for 1.10.2.
+1.0.2.1 alpha
+------------------------------------------------------------------
+- Bug fix for alloy furnce.
+	- Basically fixes a problem when you add an item to the alloy furnace while it is 
+	  crafting an item. This bug crashed clients. Its fixed now so download this
+	  and you won't have any problems.
+	- Note: I'm about ready for 1.10.2. I got most of the stuff ported so probalby
+	  today or tomorrow it will get released.
 1.0.2 alpha
 ------------------------------------------------------------------
 - Added Alloy Furnace

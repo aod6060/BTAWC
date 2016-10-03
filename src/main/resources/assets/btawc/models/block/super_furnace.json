@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "btawc:blocks/super_furnace_bottom_top",
+    "bottom": "btawc:blocks/super_furnace_bottom_top",
+    "front": "btawc:blocks/super_furnace_front",
+    "side": "btawc:blocks/super_furnace_sides"
+  }
+}

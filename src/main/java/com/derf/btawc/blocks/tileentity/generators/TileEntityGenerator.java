@@ -7,24 +7,21 @@ import com.derf.btawc.energy.IEnergyLevelPrintable;
 import cofh.api.energy.IEnergyProvider;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class TileEntityGenerator extends TileEntityBasic implements IEnergyProvider, IEnergyLevelPrintable {
+public abstract class TileEntityGenerator extends TileEntityBasic implements ITickable, IEnergyProvider, IEnergyLevelPrintable {
 	
 	protected EnergyStorage storage = null;
 	
-	/*
 	@Override
-	public void updateEntity() {
-		// TODO Auto-generated method stub
-		super.updateEntity();
+	public void update() {
 		// Update Generator per tick
 		updateGeneratorInternalStorage();
 		// Update TileEntities with the internal storage
 		updateTileEntities();
 	}
-	*/
 	
 	protected abstract void updateTileEntities();
 
@@ -33,25 +30,25 @@ public abstract class TileEntityGenerator extends TileEntityBasic implements IEn
 	@Override
 	public int getEnergyStored(EnumFacing from) {
 		// TODO Auto-generated method stub
-		return 0;
+		return storage.getEnergyStored();
 	}
 
 	@Override
 	public int getMaxEnergyStored(EnumFacing from) {
 		// TODO Auto-generated method stub
-		return 0;
+		return storage.getMaxEnergyStored();
 	}
 
 	@Override
 	public boolean canConnectEnergy(EnumFacing from) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public int extractEnergy(EnumFacing from, int maxExtract, boolean simulate) {
 		// TODO Auto-generated method stub
-		return 0;
+		return storage.extractEnergy(maxExtract, simulate);
 	}
 
 	@Override

@@ -30,8 +30,8 @@ public class GuiContainerSuperFurnace extends GuiContainerBasic {
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-		//String s = this.entity.hasCustomInventoryName()? this.entity.getInventoryName() : this.getLangString(this.entity.getInventoryName());
-		//this.renderString(s, this.xSize / 2 - this.stringWidth(s) / 2, 6, Color.BLACK);
+		String s = this.entity.hasCustomName()? this.entity.getName() : this.getLangString(this.entity.getName());
+		this.renderString(s, this.xSize / 2 - this.stringWidth(s) / 2, 6, Color.BLACK);
 		this.renderFormatedString("container.inventory", 6, 111, Color.BLACK);
 	}
 

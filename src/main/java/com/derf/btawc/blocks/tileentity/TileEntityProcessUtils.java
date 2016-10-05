@@ -50,6 +50,7 @@ public final class TileEntityProcessUtils {
 					process.resetCookingTime();
 				}
 			}
+			
 			if(flag != usage.isBurning()) {
 				flag1 = true;
 				process.updateBlockState();

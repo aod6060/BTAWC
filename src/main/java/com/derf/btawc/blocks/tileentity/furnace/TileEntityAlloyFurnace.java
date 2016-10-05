@@ -291,6 +291,7 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable
 		super.readFromNBT(tag);
 		NBTTagList list = tag.getTagList("Items", Constants.NBT.TAG_COMPOUND);
 		this.inventory = new ItemStack[this.getSizeInventory()];
+		
 		for(int i = 0; i < list.tagCount(); i++) {
 			NBTTagCompound comp = list.getCompoundTagAt(i);
 			int index = comp.getInteger("Slot");
@@ -312,6 +313,7 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable
 		tag.setInteger("BurnTime", this.burnTime);
 		tag.setInteger("CookTime", this.cookTime);
 		NBTTagList list = new NBTTagList();
+		
 		for(int i = 0; i < this.inventory.length; i++) {
 			if(this.inventory[i] != null) {
 				NBTTagCompound comp = new NBTTagCompound();

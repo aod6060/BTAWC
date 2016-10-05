@@ -5,17 +5,23 @@ import com.derf.btawc.blocks.tileentity.IFuelUsage;
 import com.derf.btawc.blocks.tileentity.IProcess;
 import com.derf.btawc.blocks.tileentity.TileEntityBasic;
 import com.derf.btawc.blocks.tileentity.TileEntityProcessUtils;
-import com.derf.btawc.inventory.Inventory;
 import com.derf.btawc.recipe.ChipMakerRecipe;
 import com.derf.btawc.recipe.ChipMakerRecipeManager;
 import com.derf.btawc.recipe.RecipeHolder;
 import com.derf.btawc.util.FuelUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ITickable;
+import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityChipMaker extends TileEntityBasic implements IInventory, ITickable, IFuelUsage, IProcess {
 
@@ -25,9 +31,13 @@ public class TileEntityChipMaker extends TileEntityBasic implements IInventory, 
 	public static final int REDSTONE_SLOT = 1;
 	public static final int OUTPUT_SLOT = 2;
 	public static final int FUEL_SLOT = 3;
+	public static final int INVENTORY_SIZE = 4;
 	
 	// Private Stuffed needed By inventory
-	private Inventory inventory = new Inventory(4, "container.chip_maker");
+	//rivate Inventory inventory = new Inventory(4, "container.chip_maker");
+	private ItemStack[] inventory = new ItemStack[INVENTORY_SIZE];
+	
+	private String name;
 	private int burnTime;
 	private int currentItemBurnTime;
 	private int cookTime;
@@ -35,54 +45,58 @@ public class TileEntityChipMaker extends TileEntityBasic implements IInventory, 
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return inventory.getName();
+		return this.hasCustomName()? this.name : "container.chip_maker";
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
 	@Override
 	public boolean hasCustomName() {
 		// TODO Auto-generated method stub
-		return inventory.hasCustomName();
+		return this.name != null && !this.name.isEmpty();
 	}
 
 	@Override
 	public int getSizeInventory() {
 		// TODO Auto-generated method stub
-		return inventory.getSizeInventory();
+		return inventory.length;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int index) {
-		// TODO Auto-generated method stub
-		return inventory.getStackInSlot(index);
+		return inventory[index];
 	}
 
 	@Override
 	public ItemStack decrStackSize(int index, int count) {
-		// TODO Auto-generated method stub
-		return inventory.decrStackSize(index, count);
+		return ItemStackHelper.getAndSplit(this.inventory, index, count);
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int index) {
 		// TODO Auto-generated method stub
-		return inventory.removeStackFromSlot(index);
+		return ItemStackHelper.getAndRemove(this.inventory, index);
 	}
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) {
-		inventory.setInventorySlotContents(index, stack);
+		this.inventory[index] = stack;
+		
+		if(stack != null && stack.stackSize > this.getInventoryStackLimit()) {
+			stack.stackSize = this.getInventoryStackLimit();
+		}
 	}
 
 	@Override
 	public int getInventoryStackLimit() {
 		// TODO Auto-generated method stub
-		return inventory.getInventoryStackLimit();
+		return 64;
 	}
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.worldObj.getTileEntity(pos) != this? false : player.getDistanceSq(pos.add(0.5, 0.5, 0.5)) <= 64.0;
 	}
 
 	@Override
@@ -93,8 +107,20 @@ public class TileEntityChipMaker extends TileEntityBasic implements IInventory, 
 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean b = false;
+		
+		if(index == OUTPUT_SLOT) {
+			b = false;
+		} else if(index == MATERIAL_SLOT) {
+			b = true;
+		} else if(index == REDSTONE_SLOT) {
+			b = stack.getItem() == Items.REDSTONE;
+		} else {
+			ItemStack fuelStack = this.inventory[FUEL_SLOT];
+			b = FuelUtils.isItemFuel(stack) || SlotFurnaceFuel.isBucket(stack) && (fuelStack == null || fuelStack.getItem() != Items.BUCKET);
+		}
+		
+		return b;
 	}
 
 	@Override
@@ -137,7 +163,9 @@ public class TileEntityChipMaker extends TileEntityBasic implements IInventory, 
 
 	@Override
 	public void clear() {
-		inventory.clear();
+		for(ItemStack s : inventory) {
+			s = null;
+		}
 	}
 
 	@Override
@@ -147,20 +175,47 @@ public class TileEntityChipMaker extends TileEntityBasic implements IInventory, 
 
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
-		// TODO Auto-generated method stub
-		inventory.readFromNBT(compound);
+		super.readFromNBT(compound);
 		this.burnTime = compound.getInteger("BurnTime");
 		this.cookTime = compound.getInteger("CookTime");
 		this.currentItemBurnTime = FuelUtils.getItemBurnTime(this.getStackInSlot(FUEL_SLOT));
+		// Handle Inventory
+		NBTTagList list = compound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
+		this.inventory = new ItemStack[this.getSizeInventory()];
+		
+		for(int i = 0; i < list.tagCount(); i++) {
+			NBTTagCompound comp = list.getCompoundTagAt(i);
+			int index = comp.getInteger("Slot");
+			if(index >= 0 && index < this.getSizeInventory()) {
+				this.inventory[index] = ItemStack.loadItemStackFromNBT(comp);
+			}
+		}
+		
+		if(compound.hasKey("CustomName")) {
+			this.name = compound.getString("CustomName");
+		}
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-		// TODO Auto-generated method stub
-		inventory.writeToNBT(compound);
+		super.writeToNBT(compound);
 		compound.setInteger("BurnTime", this.burnTime);
 		compound.setInteger("CookTime", this.cookTime);
-		return super.writeToNBT(compound);
+		// Handle Inventory
+		NBTTagList list = new NBTTagList();
+		for(int i = 0; i < this.getSizeInventory(); i++) {
+			if(this.inventory[i] != null) {
+				NBTTagCompound comp = new NBTTagCompound();
+				comp.setInteger("Slot", i);
+				inventory[i].writeToNBT(comp);
+				list.appendTag(comp);
+			}
+		}
+		compound.setTag("Items", list);
+		if(this.hasCustomName()) {
+			compound.setString("CustomName", this.name);
+		}
+		return compound;
 	}
 
 	@Override
@@ -205,10 +260,10 @@ public class TileEntityChipMaker extends TileEntityBasic implements IInventory, 
 				}
 			}
 			// Update Redstone slot
-			if(this.getStackInSlot(MATERIAL_SLOT) != null) {
-				this.getStackInSlot(MATERIAL_SLOT).stackSize -= result.getRecipe().getRedstone().stackSize;
-				if(this.getStackInSlot(MATERIAL_SLOT).stackSize <= 0) {
-					this.setInventorySlotContents(MATERIAL_SLOT, null);
+			if(this.getStackInSlot(REDSTONE_SLOT) != null) {
+				this.getStackInSlot(REDSTONE_SLOT).stackSize -= result.getRecipe().getRedstone().stackSize;
+				if(this.getStackInSlot(REDSTONE_SLOT).stackSize <= 0) {
+					this.setInventorySlotContents(REDSTONE_SLOT, null);
 				}
 			}
 		}
@@ -216,11 +271,13 @@ public class TileEntityChipMaker extends TileEntityBasic implements IInventory, 
 
 	@Override
 	public boolean isInputNull() {
+		/*
 		boolean b = false;
 		for(int i = 0; i < 2; i++) {
-			b = b || this.inventory.getStackInSlot(i) != null;
+			b = b || this.getStackInSlot(i) != null;
 		}
-		return b;
+		*/
+		return this.getStackInSlot(MATERIAL_SLOT) != null && this.getStackInSlot(REDSTONE_SLOT) != null;
 	}
 
 	@Override
@@ -283,5 +340,21 @@ public class TileEntityChipMaker extends TileEntityBasic implements IInventory, 
 		this.burnTime = burnTime;
 	}
 
+	public boolean isSlotNull(int index) {
+		return getStackInSlot(index) == null;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public int getBuringTimeRemainingScaled(int scale) {
+		if(this.currentItemBurnTime == 0) {
+			this.currentItemBurnTime = this.getMaxCookingTime();
+		}
+		return this.burnTime * scale / this.currentItemBurnTime;
+	}
 	
+	@SideOnly(Side.CLIENT)
+	public int getCookProgressScaled(int scale) {
+		// TODO Auto-generated method stub
+		return this.cookTime * scale / COOKING_SPEED;
+	}
 }

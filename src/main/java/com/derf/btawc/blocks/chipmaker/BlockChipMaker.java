@@ -47,13 +47,15 @@ public class BlockChipMaker extends BlockContainerMachineBasic {
 	@Override
 	public void onCustomName(World world, BlockPos pos, ItemStack stack) {
 		if(world.getTileEntity(pos) != null && world.getTileEntity(pos) instanceof TileEntityChipMaker) {
-			// Set Custom Name
+			TileEntityChipMaker entity = (TileEntityChipMaker)world.getTileEntity(pos);
+			entity.setName(stack.getDisplayName());
 		}
 	}
 
 	@Override
 	public void onOpenGui(World world, BlockPos pos, EntityPlayer player) {
 		// Open Gui
+		player.openGui(Loader.INSTANCE, GuiHandler.CHIP_MAKER_GUI, world, pos.getX(), pos.getY(), pos.getZ());
 	}
 	
 	@Override
@@ -61,11 +63,24 @@ public class BlockChipMaker extends BlockContainerMachineBasic {
 		if(!keepInventory) {
 			if(entity instanceof TileEntityChipMaker) {
 				// Drop Inventory
+				InventoryHelper.dropInventoryItems(world, pos, (TileEntityChipMaker)entity);
 			}
 		}
 	}
 
-	public static void setChipMakerState(boolean active, World worldObj, BlockPos pos) {
-		
+	public static void setChipMakerState(boolean active, World world, BlockPos pos) {
+		IBlockState state = world.getBlockState(pos);
+		TileEntity entity = world.getTileEntity(pos);
+		keepInventory = true;
+		if(active) {
+			world.setBlockState(pos, BlockManager.chipMakerOn.getDefaultState().withProperty(FACING, state.getValue(FACING)));
+		} else {
+			world.setBlockState(pos, BlockManager.chipMaker.getDefaultState().withProperty(FACING, state.getValue(FACING)));
+		}
+		keepInventory = false;
+		if(entity != null) {
+			entity.validate();
+			world.setTileEntity(pos, entity);
+		}
 	}
 }

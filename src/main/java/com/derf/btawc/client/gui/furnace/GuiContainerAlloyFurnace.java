@@ -72,7 +72,7 @@ public class GuiContainerAlloyFurnace extends GuiContainerBasic {
 		int l = this.getL();
 		
 		if(this.entity.isBurning()) {
-			int i1 = this.entity.getBurnTimeRemainingScaled(17);
+			int i1 = this.entity.getBurnTimeRemainingScaled(15);
 			this.drawTexturedModalRect(k + 26, l + 53 + 14 - i1, 175, 14 - i1, 14, i1 + 1);
 			i1 = this.entity.getCookProgressScaled(24);
 			this.drawTexturedModalRect(k + 78, l + 24, 175, 15, i1 + 1, 15);

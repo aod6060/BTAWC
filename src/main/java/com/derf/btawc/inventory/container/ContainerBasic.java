@@ -3,6 +3,7 @@ package com.derf.btawc.inventory.container;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public abstract class ContainerBasic extends Container {
 	
@@ -17,5 +18,9 @@ public abstract class ContainerBasic extends Container {
 		for(int x = 0; x < 9; x++) {
 			this.addSlotToContainer(new Slot(inventory, x, x * 18 + x2, y2));
 		}
+	}
+	
+	public boolean merge(ItemStack stack, int index, int max, boolean reverseDirection) {
+		return this.mergeItemStack(stack, index, max, reverseDirection);
 	}
 }

@@ -1,6 +1,7 @@
 package com.derf.btawc;
 
 import com.derf.btawc.recipe.AlloyRecipeManager;
+import com.derf.btawc.recipe.ChipMakerRecipeManager;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -126,5 +127,10 @@ public final class ModRegistry {
 	// Adding Mod Recipes Handlers
 	public static void addAlloyFurnaceRecipe(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4, ItemStack result) {
 		AlloyRecipeManager.addRecipe(input1, input2, input3, input4, result);
+	}
+	
+	// Chip Maker Recipe
+	public static void addChipMakerRecipe(ItemStack material, int redstone, ItemStack result) {
+		ChipMakerRecipeManager.addRecipe(material, redstone, result);
 	}
 }

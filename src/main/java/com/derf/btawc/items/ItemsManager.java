@@ -572,8 +572,27 @@ public class ItemsManager {
 				null,
 				null,
 				new ItemStack(steelIngot));
-		
 		// Chips
+		// Iron Chip 4
+		ModRegistry.addChipMakerRecipe(
+				new ItemStack(Items.IRON_INGOT), 
+				4, 
+				new ItemStack(ironChip));
+		// Gold Chip 4
+		ModRegistry.addChipMakerRecipe(
+				new ItemStack(Items.GOLD_INGOT), 
+				4, 
+				new ItemStack(goldChip));
+		// Giron Chip 4
+		ModRegistry.addChipMakerRecipe(
+				new ItemStack(gironIngot), 
+				4, 
+				new ItemStack(gironChip));
+		// Pulsating Chip 8
+		ModRegistry.addChipMakerRecipe(
+				new ItemStack(Items.ENDER_PEARL), 
+				8, 
+				new ItemStack(pulsatingChip));
 	}
 	
 	public static void addToOreDictionary() {

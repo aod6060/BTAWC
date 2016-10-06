@@ -8,13 +8,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class AlloyRecipe {
+	private int id;
 	// Input Stuff
 	private ItemStack input1 = null;
 	private ItemStack input2 = null;
 	private ItemStack input3 = null;
 	private ItemStack input4 = null;
 	
-	public AlloyRecipe(ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4) {	
+	public AlloyRecipe(int id, ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4) {
+		this.id = id;
 		this.input1 = input1;
 		this.input2 = input2;
 		this.input3 = input3;
@@ -81,5 +83,10 @@ public class AlloyRecipe {
 		temp.add(input4);
 		return temp;
 	}
+
+	public int getId() {
+		return id;
+	}
+	
 	
 }

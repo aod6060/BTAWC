@@ -31,4 +31,18 @@ public final class OreDictionaryUtils {
 		
 		return temp;
 	}
+	
+	public static List<ItemStack> getItemsStacksFromItemStack(ItemStack stack) {
+		int[] ids = OreDictionary.getOreIDs(stack);
+		
+		if(ids.length < 0) {
+			return null;
+		}
+		
+		String name = OreDictionary.getOreName(ids[0]);
+		
+		List<ItemStack> temp = OreDictionary.getOres(name);
+		
+		return temp;
+	}
 }

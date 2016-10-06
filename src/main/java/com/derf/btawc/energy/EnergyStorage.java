@@ -111,4 +111,17 @@ public class EnergyStorage implements IEnergyStorage {
 	public void setMaxExtract(int maxExtract) {
 		this.maxExtract = maxExtract;
 	}
+	
+	public boolean isFull() {
+		return this.energy >= this.capacity;
+	}
+	
+	public boolean isEmpty() {
+		return this.energy <= 0;
+	}
+	
+	public void setMaxTransfer(int transfer) {
+		this.setMaxExtract(transfer);
+		this.setMaxReceive(transfer);
+	}
 }

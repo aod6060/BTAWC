@@ -14,18 +14,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public abstract class TileEntityGenerator extends TileEntityBasic implements ITickable, IEnergyProvider, IEnergyLevelPrintable {
 	
 	protected EnergyStorage storage = null;
-	
-	@Override
-	public void update() {
-		// Update Generator per tick
-		updateGeneratorInternalStorage();
-		// Update TileEntities with the internal storage
-		updateTileEntities();
-	}
-	
-	protected abstract void updateTileEntities();
-
-	protected abstract void updateGeneratorInternalStorage();
 
 	@Override
 	public int getEnergyStored(EnumFacing from) {

@@ -36,5 +36,7 @@ public class Loader {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent e) {
 		proxy.postInit(e);
+		
+		// Small little test for something...
 	}
 }

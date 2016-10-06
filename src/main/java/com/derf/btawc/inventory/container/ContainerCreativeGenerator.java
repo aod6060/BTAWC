@@ -18,6 +18,9 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 	private int maxEnergy;
 	private int maxExtract;
 	private int maxReceive;
+	private int currentEnergyTicks;
+	public int speedUpgrades;
+	public int insantiy;
 	
 	public ContainerCreativeGenerator(InventoryPlayer player, TileEntityCreativeGenerator generator) {
 		this.player = player;
@@ -40,6 +43,9 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 		listener.sendProgressBarUpdate(this, 1, this.generator.getStorage().getCapacity());
 		listener.sendProgressBarUpdate(this, 2, this.generator.getStorage().getMaxReceive());
 		listener.sendProgressBarUpdate(this, 3, this.generator.getStorage().getMaxExtract());
+		listener.sendProgressBarUpdate(this, 4, this.generator.currentEnergyTicks);
+		listener.sendProgressBarUpdate(this, 5, this.generator.speedUpgrades);
+		listener.sendProgressBarUpdate(this, 6, this.generator.insantity);
 	}
 	
 	@Override
@@ -65,18 +71,32 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 			if(this.maxExtract != this.generator.getStorage().getEnergy()) {
 				listener.sendProgressBarUpdate(this, 3, this.generator.getStorage().getMaxExtract());
 			}
+			
+			if(this.currentEnergyTicks != this.generator.currentEnergyTicks) {
+				listener.sendProgressBarUpdate(this, 4, this.generator.currentEnergyTicks);
+			}
+			
+			if(this.speedUpgrades != this.generator.speedUpgrades) {
+				listener.sendProgressBarUpdate(this, 5, this.generator.speedUpgrades);
+			}
+			
+			if(this.insantiy != this.generator.insantity) {
+				listener.sendProgressBarUpdate(this, 6, this.generator.insantity);
+			}
 		}
 		
 		this.currentEnergy = this.generator.getStorage().getEnergy();
 		this.maxEnergy = this.generator.getStorage().getCapacity();
 		this.maxReceive = this.generator.getStorage().getMaxReceive();
 		this.maxExtract = this.generator.getStorage().getMaxExtract();
+		this.currentEnergyTicks = this.generator.currentEnergyTicks;
+		this.speedUpgrades = this.generator.speedUpgrades;
+		this.insantiy = this.generator.insantity;
 	}
 	
 	
 	@Override
 	public void updateProgressBar(int index, int value) {
-		// TODO Auto-generated method stub
 		super.updateProgressBar(index, value);
 		switch(index) {
 		case 0:
@@ -90,6 +110,15 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 			break;
 		case 3:
 			this.generator.getStorage().setMaxExtract(value);
+			break;
+		case 4:
+			this.generator.currentEnergyTicks = value;
+			break;
+		case 5:
+			this.generator.speedUpgrades = value;
+			break;
+		case 6:
+			this.generator.insantity = value;
 			break;
 		}
 	}

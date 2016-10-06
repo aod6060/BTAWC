@@ -1,5 +1,7 @@
 package com.derf.btawc.client.gui.generators;
 
+import java.io.IOException;
+
 import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
 import com.derf.btawc.client.Color;
@@ -8,7 +10,9 @@ import com.derf.btawc.inventory.container.ContainerCreativeGenerator;
 import com.derf.btawc.util.GuiRect;
 import com.derf.btawc.util.Vec2;
 
+import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiContainerCreativeGenerator extends GuiContainerBasic {
@@ -21,6 +25,12 @@ public class GuiContainerCreativeGenerator extends GuiContainerBasic {
 	private Vec2 screenMouseCoord = new Vec2();
 	
 	private GuiRect rect;
+	
+	private GuiRect speedUpgradedInc = new GuiRect(135, 47, 9, 9);
+	private GuiRect speedUpgradedDec = new GuiRect(135+10, 47, 9, 9);
+	
+	private GuiRect insantityInc = new GuiRect(135, 63, 9, 9);
+	private GuiRect insantityDec = new GuiRect(135 + 10, 63, 9, 9);
 	
 	public GuiContainerCreativeGenerator(InventoryPlayer player, TileEntityCreativeGenerator generator) {
 		super(new ContainerCreativeGenerator(player, generator));
@@ -46,6 +56,18 @@ public class GuiContainerCreativeGenerator extends GuiContainerBasic {
 			String info = generator.printEnergyValue();
 			this.renderString(info, (int)this.mouseCoord.getX(), (int)this.mouseCoord.getY(), Color.DARK_GREY);
 		}
+		
+		// Section where I'm rendering debug info
+		String energyTicks = generator.printEnergyValue();
+		this.renderString(energyTicks, 40, 32, Color.BLACK);
+		
+		// Print Speed Upgrades
+		String speedUpgrades = String.format("Speed Upgrades: %d", this.generator.speedUpgrades);
+		this.renderString(speedUpgrades, 40, 48, Color.BLACK);
+		// Print Insantiy
+		String insantiy = String.format("Insantity: %d", this.generator.insantity);
+		this.renderString(insantiy, 40, 64, Color.BLACK);
+		
 	}
 
 
@@ -53,8 +75,20 @@ public class GuiContainerCreativeGenerator extends GuiContainerBasic {
 	protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
 		this.renderBackgroundImage(creativeGenertorGUI);
 		this.renderEnergyStorageLevel(15, 15);
+		
+		this.renderNobes(135, 47);
+		this.renderNobes(135, 63);
 	}
 	
+	private void renderNobes(int x, int y) {
+		// TODO Auto-generated method stub
+		int k = this.getK();
+		int l = this.getL();
+		this.drawTexturedModalRect(x + k, l + y, 175, 47, 10, 10);
+		this.drawTexturedModalRect(x + k + 10, l + y, 175, 63, 10, 10);
+	}
+
+
 	protected void renderEnergyStorageLevel(int x, int y) {
 		// Update Energy delta [16, 40]
 		int k = this.getK();
@@ -77,6 +111,61 @@ public class GuiContainerCreativeGenerator extends GuiContainerBasic {
 		
 		this.screenMouseCoord.setX(mx);
 		this.screenMouseCoord.setY(my);
+	}
+
+
+	@Override
+	protected void mouseClicked(int x, int y, int button) throws IOException {
+		// TODO Auto-generated method stub
+		super.mouseClicked(x, y, button);
+		
+		int k = this.getK();
+		int l = this.getL();
+		
+		if(button == 0 || button == 1) {
+			Vec2 mc = new Vec2(x - k, y - l);
+			
+			
+			if(this.speedUpgradedInc.collide(mc)) {
+				this.inventorySlots.speedUpgrades += 1;
+				if(generator.speedUpgrades > 4) {
+					generator.speedUpgrades = 4;
+					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.BLOCK_ANVIL_LAND, 1.0f));
+				} else {
+					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f));
+				}
+			}
+			
+			if(this.speedUpgradedDec.collide(mc)) {
+				generator.speedUpgrades -= 1;
+				if(generator.speedUpgrades < 0) {
+					generator.speedUpgrades = 0;
+					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.BLOCK_ANVIL_LAND, 1.0f));
+				} else {
+					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f));
+				}
+			}
+			
+			if(this.insantityInc.collide(mc)) {
+				generator.insantity += 1;
+				if(generator.insantity > 4096) {
+					generator.insantity = 4096;
+					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.BLOCK_ANVIL_LAND, 1.0f));
+				} else {
+					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f));
+				}
+			}
+			
+			if(this.insantityDec.collide(mc)) {
+				generator.insantity -= 1;
+				if(generator.insantity < 1) {
+					generator.insantity = 1;
+					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.BLOCK_ANVIL_LAND, 1.0f));
+				} else {
+					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f));
+				}
+			}
+		}
 	}
 	
 	

@@ -1,6 +1,7 @@
 package com.derf.btawc.recipe;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,16 +12,16 @@ import net.minecraft.item.ItemStack;
 
 public final class ChipMakerRecipeManager {
 	
-	
-	
 	private static Map<ChipMakerRecipe, ItemStack> recipes = new HashMap<ChipMakerRecipe, ItemStack>();
+	private static int id = -1;
+	private static Comparator<Entry<ChipMakerRecipe, ItemStack>> comp = create();
 	
 	public static void addRecipe(ChipMakerRecipe recipe, ItemStack result) {
 		recipes.put(recipe, result);
 	}
 	
 	public static void addRecipe(ItemStack material, int amount, ItemStack result) {
-		recipes.put(new ChipMakerRecipe(material, amount), result);
+		recipes.put(new ChipMakerRecipe(++id, material, amount), result);
 	}
 	
 	public static RecipeHolder<ChipMakerRecipe, ItemStack> getResult(ItemStack material, ItemStack redstone) {
@@ -48,6 +49,16 @@ public final class ChipMakerRecipeManager {
 		for(Entry<ChipMakerRecipe, ItemStack> e : es) {
 			temp.add(e);
 		}
+		temp.sort(comp);
 		return temp;
+	}
+	
+	public static Comparator<Entry<ChipMakerRecipe, ItemStack>> create() {
+		return new Comparator<Entry<ChipMakerRecipe, ItemStack>>() {
+			@Override
+			public int compare(Entry<ChipMakerRecipe, ItemStack> entry1, Entry<ChipMakerRecipe, ItemStack> entry2) {
+				return entry1.getKey().getId() - entry2.getKey().getId();
+			}
+		};
 	}
 } 

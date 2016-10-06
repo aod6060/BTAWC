@@ -5,10 +5,12 @@ import com.derf.btawc.blocks.chipmaker.BlockChipMaker;
 import com.derf.btawc.blocks.furnace.BlockAlloyFurnace;
 import com.derf.btawc.blocks.furnace.BlockSuperFurnace;
 import com.derf.btawc.blocks.generators.BlockCreativeGenerator;
+import com.derf.btawc.blocks.generators.BlockSolidFuelGenerator;
 import com.derf.btawc.blocks.tileentity.chipmaker.TileEntityChipMaker;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
+import com.derf.btawc.blocks.tileentity.generators.TileEntitySolidFuelGenerator;
 import com.derf.btawc.blocks.witherproof.BlockWitherProof;
 import com.derf.btawc.blocks.witherproof.BlockWitherProofGlass;
 import com.derf.btawc.creativetabs.CreativeTabsManager;
@@ -25,6 +27,9 @@ public final class BlockManager {
 	
 	// Generators
 	public static Block creativeGenerator; // Simple Creative Generator...
+	// solid fuel generator
+	public static Block solidFuelGenerator;
+	public static Block solidFuelGeneratorOn;
 	// Storage
 	public static Block energyStorageBasic; // Basic Energy Storage cap 10000 transfer rate 100
 	// Wireless Energy Access
@@ -46,6 +51,9 @@ public final class BlockManager {
 	public static final void create() {
 		// Generator
 		creativeGenerator = new BlockCreativeGenerator();
+		// Solid Fuel Generator
+		solidFuelGenerator = new BlockSolidFuelGenerator(0.0f, false);
+		solidFuelGeneratorOn = new BlockSolidFuelGenerator(1.0f, true);
 		//energyStorageBasic = new BlockEnergyStorageBasic();
 		// Super Furnace
 		superFurnace = new BlockSuperFurnace(0, false);
@@ -65,6 +73,9 @@ public final class BlockManager {
 	public static final void register() {
 		// Generators
 		ModRegistry.registerBlock(creativeGenerator, "creative_generator");
+		// Solid Fuel Generator
+		ModRegistry.registerBlock(solidFuelGenerator, "solid_fuel_generator");
+		ModRegistry.registerBlock(solidFuelGeneratorOn, "solid_fuel_generator_on");
 		//GameRegistry.registerBlock(energyStorageBasic, "energy_storage_basic");
 		// Super Furnace
 		ModRegistry.registerBlock(superFurnace, "super_furnace");
@@ -84,6 +95,8 @@ public final class BlockManager {
 	public static final void registerTileEntities() {
 		// Generators
 		ModRegistry.registerTileEntity(TileEntityCreativeGenerator.class, "creative_generator");
+		// Solid Fuel Generator
+		ModRegistry.registerTileEntity(TileEntitySolidFuelGenerator.class, "solid_fuel_generator");
 		// Storage
 		//GameRegistry.registerTileEntity(TileEntityEnergyStorageBasic.class, "energy_storage_basic");
 		// Super Furnace
@@ -97,6 +110,8 @@ public final class BlockManager {
 	public static final void creativeTabs() {
 		// Generators
 		creativeGenerator.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		// Solid Fuel Generator
+		solidFuelGenerator.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		//energyStorageBasic.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Super Furnace
 		superFurnace.setCreativeTab(CreativeTabsManager.tabBTAWC);
@@ -111,13 +126,7 @@ public final class BlockManager {
 	}
 	
 	public static final void crafting() {
-		// Super Furnace
-		ModRegistry.addShapedCraftingRecipe(
-				new ItemStack(superFurnace), 
-				"fff",
-				"fff",
-				"fff",
-				'f', Blocks.FURNACE);
+		// Basic Blocks
 		// Wither Proof Block
 		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(witherProofBlock, 4), 
@@ -141,6 +150,14 @@ public final class BlockManager {
 				"ggg",
 				'g', witherProofBlock,
 				'p', Blocks.GLASS);
+		// Basic Machines (doesn't use RF)
+		// Super Furnace
+		ModRegistry.addShapedCraftingRecipe(
+				new ItemStack(superFurnace), 
+				"fff",
+				"fff",
+				"fff",
+				'f', Blocks.FURNACE);
 		// Alloy Furnace
 		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(alloyFurnace), 
@@ -160,6 +177,16 @@ public final class BlockManager {
 				'f', Blocks.FURNACE,
 				'r', Blocks.REDSTONE_BLOCK);
 		
+		// Generators (Produces RF) generators use gold chip for recipe
+		ModRegistry.addShapedCraftingRecipe(
+				new ItemStack(solidFuelGenerator), 
+				"sss",
+				"sfs",
+				"sgs",
+				's', ItemsManager.steelIngot,
+				'f', Blocks.FURNACE,
+				'g', ItemsManager.goldChip);
+		
 	}
 
 	public static void addToOreDictionary() {
@@ -171,15 +198,20 @@ public final class BlockManager {
 	
 	@SideOnly(Side.CLIENT)
 	public static void registerRenderer() {
+		// Generators
 		// Creative Generator
 		ModRegistry.registerRender(creativeGenerator, "creative_generator");
-		// Super Furnace
-		ModRegistry.registerRender(superFurnace, "super_furnace");
-		ModRegistry.registerRender(superFurnaceOn, "super_furnace_on");
+		// Solid Fuel Generator
+		ModRegistry.registerRender(solidFuelGenerator, "solid_fuel_generator");
+		ModRegistry.registerRender(solidFuelGeneratorOn, "solid_fuel_generator_on");
 		// Wither Proof
 		ModRegistry.registerRender(witherProofBlock, "wither_proof");
 		ModRegistry.registerRender(witherProofGlass, "wither_proof_glass");
 		ModRegistry.registerRender(witherProofLight, "wither_proof_light");
+		// Basic Machines (don't use rf but fuel)
+		// Super Furnace
+		ModRegistry.registerRender(superFurnace, "super_furnace");
+		ModRegistry.registerRender(superFurnaceOn, "super_furnace_on");
 		// Alloy Furnace
 		ModRegistry.registerRender(alloyFurnace, "alloy_furnace");
 		ModRegistry.registerRender(alloyFurnaceOn, "alloy_furnace_on");

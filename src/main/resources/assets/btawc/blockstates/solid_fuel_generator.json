@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": {"model": "btawc:solid_fuel_generator"},
+    "facing=south": {"model": "btawc:solid_fuel_generator", "y": 180},
+    "facing=west": {"model": "btawc:solid_fuel_generator", "y": 270},
+    "facing=east": {"model": "btawc:solid_fuel_generator", "y": 90}
+  }
+}

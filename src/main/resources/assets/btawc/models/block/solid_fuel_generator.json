@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "btawc:blocks/solid_fuel_generator_bottom_top",
+    "bottom": "btawc:blocks/solid_fuel_generator_bottom_top",
+    "front": "btawc:blocks/solid_fuel_generator_front",
+    "side": "btawc:blocks/solid_fuel_generator_sides"
+  }
+}

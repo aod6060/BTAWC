@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.lwjgl.opengl.GL11;
+
 import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.client.Color;
@@ -12,9 +14,12 @@ import com.derf.btawc.inventory.container.ContainerAlloyFurnace;
 import com.derf.btawc.recipe.AlloyRecipe;
 import com.derf.btawc.recipe.AlloyRecipeManager;
 import com.derf.btawc.util.GuiRect;
+import com.derf.btawc.util.OreDictionaryUtils;
 import com.derf.btawc.util.Vec2;
 
 import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -78,27 +83,45 @@ public class GuiContainerAlloyFurnace extends GuiContainerBasic {
 			this.drawTexturedModalRect(k + 78, l + 24, 175, 15, i1 + 1, 15);
 		}
 		
+		this.renderRecipeGui(this.xSize + k, l);
+	}
+	
+	private void renderRecipeGui(int gx, int gy) {
 		if(toggleRecipe) {
-			this.drawTexturedModalRect(this.xSize + k, 0 + l, 0, 175, 80, 64);
+			//GL11.glDisable(GL11.GL_LIGHTING);
+			RenderHelper.disableStandardItemLighting();
+			RenderHelper.enableGUIStandardItemLighting();
+			
+			this.drawTexturedModalRect(gx, gy, 0, 175, 80, 64);
 			
 			List<ItemStack> stacks = recipes.get(index).getKey().getInputs();
 			
 			for(int y = 0; y < 2; y++) {
 				for(int x = 0; x < 2; x++) {
 					if(stacks.get(y*2+x) != null) {
-						//this.itemRender.renderItemOverlayIntoGUI(this.fontRendererObj, stacks.get(y*2+x), this.xSize - k - (x * 18 + 9), y * 18 + 17 + l, null);
-						this.itemRender.renderItemIntoGUI(stacks.get(y*2+x), x * 18 + 9 + this.xSize + k, y * 18 + 17 + l);
+						ItemStack stack = stacks.get(y*2+x);
+						this.renderItem(stack, x * 18 + 9 + gx, y * 18 + 17 + gy);
+	
 					}
 				}
 			}
 			
 			if(recipes.get(index).getValue() != null) {
-				//this.itemRender.renderItemOverlayIntoGUI(this.fontRendererObj, recipes.get(index).getValue(), this.xSize - 56 - k, 25 + l, null);
-				this.itemRender.renderItemIntoGUI(recipes.get(index).getValue(), this.xSize + 56 + k, 25 + l);
+				this.renderItem(recipes.get(index).getValue(), gx + 56, gy + 25);
 			}
+			RenderHelper.enableStandardItemLighting();
 		}
 	}
-	
+	private void renderItem(ItemStack stack, int x, int y) {
+		//this.itemRender.renderItemIntoGUI(stack, x, y);
+		GlStateManager.translate(0.0f, 0.0f, 32.0f);
+		this.zLevel = 200.0f;
+		this.itemRender.zLevel = 200.0f;
+		this.itemRender.renderItemAndEffectIntoGUI(stack, x, y);
+		this.itemRender.renderItemOverlays(this.fontRendererObj, stack, x, y);
+		this.zLevel = 0.0f;
+		this.itemRender.zLevel = 0.0f;
+	}
 	
 	@Override
 	protected void mouseClicked(int x, int y, int button) throws IOException {
@@ -122,7 +145,6 @@ public class GuiContainerAlloyFurnace extends GuiContainerBasic {
 					// Do something
 					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f));
 					--this.index;
-					
 					if(this.index < 0) {
 						this.index = recipes.size() - 1;
 					}
@@ -132,7 +154,6 @@ public class GuiContainerAlloyFurnace extends GuiContainerBasic {
 					// Do something
 					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f));
 					++this.index;
-					
 					if(this.index > recipes.size() - 1) {
 						this.index = 0;
 					}

@@ -4,13 +4,14 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class ChipMakerRecipe {
+	private int id = 0;
 	private ItemStack material = null;
 	private ItemStack redstone = null;
 	
-	
 	public ChipMakerRecipe() {}
 	
-	public ChipMakerRecipe(ItemStack material, int amount) {
+	public ChipMakerRecipe(int id, ItemStack material, int amount) {
+		this.id = id;
 		this.material = material;
 		this.redstone = new ItemStack(Items.REDSTONE, amount);
 	}
@@ -37,4 +38,10 @@ public class ChipMakerRecipe {
 		
 		return b;
 	}
+
+	public int getId() {
+		return id;
+	}
+	
+	
 }

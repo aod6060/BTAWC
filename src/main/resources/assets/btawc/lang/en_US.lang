@@ -23,10 +23,10 @@ item.magnet_wither.name=Wither Magnet
 item.flowtation_device_frame.name=Flowtation Device Frame
 item.flowtation_device.name=Flowtation Device
 # Hoe of Greed
-item.hoe_of_greed_basic.name=Hoe of Greed (3x3 area 2x produce)
-item.hoe_of_greed_super.name=Super Hoe of Greed (5x5 area 4x produce)
-item.hoe_of_greed_mega.name=Mega Hoe of Greed (7x7 area 8x produce)
-item.hoe_of_greed_ultra.name=Ultimate Hoe of Greed (9x9 area 16x produce)
+item.hoe_of_greed_basic.name=Hoe of Greed
+item.hoe_of_greed_super.name=Super Hoe of Greed
+item.hoe_of_greed_mega.name=Mega Hoe of Greed
+item.hoe_of_greed_ultra.name=Ultimate Hoe of Greed
 # Pickaxe of Greed
 item.pickaxe_of_greed_basic.name=Pickaxe of Greed
 item.pickaxe_of_greed_super.name=Super Pickaxe of Greed
@@ -60,16 +60,20 @@ item.giron_chip.name=Giron Chip
 item.pulsating_chip.name=Pulsating Chip
 # Tiles
 # Generators
+# Creative Generators
 tile.creative_generator.name=Creative Generator (Creative Mode Only)
+# Solid Fuel Generator
+tile.solid_fuel_generator.name=Solid Fuel Generator
 # Energy Storage
 tile.energy_storage_basic.name=Energy Storage Basic (Stores 10000RF transfers 100 RF/t)
-# Super Furnace
-tile.super_furnace.name=Super Furnace
 # Wither Proof Blocks
 tile.wither_proof.name=Wither Proof Block
 tile.wither_proof_glass.name=Wither Proof Glass
 tile.wither_proof_light.name=Wither Proof Lamp
+# Basic Machines
 # Alloy Furnace
 tile.alloy_furnace.name=Alloy Furnace
 # Chip Maker
 tile.chip_maker.name=Chip Maker
+# Super Furnace
+tile.super_furnace.name=Super Furnace

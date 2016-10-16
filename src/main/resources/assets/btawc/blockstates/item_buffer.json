@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": {
+      "model": "btawc:item_buffer"
+    }
+  }
+}

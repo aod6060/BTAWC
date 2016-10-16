@@ -76,7 +76,8 @@ public class ItemsManager {
 	public static Item goldChip;
 	public static Item gironChip;
 	public static Item pulsatingChip;
-	
+	// Machine Upgrades
+	public static Item speedUpgradeChip;
 
 	
 	public static final void create() {
@@ -132,6 +133,9 @@ public class ItemsManager {
 		goldChip = new ItemBasic("gold_chip");
 		gironChip = new ItemBasic("giron_chip");
 		pulsatingChip = new ItemBasic("pulsating_chip");
+		// Upgrade Chips
+		speedUpgradeChip = new ItemBasic("speed_upgrade_chip");
+		speedUpgradeChip.setMaxStackSize(4);
 	}
 	
 	public static final void register() {
@@ -186,6 +190,8 @@ public class ItemsManager {
 		ModRegistry.registerItem(goldChip, "gold_chip");
 		ModRegistry.registerItem(gironChip, "giron_chip");
 		ModRegistry.registerItem(pulsatingChip, "pulsating_chip");
+		// Upgrade Chips
+		ModRegistry.registerItem(speedUpgradeChip, "speed_upgrade_chip");
 	}
 	
 	public static final void creativeTabs() {
@@ -241,7 +247,8 @@ public class ItemsManager {
 		goldChip.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		gironChip.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		pulsatingChip.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		
+		// Upgrade Chips
+		speedUpgradeChip.setCreativeTab(CreativeTabsManager.tabBTAWC);
 	}
 	
 	public static final void crafting() {
@@ -593,6 +600,11 @@ public class ItemsManager {
 				new ItemStack(Items.ENDER_PEARL), 
 				8, 
 				new ItemStack(pulsatingChip));
+		// Speed Upgrade Chips [ironChip + 16 redstone]
+		ModRegistry.addChipMakerRecipe(
+				new ItemStack(ironChip), 
+				16, 
+				new ItemStack(speedUpgradeChip));
 	}
 	
 	public static void addToOreDictionary() {
@@ -666,5 +678,7 @@ public class ItemsManager {
 		ModRegistry.registerRender(goldChip, "gold_chip");
 		ModRegistry.registerRender(gironChip, "giron_chip");
 		ModRegistry.registerRender(pulsatingChip, "pulsating_chip");
+		// Upgrade Chips
+		ModRegistry.registerRender(speedUpgradeChip, "speed_upgrade_chip");
 	}
 }

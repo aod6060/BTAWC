@@ -4,6 +4,7 @@ container.super_furnace=Super Furnace
 container.alloy_furnace=Alloy Furnace
 container.creative_generator=Creative Generator
 container.chip_maker=Chip Maker
+container.item_buffer=Item Buffer
 # Item Groups
 itemGroup.tabBTAWC=BTAWC
 # Items
@@ -58,6 +59,7 @@ item.iron_chip.name=Iron Chip
 item.gold_chip.name=Gold Chip
 item.giron_chip.name=Giron Chip
 item.pulsating_chip.name=Pulsating Chip
+item.speed_upgrade_chip.name=Speed Upgrade Chip
 # Tiles
 # Generators
 # Creative Generators
@@ -77,3 +79,4 @@ tile.alloy_furnace.name=Alloy Furnace
 tile.chip_maker.name=Chip Maker
 # Super Furnace
 tile.super_furnace.name=Super Furnace
+tile.item_buffer.name=Item Buffer

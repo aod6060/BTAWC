@@ -4,14 +4,17 @@ import com.derf.btawc.blocks.tileentity.chipmaker.TileEntityChipMaker;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
+import com.derf.btawc.blocks.tileentity.itembuffer.TileEntityItemBuffer;
 import com.derf.btawc.client.gui.chipmaker.GuiContainerChipMaker;
 import com.derf.btawc.client.gui.furnace.GuiContainerAlloyFurnace;
 import com.derf.btawc.client.gui.furnace.GuiContainerSuperFurnace;
 import com.derf.btawc.client.gui.generators.GuiContainerCreativeGenerator;
-import com.derf.btawc.inventory.container.ContainerAlloyFurnace;
-import com.derf.btawc.inventory.container.ContainerChipMaker;
-import com.derf.btawc.inventory.container.ContainerCreativeGenerator;
-import com.derf.btawc.inventory.container.ContainerSuperFurnace;
+import com.derf.btawc.client.gui.itembuffer.GuiContainerItemBuffer;
+import com.derf.btawc.inventory.container.chipmaker.ContainerChipMaker;
+import com.derf.btawc.inventory.container.furnace.ContainerAlloyFurnace;
+import com.derf.btawc.inventory.container.furnace.ContainerSuperFurnace;
+import com.derf.btawc.inventory.container.generator.ContainerCreativeGenerator;
+import com.derf.btawc.inventory.container.itembuffer.ContainerItemBuffer;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -28,6 +31,8 @@ public class GuiHandler implements IGuiHandler {
 	public final static int CREATIVE_GENERATOR_GUI = 2;
 	// Chip Maker
 	public final static int CHIP_MAKER_GUI = 3;
+	// Item Buffer
+	public static final int ITEM_BUFFER_GUI = 4;
 	
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -42,6 +47,8 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerCreativeGenerator(player.inventory, (TileEntityCreativeGenerator)world.getTileEntity(pos));
 		case CHIP_MAKER_GUI:
 			return new ContainerChipMaker(player.inventory, (TileEntityChipMaker)world.getTileEntity(pos));
+		case ITEM_BUFFER_GUI:
+			return new ContainerItemBuffer(player.inventory, (TileEntityItemBuffer)world.getTileEntity(pos));
 		}
 		
 		return null;
@@ -60,6 +67,8 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiContainerCreativeGenerator(player.inventory, (TileEntityCreativeGenerator)world.getTileEntity(pos));
 		case CHIP_MAKER_GUI:
 			return new GuiContainerChipMaker(player.inventory, (TileEntityChipMaker)world.getTileEntity(pos));
+		case ITEM_BUFFER_GUI:
+			return new GuiContainerItemBuffer(player.inventory, (TileEntityItemBuffer)world.getTileEntity(pos));
 		}
 		
 		return null;

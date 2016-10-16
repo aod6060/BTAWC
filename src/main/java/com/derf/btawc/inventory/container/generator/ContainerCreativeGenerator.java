@@ -1,6 +1,7 @@
-package com.derf.btawc.inventory.container;
+package com.derf.btawc.inventory.container.generator;
 
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
+import com.derf.btawc.inventory.container.ContainerBasic;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -19,19 +20,19 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 	private int maxExtract;
 	private int maxReceive;
 	private int currentEnergyTicks;
-	public int speedUpgrades;
 	public int insantiy;
 	
 	public ContainerCreativeGenerator(InventoryPlayer player, TileEntityCreativeGenerator generator) {
 		this.player = player;
 		this.generator = generator;
+		this.addSlotToContainer(new Slot(generator, 0, 143, 15));
 		// Create Player Inventory [8, 92], [8, 150]
 		this.createPlayerInventory(player, 8, 92, 8, 150);
 	}
 	
 	@Override
-	public boolean canInteractWith(EntityPlayer p_75145_1_) {
-		return true;
+	public boolean canInteractWith(EntityPlayer player) {
+		return this.generator.isUseableByPlayer(player);
 	}
 
 	
@@ -44,8 +45,7 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 		listener.sendProgressBarUpdate(this, 2, this.generator.getStorage().getMaxReceive());
 		listener.sendProgressBarUpdate(this, 3, this.generator.getStorage().getMaxExtract());
 		listener.sendProgressBarUpdate(this, 4, this.generator.currentEnergyTicks);
-		listener.sendProgressBarUpdate(this, 5, this.generator.speedUpgrades);
-		listener.sendProgressBarUpdate(this, 6, this.generator.insantity);
+		listener.sendProgressBarUpdate(this, 5, this.generator.insantity);
 	}
 	
 	@Override
@@ -60,15 +60,15 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 				listener.sendProgressBarUpdate(this, 0, this.generator.getStorage().getEnergy());
 			}
 			
-			if(this.maxEnergy != this.generator.getStorage().getEnergy()) {
+			if(this.maxEnergy != this.generator.getStorage().getCapacity()) {
 				listener.sendProgressBarUpdate(this, 1, this.generator.getStorage().getCapacity());
 			}
 			
-			if(this.maxReceive != this.generator.getStorage().getEnergy()) {
+			if(this.maxReceive != this.generator.getStorage().getMaxReceive()) {
 				listener.sendProgressBarUpdate(this, 2, this.generator.getStorage().getMaxReceive());
 			}
 			
-			if(this.maxExtract != this.generator.getStorage().getEnergy()) {
+			if(this.maxExtract != this.generator.getStorage().getMaxExtract()) {
 				listener.sendProgressBarUpdate(this, 3, this.generator.getStorage().getMaxExtract());
 			}
 			
@@ -76,12 +76,8 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 				listener.sendProgressBarUpdate(this, 4, this.generator.currentEnergyTicks);
 			}
 			
-			if(this.speedUpgrades != this.generator.speedUpgrades) {
-				listener.sendProgressBarUpdate(this, 5, this.generator.speedUpgrades);
-			}
-			
 			if(this.insantiy != this.generator.insantity) {
-				listener.sendProgressBarUpdate(this, 6, this.generator.insantity);
+				listener.sendProgressBarUpdate(this, 5, this.generator.insantity);
 			}
 		}
 		
@@ -90,7 +86,6 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 		this.maxReceive = this.generator.getStorage().getMaxReceive();
 		this.maxExtract = this.generator.getStorage().getMaxExtract();
 		this.currentEnergyTicks = this.generator.currentEnergyTicks;
-		this.speedUpgrades = this.generator.speedUpgrades;
 		this.insantiy = this.generator.insantity;
 	}
 	
@@ -115,9 +110,6 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 			this.generator.currentEnergyTicks = value;
 			break;
 		case 5:
-			this.generator.speedUpgrades = value;
-			break;
-		case 6:
 			this.generator.insantity = value;
 			break;
 		}
@@ -131,14 +123,22 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 			ItemStack stack1 = slot.getStack();
 			stack = stack1.copy();
 			
-			if(this.isPlayerHiddenInventory(index)) {
-				if(!this.mergeItemStack(stack1, 27, 36, false)) {
-					return null;
+			if(!this.isSpeedUpgradeSlot(index)) {
+				if(TileEntityCreativeGenerator.isSpeedUpgrade(stack1)){
+					if(!this.merge(stack1, 0, 1, false)) {
+						return null;
+					}
+				} else if(this.isPlayerHiddenInventory(index)) {
+					if(!this.mergeItemStack(stack1, 28, 37, false)) {
+						return null;
+					}
+				} else if(this.isPlayerInventory(index)) {
+					if(!this.mergeItemStack(stack1, 1, 28, false)) {
+						return null;
+					}
 				}
-			} else if(this.isPlayerInventory(index)) {
-				if(!this.mergeItemStack(stack1, 0, 27, false)) {
-					return null;
-				}
+			} else if(!this.merge(stack1, 1, 37, false)) {
+				return null;
 			}
 			
 			if(stack1.stackSize == 0) {
@@ -157,13 +157,16 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 		return stack;
 	}
 	
+	private boolean isSpeedUpgradeSlot(int index) {
+		return index == 0; 
+	}
 	/**
 	 * Slots 0 - 26
 	 * @param this index of the slot
 	 * @return boolean
 	 */
 	private boolean isPlayerHiddenInventory(int index) {
-		return index >= 0 && index < 27;
+		return index >= 1 && index < 28;
 	}
 	
 	/**
@@ -172,6 +175,6 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 	 * @return boolean
 	 */
 	private boolean isPlayerInventory(int index) {
-		return index  >= 27 && index < 36;
+		return index  >= 28 && index < 37;
 	}
 }

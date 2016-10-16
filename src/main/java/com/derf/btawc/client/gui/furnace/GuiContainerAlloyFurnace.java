@@ -10,7 +10,7 @@ import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.client.Color;
 import com.derf.btawc.client.gui.GuiContainerBasic;
-import com.derf.btawc.inventory.container.ContainerAlloyFurnace;
+import com.derf.btawc.inventory.container.furnace.ContainerAlloyFurnace;
 import com.derf.btawc.recipe.AlloyRecipe;
 import com.derf.btawc.recipe.AlloyRecipeManager;
 import com.derf.btawc.util.GuiRect;

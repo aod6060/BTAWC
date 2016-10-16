@@ -47,9 +47,7 @@ public abstract class TileEntityGenerator extends TileEntityBasic implements ITi
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
-		super.writeToNBT(tag);
-		storage.writeToNBT(tag);
-		return tag;
+		return storage.writeToNBT(super.writeToNBT(tag));
 	}
 	
 	@Override
@@ -60,11 +58,8 @@ public abstract class TileEntityGenerator extends TileEntityBasic implements ITi
 	
 	@SideOnly(Side.CLIENT)
 	public int getEnergyLevelScaled(int scale) {
-		if(this.storage.getEnergyStored() == 0) {
-			return 0;
-		} else {
-			return this.storage.getEnergyStored() * scale / this.storage.getMaxEnergyStored();
-		}
+		double ret = (double)this.storage.getEnergyStored() * scale / (double)this.storage.getMaxEnergyStored();
+		return (int)ret;
 	}
 	
 	public EnergyStorage getStorage() {

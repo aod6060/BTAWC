@@ -11,6 +11,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -48,5 +49,18 @@ public class BlockCreativeGenerator extends BlockContainerBasic {
 		
 		return true;
 	}
+
+	@Override
+	public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		// TODO Auto-generated method stub
+		
+		TileEntity entity = world.getTileEntity(pos);
+		
+		if(entity instanceof TileEntityCreativeGenerator) {
+			InventoryHelper.dropInventoryItems(world, pos, (TileEntityCreativeGenerator)entity);
+		}
+		super.breakBlock(world, pos, state);
+	}
+	
 	
 }

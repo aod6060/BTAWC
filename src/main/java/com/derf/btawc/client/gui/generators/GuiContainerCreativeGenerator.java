@@ -6,7 +6,9 @@ import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
 import com.derf.btawc.client.Color;
 import com.derf.btawc.client.gui.GuiContainerBasic;
-import com.derf.btawc.inventory.container.ContainerCreativeGenerator;
+import com.derf.btawc.inventory.container.generator.ContainerCreativeGenerator;
+import com.derf.btawc.network.PacketHandler;
+import com.derf.btawc.network.packets.PacketCreativeGeneratorInfo;
 import com.derf.btawc.util.GuiRect;
 import com.derf.btawc.util.Vec2;
 
@@ -60,9 +62,8 @@ public class GuiContainerCreativeGenerator extends GuiContainerBasic {
 		// Section where I'm rendering debug info
 		String energyTicks = generator.printEnergyValue();
 		this.renderString(energyTicks, 40, 32, Color.BLACK);
-		
 		// Print Speed Upgrades
-		String speedUpgrades = String.format("Speed Upgrades: %d", this.generator.speedUpgrades);
+		String speedUpgrades = String.format("Speed Upgrades: %d", this.generator.getNumberOfSpeedUpgrades());
 		this.renderString(speedUpgrades, 40, 48, Color.BLACK);
 		// Print Insantiy
 		String insantiy = String.format("Insantity: %d", this.generator.insantity);
@@ -75,8 +76,6 @@ public class GuiContainerCreativeGenerator extends GuiContainerBasic {
 	protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
 		this.renderBackgroundImage(creativeGenertorGUI);
 		this.renderEnergyStorageLevel(15, 15);
-		
-		this.renderNobes(135, 47);
 		this.renderNobes(135, 63);
 	}
 	
@@ -124,32 +123,10 @@ public class GuiContainerCreativeGenerator extends GuiContainerBasic {
 		
 		if(button == 0 || button == 1) {
 			Vec2 mc = new Vec2(x - k, y - l);
-			
-			
-			if(this.speedUpgradedInc.collide(mc)) {
-				this.inventorySlots.speedUpgrades += 1;
-				if(generator.speedUpgrades > 4) {
-					generator.speedUpgrades = 4;
-					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.BLOCK_ANVIL_LAND, 1.0f));
-				} else {
-					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f));
-				}
-			}
-			
-			if(this.speedUpgradedDec.collide(mc)) {
-				generator.speedUpgrades -= 1;
-				if(generator.speedUpgrades < 0) {
-					generator.speedUpgrades = 0;
-					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.BLOCK_ANVIL_LAND, 1.0f));
-				} else {
-					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f));
-				}
-			}
-			
 			if(this.insantityInc.collide(mc)) {
-				generator.insantity += 1;
-				if(generator.insantity > 4096) {
-					generator.insantity = 4096;
+				this.generator.insantity += 64;
+				if(this.generator.insantity > 4096) {
+					this.generator.insantity = 4096;
 					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.BLOCK_ANVIL_LAND, 1.0f));
 				} else {
 					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f));
@@ -157,14 +134,21 @@ public class GuiContainerCreativeGenerator extends GuiContainerBasic {
 			}
 			
 			if(this.insantityDec.collide(mc)) {
-				generator.insantity -= 1;
-				if(generator.insantity < 1) {
-					generator.insantity = 1;
+				this.generator.insantity -= 64;
+				if(this.generator.insantity < 1) {
+					this.generator.insantity = 1;
 					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.BLOCK_ANVIL_LAND, 1.0f));
 				} else {
 					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f));
 				}
+				this.inventorySlots.updateProgressBar(6, generator.insantity);
 			}
+			
+			// Send Packet to TileEntity
+			PacketHandler.INSTANCE.sendToServer(
+					new PacketCreativeGeneratorInfo(this.generator.getWorld().provider.getDimension(),
+							this.generator.getPos(),
+							this.generator.insantity));
 		}
 	}
 	

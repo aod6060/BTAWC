@@ -10,7 +10,7 @@ import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.tileentity.chipmaker.TileEntityChipMaker;
 import com.derf.btawc.client.Color;
 import com.derf.btawc.client.gui.GuiContainerBasic;
-import com.derf.btawc.inventory.container.ContainerChipMaker;
+import com.derf.btawc.inventory.container.chipmaker.ContainerChipMaker;
 import com.derf.btawc.recipe.ChipMakerRecipe;
 import com.derf.btawc.recipe.ChipMakerRecipeManager;
 import com.derf.btawc.util.GuiRectArea;

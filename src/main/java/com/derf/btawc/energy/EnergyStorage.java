@@ -73,11 +73,12 @@ public class EnergyStorage implements IEnergyStorage {
 		}
 	}
 	
-	public void writeToNBT(NBTTagCompound comp) {
+	public NBTTagCompound writeToNBT(NBTTagCompound comp) {
 		if(energy < 0) {
 			energy = 0;
 		}
 		comp.setInteger("energy", energy);
+		return comp;
 	}
 
 	public int getMaxReceive() {

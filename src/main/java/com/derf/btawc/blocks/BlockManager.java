@@ -6,11 +6,13 @@ import com.derf.btawc.blocks.furnace.BlockAlloyFurnace;
 import com.derf.btawc.blocks.furnace.BlockSuperFurnace;
 import com.derf.btawc.blocks.generators.BlockCreativeGenerator;
 import com.derf.btawc.blocks.generators.BlockSolidFuelGenerator;
+import com.derf.btawc.blocks.itembuffer.BlockItemBuffer;
 import com.derf.btawc.blocks.tileentity.chipmaker.TileEntityChipMaker;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
 import com.derf.btawc.blocks.tileentity.generators.TileEntitySolidFuelGenerator;
+import com.derf.btawc.blocks.tileentity.itembuffer.TileEntityItemBuffer;
 import com.derf.btawc.blocks.witherproof.BlockWitherProof;
 import com.derf.btawc.blocks.witherproof.BlockWitherProofGlass;
 import com.derf.btawc.creativetabs.CreativeTabsManager;
@@ -46,6 +48,8 @@ public final class BlockManager {
 	// Chip Maker, This is used to create the chipMaker
 	public static Block chipMaker;
 	public static Block chipMakerOn;
+	// Item Buffer (Simple item transport to test how item transport works). 
+	public static Block itemBuffer;
 	// Misc
 	
 	public static final void create() {
@@ -68,6 +72,8 @@ public final class BlockManager {
 		// Chip Maker
 		chipMaker = new BlockChipMaker(0, false);
 		chipMakerOn = new BlockChipMaker(1, false);
+		// Item Buffer
+		itemBuffer = new BlockItemBuffer();
 	}
 	
 	public static final void register() {
@@ -90,6 +96,8 @@ public final class BlockManager {
 		// Chip Maker
 		ModRegistry.registerBlock(chipMaker, "chip_maker");
 		ModRegistry.registerBlock(chipMakerOn, "chip_maker_on");
+		// Item Buffer
+		ModRegistry.registerBlock(itemBuffer, "item_buffer");
 	}
 	
 	public static final void registerTileEntities() {
@@ -105,6 +113,8 @@ public final class BlockManager {
 		ModRegistry.registerTileEntity(TileEntityAlloyFurnace.class, "alloy_furnace");
 		// Chip Maker
 		ModRegistry.registerTileEntity(TileEntityChipMaker.class, "chip_maker");
+		// Item Buffer
+		ModRegistry.registerTileEntity(TileEntityItemBuffer.class, "item_buffer");
 	}
 	
 	public static final void creativeTabs() {
@@ -123,6 +133,8 @@ public final class BlockManager {
 		alloyFurnace.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Chip Maker
 		chipMaker.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		// Item Buffer
+		itemBuffer.setCreativeTab(CreativeTabsManager.tabBTAWC);
 	}
 	
 	public static final void crafting() {
@@ -186,6 +198,15 @@ public final class BlockManager {
 				's', ItemsManager.steelIngot,
 				'f', Blocks.FURNACE,
 				'g', ItemsManager.goldChip);
+		// Item Buffer
+		ModRegistry.addShapedCraftingRecipe(
+				new ItemStack(itemBuffer), 
+				"sts",
+				"tct",
+				"sts",
+				's', Blocks.STONE,
+				't', ItemsManager.steelIngot,
+				'c', Blocks.CHEST);
 		
 	}
 
@@ -218,7 +239,8 @@ public final class BlockManager {
 		// Chip Maker
 		ModRegistry.registerRender(chipMaker, "chip_maker");
 		ModRegistry.registerRender(chipMakerOn, "chip_maker_on");
-		
+		// Item Buffer
+		ModRegistry.registerRender(itemBuffer, "item_buffer");
 	}
 
 

@@ -287,9 +287,9 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable
 	}
 	
 	@Override
-	public void readFromNBT(NBTTagCompound tag) {
-		super.readFromNBT(tag);
-		NBTTagList list = tag.getTagList("Items", Constants.NBT.TAG_COMPOUND);
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+		NBTTagList list = compound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
 		this.inventory = new ItemStack[this.getSizeInventory()];
 		
 		for(int i = 0; i < list.tagCount(); i++) {
@@ -299,19 +299,19 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable
 				this.inventory[index] = ItemStack.loadItemStackFromNBT(comp);
 			}
 		}
-		this.burnTime = tag.getInteger("BurnTime");
-		this.cookTime = tag.getInteger("CookTime");
+		this.burnTime = compound.getInteger("BurnTime");
+		this.cookTime = compound.getInteger("CookTime");
 		this.currentItemBurnTime = FuelUtils.getItemBurnTime(this.inventory[FUEL_SLOT]);
-		if(tag.hasKey("CustomName")) {
-			this.name = tag.getString("CustomName");
+		if(compound.hasKey("CustomName")) {
+			this.name = compound.getString("CustomName");
 		}
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
-		super.writeToNBT(tag);
-		tag.setInteger("BurnTime", this.burnTime);
-		tag.setInteger("CookTime", this.cookTime);
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		super.writeToNBT(compound);
+		compound.setInteger("BurnTime", this.burnTime);
+		compound.setInteger("CookTime", this.cookTime);
 		NBTTagList list = new NBTTagList();
 		
 		for(int i = 0; i < this.inventory.length; i++) {
@@ -322,10 +322,10 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable
 				list.appendTag(comp);
 			}
 		}
-		tag.setTag("Items", list);
+		compound.setTag("Items", list);
 		if(this.hasCustomName()) {
-			tag.setString("CustomName", this.name);
+			compound.setString("CustomName", this.name);
 		}
-		return tag;
+		return compound;
 	}
 }

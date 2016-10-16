@@ -35,7 +35,7 @@ public final class OreDictionaryUtils {
 	public static List<ItemStack> getItemsStacksFromItemStack(ItemStack stack) {
 		int[] ids = OreDictionary.getOreIDs(stack);
 		
-		if(ids.length < 0) {
+		if(ids.length >= 0) {
 			return null;
 		}
 		

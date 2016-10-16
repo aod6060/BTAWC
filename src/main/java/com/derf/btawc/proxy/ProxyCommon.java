@@ -9,6 +9,7 @@ import com.derf.btawc.items.ItemsManager;
 import com.derf.btawc.items.growthdevice.ItemGrowthDevice;
 import com.derf.btawc.items.tools.ItemAxeOfGreed;
 import com.derf.btawc.items.tools.ItemPickaxeOfGreed;
+import com.derf.btawc.network.PacketHandler;
 import com.derf.btawc.util.MobDropUtils;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -28,6 +29,8 @@ public class ProxyCommon implements IProxy {
 		CreativeTabsManager.create();
 		ItemsManager.creativeTabs();
 		BlockManager.creativeTabs();
+		// Register Network Packets
+		PacketHandler.registerMessages();
 	}
 
 	@Override

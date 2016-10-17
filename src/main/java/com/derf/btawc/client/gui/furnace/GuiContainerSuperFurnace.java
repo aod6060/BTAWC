@@ -23,6 +23,7 @@ public class GuiContainerSuperFurnace extends GuiContainerBasic {
 		this.playerInventory = playerInventory;
 		this.entity = entity;
 		
+		System.out.println(this.width + ": " + this.height);
 		this.xSize = 175;
 		this.ySize = 207;
 	}

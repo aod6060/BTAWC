@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "top": "btawc:blocks/cobblestone_generator_bottom_top",
+    "bottom": "btawc:blocks/cobblestone_generator_bottom_top",
+    "side": "btawc:blocks/cobblestone_generator_sides"
+  }
+}

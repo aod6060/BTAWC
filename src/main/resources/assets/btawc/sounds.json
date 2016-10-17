@@ -1,0 +1,9 @@
+{
+  "sfx.air_horn": {
+    "category": "block",
+    "sounds": [
+      "btawc:sfx/air_horn"
+    ],
+    "subtitle": "btawc.sfx.air_horn"
+  }
+}

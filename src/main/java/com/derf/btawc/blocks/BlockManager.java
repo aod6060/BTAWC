@@ -2,12 +2,15 @@ package com.derf.btawc.blocks;
 
 import com.derf.btawc.ModRegistry;
 import com.derf.btawc.blocks.chipmaker.BlockChipMaker;
+import com.derf.btawc.blocks.cobblestonegenerator.BlockCobblestoneGenerator;
 import com.derf.btawc.blocks.furnace.BlockAlloyFurnace;
 import com.derf.btawc.blocks.furnace.BlockSuperFurnace;
 import com.derf.btawc.blocks.generators.BlockCreativeGenerator;
 import com.derf.btawc.blocks.generators.BlockSolidFuelGenerator;
 import com.derf.btawc.blocks.itembuffer.BlockItemBuffer;
+import com.derf.btawc.blocks.lootpresents.BlockLootPresent;
 import com.derf.btawc.blocks.tileentity.chipmaker.TileEntityChipMaker;
+import com.derf.btawc.blocks.tileentity.cobblestonegenerator.TileEntityCobblestoneGenerator;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
@@ -21,7 +24,9 @@ import com.derf.btawc.items.ItemsManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -50,6 +55,10 @@ public final class BlockManager {
 	public static Block chipMakerOn;
 	// Item Buffer (Simple item transport to test how item transport works). 
 	public static Block itemBuffer;
+	// Loot Presents
+	public static Block simpleDungeonPresent;
+	// Cobblestone Generator (Creates cobble stone passively)
+	public static Block cobblestoneGenerator;
 	// Misc
 	
 	public static final void create() {
@@ -74,6 +83,10 @@ public final class BlockManager {
 		chipMakerOn = new BlockChipMaker(1, false);
 		// Item Buffer
 		itemBuffer = new BlockItemBuffer();
+		// Simple Dungeon Present
+		simpleDungeonPresent = new BlockLootPresent("simple_dungeon_present", LootTableList.CHESTS_SIMPLE_DUNGEON);
+		// Cobblestone Generator
+		cobblestoneGenerator = new BlockCobblestoneGenerator();
 	}
 	
 	public static final void register() {
@@ -98,6 +111,10 @@ public final class BlockManager {
 		ModRegistry.registerBlock(chipMakerOn, "chip_maker_on");
 		// Item Buffer
 		ModRegistry.registerBlock(itemBuffer, "item_buffer");
+		// Simple Dungeon present
+		ModRegistry.registerBlock(simpleDungeonPresent, "simple_dungeon_present");
+		// Cobblestone Generator
+		ModRegistry.registerBlock(cobblestoneGenerator, "cobblestone_generator");
 	}
 	
 	public static final void registerTileEntities() {
@@ -115,6 +132,8 @@ public final class BlockManager {
 		ModRegistry.registerTileEntity(TileEntityChipMaker.class, "chip_maker");
 		// Item Buffer
 		ModRegistry.registerTileEntity(TileEntityItemBuffer.class, "item_buffer");
+		// Cobblestone Generator
+		ModRegistry.registerTileEntity(TileEntityCobblestoneGenerator.class, "cobblestone_generator");
 	}
 	
 	public static final void creativeTabs() {
@@ -135,6 +154,10 @@ public final class BlockManager {
 		chipMaker.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Item Buffer
 		itemBuffer.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		// Simple Dungeon Present
+		simpleDungeonPresent.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		// Cobblestone Generator
+		cobblestoneGenerator.setCreativeTab(CreativeTabsManager.tabBTAWC);
 	}
 	
 	public static final void crafting() {
@@ -204,9 +227,31 @@ public final class BlockManager {
 				"sts",
 				"tct",
 				"sts",
-				's', Blocks.STONE,
+				's', new ItemStack(Blocks.STONE, 1, 0),
 				't', ItemsManager.steelIngot,
 				'c', Blocks.CHEST);
+		// Simple Dungeon Present
+		ModRegistry.addShapedCraftingRecipe(
+				new ItemStack(simpleDungeonPresent), 
+				"wdw",
+				"mcm",
+				"wsw",
+				'w', Blocks.WOOL,
+				'd', Blocks.DIAMOND_BLOCK,
+				'm', ItemsManager.mobIngot,
+				'c', Blocks.CHEST,
+				's', Blocks.COBBLESTONE);
+		// Cobblestone Generator
+		ModRegistry.addShapedCraftingRecipe(
+				new ItemStack(cobblestoneGenerator), 
+				"nsn",
+				"lcw",
+				"nsn",
+				'c', Blocks.COBBLESTONE,
+				'l', Items.LAVA_BUCKET,
+				'w', Items.WATER_BUCKET,
+				'n', new ItemStack(Blocks.STONE, 1, 0),
+				's', ItemsManager.steelIngot);
 		
 	}
 
@@ -241,6 +286,10 @@ public final class BlockManager {
 		ModRegistry.registerRender(chipMakerOn, "chip_maker_on");
 		// Item Buffer
 		ModRegistry.registerRender(itemBuffer, "item_buffer");
+		// Simple Dungeon Present
+		ModRegistry.registerRender(simpleDungeonPresent, "simple_dungeon_present");
+		// Cobblestone Generator
+		ModRegistry.registerRender(cobblestoneGenerator, "cobblestone_generator");
 	}
 
 

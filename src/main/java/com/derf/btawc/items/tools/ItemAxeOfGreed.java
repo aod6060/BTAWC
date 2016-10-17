@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.derf.btawc.Loader;
+import com.derf.btawc.blocks.BlockManager;
 import com.derf.btawc.util.OreDictionaryUtils;
 
 import net.minecraft.block.Block;
@@ -74,6 +75,8 @@ public class ItemAxeOfGreed extends ItemAxe {
 				}
 			}
 		}
+		
+		blocks.add(BlockManager.simpleDungeonPresent);
 	}
 	
 	public static boolean isBlockDuplicatable(Block block) {

@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import com.derf.btawc.blocks.furnace.BlockSuperFurnace;
 import com.derf.btawc.blocks.tileentity.TileEntityBasic;
 import com.derf.btawc.util.FuelUtils;
+import com.derf.btawc.util.InventoryUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -323,8 +324,9 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 	}
 	
 	@Override
-	public void readFromNBT(NBTTagCompound tag) {
-		super.readFromNBT(tag);
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+		/*
 		NBTTagList list = tag.getTagList("Items", Constants.NBT.TAG_COMPOUND);
 		this.inventory = new ItemStack[this.getSizeInventory()];
 		
@@ -335,20 +337,23 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 				this.inventory[index] = ItemStack.loadItemStackFromNBT(comp);
 			}
 		}
-		this.burnTime = tag.getInteger("BurnTime");
-		this.cookTime = tag.getInteger("CookTime");
+		*/
+		InventoryUtils.loadInventory(this, compound);
+		this.burnTime = compound.getInteger("BurnTime");
+		this.cookTime = compound.getInteger("CookTime");
 		this.currentItemBurnTime = FuelUtils.getItemBurnTime(this.inventory[FUEL_SLOT]);
 		
-		if(tag.hasKey("CustomName")) {
-			this.name = tag.getString("CustomName");
+		if(compound.hasKey("CustomName")) {
+			this.name = compound.getString("CustomName");
 		}
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
-		super.writeToNBT(tag);
-		tag.setInteger("BurnTime", this.burnTime);
-		tag.setInteger("CookTime", this.cookTime);
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		super.writeToNBT(compound);
+		compound.setInteger("BurnTime", this.burnTime);
+		compound.setInteger("CookTime", this.cookTime);
+		/*
 		NBTTagList list = new NBTTagList();
 		
 		for(int i =0; i < this.inventory.length; i++) {
@@ -362,11 +367,13 @@ public class TileEntitySuperFurnace extends TileEntityBasic implements IInventor
 			
 		}
 		
-		tag.setTag("Items", list);
+		compound.setTag("Items", list);
+		*/
+		InventoryUtils.saveInventory(this, compound);
 		
 		if(this.hasCustomName()) {
-			tag.setString("CustomName", this.name);
+			compound.setString("CustomName", this.name);
 		}
-		return tag;
+		return compound;
 	}
 }

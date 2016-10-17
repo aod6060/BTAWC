@@ -9,6 +9,7 @@ import com.derf.btawc.recipe.ChipMakerRecipe;
 import com.derf.btawc.recipe.ChipMakerRecipeManager;
 import com.derf.btawc.recipe.RecipeHolder;
 import com.derf.btawc.util.FuelUtils;
+import com.derf.btawc.util.InventoryUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -179,6 +180,7 @@ public class TileEntityChipMaker extends TileEntityBasic implements IInventory, 
 		this.burnTime = compound.getInteger("BurnTime");
 		this.cookTime = compound.getInteger("CookTime");
 		this.currentItemBurnTime = FuelUtils.getItemBurnTime(this.getStackInSlot(FUEL_SLOT));
+		/*
 		// Handle Inventory
 		NBTTagList list = compound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
 		this.inventory = new ItemStack[this.getSizeInventory()];
@@ -190,6 +192,8 @@ public class TileEntityChipMaker extends TileEntityBasic implements IInventory, 
 				this.inventory[index] = ItemStack.loadItemStackFromNBT(comp);
 			}
 		}
+		*/
+		InventoryUtils.loadInventory(this, compound);
 		
 		if(compound.hasKey("CustomName")) {
 			this.name = compound.getString("CustomName");
@@ -202,6 +206,7 @@ public class TileEntityChipMaker extends TileEntityBasic implements IInventory, 
 		compound.setInteger("BurnTime", this.burnTime);
 		compound.setInteger("CookTime", this.cookTime);
 		// Handle Inventory
+		/*
 		NBTTagList list = new NBTTagList();
 		for(int i = 0; i < this.getSizeInventory(); i++) {
 			if(this.inventory[i] != null) {
@@ -212,6 +217,8 @@ public class TileEntityChipMaker extends TileEntityBasic implements IInventory, 
 			}
 		}
 		compound.setTag("Items", list);
+		*/
+		InventoryUtils.saveInventory(this, compound);
 		if(this.hasCustomName()) {
 			compound.setString("CustomName", this.name);
 		}

@@ -12,9 +12,11 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.IForgeRegistryEntry;
 
 public final class ModRegistry {
 	
@@ -31,7 +33,8 @@ public final class ModRegistry {
 	}
 	
 	public static void registerRender(Item item, int meta, String name) {
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(Loader.MODID + ":" + name, "inventory"));
+		//Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(Loader.MODID + ":" + name, "inventory"));
+		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(Loader.MODID + ":" + name, "inventory"));
 	}
 	
 	public static void addVariants(Block block, String...args) {	
@@ -61,7 +64,7 @@ public final class ModRegistry {
 			item.setRegistryName(name);
 			GameRegistry.register(item);
 		} else {
-			throw new RuntimeException("SumRegistry.registerBlock, was passed a null block for "+name);
+			throw new RuntimeException("ModRegistry.registerBlock, was passed a null block for "+name);
 		}
 	}
 	
@@ -70,7 +73,7 @@ public final class ModRegistry {
 			item.setRegistryName(name);
 			GameRegistry.register(item);
 		} else {
-			throw new RuntimeException("SumRegistry.registerItem, was passed a null item for "+name);
+			throw new RuntimeException("ModRegistry.registerItem, was passed a null item for "+name);
 		}
 	}
 	
@@ -122,6 +125,14 @@ public final class ModRegistry {
 	
 	public static void addSmeltingRecipe(ItemStack input, ItemStack output, float xp) {
 		GameRegistry.addSmelting(input, output, xp);
+	}
+	
+	public static <K extends IForgeRegistryEntry<?>> K register(K object) {
+		return GameRegistry.register(object);
+	}
+	
+	public static <K extends IForgeRegistryEntry<?>> K register(K object, ResourceLocation name) {
+		return GameRegistry.register(object, name);
 	}
 	
 	// Adding Mod Recipes Handlers

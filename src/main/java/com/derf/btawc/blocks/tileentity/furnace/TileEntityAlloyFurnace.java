@@ -6,6 +6,7 @@ import com.derf.btawc.blocks.furnace.BlockAlloyFurnace;
 import com.derf.btawc.blocks.tileentity.TileEntityBasic;
 import com.derf.btawc.recipe.AlloyRecipeManager;
 import com.derf.btawc.util.FuelUtils;
+import com.derf.btawc.util.InventoryUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -289,6 +290,7 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
+		/*
 		NBTTagList list = compound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
 		this.inventory = new ItemStack[this.getSizeInventory()];
 		
@@ -299,6 +301,8 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable
 				this.inventory[index] = ItemStack.loadItemStackFromNBT(comp);
 			}
 		}
+		*/
+		InventoryUtils.loadInventory(this, compound);
 		this.burnTime = compound.getInteger("BurnTime");
 		this.cookTime = compound.getInteger("CookTime");
 		this.currentItemBurnTime = FuelUtils.getItemBurnTime(this.inventory[FUEL_SLOT]);
@@ -312,6 +316,7 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable
 		super.writeToNBT(compound);
 		compound.setInteger("BurnTime", this.burnTime);
 		compound.setInteger("CookTime", this.cookTime);
+		/*
 		NBTTagList list = new NBTTagList();
 		
 		for(int i = 0; i < this.inventory.length; i++) {
@@ -323,6 +328,8 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable
 			}
 		}
 		compound.setTag("Items", list);
+		*/
+		InventoryUtils.saveInventory(this, compound);
 		if(this.hasCustomName()) {
 			compound.setString("CustomName", this.name);
 		}

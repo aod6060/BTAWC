@@ -4,6 +4,9 @@ import javax.annotation.Nullable;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.util.Constants;
 
 public final class InventoryUtils {
 	
@@ -177,10 +180,53 @@ public final class InventoryUtils {
 			   inventory.getStackInSlot(index).stackSize < inventory.getStackInSlot(index).getMaxStackSize());
 	}
 	
+	/**
+	 * This will set a slot to null if the stackSize is zero
+	 * @param inventory
+	 * @param index
+	 */
 	public static void setSlotToNullIfZero(IInventory inventory, int index) {
 		if(inventory.getStackInSlot(index) != null && 
 		   inventory.getStackInSlot(index).stackSize <= 0) {
 			inventory.setInventorySlotContents(index, null);
+		}
+	}
+	
+	/**
+	 * This will save an entire inventory to NBT data...
+	 * @param inventory
+	 * @param compound
+	 */
+	public static void saveInventory(IInventory inventory, NBTTagCompound compound) {
+		NBTTagList list = new NBTTagList();
+		
+		for(int i = 0; i < inventory.getSizeInventory(); i++) {
+			if(inventory.getStackInSlot(i) != null) {
+				NBTTagCompound comp = new NBTTagCompound();
+				comp.setInteger("Slot", i);
+				inventory.getStackInSlot(i).writeToNBT(comp);
+				list.appendTag(comp);
+			}
+		}
+		
+		compound.setTag("Items", list);
+	}
+	
+	/**
+	 * This will load an entire inventory from NBT data...
+	 * @param inventory
+	 * @param compound
+	 */
+	public static void loadInventory(IInventory inventory, NBTTagCompound compound) {
+		NBTTagList list = compound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
+		inventory.clear();
+		
+		for(int i = 0; i < list.tagCount(); i++) {
+			NBTTagCompound comp = list.getCompoundTagAt(i);
+			int index = comp.getInteger("Slot");
+			if(index >= 0 && index < inventory.getSizeInventory()) {
+				inventory.setInventorySlotContents(index, ItemStack.loadItemStackFromNBT(comp));
+			}
 		}
 	}
 }

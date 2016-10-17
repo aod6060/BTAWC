@@ -13,15 +13,16 @@ public class ProxyClient extends ProxyCommon {
 	public void preInit(FMLPreInitializationEvent e) {
 		// TODO Auto-generated method stub
 		super.preInit(e);
-		BlockManager.registerVarients();
+		BlockManager.registerVarients();		
+		ItemsManager.registerRenderer();
+		BlockManager.registerRenderer();
 	}
 
 	@Override
 	public void init(FMLInitializationEvent e) {
 		// TODO Auto-generated method stub
 		super.init(e);
-		ItemsManager.registerRenderer();
-		BlockManager.registerRenderer();
+
 	}
 
 	@Override

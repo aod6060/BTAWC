@@ -47,7 +47,7 @@ public class TileEntityItemBuffer extends TileEntityBasic implements IInventory,
 	@Override
 	public boolean hasCustomName() {
 		// TODO Auto-generated method stub
-		return this.name != null && this.name.isEmpty();
+		return this.name != null && !this.name.isEmpty();
 	}
 	@Override
 	public int getSizeInventory() {
@@ -132,16 +132,7 @@ public class TileEntityItemBuffer extends TileEntityBasic implements IInventory,
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
 		// Inventory
-		NBTTagList list = compound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
-		this.inventory = new ItemStack[this.getSizeInventory()];
-		
-		for(int i = 0; i < list.tagCount(); i++) {
-			NBTTagCompound comp = list.getCompoundTagAt(i);
-			int index = comp.getInteger("Slot");
-			if(index >= 0 && index < this.getSizeInventory()) {
-				this.inventory[index] = ItemStack.loadItemStackFromNBT(comp);
-			}
-		}
+		InventoryUtils.loadInventory(this, compound);
 		
 		if(compound.hasKey("CustomName")) {
 			this.name = compound.getString("CustomName");
@@ -159,17 +150,8 @@ public class TileEntityItemBuffer extends TileEntityBasic implements IInventory,
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		// Inventory
-		NBTTagList list = new NBTTagList();
-		for(int i = 0; i < this.inventory.length; i++) {
-			if(this.inventory[i] != null) {
-				NBTTagCompound comp = new NBTTagCompound();
-				comp.setInteger("Slot", i);
-				inventory[i].writeToNBT(comp);
-				list.appendTag(comp);
-			}
-		}
+		InventoryUtils.saveInventory(this, compound);
 		
-		compound.setTag("Items", list);
 		if(this.hasCustomName()) {
 			compound.setString("CustomName", this.name);
 		}
@@ -400,11 +382,5 @@ public class TileEntityItemBuffer extends TileEntityBasic implements IInventory,
 			
 			this.markDirty();
 		}
-	}
-
-	public void updateBlockState() {
-		IBlockState state = worldObj.getBlockState(pos);
-		IBlockState newState = state.getActualState(worldObj, pos);
-		worldObj.setBlockState(pos, newState);
 	}
 }

@@ -1,0 +1,8 @@
+{
+  "parent": "btawc:block/present",
+  "textures": {
+    "top": "btawc:blocks/simple_dungeon_present_top",
+    "bottom": "btawc:blocks/simple_dungeon_present_bottom",
+    "sides": "btawc:blocks/simple_dungeon_present_side"
+  }
+}

@@ -3,6 +3,7 @@ package com.derf.btawc.items.tools;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.derf.btawc.blocks.BlockManager;
 import com.derf.btawc.util.OreDictionaryUtils;
 import com.derf.btawc.util.Utils;
 
@@ -43,6 +44,7 @@ public class ItemPickaxeOfGreed extends ItemPickaxe {
 		}
 		
 		blocks.add(Blocks.LIT_REDSTONE_ORE);
+		blocks.add(BlockManager.simpleDungeonPresent);
 	}
 	
 	public static boolean isBlockDuplicatable(Block block) {

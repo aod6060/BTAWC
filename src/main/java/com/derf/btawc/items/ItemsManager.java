@@ -2,6 +2,7 @@ package com.derf.btawc.items;
 
 import com.derf.btawc.ModRegistry;
 import com.derf.btawc.creativetabs.CreativeTabsManager;
+import com.derf.btawc.items.airhorn.ItemAirHorn;
 import com.derf.btawc.items.growthdevice.ItemGrowthDevice;
 import com.derf.btawc.items.magnet.ItemMagnetAnimals;
 import com.derf.btawc.items.magnet.ItemMagnetItems;
@@ -78,7 +79,10 @@ public class ItemsManager {
 	public static Item pulsatingChip;
 	// Machine Upgrades
 	public static Item speedUpgradeChip;
-
+	// Air Horn - Because I can :)
+	public static Item airHorn;
+	// Nether Star Fuel
+	public static Item netherStarFuel; // Lasts forever, about 1,000,000 ticks lol
 	
 	public static final void create() {
 		
@@ -136,6 +140,9 @@ public class ItemsManager {
 		// Upgrade Chips
 		speedUpgradeChip = new ItemBasic("speed_upgrade_chip");
 		speedUpgradeChip.setMaxStackSize(4);
+		// Air Horn
+		airHorn = new ItemAirHorn();
+		// Nether Star Fuel
 	}
 	
 	public static final void register() {
@@ -192,6 +199,8 @@ public class ItemsManager {
 		ModRegistry.registerItem(pulsatingChip, "pulsating_chip");
 		// Upgrade Chips
 		ModRegistry.registerItem(speedUpgradeChip, "speed_upgrade_chip");
+		// Air Horn
+		ModRegistry.registerItem(airHorn, "air_horn");
 	}
 	
 	public static final void creativeTabs() {
@@ -249,6 +258,8 @@ public class ItemsManager {
 		pulsatingChip.setCreativeTab(CreativeTabsManager.tabBTAWC);
 		// Upgrade Chips
 		speedUpgradeChip.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		// Air Horn
+		airHorn.setCreativeTab(CreativeTabsManager.tabBTAWC);
 	}
 	
 	public static final void crafting() {
@@ -605,6 +616,15 @@ public class ItemsManager {
 				new ItemStack(ironChip), 
 				16, 
 				new ItemStack(speedUpgradeChip));
+		// Air Horn
+		ModRegistry.addShapedCraftingRecipe(
+				new ItemStack(airHorn), 
+				" r ",
+				"sgs",
+				"sss",
+				'r', graphite,
+				's', steelIngot,
+				'g', Items.GLASS_BOTTLE);
 	}
 	
 	public static void addToOreDictionary() {
@@ -680,5 +700,7 @@ public class ItemsManager {
 		ModRegistry.registerRender(pulsatingChip, "pulsating_chip");
 		// Upgrade Chips
 		ModRegistry.registerRender(speedUpgradeChip, "speed_upgrade_chip");
+		// Air Horn
+		ModRegistry.registerRender(airHorn, "air_horn");
 	}
 }

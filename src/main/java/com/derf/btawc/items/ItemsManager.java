@@ -79,7 +79,8 @@ public class ItemsManager {
 	public static Item gironChip;
 	public static Item pulsatingChip;
 	// Machine Upgrades
-	public static Item speedUpgradeChip;
+	public static Item speedUpgradeChip; // Makes a machine produce faster
+	public static Item efficencyUpgradeChip; // Makes a machine waste less fuel or energy
 	// Air Horn - Because I can :)
 	public static Item airHorn;
 	// Nether Star Fuel
@@ -138,8 +139,8 @@ public class ItemsManager {
 		gironChip = new ItemBasic("giron_chip");
 		pulsatingChip = new ItemBasic("pulsating_chip");
 		// Upgrade Chips
-		speedUpgradeChip = new ItemBasic("speed_upgrade_chip");
-		speedUpgradeChip.setMaxStackSize(4);
+		speedUpgradeChip = new ItemUpgrades("speed_upgrade_chip");
+		efficencyUpgradeChip = new ItemUpgrades("efficency_upgrade_chip");
 		// Air Horn
 		airHorn = new ItemAirHorn();
 		// Nether Star Fuel
@@ -202,6 +203,7 @@ public class ItemsManager {
 		LifeCycleManager.addItemLifeCycle("pulsating_chip", pulsatingChip, CreativeTabsManager.tabBTAWC, null);
 		// Upgrade Chips
 		LifeCycleManager.addItemLifeCycle("speed_upgrade_chip", speedUpgradeChip, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("efficency_upgrade_chip", efficencyUpgradeChip, CreativeTabsManager.tabBTAWC, null);
 		// Air Horn
 		LifeCycleManager.addItemLifeCycle("air_horn", airHorn, CreativeTabsManager.tabBTAWC, null);
 		// Fuel
@@ -562,6 +564,11 @@ public class ItemsManager {
 				new ItemStack(ironChip), 
 				16, 
 				new ItemStack(speedUpgradeChip));
+		// Efficency Upgrade chips [goldChip + 16 redstone]
+		ModRegistry.addChipMakerRecipe(
+				new ItemStack(goldChip), 
+				16, 
+				new ItemStack(efficencyUpgradeChip));
 		// Air Horn
 		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(airHorn), 

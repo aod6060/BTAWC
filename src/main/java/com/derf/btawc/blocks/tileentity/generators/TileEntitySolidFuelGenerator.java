@@ -5,6 +5,7 @@ import java.util.List;
 import com.derf.btawc.blocks.generators.BlockSolidFuelGenerator;
 import com.derf.btawc.blocks.tileentity.IFuelUsage;
 import com.derf.btawc.energy.EnergyStorage;
+import com.derf.btawc.items.ItemsManager;
 import com.derf.btawc.util.FuelUtils;
 import com.derf.btawc.util.Holder;
 import com.derf.btawc.util.InventoryUtils;
@@ -18,9 +19,9 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 /**
@@ -43,7 +44,7 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 	// Static Stuff
 	public static final int FUEL_SLOT = 0;
 	public static final int SPEED_UPGRADE_SLOT = 1;
-	public static final int FUEL_EFFICIENCY_SLOT = 2;
+	public static final int EFFICENCY_UPGRADE_SLOT = 2;
 	public static final int MAX_SLOT_SIZE = 3;
 	public static final int MAX_CAPACITY = 1000000000;
 	// Caculate Insantiy
@@ -56,13 +57,14 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 	private int burnTime;
 	// Max Burn Time
 	private int maxBurnTime = 2048; // This is the max burn time for all fuel
+	private int prevMaxBurnTime;
 	// This is the default rf/t
 	private int energyTicks = 128;
 	// Insanity Modifier
 	// This is the insantiy modifier
 	private int insantity = 1; // [1-4096]
 	// Current Energy Ticks
-	
+	private int currentEnergyTicks = 0;
 	// Name
 	private String name;
 
@@ -84,14 +86,16 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 		}
 		
 		if(!worldObj.isRemote) {
+			
 			if(!this.isBurnTimeZero() || this.getStackInSlot(this.getFuelSlot()) != null) {
 				if(this.isBurnTimeZero() && !this.getStorage().isFull()) {
 					this.insantity = this.calculateInsantiyFromFuel();
-					this.setBurnTime(this.maxBurnTime);
+					this.setBurnTime(this.computeFuelTime());
 					if(this.isBurning()) {
 						flag1 = true;
 						if(this.getStackInSlot(this.getFuelSlot()) != null) {
-							this.decrStackSize(this.getFuelSlot(), 1);
+							//this.decrStackSize(this.getFuelSlot(), 1);
+							--this.getStackInSlot(this.getFuelSlot()).stackSize;
 							if(this.getStackInSlot(this.getFuelSlot()).stackSize <= 0) {
 								this.setInventorySlotContents(this.getFuelSlot(), this.getStackInSlot(this.getFuelSlot()).getItem().getContainerItem(this.getStackInSlot(this.getFuelSlot())));
 							}
@@ -100,13 +104,20 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 				}		
 				
 				if(this.isBurning() && !this.getStorage().isFull()) {
-				// Increment Storage Buffer
+					// Increment Storage Buffer
+					handleStorageBuffer();
+					storeEnergtyIntoBuffer();
+					outputAllSides();
 				}
 			}
 			
 			if(flag != this.isBurning()) {
 				flag1 = true;
 				BlockSolidFuelGenerator.updateBlockState(this.isBurning(), worldObj, pos);
+			}
+		} else {
+			if(!storage.isEmpty()) {
+				outputAllSides();
 			}
 		}
 		
@@ -115,6 +126,74 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 		}
 	}
 	
+	private void storeEnergtyIntoBuffer() {
+		int delta = storage.receiveEnergy(this.currentEnergyTicks, true);
+		this.storage.receiveEnergy(delta, false);
+	}
+
+	private int computeFuelTime() {
+		double rep_speedupgrades = 1;
+		double efficencyupgrades = 1;
+		
+		int mul = 1;
+		if(this.getStackInSlot(SPEED_UPGRADE_SLOT) != null && this.getStackInSlot(SPEED_UPGRADE_SLOT).stackSize > 0) {
+			//rep_speedupgrades = 1.0 / (double)this.getStackInSlot(SPEED_UPGRADE_SLOT).stackSize;
+			
+			int temp = 1;
+			
+			for(int i = 0; i < this.getStackInSlot(SPEED_UPGRADE_SLOT).stackSize; i++) {
+				temp *= 2;
+			}
+			
+			rep_speedupgrades = 1.0 / temp;
+		}
+		
+		if(this.getStackInSlot(EFFICENCY_UPGRADE_SLOT) != null && this.getStackInSlot(EFFICENCY_UPGRADE_SLOT).stackSize > 0) {
+			int temp = 1;
+			
+			for(int i = 0; i < this.getStackInSlot(EFFICENCY_UPGRADE_SLOT).stackSize; i++) {
+				temp *= 2;
+			}
+			
+			efficencyupgrades = temp;
+		}
+		
+		return (int) (this.maxBurnTime * rep_speedupgrades * efficencyupgrades);
+	}
+
+	
+	private void outputAllSides() {
+		// Output to all sides
+		List<Holder> sides = Holder.getHolders(pos);
+		for(Holder side : sides) {
+			TileEntity entity = worldObj.getTileEntity(side.getPos());
+			if(entity != null && entity instanceof IEnergyReceiver) {
+				IEnergyReceiver handler = (IEnergyReceiver)entity;
+				int ee = this.extractEnergy(side.getDirection(), this.currentEnergyTicks, true);
+				int er = handler.receiveEnergy(side.getDirection().getOpposite(), ee, true);
+				this.extractEnergy(side.getDirection(), er, false);
+				handler.receiveEnergy(side.getDirection().getOpposite(), er, false);
+			}
+		}
+	}
+
+	private void handleStorageBuffer() {
+		int mul = 1;
+		int size = 0;
+		if(this.getStackInSlot(SPEED_UPGRADE_SLOT) != null) {
+			size = this.getStackInSlot(SPEED_UPGRADE_SLOT).stackSize;
+		}
+		for(int i = 0; i < size; i++) {
+			mul *= 2;
+		}
+		// Calculate Actual RF/t
+		this.currentEnergyTicks = this.energyTicks * mul * this.insantity;
+		// I might change this.
+		if(this.currentEnergyTicks > this.storage.getCapacity()) {
+			this.currentEnergyTicks = this.storage.getCapacity();
+		}
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -154,7 +233,7 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 
 	@Override
 	public void setBurnTime(int burnTime) {
-		this.burnTime = burnTime;
+		this.prevMaxBurnTime = this.burnTime = burnTime;
 	}
 
 	@Override
@@ -165,26 +244,40 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 
 	@Override
 	public ItemStack getStackInSlot(int index) {
+		// Add event for efficency slot
 		return this.inventory[index];
 	}
 
 	@Override
 	public ItemStack decrStackSize(int index, int count) {
+		// Add event for efficency slot
 		return ItemStackHelper.getAndSplit(this.inventory, index, count);
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int index) {
+		// Add event for efficency slot
 		return ItemStackHelper.getAndRemove(this.inventory, index);
 	}
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) {
 		this.inventory[index] = stack;
-		
 		if(stack != null && stack.stackSize > this.getInventoryStackLimit()) {
 			stack.stackSize = this.getInventoryStackLimit();
 		}
+	}
+
+	private void onUpgradeChange() {
+		// TODO Auto-generated method stub
+		int newBurnTime = this.computeFuelTime(); // At maximum
+		
+		int currentBurnTime = this.burnTime;
+		
+		double rep = currentBurnTime / this.prevMaxBurnTime;
+		
+		this.burnTime = (int) (newBurnTime * rep);
+		this.prevMaxBurnTime = newBurnTime;
 	}
 
 	@Override
@@ -205,7 +298,14 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		return FuelUtils.isItemFuel(stack) || SlotFurnaceFuel.isBucket(stack) && (stack == null || stack.getItem() != Items.BUCKET);
+		//return FuelUtils.isItemFuel(stack) || SlotFurnaceFuel.isBucket(stack) && (stack == null || stack.getItem() != Items.BUCKET);
+		if(stack.getItem() == ItemsManager.speedUpgradeChip) {
+			return true;
+		} else if(stack.getItem() == ItemsManager.efficencyUpgradeChip) {
+			return true;
+		} else {
+			return FuelUtils.isItemFuel(stack) || SlotFurnaceFuel.isBucket(stack) && (stack == null || stack.getItem() != Items.BUCKET);
+		}
 	}
 
 	@Override
@@ -228,7 +328,7 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 			value = this.getStorage().getMaxReceive();
 			break;
 		case 5:
-			value = this.energyTicks;
+			value = this.currentEnergyTicks;
 			break;
 		case 6: 
 			value = this.insantity;
@@ -256,7 +356,7 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 			this.getStorage().setMaxReceive(value);
 			break;
 		case 5:
-			this.energyTicks = value;
+			this.currentEnergyTicks = value;
 			break;
 		case 6: 
 			this.insantity = value;
@@ -271,15 +371,16 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 
 	@Override
 	public void clear() {
-		for(int i = 0; i < this.inventory.length; i++) {
-			this.inventory[i] = null;
-		}
+		this.inventory = new ItemStack[MAX_SLOT_SIZE];
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
 		this.burnTime = compound.getInteger("BurnTime");
+		this.currentEnergyTicks = compound.getInteger("CurrentEnergyTicks");
+		this.insantity = compound.getInteger("Insanity");
+		this.prevMaxBurnTime = compound.getInteger("PrevMaxBurnTime");
 		// Inventory
 		InventoryUtils.loadInventory(this, compound);
 		if(compound.hasKey("CustomName")) {
@@ -290,15 +391,17 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		// TODO Auto-generated method stub
-		super.writeToNBT(compound);
 		compound.setInteger("BurnTime", this.burnTime);
+		compound.setInteger("CurrentEnergyTicks", this.currentEnergyTicks);
+		compound.setInteger("Insanity", this.insantity);
+		compound.setInteger("PrevMaxBurnTime", this.prevMaxBurnTime);
 		// Inventory
 		InventoryUtils.saveInventory(this, compound);
 		if(this.hasCustomName()) {
 			compound.setString("CustomName", this.name);
 		}
 		
-		return compound;
+		return super.writeToNBT(compound);
 	}
 	
 	public int calculateInsantiyFromFuel() {
@@ -325,5 +428,16 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 		}
 		
 		return temp;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public int getBurningTimeRemainingScaled(int scale) {
+		return this.burnTime * scale / this.maxBurnTime;
+	}
+	
+	@Override
+	public String printEnergyValue() {
+		String s = String.format("[%d/%d] %d RF/t", this.storage.getEnergyStored(), this.storage.getMaxEnergyStored(), this.currentEnergyTicks);
+		return s;
 	}
 }

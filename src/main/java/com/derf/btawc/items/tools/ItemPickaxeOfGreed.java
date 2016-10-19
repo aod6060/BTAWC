@@ -41,7 +41,7 @@ public class ItemPickaxeOfGreed extends ItemPickaxe {
 				Block block = Block.getBlockFromItem(stack.getItem());
 				if(block != null) {
 					//System.out.println("block added to PickaxeOfGreed: " + block.getLocalizedName());
-					BTAWCLogger.getLogger().log(Level.INFO, "Block was added to Pickaxe Of Greed: %s", block.getLocalizedName());
+					BTAWCLogger.getLogger().log(Level.INFO, "Block was added to Pickaxe Of Greed: "+block.getLocalizedName());
 					blocks.add(block);
 				}
 			}

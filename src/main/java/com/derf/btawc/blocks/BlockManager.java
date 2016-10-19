@@ -97,20 +97,20 @@ public final class BlockManager {
 		LifeCycleManager.addBlockLifeCycle("creative_generator", creativeGenerator, CreativeTabsManager.tabBTAWC, TileEntityCreativeGenerator.class, null);
 		// Solid Fuel Generator
 		LifeCycleManager.addBlockLifeCycle("solid_fuel_generator", solidFuelGenerator, CreativeTabsManager.tabBTAWC, TileEntitySolidFuelGenerator.class, null);
-		LifeCycleManager.addBlockLifeCycle("solid_fuel_generator_on", solidFuelGeneratorOn, CreativeTabsManager.tabBTAWC, null, null);
+		LifeCycleManager.addBlockLifeCycle("solid_fuel_generator_on", solidFuelGeneratorOn, null, null, null);
 		// Super Furnace
 		LifeCycleManager.addBlockLifeCycle("super_furnace", superFurnace, CreativeTabsManager.tabBTAWC, TileEntitySuperFurnace.class, null);
-		LifeCycleManager.addBlockLifeCycle("super_furnace_on", superFurnaceOn, CreativeTabsManager.tabBTAWC, null, null);
+		LifeCycleManager.addBlockLifeCycle("super_furnace_on", superFurnaceOn, null, null, null);
 		// Wither Proof Blocks
 		LifeCycleManager.addBlockLifeCycle("wither_proof", witherProofBlock, CreativeTabsManager.tabBTAWC, null, null);
 		LifeCycleManager.addBlockLifeCycle("wither_proof_light", witherProofLight, CreativeTabsManager.tabBTAWC, null, null);
 		LifeCycleManager.addBlockLifeCycle("wither_proof_glass", witherProofGlass, CreativeTabsManager.tabBTAWC, null, null);
 		// Alloy Furnace
 		LifeCycleManager.addBlockLifeCycle("alloy_furnace", alloyFurnace, CreativeTabsManager.tabBTAWC, TileEntityAlloyFurnace.class, null);
-		LifeCycleManager.addBlockLifeCycle("alloy_furnace_on", alloyFurnaceOn, CreativeTabsManager.tabBTAWC, null, null);
+		LifeCycleManager.addBlockLifeCycle("alloy_furnace_on", alloyFurnaceOn, null, null, null);
 		// Chip Maker
 		LifeCycleManager.addBlockLifeCycle("chip_maker", chipMaker, CreativeTabsManager.tabBTAWC, TileEntityChipMaker.class, null);
-		LifeCycleManager.addBlockLifeCycle("chip_maker_on", chipMakerOn, CreativeTabsManager.tabBTAWC, null, null);
+		LifeCycleManager.addBlockLifeCycle("chip_maker_on", chipMakerOn, null, null, null);
 		// Item Buffer
 		LifeCycleManager.addBlockLifeCycle("item_buffer", itemBuffer, CreativeTabsManager.tabBTAWC, TileEntityItemBuffer.class, null);
 		// Simple Dungeon Present

@@ -32,7 +32,8 @@ public final class TileEntityProcessUtils {
 					if(usage.isBurning()) {
 						flag1 = true;
 						if(inventory.getStackInSlot(usage.getFuelSlot()) != null) {
-							inventory.decrStackSize(usage.getFuelSlot(), 1);
+							//inventory.decrStackSize(usage.getFuelSlot(), 1);
+							--inventory.getStackInSlot(usage.getFuelSlot()).stackSize;
 							if(inventory.getStackInSlot(usage.getFuelSlot()).stackSize <= 0) {
 								inventory.setInventorySlotContents(usage.getFuelSlot(), inventory.getStackInSlot(usage.getFuelSlot()).getItem().getContainerItem(inventory.getStackInSlot(usage.getFuelSlot())));
 							}

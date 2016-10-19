@@ -2,6 +2,7 @@ package com.derf.btawc.inventory.container.generator;
 
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
 import com.derf.btawc.inventory.container.ContainerBasic;
+import com.derf.btawc.items.ItemsManager;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -25,7 +26,16 @@ public class ContainerCreativeGenerator extends ContainerBasic {
 	public ContainerCreativeGenerator(InventoryPlayer player, TileEntityCreativeGenerator generator) {
 		this.player = player;
 		this.generator = generator;
-		this.addSlotToContainer(new Slot(generator, 0, 143, 15));
+		// Speed upgrade [0] (143, 15)
+		this.addSlotToContainer(new Slot(generator, 0, 143, 15) {
+
+			@Override
+			public boolean isItemValid(ItemStack stack) {
+				// TODO Auto-generated method stub
+				return stack.getItem() == ItemsManager.speedUpgradeChip;
+			}
+			
+		});
 		// Create Player Inventory [8, 92], [8, 150]
 		this.createPlayerInventory(player, 8, 92, 8, 150);
 	}

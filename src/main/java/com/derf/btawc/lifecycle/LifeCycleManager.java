@@ -80,13 +80,17 @@ public final class LifeCycleManager {
 		BTAWCLogger.getLogger().log(Level.INFO, "Handle CreativeTabs Registraction...");
 		BTAWCLogger.getLogger().log(Level.INFO, "Handle Item Life Cycles");
 		for(IItemLifeCycle item : items) {
-			item.getItem().setCreativeTab(item.getCreativeTabs());
-			BTAWCLogger.getLogger().log(Level.INFO, "Added " + item.getRegisteryName() + " to " + item.getCreativeTabs());
+			if(item.getCreativeTabs() != null) {
+				item.getItem().setCreativeTab(item.getCreativeTabs());
+				BTAWCLogger.getLogger().log(Level.INFO, "Added " + item.getRegisteryName() + " to " + item.getCreativeTabs());
+			}
 		}
 		BTAWCLogger.getLogger().log(Level.INFO, "Handle Block Life Cycles");
 		for(IBlockLifeCycle block : blocks) {
-			block.getBlock().setCreativeTab(block.getCreativeTabs());
-			BTAWCLogger.getLogger().log(Level.INFO, "Added " + block.getRegistryName() + " to " + block.getCreativeTabs());
+			if(block.getCreativeTabs() != null) {
+				block.getBlock().setCreativeTab(block.getCreativeTabs());
+				BTAWCLogger.getLogger().log(Level.INFO, "Added " + block.getRegistryName() + " to " + block.getCreativeTabs());
+			}
 		}
 	}
 	

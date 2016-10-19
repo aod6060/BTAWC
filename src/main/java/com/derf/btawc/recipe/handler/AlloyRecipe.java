@@ -1,4 +1,4 @@
-package com.derf.btawc.recipe;
+package com.derf.btawc.recipe.handler;
 
 import java.util.ArrayList;
 import java.util.List;

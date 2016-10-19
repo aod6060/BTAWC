@@ -20,6 +20,7 @@ import com.derf.btawc.blocks.witherproof.BlockWitherProof;
 import com.derf.btawc.blocks.witherproof.BlockWitherProofGlass;
 import com.derf.btawc.creativetabs.CreativeTabsManager;
 import com.derf.btawc.items.ItemsManager;
+import com.derf.btawc.lifecycle.LifeCycleManager;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -61,6 +62,8 @@ public final class BlockManager {
 	public static Block cobblestoneGenerator;
 	// Misc
 	
+	// Looped Registry :)
+	
 	public static final void create() {
 		// Generator
 		creativeGenerator = new BlockCreativeGenerator();
@@ -89,75 +92,31 @@ public final class BlockManager {
 		cobblestoneGenerator = new BlockCobblestoneGenerator();
 	}
 	
-	public static final void register() {
-		// Generators
-		ModRegistry.registerBlock(creativeGenerator, "creative_generator");
+	public static void lifeCycle() {
+		// Creative Generator
+		LifeCycleManager.addBlockLifeCycle("creative_generator", creativeGenerator, CreativeTabsManager.tabBTAWC, TileEntityCreativeGenerator.class, null);
 		// Solid Fuel Generator
-		ModRegistry.registerBlock(solidFuelGenerator, "solid_fuel_generator");
-		ModRegistry.registerBlock(solidFuelGeneratorOn, "solid_fuel_generator_on");
-		//GameRegistry.registerBlock(energyStorageBasic, "energy_storage_basic");
+		LifeCycleManager.addBlockLifeCycle("solid_fuel_generator", solidFuelGenerator, CreativeTabsManager.tabBTAWC, TileEntitySolidFuelGenerator.class, null);
+		LifeCycleManager.addBlockLifeCycle("solid_fuel_generator_on", solidFuelGeneratorOn, CreativeTabsManager.tabBTAWC, null, null);
 		// Super Furnace
-		ModRegistry.registerBlock(superFurnace, "super_furnace");
-		ModRegistry.registerBlock(superFurnaceOn, "super_furnace_on");
-		// Wither Proof Block
-		ModRegistry.registerBlock(witherProofBlock, "wither_proof");
-		ModRegistry.registerBlock(witherProofLight, "wither_proof_light");
-		ModRegistry.registerBlock(witherProofGlass, "wither_proof_glass");
+		LifeCycleManager.addBlockLifeCycle("super_furnace", superFurnace, CreativeTabsManager.tabBTAWC, TileEntitySuperFurnace.class, null);
+		LifeCycleManager.addBlockLifeCycle("super_furnace_on", superFurnaceOn, CreativeTabsManager.tabBTAWC, null, null);
+		// Wither Proof Blocks
+		LifeCycleManager.addBlockLifeCycle("wither_proof", witherProofBlock, CreativeTabsManager.tabBTAWC, null, null);
+		LifeCycleManager.addBlockLifeCycle("wither_proof_light", witherProofLight, CreativeTabsManager.tabBTAWC, null, null);
+		LifeCycleManager.addBlockLifeCycle("wither_proof_glass", witherProofGlass, CreativeTabsManager.tabBTAWC, null, null);
 		// Alloy Furnace
-		ModRegistry.registerBlock(alloyFurnace, "alloy_furnace");
-		ModRegistry.registerBlock(alloyFurnaceOn, "alloy_furnace_on");
+		LifeCycleManager.addBlockLifeCycle("alloy_furnace", alloyFurnace, CreativeTabsManager.tabBTAWC, TileEntityAlloyFurnace.class, null);
+		LifeCycleManager.addBlockLifeCycle("alloy_furnace_on", alloyFurnaceOn, CreativeTabsManager.tabBTAWC, null, null);
 		// Chip Maker
-		ModRegistry.registerBlock(chipMaker, "chip_maker");
-		ModRegistry.registerBlock(chipMakerOn, "chip_maker_on");
+		LifeCycleManager.addBlockLifeCycle("chip_maker", chipMaker, CreativeTabsManager.tabBTAWC, TileEntityChipMaker.class, null);
+		LifeCycleManager.addBlockLifeCycle("chip_maker_on", chipMakerOn, CreativeTabsManager.tabBTAWC, null, null);
 		// Item Buffer
-		ModRegistry.registerBlock(itemBuffer, "item_buffer");
-		// Simple Dungeon present
-		ModRegistry.registerBlock(simpleDungeonPresent, "simple_dungeon_present");
-		// Cobblestone Generator
-		ModRegistry.registerBlock(cobblestoneGenerator, "cobblestone_generator");
-	}
-	
-	public static final void registerTileEntities() {
-		// Generators
-		ModRegistry.registerTileEntity(TileEntityCreativeGenerator.class, "creative_generator");
-		// Solid Fuel Generator
-		ModRegistry.registerTileEntity(TileEntitySolidFuelGenerator.class, "solid_fuel_generator");
-		// Storage
-		//GameRegistry.registerTileEntity(TileEntityEnergyStorageBasic.class, "energy_storage_basic");
-		// Super Furnace
-		ModRegistry.registerTileEntity(TileEntitySuperFurnace.class, "super_furnace");
-		// Alloy Furnace
-		ModRegistry.registerTileEntity(TileEntityAlloyFurnace.class, "alloy_furnace");
-		// Chip Maker
-		ModRegistry.registerTileEntity(TileEntityChipMaker.class, "chip_maker");
-		// Item Buffer
-		ModRegistry.registerTileEntity(TileEntityItemBuffer.class, "item_buffer");
-		// Cobblestone Generator
-		ModRegistry.registerTileEntity(TileEntityCobblestoneGenerator.class, "cobblestone_generator");
-	}
-	
-	public static final void creativeTabs() {
-		// Generators
-		creativeGenerator.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// Solid Fuel Generator
-		solidFuelGenerator.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		//energyStorageBasic.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// Super Furnace
-		superFurnace.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// Wither Proof Block
-		witherProofBlock.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		witherProofLight.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		witherProofGlass.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// Alloy Furnace
-		alloyFurnace.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// Chip Maker
-		chipMaker.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// Item Buffer
-		itemBuffer.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		LifeCycleManager.addBlockLifeCycle("item_buffer", itemBuffer, CreativeTabsManager.tabBTAWC, TileEntityItemBuffer.class, null);
 		// Simple Dungeon Present
-		simpleDungeonPresent.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		LifeCycleManager.addBlockLifeCycle("simple_dungeon_present", simpleDungeonPresent, CreativeTabsManager.tabBTAWC, null, null);
 		// Cobblestone Generator
-		cobblestoneGenerator.setCreativeTab(CreativeTabsManager.tabBTAWC);
+		LifeCycleManager.addBlockLifeCycle("cobblestone_generator", cobblestoneGenerator, CreativeTabsManager.tabBTAWC, TileEntityCobblestoneGenerator.class, null);
 	}
 	
 	public static final void crafting() {
@@ -254,43 +213,4 @@ public final class BlockManager {
 				's', ItemsManager.steelIngot);
 		
 	}
-
-	public static void addToOreDictionary() {
-	}
-
-	@SideOnly(Side.CLIENT)
-	public static void registerVarients() {
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public static void registerRenderer() {
-		// Generators
-		// Creative Generator
-		ModRegistry.registerRender(creativeGenerator, "creative_generator");
-		// Solid Fuel Generator
-		ModRegistry.registerRender(solidFuelGenerator, "solid_fuel_generator");
-		ModRegistry.registerRender(solidFuelGeneratorOn, "solid_fuel_generator_on");
-		// Wither Proof
-		ModRegistry.registerRender(witherProofBlock, "wither_proof");
-		ModRegistry.registerRender(witherProofGlass, "wither_proof_glass");
-		ModRegistry.registerRender(witherProofLight, "wither_proof_light");
-		// Basic Machines (don't use rf but fuel)
-		// Super Furnace
-		ModRegistry.registerRender(superFurnace, "super_furnace");
-		ModRegistry.registerRender(superFurnaceOn, "super_furnace_on");
-		// Alloy Furnace
-		ModRegistry.registerRender(alloyFurnace, "alloy_furnace");
-		ModRegistry.registerRender(alloyFurnaceOn, "alloy_furnace_on");
-		// Chip Maker
-		ModRegistry.registerRender(chipMaker, "chip_maker");
-		ModRegistry.registerRender(chipMakerOn, "chip_maker_on");
-		// Item Buffer
-		ModRegistry.registerRender(itemBuffer, "item_buffer");
-		// Simple Dungeon Present
-		ModRegistry.registerRender(simpleDungeonPresent, "simple_dungeon_present");
-		// Cobblestone Generator
-		ModRegistry.registerRender(cobblestoneGenerator, "cobblestone_generator");
-	}
-
-
 }

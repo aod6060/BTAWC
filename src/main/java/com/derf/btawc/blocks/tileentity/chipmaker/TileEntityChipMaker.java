@@ -5,9 +5,9 @@ import com.derf.btawc.blocks.tileentity.IFuelUsage;
 import com.derf.btawc.blocks.tileentity.IProcess;
 import com.derf.btawc.blocks.tileentity.TileEntityBasic;
 import com.derf.btawc.blocks.tileentity.TileEntityProcessUtils;
-import com.derf.btawc.recipe.ChipMakerRecipe;
-import com.derf.btawc.recipe.ChipMakerRecipeManager;
 import com.derf.btawc.recipe.RecipeHolder;
+import com.derf.btawc.recipe.handler.ChipMakerRecipe;
+import com.derf.btawc.recipe.handler.ChipMakerRecipeManager;
 import com.derf.btawc.util.FuelUtils;
 import com.derf.btawc.util.InventoryUtils;
 

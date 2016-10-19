@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 import com.derf.btawc.blocks.furnace.BlockAlloyFurnace;
 import com.derf.btawc.blocks.tileentity.TileEntityBasic;
-import com.derf.btawc.recipe.AlloyRecipeManager;
+import com.derf.btawc.recipe.handler.AlloyRecipeManager;
 import com.derf.btawc.util.FuelUtils;
 import com.derf.btawc.util.InventoryUtils;
 

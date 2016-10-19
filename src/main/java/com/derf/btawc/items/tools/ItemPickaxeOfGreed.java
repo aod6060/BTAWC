@@ -3,6 +3,9 @@ package com.derf.btawc.items.tools;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.Level;
+
+import com.derf.btawc.BTAWCLogger;
 import com.derf.btawc.blocks.BlockManager;
 import com.derf.btawc.util.OreDictionaryUtils;
 import com.derf.btawc.util.Utils;
@@ -37,7 +40,8 @@ public class ItemPickaxeOfGreed extends ItemPickaxe {
 			for(ItemStack stack : stacks) {
 				Block block = Block.getBlockFromItem(stack.getItem());
 				if(block != null) {
-					System.out.println("block added to PickaxeOfGreed: " + block.getLocalizedName());
+					//System.out.println("block added to PickaxeOfGreed: " + block.getLocalizedName());
+					BTAWCLogger.getLogger().log(Level.INFO, "Block was added to Pickaxe Of Greed: %s", block.getLocalizedName());
 					blocks.add(block);
 				}
 			}

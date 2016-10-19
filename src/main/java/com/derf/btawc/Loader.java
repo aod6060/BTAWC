@@ -2,6 +2,7 @@ package com.derf.btawc;
 
 import com.derf.btawc.proxy.IProxy;
 
+import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -25,6 +26,7 @@ public class Loader {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
+		BTAWCLogger.init();
 		proxy.preInit(e);
 	}
 	

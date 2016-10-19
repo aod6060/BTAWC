@@ -92,4 +92,8 @@ public final class Utils {
 		
 		return states;
 	}
+	
+	public static double lerp(double value, double min, double max) {
+		return (1-value) * min + value*max;
+	}
 }

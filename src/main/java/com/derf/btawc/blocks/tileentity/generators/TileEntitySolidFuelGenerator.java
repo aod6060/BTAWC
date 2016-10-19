@@ -2,10 +2,13 @@ package com.derf.btawc.blocks.tileentity.generators;
 
 import java.util.List;
 
+import com.derf.btawc.blocks.generators.BlockSolidFuelGenerator;
 import com.derf.btawc.blocks.tileentity.IFuelUsage;
 import com.derf.btawc.energy.EnergyStorage;
 import com.derf.btawc.util.FuelUtils;
 import com.derf.btawc.util.Holder;
+import com.derf.btawc.util.InventoryUtils;
+import com.derf.btawc.util.Utils;
 
 import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,16 +42,33 @@ Alright I'm back to doing the generators... I've been thinking of what I want to
 public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements IInventory, IFuelUsage {
 	// Static Stuff
 	public static final int FUEL_SLOT = 0;
+	public static final int SPEED_UPGRADE_SLOT = 1;
+	public static final int FUEL_EFFICIENCY_SLOT = 2;
+	public static final int MAX_SLOT_SIZE = 3;
+	public static final int MAX_CAPACITY = 1000000000;
+	// Caculate Insantiy
+	public static final int INSANTITY_MIN = 1;
+	public static final int INSANTITY_MAX = 4096;
+	public static final int MAX_FUEL_SATURATION = 1000000;
 	// Fuel Generator Inventory
-	private ItemStack[] inventory = new ItemStack[1];
+	private ItemStack[] inventory = new ItemStack[MAX_SLOT_SIZE];
 	// burn time
 	private int burnTime;
+	// Max Burn Time
+	private int maxBurnTime = 2048; // This is the max burn time for all fuel
+	// This is the default rf/t
+	private int energyTicks = 128;
+	// Insanity Modifier
+	// This is the insantiy modifier
+	private int insantity = 1; // [1-4096]
+	// Current Energy Ticks
+	
 	// Name
 	private String name;
 
 	public TileEntitySolidFuelGenerator() {
 		super();
-		this.storage = new EnergyStorage(1000000, 100);
+		this.storage = new EnergyStorage(MAX_CAPACITY);
 	}
 	
 	@Override
@@ -56,6 +76,43 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 		// Handle Fuel
 		// Charge Internal Buffer
 		// Power Receivers on 6 faces.
+		boolean flag = this.isBurning();
+		boolean flag1 = false;
+		
+		if(this.isBurning()) {
+			this.decreaseFuelTime();
+		}
+		
+		if(!worldObj.isRemote) {
+			if(!this.isBurnTimeZero() || this.getStackInSlot(this.getFuelSlot()) != null) {
+				if(this.isBurnTimeZero() && !this.getStorage().isFull()) {
+					this.insantity = this.calculateInsantiyFromFuel();
+					this.setBurnTime(this.maxBurnTime);
+					if(this.isBurning()) {
+						flag1 = true;
+						if(this.getStackInSlot(this.getFuelSlot()) != null) {
+							this.decrStackSize(this.getFuelSlot(), 1);
+							if(this.getStackInSlot(this.getFuelSlot()).stackSize <= 0) {
+								this.setInventorySlotContents(this.getFuelSlot(), this.getStackInSlot(this.getFuelSlot()).getItem().getContainerItem(this.getStackInSlot(this.getFuelSlot())));
+							}
+						}
+					}
+				}		
+				
+				if(this.isBurning() && !this.getStorage().isFull()) {
+				// Increment Storage Buffer
+				}
+			}
+			
+			if(flag != this.isBurning()) {
+				flag1 = true;
+				BlockSolidFuelGenerator.updateBlockState(this.isBurning(), worldObj, pos);
+			}
+		}
+		
+		if(flag1) {
+			this.markDirty();
+		}
 	}
 	
 	public void setName(String name) {
@@ -170,6 +227,12 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 		case 4:
 			value = this.getStorage().getMaxReceive();
 			break;
+		case 5:
+			value = this.energyTicks;
+			break;
+		case 6: 
+			value = this.insantity;
+			break;
 		}
 		return value;
 	}
@@ -192,12 +255,18 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 		case 4:
 			this.getStorage().setMaxReceive(value);
 			break;
+		case 5:
+			this.energyTicks = value;
+			break;
+		case 6: 
+			this.insantity = value;
+			break;
 		}
 	}
 
 	@Override
 	public int getFieldCount() {
-		return 5;
+		return 7;
 	}
 
 	@Override
@@ -208,45 +277,53 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound tag) {
-		super.readFromNBT(tag);
-		this.burnTime = tag.getInteger("BurnTime");
-		NBTTagList list = tag.getTagList("Items", Constants.NBT.TAG_COMPOUND);
-		this.inventory = new ItemStack[this.getSizeInventory()];
-		for(int i = 0; i < list.tagCount(); i++) {
-			NBTTagCompound comp = list.getCompoundTagAt(i);
-			int index = comp.getInteger("Slot");
-			if(index >= 0 && index < this.getSizeInventory()) {
-				this.inventory[index] = ItemStack.loadItemStackFromNBT(comp);
-			}
-		}
-		
-		if(tag.hasKey("CustomName")) {
-			this.name = tag.getString("CustomName");
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+		this.burnTime = compound.getInteger("BurnTime");
+		// Inventory
+		InventoryUtils.loadInventory(this, compound);
+		if(compound.hasKey("CustomName")) {
+			this.name = compound.getString("CustomName");
 		}
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		// TODO Auto-generated method stub
-		super.writeToNBT(tag);
-		tag.setInteger("BurnTime", this.burnTime);
-		NBTTagList list = new NBTTagList();
-		for(int i = 0; i < this.getSizeInventory(); i++) {
-			if(this.inventory[i] != null) {
-				NBTTagCompound comp = new NBTTagCompound();
-				comp.setInteger("Slot", i);
-				inventory[i].writeToNBT(comp);
-				list.appendTag(comp);
-			}
-		}
-		tag.setTag("Items", list);
+		super.writeToNBT(compound);
+		compound.setInteger("BurnTime", this.burnTime);
+		// Inventory
+		InventoryUtils.saveInventory(this, compound);
 		if(this.hasCustomName()) {
-			tag.setString("CustomName", this.name);
+			compound.setString("CustomName", this.name);
 		}
 		
-		return tag;
+		return compound;
 	}
 	
-	
+	public int calculateInsantiyFromFuel() {
+		
+		int temp = INSANTITY_MIN;
+		
+		if(this.getStackInSlot(this.getFuelSlot()) != null) {
+			
+			int fuel_ticks = FuelUtils.getItemBurnTime(this.getStackInSlot(this.getFuelSlot()));
+			
+			if(fuel_ticks > MAX_FUEL_SATURATION) {
+				fuel_ticks = MAX_FUEL_SATURATION;
+			}
+			
+			double re_fuel_tick = (double)fuel_ticks / (double)MAX_FUEL_SATURATION;
+			
+			double d = Utils.lerp(re_fuel_tick, 0.0f, 1.0f);
+			
+			temp = (int) (d * INSANTITY_MAX);
+			
+			if(temp < INSANTITY_MIN) {
+				temp = INSANTITY_MIN;
+			}
+		}
+		
+		return temp;
+	}
 }

@@ -1,4 +1,4 @@
-package com.derf.btawc.recipe;
+package com.derf.btawc.recipe.handler;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import com.derf.btawc.recipe.RecipeHolder;
+
 import java.util.Set;
 
 import net.minecraft.item.ItemStack;

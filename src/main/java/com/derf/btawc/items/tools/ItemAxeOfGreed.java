@@ -3,6 +3,9 @@ package com.derf.btawc.items.tools;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.Level;
+
+import com.derf.btawc.BTAWCLogger;
 import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.BlockManager;
 import com.derf.btawc.util.OreDictionaryUtils;
@@ -58,7 +61,8 @@ public class ItemAxeOfGreed extends ItemAxe {
 			for(ItemStack stack : stacks) {
 				Block block = Block.getBlockFromItem(stack.getItem());
 				if(block != null) {
-					System.out.println("block added to AxeOfGreed: " + block.getLocalizedName());
+					//System.out.println("block added to AxeOfGreed: " + block.getLocalizedName());
+					BTAWCLogger.getLogger().log(Level.INFO, "Block was added to Axe of Greed: "+block.getLocalizedName());
 					blocks.add(block);
 				}
 			}
@@ -70,7 +74,8 @@ public class ItemAxeOfGreed extends ItemAxe {
 			for(ItemStack stack : stacks) {
 				Block block = Block.getBlockFromItem(stack.getItem());
 				if(block != null) {
-					System.out.println("block added to AxeOfGreed: " + block.getLocalizedName());
+					//System.out.println("block added to AxeOfGreed: " + block.getLocalizedName());
+					BTAWCLogger.getLogger().log(Level.INFO, "Block was added to Axe of Greed: "+block.getLocalizedName());
 					blocks.add(block);
 				}
 			}

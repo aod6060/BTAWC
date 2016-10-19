@@ -13,6 +13,7 @@ import com.derf.btawc.items.tools.ItemAxeOfGreed;
 import com.derf.btawc.items.tools.ItemHoeOfGreed;
 import com.derf.btawc.items.tools.ItemPickaxeOfGreed;
 import com.derf.btawc.items.tools.ItemSwordOfGreed;
+import com.derf.btawc.lifecycle.LifeCycleManager;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -85,7 +86,6 @@ public class ItemsManager {
 	public static Item netherStarFuel; // Lasts forever, about 1,000,000 ticks lol
 	
 	public static final void create() {
-		
 		// Growth Device
 		growthDeviceFrame = new ItemBasic("growth_device_frame");
 		growthDevice = new ItemGrowthDevice("growth_device", 3, 1);
@@ -143,128 +143,74 @@ public class ItemsManager {
 		// Air Horn
 		airHorn = new ItemAirHorn();
 		// Nether Star Fuel
+		netherStarFuel = new ItemBasic("nether_star_fuel");
 	}
 	
-	public static final void register() {
+	public static final void lifeCycle() {
 		// Growth Device
-		ModRegistry.registerItem(growthDeviceFrame, "growth_device_frame");
-		ModRegistry.registerItem(growthDevice, "growth_device");
-		ModRegistry.registerItem(growthDeviceSuper, "growth_device_super");
-		ModRegistry.registerItem(growthDeviceMega, "growth_device_mega");
-		ModRegistry.registerItem(growthDeviceUltra, "growth_device_ultra");
+		LifeCycleManager.addItemLifeCycle("growth_device_frame", growthDeviceFrame, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("growth_device", growthDevice, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("growth_device_super", growthDeviceSuper, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("growth_device_mega", growthDeviceMega, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("growth_device_ultra", growthDeviceUltra, CreativeTabsManager.tabBTAWC, null);
 		// Magnet
-		ModRegistry.registerItem(magnetFrame, "magnet_frame");
-		ModRegistry.registerItem(magnetItems, "magnet_items");
-		ModRegistry.registerItem(magnetAnimals, "magnet_animals");
-		ModRegistry.registerItem(magnetMobs, "magnet_mobs");
-		ModRegistry.registerItem(magnetWither, "magnet_wither");
+		LifeCycleManager.addItemLifeCycle("magnet_frame", magnetFrame, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("magnet_items", magnetItems, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("magnet_animals", magnetAnimals, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("magnet_mobs", magnetMobs, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("magnet_wither", magnetWither, CreativeTabsManager.tabBTAWC, null);
 		// Flowtation Device
-		ModRegistry.registerItem(flowtationDeviceFrame, "flowtation_device_frame");
-		ModRegistry.registerItem(flowtationDevice, "flowtation_device");
+		LifeCycleManager.addItemLifeCycle("flowtation_device_frame", flowtationDeviceFrame, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("flowtation_device", flowtationDevice, CreativeTabsManager.tabBTAWC, null);
 		// Hoe of Greed
-		ModRegistry.registerItem(hoeOfGreed, "hoe_of_greed_basic");
-		ModRegistry.registerItem(hoeOfGreedSuper, "hoe_of_greed_super");
-		ModRegistry.registerItem(hoeOfGreedMega, "hoe_of_greed_mega");
-		ModRegistry.registerItem(hoeOfGreedUltra, "hoe_of_greed_ultra");
+		LifeCycleManager.addItemLifeCycle("hoe_of_greed_basic", hoeOfGreed, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("hoe_of_greed_super", hoeOfGreedSuper, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("hoe_of_greed_mega", hoeOfGreedMega, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("hoe_of_greed_ultra", hoeOfGreedUltra, CreativeTabsManager.tabBTAWC, null);
 		// Pickaxe of Greed
-		ModRegistry.registerItem(pickaxeOfGreed, "pickaxe_of_greed_basic");
-		ModRegistry.registerItem(pickaxeOfGreedSuper, "pickaxe_of_greed_super");
-		ModRegistry.registerItem(pickaxeOfGreedMega, "pickaxe_of_greed_mega");
-		ModRegistry.registerItem(pickaxeOfGreedUltra, "pickaxe_of_greed_ultra");
+		LifeCycleManager.addItemLifeCycle("pickaxe_of_greed_basic", pickaxeOfGreed, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("pickaxe_of_greed_super", pickaxeOfGreedSuper, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("pickaxe_of_greed_mega", pickaxeOfGreedMega, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("pickaxe_of_greed_ultra", pickaxeOfGreedUltra, CreativeTabsManager.tabBTAWC, null);
 		// Axe of Greed
-		ModRegistry.registerItem(axeOfGreed, "axe_of_greed_basic");
-		ModRegistry.registerItem(axeOfGreedSuper, "axe_of_greed_super");
-		ModRegistry.registerItem(axeOfGreedMega, "axe_of_greed_mega");
-		ModRegistry.registerItem(axeOfGreedUltra, "axe_of_greed_ultra");
+		LifeCycleManager.addItemLifeCycle("axe_of_greed_basic", axeOfGreed, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("axe_of_greed_super", axeOfGreedSuper, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("axe_of_greed_mega", axeOfGreedMega, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("axe_of_greed_ultra", axeOfGreedUltra, CreativeTabsManager.tabBTAWC, null);
 		// Sword of Greed
-		ModRegistry.registerItem(swordOfGreed, "sword_of_greed_basic");
-		ModRegistry.registerItem(swordOfGreedSuper, "sword_of_greed_super");
-		ModRegistry.registerItem(swordOfGreedMega, "sword_of_greed_mega");
-		ModRegistry.registerItem(swordOfGreedUltra, "sword_of_greed_ultra");
+		LifeCycleManager.addItemLifeCycle("sword_of_greed_basic", swordOfGreed, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("sword_of_greed_super", swordOfGreedSuper, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("sword_of_greed_mega", swordOfGreedMega, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("sword_of_greed_ultra", swordOfGreedUltra, CreativeTabsManager.tabBTAWC, null);
 		// Pulsator
-		ModRegistry.registerItem(pulsator, "pulsator");
-		// Misc
-		ModRegistry.registerItem(netherStarIngot, "nether_star_ingot");
-		ModRegistry.registerItem(animalIngot, "animal_ingot");
-		ModRegistry.registerItem(crystalOfGreed, "crystal_of_greed");
-		ModRegistry.registerItem(mobIngot, "mob_ingot");
-		ModRegistry.registerItem(crystalOfWrath, "crystal_of_wrath");
-		ModRegistry.registerItem(graphite, "graphite");
-		ModRegistry.registerItem(gironIngot, "giron_ingot");
-		ModRegistry.registerItem(steelIngot, "steel_ingot");
+		LifeCycleManager.addItemLifeCycle("pulsator", pulsator, CreativeTabsManager.tabBTAWC, null);
+		// Materials
+		// Ingots
+		LifeCycleManager.addItemLifeCycle("nether_star_ingot", netherStarIngot, CreativeTabsManager.tabBTAWC, "ingotNetherStar");
+		LifeCycleManager.addItemLifeCycle("animal_ingot", animalIngot, CreativeTabsManager.tabBTAWC, "ingotAnimal");
+		LifeCycleManager.addItemLifeCycle("mob_ingot", mobIngot, CreativeTabsManager.tabBTAWC, "ingotMob");
+		LifeCycleManager.addItemLifeCycle("giron_ingot", gironIngot, CreativeTabsManager.tabBTAWC, "ingotGiron");
+		LifeCycleManager.addItemLifeCycle("steel_ingot", steelIngot, CreativeTabsManager.tabBTAWC, "ingotSteel");
+		LifeCycleManager.addItemLifeCycle("graphite", graphite, CreativeTabsManager.tabBTAWC, "graphite");
+		// Crystals
+		LifeCycleManager.addItemLifeCycle("crystal_of_greed", crystalOfGreed, CreativeTabsManager.tabBTAWC, "crystalGreed");
+		LifeCycleManager.addItemLifeCycle("crystal_of_wrath", crystalOfWrath, CreativeTabsManager.tabBTAWC, "crystalWrath");
 		// Chips
-		ModRegistry.registerItem(ironChip, "iron_chip");
-		ModRegistry.registerItem(goldChip, "gold_chip");
-		ModRegistry.registerItem(gironChip, "giron_chip");
-		ModRegistry.registerItem(pulsatingChip, "pulsating_chip");
+		LifeCycleManager.addItemLifeCycle("iron_chip", ironChip, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("gold_chip", goldChip, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("giron_chip", gironChip, CreativeTabsManager.tabBTAWC, null);
+		LifeCycleManager.addItemLifeCycle("pulsating_chip", pulsatingChip, CreativeTabsManager.tabBTAWC, null);
 		// Upgrade Chips
-		ModRegistry.registerItem(speedUpgradeChip, "speed_upgrade_chip");
+		LifeCycleManager.addItemLifeCycle("speed_upgrade_chip", speedUpgradeChip, CreativeTabsManager.tabBTAWC, null);
 		// Air Horn
-		ModRegistry.registerItem(airHorn, "air_horn");
-	}
-	
-	public static final void creativeTabs() {
+		LifeCycleManager.addItemLifeCycle("air_horn", airHorn, CreativeTabsManager.tabBTAWC, null);
+		// Fuel
+		LifeCycleManager.addItemLifeCycle("nether_star_fuel", netherStarFuel, CreativeTabsManager.tabBTAWC, null);
 		
-		// Growth Device
-		growthDeviceFrame.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		growthDevice.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		growthDeviceSuper.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		growthDeviceMega.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		growthDeviceUltra.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// Magnet
-		magnetFrame.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		magnetItems.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		magnetAnimals.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		magnetMobs.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		magnetWither.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// Flowtation Device
-		flowtationDeviceFrame.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		flowtationDevice.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// hoe of greed
-		hoeOfGreed.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		hoeOfGreedSuper.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		hoeOfGreedMega.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		hoeOfGreedUltra.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// Pickaxe of Greed
-		pickaxeOfGreed.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		pickaxeOfGreedSuper.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		pickaxeOfGreedMega.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		pickaxeOfGreedUltra.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// Axe of Greed
-		axeOfGreed.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		axeOfGreedSuper.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		axeOfGreedMega.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		axeOfGreedUltra.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// Sword of Greed
-		swordOfGreed.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		swordOfGreedSuper.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		swordOfGreedMega.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		swordOfGreedUltra.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// Pulsator
-		pulsator.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// Misc
-		netherStarIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		animalIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		crystalOfGreed.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		mobIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		crystalOfWrath.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		graphite.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		gironIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		steelIngot.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// Chips
-		ironChip.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		goldChip.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		gironChip.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		pulsatingChip.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// Upgrade Chips
-		speedUpgradeChip.setCreativeTab(CreativeTabsManager.tabBTAWC);
-		// Air Horn
-		airHorn.setCreativeTab(CreativeTabsManager.tabBTAWC);
 	}
 	
 	public static final void crafting() {
 		// Grow Device
-		
 		// Grow Device Frame
 		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(growthDeviceFrame),
@@ -625,82 +571,15 @@ public class ItemsManager {
 				'r', graphite,
 				's', steelIngot,
 				'g', Items.GLASS_BOTTLE);
-	}
-	
-	public static void addToOreDictionary() {
-		OreDictionary.registerOre("ingotNetharStar", netherStarIngot);
-		OreDictionary.registerOre("ingotAnimal", animalIngot);
-		OreDictionary.registerOre("ingotMob", mobIngot);
-		OreDictionary.registerOre("ingotGiron", gironIngot);
-		OreDictionary.registerOre("ingotSteel", steelIngot);
-		OreDictionary.registerOre("crystalGreed", crystalOfGreed);
-		OreDictionary.registerOre("crystalWrath", crystalOfWrath);
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public static void registerRenderer() {
-		// Growth Device
-		ModRegistry.registerRender(growthDeviceFrame, "growth_device_frame");
-		ModRegistry.registerRender(growthDevice, "growth_device");
-		ModRegistry.registerRender(growthDeviceSuper, "growth_device_super");
-		ModRegistry.registerRender(growthDeviceMega, "growth_device_mega");
-		ModRegistry.registerRender(growthDeviceUltra, "growth_device_ultra");
-		// Magnets
-		ModRegistry.registerRender(magnetFrame, "magnet_frame");
-		ModRegistry.registerRender(magnetItems, "magnet_items");
-		ModRegistry.registerRender(magnetAnimals, "magnet_animals");
-		ModRegistry.registerRender(magnetMobs, "magnet_mobs");
-		ModRegistry.registerRender(magnetWither, "magnet_wither");
-		// Flowtation Device
-		ModRegistry.registerRender(flowtationDeviceFrame, "flowtation_device_frame");
-		ModRegistry.registerRender(flowtationDevice, "flowtation_device");
-		// Hoe of Greed
-		ModRegistry.registerRender(hoeOfGreed, "hoe_of_greed_basic");
-		ModRegistry.registerRender(hoeOfGreedSuper, "hoe_of_greed_super");
-		ModRegistry.registerRender(hoeOfGreedMega, "hoe_of_greed_mega");
-		ModRegistry.registerRender(hoeOfGreedUltra, "hoe_of_greed_ultra");
-		// Pickaxe of Greed
-		ModRegistry.registerRender(pickaxeOfGreed, "pickaxe_of_greed_basic");
-		ModRegistry.registerRender(pickaxeOfGreedSuper, "pickaxe_of_greed_super");
-		ModRegistry.registerRender(pickaxeOfGreedMega, "pickaxe_of_greed_mega");
-		ModRegistry.registerRender(pickaxeOfGreedUltra, "pickaxe_of_greed_ultra");
-		// Axe of Greed
-		ModRegistry.registerRender(axeOfGreed, "axe_of_greed_basic");
-		ModRegistry.registerRender(axeOfGreedSuper, "axe_of_greed_super");
-		ModRegistry.registerRender(axeOfGreedMega, "axe_of_greed_mega");
-		ModRegistry.registerRender(axeOfGreedUltra, "axe_of_greed_ultra");
-		// Sword of Greed
-		ModRegistry.registerRender(swordOfGreed, "sword_of_greed_basic");
-		ModRegistry.registerRender(swordOfGreedSuper, "sword_of_greed_super");
-		ModRegistry.registerRender(swordOfGreedMega, "sword_of_greed_mega");
-		ModRegistry.registerRender(swordOfGreedUltra, "sword_of_greed_ultra");
-		// Pulsator
-		ModRegistry.registerRender(pulsator, "pulsator");
-		// Misc
-		// Nether Star Ingot
-		ModRegistry.registerRender(netherStarIngot, "nether_star_ingot");
-		// Animal Ingot
-		ModRegistry.registerRender(animalIngot, "animal_ingot");
-		// Crystal of Greed
-		ModRegistry.registerRender(crystalOfGreed, "crystal_of_greed");
-		// Mob Ingot
-		ModRegistry.registerRender(mobIngot, "mob_ingot");
-		// Crystal of Wrath
-		ModRegistry.registerRender(crystalOfWrath, "crystal_of_wrath");
-		// graphite
-		ModRegistry.registerRender(graphite, "graphite");
-		// Giron Ingot
-		ModRegistry.registerRender(gironIngot, "giron_ingot");
-		// Steel Ingot
-		ModRegistry.registerRender(steelIngot, "steel_ingot");
-		// Chips
-		ModRegistry.registerRender(ironChip, "iron_chip");
-		ModRegistry.registerRender(goldChip, "gold_chip");
-		ModRegistry.registerRender(gironChip, "giron_chip");
-		ModRegistry.registerRender(pulsatingChip, "pulsating_chip");
-		// Upgrade Chips
-		ModRegistry.registerRender(speedUpgradeChip, "speed_upgrade_chip");
-		// Air Horn
-		ModRegistry.registerRender(airHorn, "air_horn");
+		// Nether Star Fuel
+		ModRegistry.addAlloyFurnaceRecipe(new ItemStack(netherStarIngot), new ItemStack(Items.COAL), new ItemStack(netherStarIngot), new ItemStack(Items.COAL), new ItemStack(netherStarFuel, 4));
+		// Torch Recipe for Nether Star Fuel
+		ModRegistry.addShapedCraftingRecipe(
+				new ItemStack(Blocks.TORCH, 64), 
+				"n",
+				"s",
+				'n', netherStarFuel,
+				's', Items.STICK);
+		
 	}
 }

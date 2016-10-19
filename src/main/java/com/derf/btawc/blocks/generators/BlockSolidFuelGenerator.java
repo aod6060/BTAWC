@@ -46,4 +46,7 @@ public class BlockSolidFuelGenerator extends BlockContainerMachineBasic {
 		}
 	}
 
+	public static void updateBlockState(boolean burning, World worldObj, BlockPos pos) {
+	}
+
 }

@@ -2,6 +2,7 @@ package com.derf.btawc.proxy;
 
 import com.derf.btawc.blocks.BlockManager;
 import com.derf.btawc.items.ItemsManager;
+import com.derf.btawc.lifecycle.LifeCycleManager;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -13,9 +14,7 @@ public class ProxyClient extends ProxyCommon {
 	public void preInit(FMLPreInitializationEvent e) {
 		// TODO Auto-generated method stub
 		super.preInit(e);
-		BlockManager.registerVarients();		
-		ItemsManager.registerRenderer();
-		BlockManager.registerRenderer();
+		LifeCycleManager.registerRender();
 	}
 
 	@Override

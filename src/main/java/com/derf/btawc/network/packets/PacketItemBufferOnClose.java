@@ -46,7 +46,7 @@ public class PacketItemBufferOnClose implements IMessage {
 			TileEntity entity = world.getTileEntity(pos);
 			if(entity instanceof TileEntityItemBuffer) {
 				TileEntityItemBuffer itembuffer = (TileEntityItemBuffer)entity;
-				itembuffer.updateBlockState();
+				//itembuffer.updateBlockState();
 			}
 		}
 	}

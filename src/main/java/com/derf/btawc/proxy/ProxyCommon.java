@@ -11,6 +11,7 @@ import com.derf.btawc.items.ItemsManager;
 import com.derf.btawc.items.growthdevice.ItemGrowthDevice;
 import com.derf.btawc.items.tools.ItemAxeOfGreed;
 import com.derf.btawc.items.tools.ItemPickaxeOfGreed;
+import com.derf.btawc.lifecycle.LifeCycleManager;
 import com.derf.btawc.network.PacketHandler;
 import com.derf.btawc.sound.SoundManager;
 import com.derf.btawc.util.MobDropUtils;
@@ -26,12 +27,12 @@ public class ProxyCommon implements IProxy {
 	public void preInit(FMLPreInitializationEvent e) {
 		ItemsManager.create();
 		BlockManager.create();
-		ItemsManager.register();
-		BlockManager.register();
-		BlockManager.registerTileEntities();
 		CreativeTabsManager.create();
-		ItemsManager.creativeTabs();
-		BlockManager.creativeTabs();
+		ItemsManager.lifeCycle();
+		BlockManager.lifeCycle();
+		LifeCycleManager.register();
+		LifeCycleManager.tileEntities();
+		LifeCycleManager.creativeTabs();
 		// Register Network Packets
 		PacketHandler.registerMessages();
 		// Create and Register Sounds
@@ -41,16 +42,17 @@ public class ProxyCommon implements IProxy {
 
 	@Override
 	public void init(FMLInitializationEvent e) {
+		//LifeCycleManager.crafting();
+		BlockManager.crafting(); // Keep these till I implement my new crafting system...
 		ItemsManager.crafting();
-		BlockManager.crafting();
+		
 		HandlerManager.create();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Loader.INSTANCE, new GuiHandler());
 	}
 
 	@Override
 	public void postInit(FMLPostInitializationEvent e) {
-		ItemsManager.addToOreDictionary();
-		BlockManager.addToOreDictionary();
+		LifeCycleManager.oreDictionary();
 		ItemGrowthDevice.registerGrowthDeviceStrategies();
 		ItemPickaxeOfGreed.registerOres();
 		ItemAxeOfGreed.registerLogs();

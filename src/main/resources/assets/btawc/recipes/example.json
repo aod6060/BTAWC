@@ -1,0 +1,38 @@
+[
+  {
+    "type": "shaped-crafting",
+    "output": {
+      "itemstack": {
+        "id": "btawc:alloy_furnace",
+        "amount": 1,
+        "meta": 0
+      }
+    },
+    "input": [
+      " f ",
+      "fif",
+      " f ",
+      "f",
+      {"block": {"id": "furnace"}},
+      {"block": {"id": "iron_block"}}
+    ]
+  },
+  {
+    "type": "shapeless-crafting",
+    "output": {
+      "itemstack": {
+        "id": "btawc:example",
+        "amount": 1,
+        "meta": 0
+      }
+    },
+    "input": [
+      {
+        "itemstack" {
+          "id": "btawc:alloy_furnace",
+          ""
+        }
+      }
+    ]
+  }
+]

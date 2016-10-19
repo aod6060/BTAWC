@@ -1,7 +1,7 @@
 package com.derf.btawc;
 
-import com.derf.btawc.recipe.AlloyRecipeManager;
-import com.derf.btawc.recipe.ChipMakerRecipeManager;
+import com.derf.btawc.recipe.handler.AlloyRecipeManager;
+import com.derf.btawc.recipe.handler.ChipMakerRecipeManager;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -60,9 +60,9 @@ public final class ModRegistry {
 	public static void registerBlock(Block block, ItemBlock item, String name) {
 		if(block != null) {
 			block.setRegistryName(name);
-			GameRegistry.register(block);
+			register(block);
 			item.setRegistryName(name);
-			GameRegistry.register(item);
+			register(item);
 		} else {
 			throw new RuntimeException("ModRegistry.registerBlock, was passed a null block for "+name);
 		}
@@ -71,7 +71,7 @@ public final class ModRegistry {
 	public static void registerItem(Item item, String name) {
 		if(item != null) {
 			item.setRegistryName(name);
-			GameRegistry.register(item);
+			register(item);
 		} else {
 			throw new RuntimeException("ModRegistry.registerItem, was passed a null item for "+name);
 		}

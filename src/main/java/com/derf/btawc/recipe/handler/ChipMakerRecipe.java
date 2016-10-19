@@ -1,4 +1,4 @@
-package com.derf.btawc.recipe;
+package com.derf.btawc.recipe.handler;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

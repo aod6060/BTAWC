@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import com.derf.btawc.energy.EnergyStorage;
 import com.derf.btawc.items.ItemsManager;
 import com.derf.btawc.util.Holder;
+import com.derf.btawc.util.InventoryUtils;
 
 import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,13 +20,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
 
 public class TileEntityCreativeGenerator extends TileEntityGenerator implements IInventory {
-	private static final int SPEED_UPGRADE_SLOT = 0;
-	private static final int MAX_CAPACITY = 134217728;
+	public static final int SPEED_UPGRADE_SLOT = 0;
+	public static final int MAX_SLOT_SIZE = 1;
+	public static final int MAX_CAPACITY = 1000000000; // Holds a trillion RF
 	// Inventory
-	private ItemStack[] inventory = new ItemStack[1];
+	private ItemStack[] inventory = new ItemStack[MAX_SLOT_SIZE];
 	private String name;
 	// This is the default rf/t
-	private int energyTicks = 64;
+	private int energyTicks = 128;
 	// This is the speed upgrades
 	//public int speedUpgrades = 0; // [0 - 4]
 	// This is insantiy points
@@ -90,50 +92,32 @@ public class TileEntityCreativeGenerator extends TileEntityGenerator implements 
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound tag) {
-		super.readFromNBT(tag);
-		this.currentEnergyTicks = tag.getInteger("CurrentEnergyTicks");
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+		this.currentEnergyTicks = compound.getInteger("CurrentEnergyTicks");
 		//this.speedUpgrades = tag.getInteger("SpeedUpgrades");
-		this.insantity = tag.getInteger("Insanity");
+		this.insantity = compound.getInteger("Insanity");
+		// Inventory
+		InventoryUtils.loadInventory(this, compound);
 		
-		NBTTagList list = tag.getTagList("Items", Constants.NBT.TAG_COMPOUND);
-		this.inventory = new ItemStack[this.getSizeInventory()];
-		
-		for(int i = 0; i < list.tagCount(); i++) {
-			NBTTagCompound comp = list.getCompoundTagAt(i);
-			int index = comp.getInteger("Slot");
-			if(index >= 0 && index < this.getSizeInventory()) {
-				this.inventory[index] = ItemStack.loadItemStackFromNBT(comp);
-			}
-		}
-		
-		if(tag.hasKey("CustomName")) {
-			this.name = tag.getString("CustomName");
+		if(compound.hasKey("CustomName")) {
+			this.name = compound.getString("CustomName");
 		}
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
-		tag.setInteger("CurrentEnergyTicks", this.currentEnergyTicks);
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		compound.setInteger("CurrentEnergyTicks", this.currentEnergyTicks);
 		//tag.setInteger("SpeedUpgrades", this.speedUpgrades);
-		tag.setInteger("Insanity", this.insantity);
-		NBTTagList list = new NBTTagList();
-		
-		for(int i = 0; i < this.inventory.length; i++) {
-			if(this.inventory[i] != null) {
-				NBTTagCompound comp = new NBTTagCompound();
-				comp.setInteger("Slot", i);
-				inventory[i].writeToNBT(comp);
-				list.appendTag(comp);
-			}
-		}
-		tag.setTag("Items", list);
+		compound.setInteger("Insanity", this.insantity);
+		// Inventory
+		InventoryUtils.saveInventory(this, compound);
 		
 		if(this.hasCustomName()) {
-			tag.setString("CustomName", this.name);
+			compound.setString("CustomName", this.name);
 		}
 		
-		return super.writeToNBT(tag);
+		return super.writeToNBT(compound);
 	}
 
 	@Override

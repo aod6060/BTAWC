@@ -46,7 +46,7 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 	public static final int SPEED_UPGRADE_SLOT = 1;
 	public static final int EFFICENCY_UPGRADE_SLOT = 2;
 	public static final int MAX_SLOT_SIZE = 3;
-	public static final int MAX_CAPACITY = 1000000000;
+	public static final int MAX_CAPACITY = 500000;
 	// Caculate Insantiy
 	public static final int INSANTITY_MIN = 1;
 	public static final int INSANTITY_MAX = 4096;
@@ -103,21 +103,31 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 					}
 				}		
 				
-				if(this.isBurning() && !this.getStorage().isFull()) {
+				if(this.isBurning()) {
 					// Increment Storage Buffer
 					handleStorageBuffer();
 					storeEnergtyIntoBuffer();
-					outputAllSides();
+					outputAllSides(this.currentEnergyTicks);
+				}
+			} else {
+				if(!storage.isEmpty()) {
+					int mul = 1;
+					int size = 0;
+					if(this.getStackInSlot(SPEED_UPGRADE_SLOT) != null) {
+						size = this.getStackInSlot(SPEED_UPGRADE_SLOT).stackSize;
+					}
+					for(int i = 0; i < size; i++) {
+						mul *= 2;
+					}
+					// Calculate Actual RF/t
+					this.currentEnergyTicks = this.energyTicks * mul;
+					outputAllSides(this.currentEnergyTicks);
 				}
 			}
 			
 			if(flag != this.isBurning()) {
 				flag1 = true;
 				BlockSolidFuelGenerator.updateBlockState(this.isBurning(), worldObj, pos);
-			}
-		} else {
-			if(!storage.isEmpty()) {
-				outputAllSides();
 			}
 		}
 		
@@ -162,14 +172,14 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 	}
 
 	
-	private void outputAllSides() {
+	private void outputAllSides(int currentEnergyTicks) {
 		// Output to all sides
 		List<Holder> sides = Holder.getHolders(pos);
 		for(Holder side : sides) {
 			TileEntity entity = worldObj.getTileEntity(side.getPos());
 			if(entity != null && entity instanceof IEnergyReceiver) {
 				IEnergyReceiver handler = (IEnergyReceiver)entity;
-				int ee = this.extractEnergy(side.getDirection(), this.currentEnergyTicks, true);
+				int ee = this.extractEnergy(side.getDirection(), currentEnergyTicks, true);
 				int er = handler.receiveEnergy(side.getDirection().getOpposite(), ee, true);
 				this.extractEnergy(side.getDirection(), er, false);
 				handler.receiveEnergy(side.getDirection().getOpposite(), er, false);
@@ -188,10 +198,6 @@ public class TileEntitySolidFuelGenerator extends TileEntityGenerator implements
 		}
 		// Calculate Actual RF/t
 		this.currentEnergyTicks = this.energyTicks * mul * this.insantity;
-		// I might change this.
-		if(this.currentEnergyTicks > this.storage.getCapacity()) {
-			this.currentEnergyTicks = this.storage.getCapacity();
-		}
 	}
 
 	public void setName(String name) {

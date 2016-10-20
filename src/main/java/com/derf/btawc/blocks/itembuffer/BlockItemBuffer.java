@@ -32,15 +32,6 @@ import net.minecraft.world.World;
 
 public class BlockItemBuffer extends BlockContainerBasic {
 	
-	/*
-	public static PropertySixSidedType WEST = PropertySixSidedType.create("west");
-	public static PropertySixSidedType EAST = PropertySixSidedType.create("east");
-	public static PropertySixSidedType NORTH = PropertySixSidedType.create("north");
-	public static PropertySixSidedType SOUTH = PropertySixSidedType.create("south");
-	public static PropertySixSidedType UP = PropertySixSidedType.create("up");
-	public static PropertySixSidedType DOWN = PropertySixSidedType.create("down");
-	*/
-	
 	public BlockItemBuffer() {
 		super("item_buffer", Material.ROCK, 2.0f, 2.0f, 0.0f, "pickaxe", 0, SoundType.STONE);
 	}

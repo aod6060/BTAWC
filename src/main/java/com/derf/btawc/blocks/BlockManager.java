@@ -6,6 +6,7 @@ import com.derf.btawc.blocks.cobblestonegenerator.BlockCobblestoneGenerator;
 import com.derf.btawc.blocks.furnace.BlockAlloyFurnace;
 import com.derf.btawc.blocks.furnace.BlockSuperFurnace;
 import com.derf.btawc.blocks.generators.BlockCreativeGenerator;
+import com.derf.btawc.blocks.generators.BlockSolarPanel;
 import com.derf.btawc.blocks.generators.BlockSolidFuelGenerator;
 import com.derf.btawc.blocks.itembuffer.BlockItemBuffer;
 import com.derf.btawc.blocks.lootpresents.BlockLootPresent;
@@ -14,6 +15,7 @@ import com.derf.btawc.blocks.tileentity.cobblestonegenerator.TileEntityCobblesto
 import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
+import com.derf.btawc.blocks.tileentity.generators.TileEntitySolarPanel;
 import com.derf.btawc.blocks.tileentity.generators.TileEntitySolidFuelGenerator;
 import com.derf.btawc.blocks.tileentity.itembuffer.TileEntityItemBuffer;
 import com.derf.btawc.blocks.witherproof.BlockWitherProof;
@@ -28,8 +30,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public final class BlockManager {
 	
@@ -38,6 +38,9 @@ public final class BlockManager {
 	// solid fuel generator
 	public static Block solidFuelGenerator;
 	public static Block solidFuelGeneratorOn;
+	// solar panel
+	public static Block solarPanel;
+	// lunar panel
 	// Storage
 	public static Block energyStorageBasic; // Basic Energy Storage cap 10000 transfer rate 100
 	// Wireless Energy Access
@@ -70,6 +73,9 @@ public final class BlockManager {
 		// Solid Fuel Generator
 		solidFuelGenerator = new BlockSolidFuelGenerator(0.0f, false);
 		solidFuelGeneratorOn = new BlockSolidFuelGenerator(1.0f, true);
+		// Solar Panel
+		solarPanel = new BlockSolarPanel();
+		// Lunar Panel
 		//energyStorageBasic = new BlockEnergyStorageBasic();
 		// Super Furnace
 		superFurnace = new BlockSuperFurnace(0, false);
@@ -98,6 +104,9 @@ public final class BlockManager {
 		// Solid Fuel Generator
 		LifeCycleManager.addBlockLifeCycle("solid_fuel_generator", solidFuelGenerator, CreativeTabsManager.tabBTAWC, TileEntitySolidFuelGenerator.class, null);
 		LifeCycleManager.addBlockLifeCycle("solid_fuel_generator_on", solidFuelGeneratorOn, null, null, null);
+		// Solar Panel
+		LifeCycleManager.addBlockLifeCycle("solar_panel", solarPanel, CreativeTabsManager.tabBTAWC, TileEntitySolarPanel.class, null);
+		// Lunar Panel
 		// Super Furnace
 		LifeCycleManager.addBlockLifeCycle("super_furnace", superFurnace, CreativeTabsManager.tabBTAWC, TileEntitySuperFurnace.class, null);
 		LifeCycleManager.addBlockLifeCycle("super_furnace_on", superFurnaceOn, null, null, null);
@@ -172,6 +181,7 @@ public final class BlockManager {
 				'r', Blocks.REDSTONE_BLOCK);
 		
 		// Generators (Produces RF) generators use gold chip for recipe
+		// Solid Fuel Generator
 		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(solidFuelGenerator), 
 				"sss",
@@ -180,6 +190,17 @@ public final class BlockManager {
 				's', ItemsManager.steelIngot,
 				'f', Blocks.FURNACE,
 				'g', ItemsManager.goldChip);
+		// Solar Panel
+		ModRegistry.addShapedCraftingRecipe(
+				new ItemStack(solarPanel), 
+				"sgs",
+				"sis",
+				"scs",
+				's', ItemsManager.steelIngot,
+				'g', ItemsManager.graphite,
+				'i', Items.IRON_INGOT,
+				'c', ItemsManager.goldChip);
+		// Lunar Panel
 		// Item Buffer
 		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(itemBuffer), 

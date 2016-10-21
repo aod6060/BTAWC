@@ -1,12 +1,16 @@
 package com.derf.btawc.blocks.generators;
 
+import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.basic.BlockContainerBasic;
 import com.derf.btawc.blocks.tileentity.generators.TileEntitySolarPanel;
+import com.derf.btawc.client.gui.GuiHandler;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -31,6 +35,7 @@ public class BlockSolarPanel extends BlockContainerBasic {
 		
 		if(entity instanceof TileEntitySolarPanel) {
 			// Drop Inventory
+			InventoryHelper.dropInventoryItems(world, pos, ((IInventory)entity));
 		}
 		super.breakBlock(world, pos, state);
 	}
@@ -50,6 +55,7 @@ public class BlockSolarPanel extends BlockContainerBasic {
 		
 		if(!world.isRemote) {
 			// Open Menu
+			player.openGui(Loader.INSTANCE, GuiHandler.SOLAR_PANEL_GUI, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}

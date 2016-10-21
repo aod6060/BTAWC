@@ -1,11 +1,16 @@
 package com.derf.btawc.blocks.tileentity.generators;
 
+import java.util.List;
+
 import com.derf.btawc.blocks.tileentity.TileEntityBasic;
 import com.derf.btawc.energy.EnergyStorage;
 import com.derf.btawc.energy.IEnergyLevelPrintable;
+import com.derf.btawc.util.Holder;
 
 import cofh.api.energy.IEnergyProvider;
+import cofh.api.energy.IEnergyReceiver;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
@@ -65,4 +70,32 @@ public abstract class TileEntityGenerator extends TileEntityBasic implements ITi
 	public EnergyStorage getStorage() {
 		return this.storage;
 	}
+	
+	protected void storeIntoBuffer(int currentEnergyTicks) {
+		int value = this.storage.receiveEnergy(currentEnergyTicks, true);
+		this.storage.receiveEnergy(value, false);
+	}
+	
+	protected void outputAllSides(int currentEnergyTicks) {
+		List<Holder> sides = Holder.getHolders(pos);
+		for(Holder side : sides) {
+			TileEntity entity = worldObj.getTileEntity(side.getPos());
+			if(entity != null && entity instanceof IEnergyReceiver) {
+				IEnergyReceiver handler = (IEnergyReceiver)entity;
+				int ee = this.extractEnergy(side.getDirection(), currentEnergyTicks, true);
+				int er = handler.receiveEnergy(side.getDirection().getOpposite(), ee, true);
+				this.extractEnergy(side.getDirection(), er, false);
+				handler.receiveEnergy(side.getDirection().getOpposite(), er, false);
+			}
+		}
+	}
+	
+	protected void onEnergyUpdate(int currentEnergyTicks) {
+		caculateRFTicks();
+		this.storeIntoBuffer(currentEnergyTicks);
+		this.outputAllSides(currentEnergyTicks);
+	}
+	
+	// Abstract Methods
+	protected abstract void caculateRFTicks();
 }

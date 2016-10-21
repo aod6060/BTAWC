@@ -44,6 +44,54 @@ public class TileEntityCreativeGenerator extends TileEntityGenerator implements 
 	public void update() {
 		
 		// Caculate Addition mul for speedUpgrades
+		if(!worldObj.isRemote) {
+			/*
+			int mul = 1;
+			
+			int size = 0;
+			
+			if(this.inventory[SPEED_UPGRADE_SLOT] != null) {
+				size = this.inventory[SPEED_UPGRADE_SLOT].stackSize;
+			}
+			
+			for(int i = 0; i < size; i++) {
+				mul *= 2;
+			}
+			
+			// Calculate Actual RF/t
+			this.currentEnergyTicks = this.energyTicks * mul * this.insantity;
+			
+			if(this.currentEnergyTicks > this.storage.getCapacity()) {
+				this.currentEnergyTicks = this.storage.getCapacity();
+			}
+		
+			this.storeIntoBuffer(this.currentEnergyTicks);
+			this.outputAllSides(this.currentEnergyTicks);
+			
+			int delta = storage.receiveEnergy(this.currentEnergyTicks, true);
+			this.storage.receiveEnergy(delta, false);
+			
+			List<Holder> sides = Holder.getHolders(pos);
+			for(Holder side : sides) {
+				TileEntity entity = worldObj.getTileEntity(side.getPos());
+				
+				if(entity != null && entity instanceof IEnergyReceiver) {
+					IEnergyReceiver handler = (IEnergyReceiver)entity;
+					int ee = this.extractEnergy(side.getDirection(), this.currentEnergyTicks, true);
+					int er = handler.receiveEnergy(side.getDirection().getOpposite(), ee, true);
+					this.extractEnergy(side.getDirection(), er, false);
+					handler.receiveEnergy(side.getDirection().getOpposite(), er, false);
+				}
+			}
+			*/
+			this.onEnergyUpdate(this.currentEnergyTicks);
+			this.markDirty();
+		}
+		
+	}
+
+	@Override
+	protected void caculateRFTicks() {
 		int mul = 1;
 		
 		int size = 0;
@@ -62,29 +110,8 @@ public class TileEntityCreativeGenerator extends TileEntityGenerator implements 
 		if(this.currentEnergyTicks > this.storage.getCapacity()) {
 			this.currentEnergyTicks = this.storage.getCapacity();
 		}
-		
-		int delta = storage.receiveEnergy(this.currentEnergyTicks, true);
-		this.storage.receiveEnergy(delta, false);
-		
-		List<Holder> sides = Holder.getHolders(pos);
-		for(Holder side : sides) {
-			TileEntity entity = worldObj.getTileEntity(side.getPos());
-			
-			if(entity != null && entity instanceof IEnergyReceiver) {
-				IEnergyReceiver handler = (IEnergyReceiver)entity;
-				int ee = this.extractEnergy(side.getDirection(), this.currentEnergyTicks, true);
-				int er = handler.receiveEnergy(side.getDirection().getOpposite(), ee, true);
-				this.extractEnergy(side.getDirection(), er, false);
-				handler.receiveEnergy(side.getDirection().getOpposite(), er, false);
-			}
-		}
-		
-		if(!worldObj.isRemote) {
-			this.markDirty();
-		}
-		
 	}
-
+	
 	@Override
 	public String printEnergyValue() {
 		String s = String.format("[%d/%d] %d RF/t", this.storage.getEnergyStored(), this.storage.getMaxEnergyStored(), this.currentEnergyTicks);

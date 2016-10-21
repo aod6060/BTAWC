@@ -4,18 +4,21 @@ import com.derf.btawc.blocks.tileentity.chipmaker.TileEntityChipMaker;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
+import com.derf.btawc.blocks.tileentity.generators.TileEntitySolarPanel;
 import com.derf.btawc.blocks.tileentity.generators.TileEntitySolidFuelGenerator;
 import com.derf.btawc.blocks.tileentity.itembuffer.TileEntityItemBuffer;
 import com.derf.btawc.client.gui.chipmaker.GuiContainerChipMaker;
 import com.derf.btawc.client.gui.furnace.GuiContainerAlloyFurnace;
 import com.derf.btawc.client.gui.furnace.GuiContainerSuperFurnace;
 import com.derf.btawc.client.gui.generators.GuiContainerCreativeGenerator;
+import com.derf.btawc.client.gui.generators.GuiContainerSolarPanel;
 import com.derf.btawc.client.gui.generators.GuiContainerSolidFuelGenerator;
 import com.derf.btawc.client.gui.itembuffer.GuiContainerItemBuffer;
 import com.derf.btawc.inventory.container.chipmaker.ContainerChipMaker;
 import com.derf.btawc.inventory.container.furnace.ContainerAlloyFurnace;
 import com.derf.btawc.inventory.container.furnace.ContainerSuperFurnace;
 import com.derf.btawc.inventory.container.generator.ContainerCreativeGenerator;
+import com.derf.btawc.inventory.container.generator.ContainerSolarPanel;
 import com.derf.btawc.inventory.container.generator.ContainerSolidFuelGenerator;
 import com.derf.btawc.inventory.container.itembuffer.ContainerItemBuffer;
 
@@ -37,7 +40,9 @@ public class GuiHandler implements IGuiHandler {
 	// Item Buffer
 	public static final int ITEM_BUFFER_GUI = 4;
 	// Solid Fuel Generator
-	public static final int SOLID_FUEL_GENERATOR = 5;
+	public static final int SOLID_FUEL_GENERATOR_GUI = 5;
+	// Solar Panel
+	public static final int SOLAR_PANEL_GUI = 6;
 	
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -54,8 +59,10 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerChipMaker(player.inventory, (TileEntityChipMaker)world.getTileEntity(pos));
 		case ITEM_BUFFER_GUI:
 			return new ContainerItemBuffer(player.inventory, (TileEntityItemBuffer)world.getTileEntity(pos));
-		case SOLID_FUEL_GENERATOR:
+		case SOLID_FUEL_GENERATOR_GUI:
 			return new ContainerSolidFuelGenerator(player.inventory, (TileEntitySolidFuelGenerator)world.getTileEntity(pos));
+		case SOLAR_PANEL_GUI:
+			return new ContainerSolarPanel(player.inventory, (TileEntitySolarPanel)world.getTileEntity(pos));
 		}
 		
 		return null;
@@ -76,8 +83,10 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiContainerChipMaker(player.inventory, (TileEntityChipMaker)world.getTileEntity(pos));
 		case ITEM_BUFFER_GUI:
 			return new GuiContainerItemBuffer(player.inventory, (TileEntityItemBuffer)world.getTileEntity(pos));
-		case SOLID_FUEL_GENERATOR:
+		case SOLID_FUEL_GENERATOR_GUI:
 			return new GuiContainerSolidFuelGenerator(player.inventory, (TileEntitySolidFuelGenerator)world.getTileEntity(pos));
+		case SOLAR_PANEL_GUI:
+			return new GuiContainerSolarPanel(player.inventory, (TileEntitySolarPanel)world.getTileEntity(pos));
 		}
 		
 		return null;

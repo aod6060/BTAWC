@@ -1,17 +1,19 @@
 package com.derf.btawc.blocks.tileentity.generators;
 
-import com.derf.btawc.BTAWCLogger;
 import com.derf.btawc.energy.EnergyStorage;
 import com.derf.btawc.items.ItemsManager;
+import com.derf.btawc.util.InventoryUtils;
+import com.derf.btawc.util.Utils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
-import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Alright time for the solar panel. I'm currently looking at the Daylight Scensor to see how to 
@@ -21,10 +23,12 @@ import net.minecraft.world.World;
  */
 public class TileEntitySolarPanel extends TileEntityGenerator implements IInventory {
 	// Statics Stuff
-	public static final int SPEED_UPGRADE_SLOT = 0;
-	public static final int MAX_SLOT_SIZE = 1;
+	public static final int SOLAR_PANE_SLOT = 0; // up to 64...
+	public static final int SPEED_UPGRADE_SLOT = 1;
+	public static final int MAX_SLOT_SIZE = 2;
 	public static final int MAX_CAPACITY = 500000;
 	// Caculate Insantity
+	public static final int INSANTITY_MIN = 1;
 	public static final int INSANTITY_MAX = 4096;
 	// Inventory
 	private ItemStack[] inventory = new ItemStack[MAX_SLOT_SIZE];
@@ -44,25 +48,66 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 	
 	@Override
 	public void update() {
-		if(!worldObj.isRemote && worldObj.getWorldTime() % 20L == 0L) {
-			int baseRF = this.caculateBaseRF();
-			int speedUpgrades = this.caculateSpeedUpdates();
-			int insantity = this.caculateInsantityFromPanes();
-			this.currentEnergyTicks = baseRF;
-			
+		if(!worldObj.isRemote) {
+			if(!this.isLessThanZero()) {
+				this.onEnergyUpdate(this.currentEnergyTicks);
+			} else {
+				if(!this.getStorage().isEmpty()) {
+					this.currentEnergyTicks = this.energyTicks * this.caculateSpeedUpdates();
+					this.outputAllSides(this.currentEnergyTicks);
+				}
+			}
+			this.markDirty();
 		}
 	}
-	
+
+	private void storeIntoBuffer() {
+		int delta = storage.receiveEnergy(this.currentEnergyTicks, true);
+		this.storage.receiveEnergy(delta, false);
+	}
+
+	@Override
+	protected void caculateRFTicks() {
+		int baseRF = this.caculateBaseRF();
+		int speedUpgrades = this.caculateSpeedUpdates();
+		this.insantity = this.caculateInsantityFromPanes();
+		this.currentEnergyTicks = baseRF * speedUpgrades * insantity;
+	}
+
 	private int caculateInsantityFromPanes() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int temp = 1;
+		
+		if(this.getStackInSlot(SOLAR_PANE_SLOT) != null) {
+			int stackSize = this.getStackInSlot(SOLAR_PANE_SLOT).stackSize;
+			float rep_stackSize = (float) stackSize / 64f;
+			int modifier = (int) Utils.lerp(rep_stackSize, INSANTITY_MIN, INSANTITY_MAX);
+			temp *= modifier;
+		}
+		
+		return temp;
 	}
 
 	private int caculateSpeedUpdates() {
-		// TODO Auto-generated method stub
-		return 0;
+		int temp = 1;
+		if(this.getStackInSlot(SPEED_UPGRADE_SLOT) != null) {
+			for(int i = 0; i < this.getStackInSlot(SPEED_UPGRADE_SLOT).stackSize; i++) {
+				temp *= 2;
+			}
+			
+		}
+		return temp;
 	}
 
+	
+	public boolean isLessThanZero() {
+		int i = worldObj.getLightFor(EnumSkyBlock.SKY, pos) - worldObj.getSkylightSubtracted();
+		int value = 4; // Efficency;
+		int efficency = value + i;
+		efficency = MathHelper.clamp_int(efficency, 0, 4); // This will effectively make sure that the
+		return efficency == 0;
+	}
+	
 	private int caculateBaseRF() {
 		int i = worldObj.getLightFor(EnumSkyBlock.SKY, pos) - worldObj.getSkylightSubtracted();
 		int value = 4; // Efficency;
@@ -132,7 +177,11 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
 		if(stack != null) {
-			return stack.getItem() == ItemsManager.speedUpgradeChip;
+			if(index == SPEED_UPGRADE_SLOT && stack.getItem() == ItemsManager.speedUpgradeChip) {
+				return true;
+			} else if(index == SOLAR_PANE_SLOT && stack.getItem() == ItemsManager.solarPane) {
+				
+			}
 		}
 		return false;
 	}
@@ -199,4 +248,48 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 		this.inventory = new ItemStack[MAX_SLOT_SIZE];
 	}
 
+	@SideOnly(Side.CLIENT)
+	public int getSun(int scale) {
+		int i = worldObj.getLightFor(EnumSkyBlock.SKY, pos) - worldObj.getSkylightSubtracted();
+		int value = 4; // Efficency;
+		int efficency = value + i;
+		efficency = MathHelper.clamp_int(efficency, 0, 4);
+		return efficency * scale / 100;
+	}
+
+	
+	@Override
+	public String printEnergyValue() {
+		String s = String.format("[%d/%d] %d RF/t", this.storage.getEnergyStored(), this.storage.getMaxEnergyStored(), this.currentEnergyTicks);
+		return s;
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound compound) {
+		// TODO Auto-generated method stub
+		super.readFromNBT(compound);
+		this.currentEnergyTicks = compound.getInteger("CurrentEnergyTicks");
+		this.insantity = compound.getInteger("Insanity");
+		// Inventory
+		InventoryUtils.loadInventory(this, compound);
+		if(compound.hasKey("CustomName")) {
+			this.name = compound.getString("CustomName");
+		}
+	}
+
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		// TODO Auto-generated method stub
+		compound.setInteger("CurrentEnergyTicks", this.currentEnergyTicks);
+		compound.setInteger("Insanity", this.insantity);
+		// Inventory
+		InventoryUtils.saveInventory(this, compound);
+		if(this.hasCustomName()) {
+			compound.setString("CustomName", this.name);
+		}
+		
+		return super.writeToNBT(compound);
+	}
+	
+	
 }

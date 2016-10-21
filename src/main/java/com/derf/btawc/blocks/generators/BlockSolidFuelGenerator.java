@@ -40,7 +40,7 @@ public class BlockSolidFuelGenerator extends BlockContainerMachineBasic {
 
 	@Override
 	public void onOpenGui(World world, BlockPos pos, EntityPlayer player) {
-		player.openGui(Loader.INSTANCE, GuiHandler.SOLID_FUEL_GENERATOR, world, pos.getX(), pos.getY(), pos.getZ());
+		player.openGui(Loader.INSTANCE, GuiHandler.SOLID_FUEL_GENERATOR_GUI, world, pos.getX(), pos.getY(), pos.getZ());
 	}
 
 	@Override

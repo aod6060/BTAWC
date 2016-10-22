@@ -45,14 +45,14 @@ public abstract class TileEntityGenerator extends TileEntityBasic implements ITi
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound tag) {
-		super.readFromNBT(tag);
-		storage.readFromNBT(tag);
+	public void readFromNBT(NBTTagCompound compound) {
+		super.readFromNBT(compound);
+		storage.readFromNBT(compound);
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
-		return storage.writeToNBT(super.writeToNBT(tag));
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		return storage.writeToNBT(super.writeToNBT(compound));
 	}
 	
 	@Override

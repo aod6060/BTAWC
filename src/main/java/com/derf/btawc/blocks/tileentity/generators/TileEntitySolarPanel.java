@@ -16,10 +16,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * Alright time for the solar panel. I'm currently looking at the Daylight Scensor to see how to 
+ * Alright time for the solar panel. I'm currently looking at the Daylight Sensor to see how to 
  * works and I'm going to use its source as a base.
- * @author Fred
- *
+ * @author Fred Cook
  */
 public class TileEntitySolarPanel extends TileEntityGenerator implements IInventory {
 	// Statics Stuff
@@ -66,11 +65,6 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 		}
 	}
 
-	private void storeIntoBuffer() {
-		int delta = storage.receiveEnergy(this.currentEnergyTicks, true);
-		this.storage.receiveEnergy(delta, false);
-	}
-
 	@Override
 	protected void caculateRFTicks() {
 		int baseRF = this.caculateBaseRF();
@@ -80,16 +74,13 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 	}
 
 	private int caculateInsantityFromPanes() {
-		
 		int temp = 1;
-		
 		if(this.getStackInSlot(SOLAR_PANE_SLOT) != null) {
 			int stackSize = this.getStackInSlot(SOLAR_PANE_SLOT).stackSize;
 			float rep_stackSize = (float) stackSize / 64f;
 			int modifier = (int) Utils.lerp(rep_stackSize, INSANTITY_MIN, INSANTITY_MAX);
 			temp *= modifier;
 		}
-		
 		return temp;
 	}
 
@@ -99,41 +90,30 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 			for(int i = 0; i < this.getStackInSlot(SPEED_UPGRADE_SLOT).stackSize; i++) {
 				temp *= 2;
 			}
-			
 		}
 		return temp;
 	}
 
-	
 	public boolean isLessThanZero() {
-		int i = worldObj.getLightFor(EnumSkyBlock.SKY, pos) - worldObj.getSkylightSubtracted();
-		int value = 4; // Efficency;
-		int efficency = value + i;
-		efficency = MathHelper.clamp_int(efficency, 0, 4); // This will effectively make sure that the
+		int efficency = this.getGeneratorEfficency();
 		return efficency == 0;
 	}
 	
 	public int getEfficency() {
-		if(this.worldObj.getWorldTime() % 20L == 0l) {
-			System.out.println(this.efficency);
-		}
 		return this.efficency;
 	}
 	
 	protected int getGeneratorEfficency() {
 		int i = worldObj.getLightFor(EnumSkyBlock.SKY, pos) - worldObj.getSkylightSubtracted();
-		int value = 4;
+		int value = 5;
 		int efficency = value + i;
-		efficency= MathHelper.clamp_int(efficency, 0, 4);
+		efficency= MathHelper.clamp_int(efficency, 0, 5);
 		return efficency;
 	}
 	private int caculateBaseRF() {
-		int i = worldObj.getLightFor(EnumSkyBlock.SKY, pos) - worldObj.getSkylightSubtracted();
-		int value = 4; // Efficency;
-		int efficency = value + i;
-		efficency = MathHelper.clamp_int(efficency, 0, 4); // This will effectively make sure that the
+		int efficency = this.getGeneratorEfficency();
 		// Block produces power 
-		return (int)(energyTicks * ((float) efficency / 4.0f));
+		return (int)(energyTicks * ((float) efficency / 5.0f));
 	}
 	@Override
 	public String getName() {
@@ -291,7 +271,6 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
-		// TODO Auto-generated method stub
 		super.readFromNBT(compound);
 		this.currentEnergyTicks = compound.getInteger("CurrentEnergyTicks");
 		this.insantity = compound.getInteger("Insanity");

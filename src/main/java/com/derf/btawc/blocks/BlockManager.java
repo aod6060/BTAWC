@@ -6,6 +6,7 @@ import com.derf.btawc.blocks.cobblestonegenerator.BlockCobblestoneGenerator;
 import com.derf.btawc.blocks.furnace.BlockAlloyFurnace;
 import com.derf.btawc.blocks.furnace.BlockSuperFurnace;
 import com.derf.btawc.blocks.generators.BlockCreativeGenerator;
+import com.derf.btawc.blocks.generators.BlockLunarPanel;
 import com.derf.btawc.blocks.generators.BlockSolarPanel;
 import com.derf.btawc.blocks.generators.BlockSolidFuelGenerator;
 import com.derf.btawc.blocks.itembuffer.BlockItemBuffer;
@@ -15,6 +16,7 @@ import com.derf.btawc.blocks.tileentity.cobblestonegenerator.TileEntityCobblesto
 import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
+import com.derf.btawc.blocks.tileentity.generators.TileEntityLunarPanel;
 import com.derf.btawc.blocks.tileentity.generators.TileEntitySolarPanel;
 import com.derf.btawc.blocks.tileentity.generators.TileEntitySolidFuelGenerator;
 import com.derf.btawc.blocks.tileentity.itembuffer.TileEntityItemBuffer;
@@ -41,6 +43,7 @@ public final class BlockManager {
 	// solar panel
 	public static Block solarPanel;
 	// lunar panel
+	public static Block lunarPanel;
 	// Storage
 	public static Block energyStorageBasic; // Basic Energy Storage cap 10000 transfer rate 100
 	// Wireless Energy Access
@@ -76,6 +79,7 @@ public final class BlockManager {
 		// Solar Panel
 		solarPanel = new BlockSolarPanel();
 		// Lunar Panel
+		lunarPanel = new BlockLunarPanel();
 		//energyStorageBasic = new BlockEnergyStorageBasic();
 		// Super Furnace
 		superFurnace = new BlockSuperFurnace(0, false);
@@ -107,6 +111,7 @@ public final class BlockManager {
 		// Solar Panel
 		LifeCycleManager.addBlockLifeCycle("solar_panel", solarPanel, CreativeTabsManager.tabBTAWC, TileEntitySolarPanel.class, null);
 		// Lunar Panel
+		LifeCycleManager.addBlockLifeCycle("lunar_panel", lunarPanel, CreativeTabsManager.tabBTAWC, TileEntityLunarPanel.class, null);
 		// Super Furnace
 		LifeCycleManager.addBlockLifeCycle("super_furnace", superFurnace, CreativeTabsManager.tabBTAWC, TileEntitySuperFurnace.class, null);
 		LifeCycleManager.addBlockLifeCycle("super_furnace_on", superFurnaceOn, null, null, null);
@@ -201,6 +206,15 @@ public final class BlockManager {
 				'i', Items.IRON_INGOT,
 				'c', ItemsManager.goldChip);
 		// Lunar Panel
+		ModRegistry.addShapedCraftingRecipe(
+				new ItemStack(lunarPanel), 
+				"sgs",
+				"sis",
+				"scs",
+				's', ItemsManager.steelIngot,
+				'g', ItemsManager.graphite,
+				'i', Items.GOLD_INGOT,
+				'c', ItemsManager.goldChip);
 		// Item Buffer
 		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(itemBuffer), 

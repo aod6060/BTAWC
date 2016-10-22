@@ -1,3 +1,28 @@
+2.0.1 alpha
+------------------------------------------------------------------
+- Added RF Generators
+	- Solid Fuel Generator
+	- Solar Panel
+	- Lunar Panel
+- Added Chip Maker, Used to create chips
+- Added Chips
+	- Iron Chip
+	- Gold Chip
+	- Giron Chip
+	- Pulsating Chip (used with Teleporter System in 2.0.2 alpha)
+- Added Upgrade Chips 
+	- Speed Upgrade Chip
+	- Efficency Upgrade Chip
+- Added Air Horn
+- Added Dungeon Loot Present
+- Added Panes for Solar and Lunar Panels which boosts their power.
+	- Solar Pane
+	- Lunar Pane
+- Added a new fuel source called Nether Star Fuel, Burns 1,000,000 ticks.
+- Added Cobble Stone Generator (Generates cobble stone, hook my item buffer, item conducts, and hopper to receive cobblestone)
+- Added Six Sided Item Buffer (Note: it is defently wip due to the ui, but it works quite well so give it a try :) )
+- Note: Internal stuff, did a lot of changes to how I handle the life cycle of loading + enhance how inventorys are handled.
+- More is comming :)
 2.0.0 alpha
 ------------------------------------------------------------------
 - Ported everything from 1.0.2.1 to minecraft forge 1.10.2. There are 

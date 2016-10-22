@@ -40,6 +40,8 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 	private int insantity = 1;
 	// Current Energy Ticks
 	private int currentEnergyTicks = 0;
+	// Efficency
+	private int efficency;
 	
 	public TileEntitySolarPanel() {
 		super();
@@ -49,6 +51,9 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 	@Override
 	public void update() {
 		if(!worldObj.isRemote) {
+			
+			this.efficency = this.getGeneratorEfficency();
+			
 			if(!this.isLessThanZero()) {
 				this.onEnergyUpdate(this.currentEnergyTicks);
 			} else {
@@ -108,6 +113,20 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 		return efficency == 0;
 	}
 	
+	public int getEfficency() {
+		if(this.worldObj.getWorldTime() % 20L == 0l) {
+			System.out.println(this.efficency);
+		}
+		return this.efficency;
+	}
+	
+	protected int getGeneratorEfficency() {
+		int i = worldObj.getLightFor(EnumSkyBlock.SKY, pos) - worldObj.getSkylightSubtracted();
+		int value = 4;
+		int efficency = value + i;
+		efficency= MathHelper.clamp_int(efficency, 0, 4);
+		return efficency;
+	}
 	private int caculateBaseRF() {
 		int i = worldObj.getLightFor(EnumSkyBlock.SKY, pos) - worldObj.getSkylightSubtracted();
 		int value = 4; // Efficency;
@@ -209,6 +228,9 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 		case 5:
 			value = this.insantity;
 			break;
+		case 6:
+			value = this.efficency;
+			break;
 		}
 		
 		return value;
@@ -235,12 +257,15 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 		case 5:
 			this.insantity = value;
 			break;
+		case 6:
+			this.efficency = value;
+			break; // Do Nothing because this value is procedurally generated.
 		}
 	}
 
 	@Override
 	public int getFieldCount() {
-		return 6;
+		return 7;
 	}
 
 	@Override

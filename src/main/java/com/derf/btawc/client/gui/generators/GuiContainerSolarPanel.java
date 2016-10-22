@@ -55,7 +55,7 @@ public class GuiContainerSolarPanel extends GuiContainerBasic {
 	
 	protected void renderSun(int x, int y, int tx, int ty) {
 		
-		if(!this.generator.isLessThanZero()) {
+		if(this.generator.getEfficency() > 0) {
 			int k = this.getK();
 			int l = this.getL();
 			this.drawTexturedModalRect(x+k, y+l, tx, ty, 15, 15);

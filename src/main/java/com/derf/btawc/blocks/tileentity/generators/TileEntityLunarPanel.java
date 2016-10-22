@@ -1,6 +1,7 @@
 package com.derf.btawc.blocks.tileentity.generators;
 
 import com.derf.btawc.energy.EnergyStorage;
+import com.derf.btawc.items.ItemsManager;
 import com.derf.btawc.util.InventoryUtils;
 import com.derf.btawc.util.Utils;
 
@@ -37,13 +38,13 @@ public class TileEntityLunarPanel extends TileEntityGenerator implements IInvent
 	// Custom Name
 	private String name;
 	// Defualt RF/t
-	private int energyTicks;
+	private int energyTicks = 128;
 	// Insantity
-	private int insantity;
+	private int insantity = 1;
 	// Current RF/t
-	private int currentEnergyTicks;
+	private int currentEnergyTicks = 0;
 	// Efficency
-	private int efficency;
+	private int efficency = 1;
 	
 	public TileEntityLunarPanel() {
 		super();
@@ -52,11 +53,20 @@ public class TileEntityLunarPanel extends TileEntityGenerator implements IInvent
 	
 	@Override
 	public void update() {
-		if(!worldObj.isRemote && this.worldObj.getWorldTime() % 20L == 0L) {
-			this.onEnergyUpdate(this.currentEnergyTicks);
-			
-			System.out.println(this.currentEnergyTicks + " RF/t");
+		if(!worldObj.isRemote) {
+			if(!this.isLessThanZero()) {
+				this.onEnergyUpdate(this.currentEnergyTicks);
+			} else {
+				if(!this.getStorage().isEmpty()) {
+					this.currentEnergyTicks = this.energyTicks * this.caculateSpeedUpgrades();
+					this.outputAllSides(this.currentEnergyTicks);
+				}
+			}
 		}
+	}
+
+	private boolean isLessThanZero() {
+		return efficency == this.getGeneratorEfficency();
 	}
 
 	@Override
@@ -109,7 +119,7 @@ public class TileEntityLunarPanel extends TileEntityGenerator implements IInvent
 		j = -j;
 		int value = 5;
 		int efficency = value + j;
-		efficency = MathHelper.clamp_int(value, 0, 5);
+		efficency = MathHelper.clamp_int(efficency, 0, 5);
 		return efficency;
 	}
 	@Override
@@ -171,6 +181,14 @@ public class TileEntityLunarPanel extends TileEntityGenerator implements IInvent
 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
+		
+		if(stack != null) {
+			if(index == SPEED_UPGRADE_SLOT && stack.getItem() == ItemsManager.speedUpgradeChip) {
+				return true;
+			} else if(index == LUNAR_PANE_SLOT && stack.getItem() == ItemsManager.lunarPane) {
+				return true;
+			}
+		}
 		return false;
 	}
 

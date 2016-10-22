@@ -179,7 +179,7 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 			if(index == SPEED_UPGRADE_SLOT && stack.getItem() == ItemsManager.speedUpgradeChip) {
 				return true;
 			} else if(index == SOLAR_PANE_SLOT && stack.getItem() == ItemsManager.solarPane) {
-				
+				return true;
 			}
 		}
 		return false;

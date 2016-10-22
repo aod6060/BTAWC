@@ -87,6 +87,7 @@ public class ItemsManager {
 	public static Item netherStarFuel; // Lasts forever, about 1,000,000 ticks lol
 	// Panels
 	public static Item solarPane;
+	public static Item lunarPane;
 	
 	public static final void create() {
 		// Growth Device
@@ -147,8 +148,11 @@ public class ItemsManager {
 		airHorn = new ItemAirHorn();
 		// Nether Star Fuel
 		netherStarFuel = new ItemBasic("nether_star_fuel");
-		// Solar Panel
+		// Solar Pane
 		solarPane = new ItemBasic("solar_pane");
+		// Lunar Pane
+		lunarPane = new ItemBasic("lunar_pane");
+		
 	}
 	
 	public static final void lifeCycle() {
@@ -212,8 +216,10 @@ public class ItemsManager {
 		LifeCycleManager.addItemLifeCycle("air_horn", airHorn, CreativeTabsManager.tabBTAWC, null);
 		// Fuel
 		LifeCycleManager.addItemLifeCycle("nether_star_fuel", netherStarFuel, CreativeTabsManager.tabBTAWC, null);
-		// Solar Panel
+		// Solar Pane
 		LifeCycleManager.addItemLifeCycle("solar_pane", solarPane, CreativeTabsManager.tabBTAWC, null);
+		// Lunar Pane
+		LifeCycleManager.addItemLifeCycle("lunar_pane", lunarPane, CreativeTabsManager.tabBTAWC, null);
 	}
 	
 	public static final void crafting() {
@@ -592,6 +598,7 @@ public class ItemsManager {
 				"s",
 				'n', netherStarFuel,
 				's', Items.STICK);
+		// Solar Pane Recipe
 		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(solarPane),
 				"ggg",
@@ -601,5 +608,14 @@ public class ItemsManager {
 				's', ItemsManager.steelIngot,
 				'i', Items.IRON_INGOT);
 		
+		// Lunar Pane Recipe
+		ModRegistry.addShapedCraftingRecipe(
+				new ItemStack(lunarPane), 
+				"ggg",
+				"sis",
+				"sss",
+				'g', ItemsManager.graphite,
+				's', ItemsManager.steelIngot,
+				'i', Items.GOLD_INGOT);
 	}
 }

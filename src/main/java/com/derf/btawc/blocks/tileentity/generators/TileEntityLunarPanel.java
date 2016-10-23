@@ -54,6 +54,9 @@ public class TileEntityLunarPanel extends TileEntityGenerator implements IInvent
 	@Override
 	public void update() {
 		if(!worldObj.isRemote) {
+			
+			this.efficency = this.getGeneratorEfficency();
+			
 			if(!this.isLessThanZero()) {
 				this.onEnergyUpdate(this.currentEnergyTicks);
 			} else {
@@ -62,11 +65,13 @@ public class TileEntityLunarPanel extends TileEntityGenerator implements IInvent
 					this.outputAllSides(this.currentEnergyTicks);
 				}
 			}
+			
+			this.markDirty();
 		}
 	}
 
 	private boolean isLessThanZero() {
-		return efficency == this.getGeneratorEfficency();
+		return 0 == this.getGeneratorEfficency();
 	}
 
 	@Override
@@ -290,5 +295,7 @@ public class TileEntityLunarPanel extends TileEntityGenerator implements IInvent
 		return super.writeToNBT(compound);
 	}
 
-	
+	public int getEfficency() {
+		return this.efficency;
+	}
 }

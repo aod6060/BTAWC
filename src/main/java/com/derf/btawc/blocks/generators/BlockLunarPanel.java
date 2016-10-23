@@ -1,7 +1,9 @@
 package com.derf.btawc.blocks.generators;
 
+import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.basic.BlockContainerBasic;
 import com.derf.btawc.blocks.tileentity.generators.TileEntityLunarPanel;
+import com.derf.btawc.client.gui.GuiHandler;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -52,6 +54,7 @@ public class BlockLunarPanel extends BlockContainerBasic {
 			float hitZ) {
 		if(!world.isRemote) {
 			// Open Menu, Hasn't been created yet...
+			player.openGui(Loader.INSTANCE, GuiHandler.LUNAR_PANEL_GUI, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}

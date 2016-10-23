@@ -5,6 +5,8 @@ container.alloy_furnace=Alloy Furnace
 container.creative_generator=Creative Generator
 container.chip_maker=Chip Maker
 container.item_buffer=Item Buffer
+container.solar_panel=Solar Panel
+container.lunar_panel=Lunar Panel
 # Item Groups
 itemGroup.tabBTAWC=BTAWC
 # Items
@@ -60,12 +62,25 @@ item.gold_chip.name=Gold Chip
 item.giron_chip.name=Giron Chip
 item.pulsating_chip.name=Pulsating Chip
 item.speed_upgrade_chip.name=Speed Upgrade Chip
+item.efficency_upgrade_chip.name=Efficency Upgrade Chip
+# Air Horn
+item.air_horn.name=Air Horn
+# Nether Star Generator
+item.nether_star_fuel.name=Nether Star Fuel
+# Solar Pane
+item.solar_pane.name=Solar Pane
+# Lunar Pane
+item.lunar_pane.name=Lunar Pane
 # Tiles
 # Generators
 # Creative Generators
 tile.creative_generator.name=Creative Generator (Creative Mode Only)
 # Solid Fuel Generator
 tile.solid_fuel_generator.name=Solid Fuel Generator
+# Solar Panel
+tile.solar_panel.name=Solar Panel
+# Lunar Panel
+tile.lunar_panel.name=Lunar Panel
 # Energy Storage
 tile.energy_storage_basic.name=Energy Storage Basic (Stores 10000RF transfers 100 RF/t)
 # Wither Proof Blocks
@@ -80,3 +95,7 @@ tile.chip_maker.name=Chip Maker
 # Super Furnace
 tile.super_furnace.name=Super Furnace
 tile.item_buffer.name=Item Buffer
+# Simple Dungeon Present
+tile.simple_dungeon_present.name=Simple Dungeon Present
+# Cobblestone Generator
+tile.cobblestone_generator.name=Cobblestone Generator

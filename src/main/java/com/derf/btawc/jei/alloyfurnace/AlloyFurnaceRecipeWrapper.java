@@ -8,12 +8,12 @@ import mezz.jei.api.recipe.BlankRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
-public class AlloyRecipeWrapper extends BlankRecipeWrapper {
+public class AlloyFurnaceRecipeWrapper extends BlankRecipeWrapper {
 
 	private final List<List<ItemStack>> inputs;
 	private final ItemStack output;
 	
-	public AlloyRecipeWrapper(List<ItemStack> inputs, ItemStack output) {
+	public AlloyFurnaceRecipeWrapper(List<ItemStack> inputs, ItemStack output) {
 		this.inputs = Collections.singletonList(inputs);
 		this.output = output;
 	}

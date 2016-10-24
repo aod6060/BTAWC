@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 import com.derf.btawc.blocks.furnace.BlockAlloyFurnace;
 import com.derf.btawc.blocks.tileentity.TileEntityBasic;
-import com.derf.btawc.recipe.handler.AlloyRecipeManager;
+import com.derf.btawc.recipe.handler.AlloyFurnaceRecipeManager;
 import com.derf.btawc.util.FuelUtils;
 import com.derf.btawc.util.InventoryUtils;
 
@@ -77,7 +77,7 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable
 	
 	private boolean canSmelt() {
 		// Input is 0 - 3, Output 4
-		ItemStack stack = AlloyRecipeManager.getResult(inventory[INPUT_1], inventory[INPUT_2], inventory[INPUT_3], inventory[INPUT_4]);
+		ItemStack stack = AlloyFurnaceRecipeManager.getResult(inventory[INPUT_1], inventory[INPUT_2], inventory[INPUT_3], inventory[INPUT_4]);
 		
 		if(stack == null) {
 			return false;
@@ -97,7 +97,7 @@ public class TileEntityAlloyFurnace extends TileEntityBasic implements ITickable
 	
 	private void smeltItem() {
 		if(this.canSmelt()) {
-			ItemStack stack = AlloyRecipeManager.getResult(inventory[INPUT_1], inventory[INPUT_2], inventory[INPUT_3], inventory[INPUT_4]);
+			ItemStack stack = AlloyFurnaceRecipeManager.getResult(inventory[INPUT_1], inventory[INPUT_2], inventory[INPUT_3], inventory[INPUT_4]);
 			
 			if(this.inventory[OUTPUT] == null) {
 				this.inventory[OUTPUT] = stack.copy();

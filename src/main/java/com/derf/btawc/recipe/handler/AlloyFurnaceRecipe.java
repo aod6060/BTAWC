@@ -7,7 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class AlloyRecipe {
+public class AlloyFurnaceRecipe {
 	private int id;
 	// Input Stuff
 	private ItemStack input1 = null;
@@ -15,7 +15,7 @@ public class AlloyRecipe {
 	private ItemStack input3 = null;
 	private ItemStack input4 = null;
 	
-	public AlloyRecipe(int id, ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4) {
+	public AlloyFurnaceRecipe(int id, ItemStack input1, ItemStack input2, ItemStack input3, ItemStack input4) {
 		this.id = id;
 		this.input1 = input1;
 		this.input2 = input2;

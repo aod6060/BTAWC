@@ -590,7 +590,12 @@ public class ItemsManager {
 				's', steelIngot,
 				'g', Items.GLASS_BOTTLE);
 		// Nether Star Fuel
-		ModRegistry.addAlloyFurnaceRecipe(new ItemStack(netherStarIngot), new ItemStack(Items.COAL), new ItemStack(netherStarIngot), new ItemStack(Items.COAL), new ItemStack(netherStarFuel, 4));
+		ModRegistry.addAlloyFurnaceRecipe(
+				new ItemStack(netherStarIngot), 
+				new ItemStack(Items.COAL), 
+				new ItemStack(Items.COAL), 
+				new ItemStack(netherStarIngot), 
+				new ItemStack(netherStarFuel, 4));
 		// Torch Recipe for Nether Star Fuel
 		ModRegistry.addShapedCraftingRecipe(
 				new ItemStack(Blocks.TORCH, 64), 

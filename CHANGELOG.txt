@@ -22,6 +22,7 @@
 - Added Cobble Stone Generator (Generates cobble stone, hook my item buffer, item conducts, and hopper to receive cobblestone)
 - Added Six Sided Item Buffer (Note: it is defently wip due to the ui, but it works quite well so give it a try :) )
 - Note: Internal stuff, did a lot of changes to how I handle the life cycle of loading + enhance how inventorys are handled.
+- Added: JEI Support for Chip Maker, Super Furnace, and Alloy Furnace. I'm quite suprised by how easy it is. Qutos to mezz
 - More is comming :)
 2.0.0 alpha
 ------------------------------------------------------------------

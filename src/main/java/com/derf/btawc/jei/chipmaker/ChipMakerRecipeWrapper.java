@@ -1,5 +1,6 @@
 package com.derf.btawc.jei.chipmaker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import mezz.jei.api.ingredients.IIngredients;
@@ -11,19 +12,22 @@ public class ChipMakerRecipeWrapper extends BlankRecipeWrapper {
 	private final ItemStack input;
 	private final ItemStack redstone;
 	private final ItemStack output;
+	private final List<ItemStack> inputs = new ArrayList<ItemStack>();
 	
 	//public ChipMakerRecipeWrapper() {}
 	
 	public ChipMakerRecipeWrapper(ItemStack input, ItemStack redstone, ItemStack output) {
 		this.input = input;
 		this.redstone = redstone;
+		inputs.add(this.input);
+		inputs.add(this.redstone);
 		this.output = output;
+		
 	}
 	
 	@Override
 	public void getIngredients(IIngredients ingredients) {
-		ingredients.setInput(ItemStack.class, input);
-		ingredients.setInput(ItemStack.class, redstone);
+		ingredients.setInputs(ItemStack.class, inputs);
 		ingredients.setOutput(ItemStack.class, output);
 	}
 

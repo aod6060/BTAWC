@@ -5,6 +5,7 @@ container.alloy_furnace=Alloy Furnace
 container.creative_generator=Creative Generator
 container.chip_maker=Chip Maker
 container.item_buffer=Item Buffer
+container.solid_fuel_generator=Solid Fuel Generator
 container.solar_panel=Solar Panel
 container.lunar_panel=Lunar Panel
 # Item Groups

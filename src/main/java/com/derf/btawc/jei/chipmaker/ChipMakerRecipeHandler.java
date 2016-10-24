@@ -43,7 +43,12 @@ public class ChipMakerRecipeHandler implements IRecipeHandler<ChipMakerRecipeWra
 			BTAWCLogger.getLogger().error("Recipe conflict...");
 			return false;
 		}
-		return false;
+		
+		if(recipe.getOutput() == null) {
+			BTAWCLogger.getLogger().error("Recipe conflict...");
+			return false;
+		}
+		return true;
 	}
 
 }

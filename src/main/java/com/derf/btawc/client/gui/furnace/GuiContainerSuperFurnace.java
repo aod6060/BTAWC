@@ -3,10 +3,10 @@ package com.derf.btawc.client.gui.furnace;
 import org.lwjgl.opengl.GL11;
 
 import com.derf.btawc.Loader;
-import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 import com.derf.btawc.client.Color;
 import com.derf.btawc.client.gui.GuiContainerBasic;
 import com.derf.btawc.inventory.container.furnace.ContainerSuperFurnace;
+import com.derf.btawc.tileentity.furnace.TileEntitySuperFurnace;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;

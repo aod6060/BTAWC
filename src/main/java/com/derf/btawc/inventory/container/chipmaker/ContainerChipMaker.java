@@ -1,8 +1,8 @@
 package com.derf.btawc.inventory.container.chipmaker;
 
-import com.derf.btawc.blocks.tileentity.IField;
-import com.derf.btawc.blocks.tileentity.chipmaker.TileEntityChipMaker;
 import com.derf.btawc.inventory.container.ContainerBasic;
+import com.derf.btawc.tileentity.IField;
+import com.derf.btawc.tileentity.chipmaker.TileEntityChipMaker;
 import com.derf.btawc.util.FuelUtils;
 
 import net.minecraft.entity.player.EntityPlayer;

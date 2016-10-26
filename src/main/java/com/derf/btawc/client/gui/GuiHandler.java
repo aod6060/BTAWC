@@ -1,13 +1,5 @@
 package com.derf.btawc.client.gui;
 
-import com.derf.btawc.blocks.tileentity.chipmaker.TileEntityChipMaker;
-import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
-import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
-import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
-import com.derf.btawc.blocks.tileentity.generators.TileEntityLunarPanel;
-import com.derf.btawc.blocks.tileentity.generators.TileEntitySolarPanel;
-import com.derf.btawc.blocks.tileentity.generators.TileEntitySolidFuelGenerator;
-import com.derf.btawc.blocks.tileentity.itembuffer.TileEntityItemBuffer;
 import com.derf.btawc.client.gui.chipmaker.GuiContainerChipMaker;
 import com.derf.btawc.client.gui.furnace.GuiContainerAlloyFurnace;
 import com.derf.btawc.client.gui.furnace.GuiContainerSuperFurnace;
@@ -24,6 +16,14 @@ import com.derf.btawc.inventory.container.generator.ContainerLunarPanel;
 import com.derf.btawc.inventory.container.generator.ContainerSolarPanel;
 import com.derf.btawc.inventory.container.generator.ContainerSolidFuelGenerator;
 import com.derf.btawc.inventory.container.itembuffer.ContainerItemBuffer;
+import com.derf.btawc.tileentity.chipmaker.TileEntityChipMaker;
+import com.derf.btawc.tileentity.furnace.TileEntityAlloyFurnace;
+import com.derf.btawc.tileentity.furnace.TileEntitySuperFurnace;
+import com.derf.btawc.tileentity.generators.TileEntityCreativeGenerator;
+import com.derf.btawc.tileentity.generators.TileEntityLunarPanel;
+import com.derf.btawc.tileentity.generators.TileEntitySolarPanel;
+import com.derf.btawc.tileentity.generators.TileEntitySolidFuelGenerator;
+import com.derf.btawc.tileentity.itembuffer.TileEntityItemBuffer;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;

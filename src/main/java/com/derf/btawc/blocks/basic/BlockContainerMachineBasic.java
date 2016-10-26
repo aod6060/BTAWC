@@ -4,8 +4,8 @@ import java.util.Random;
 
 import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.BlockManager;
-import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.client.gui.GuiHandler;
+import com.derf.btawc.tileentity.furnace.TileEntityAlloyFurnace;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;

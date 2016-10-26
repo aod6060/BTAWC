@@ -7,12 +7,12 @@ import java.util.Map.Entry;
 import org.lwjgl.opengl.GL11;
 
 import com.derf.btawc.Loader;
-import com.derf.btawc.blocks.tileentity.chipmaker.TileEntityChipMaker;
 import com.derf.btawc.client.Color;
 import com.derf.btawc.client.gui.GuiContainerBasic;
 import com.derf.btawc.inventory.container.chipmaker.ContainerChipMaker;
 import com.derf.btawc.recipe.handler.ChipMakerRecipe;
 import com.derf.btawc.recipe.handler.ChipMakerRecipeManager;
+import com.derf.btawc.tileentity.chipmaker.TileEntityChipMaker;
 import com.derf.btawc.util.GuiRectArea;
 import com.derf.btawc.util.OreDictionaryUtils;
 import com.derf.btawc.util.Vec2;

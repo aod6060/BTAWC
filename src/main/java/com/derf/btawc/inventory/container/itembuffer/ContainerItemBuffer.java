@@ -1,9 +1,9 @@
 package com.derf.btawc.inventory.container.itembuffer;
 
-import com.derf.btawc.blocks.tileentity.IField;
-import com.derf.btawc.blocks.tileentity.itembuffer.TileEntityItemBuffer;
-import com.derf.btawc.inventory.EnumSixSidedType;
 import com.derf.btawc.inventory.container.ContainerBasic;
+import com.derf.btawc.tileentity.EnumSixSided;
+import com.derf.btawc.tileentity.IField;
+import com.derf.btawc.tileentity.itembuffer.TileEntityItemBuffer;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -18,7 +18,7 @@ public class ContainerItemBuffer extends ContainerBasic implements IField {
 	private TileEntityItemBuffer itembuffer;
 	
 	// Fields
-	public final EnumSixSidedType[] sided = new EnumSixSidedType[6];
+	public final EnumSixSided[] sided = new EnumSixSided[6];
 	
 	public ContainerItemBuffer(InventoryPlayer player, TileEntityItemBuffer itembuffer) {
 		this.player = player;
@@ -35,7 +35,7 @@ public class ContainerItemBuffer extends ContainerBasic implements IField {
 		
 		// Set Sided to off
 		for(int i = 0; i < sided.length; i++) {
-			sided[i] = EnumSixSidedType.OFF;
+			sided[i] = EnumSixSided.OFF;
 		}
 	}
 	
@@ -132,7 +132,7 @@ public class ContainerItemBuffer extends ContainerBasic implements IField {
 
 	@Override
 	public void setField(int id, int value) {
-		this.sided[id] = EnumSixSidedType.values()[value];
+		this.sided[id] = EnumSixSided.values()[value];
 	}
 
 	@Override

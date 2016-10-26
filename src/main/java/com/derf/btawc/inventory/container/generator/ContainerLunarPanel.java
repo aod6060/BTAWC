@@ -1,11 +1,11 @@
 package com.derf.btawc.inventory.container.generator;
 
-import com.derf.btawc.blocks.tileentity.IField;
-import com.derf.btawc.blocks.tileentity.generators.TileEntityLunarPanel;
 import com.derf.btawc.inventory.container.ContainerBasic;
 import com.derf.btawc.inventory.container.IIsSlotCorrect;
 import com.derf.btawc.inventory.slot.SlotFilterBuilder;
 import com.derf.btawc.items.ItemsManager;
+import com.derf.btawc.tileentity.IField;
+import com.derf.btawc.tileentity.generators.TileEntityLunarPanel;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

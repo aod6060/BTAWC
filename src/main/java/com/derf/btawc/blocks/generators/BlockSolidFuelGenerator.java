@@ -3,8 +3,8 @@ package com.derf.btawc.blocks.generators;
 import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.BlockManager;
 import com.derf.btawc.blocks.basic.BlockContainerMachineBasic;
-import com.derf.btawc.blocks.tileentity.generators.TileEntitySolidFuelGenerator;
 import com.derf.btawc.client.gui.GuiHandler;
+import com.derf.btawc.tileentity.generators.TileEntitySolidFuelGenerator;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

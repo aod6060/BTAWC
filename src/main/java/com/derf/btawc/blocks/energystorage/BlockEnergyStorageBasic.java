@@ -1,6 +1,6 @@
 package com.derf.btawc.blocks.energystorage;
 
-import com.derf.btawc.blocks.tileentity.energystorage.TileEntityEnergyStorageBasic;
+import com.derf.btawc.tileentity.energystorage.TileEntityEnergyStorageBasic;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

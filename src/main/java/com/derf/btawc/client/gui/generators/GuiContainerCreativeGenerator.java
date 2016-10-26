@@ -3,12 +3,12 @@ package com.derf.btawc.client.gui.generators;
 import java.io.IOException;
 
 import com.derf.btawc.Loader;
-import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
 import com.derf.btawc.client.Color;
 import com.derf.btawc.client.gui.GuiContainerBasic;
 import com.derf.btawc.inventory.container.generator.ContainerCreativeGenerator;
 import com.derf.btawc.network.PacketHandler;
 import com.derf.btawc.network.packets.PacketCreativeGeneratorInfo;
+import com.derf.btawc.tileentity.generators.TileEntityCreativeGenerator;
 import com.derf.btawc.util.GuiRect;
 import com.derf.btawc.util.Vec2;
 

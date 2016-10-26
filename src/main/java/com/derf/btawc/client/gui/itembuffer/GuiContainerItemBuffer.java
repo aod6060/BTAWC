@@ -3,14 +3,14 @@ package com.derf.btawc.client.gui.itembuffer;
 import java.io.IOException;
 
 import com.derf.btawc.Loader;
-import com.derf.btawc.blocks.tileentity.itembuffer.TileEntityItemBuffer;
 import com.derf.btawc.client.Color;
 import com.derf.btawc.client.gui.GuiContainerBasic;
-import com.derf.btawc.inventory.EnumSixSidedType;
 import com.derf.btawc.inventory.container.itembuffer.ContainerItemBuffer;
 import com.derf.btawc.network.PacketHandler;
 import com.derf.btawc.network.packets.PacketItemBuffer;
 import com.derf.btawc.network.packets.PacketItemBufferOnClose;
+import com.derf.btawc.tileentity.EnumSixSided;
+import com.derf.btawc.tileentity.itembuffer.TileEntityItemBuffer;
 import com.derf.btawc.util.GuiRect;
 import com.derf.btawc.util.Vec2;
 
@@ -120,13 +120,13 @@ public class GuiContainerItemBuffer extends GuiContainerBasic {
 		int disY = 16;
 		
 		
-		EnumSixSidedType type = itembuffer.getType(facing);
+		EnumSixSided type = itembuffer.getType(facing);
 		
-		if(type == EnumSixSidedType.PULL) {
+		if(type == EnumSixSided.PULL) {
 			this.drawTexturedModalRect(x, y, pullX, pullY, 8, 8);
-		} else if(type == EnumSixSidedType.PUSH) {
+		} else if(type == EnumSixSided.PUSH) {
 			this.drawTexturedModalRect(x, y, pushX, pushY, 8, 8);
-		} else if(type == EnumSixSidedType.DISABLED) {
+		} else if(type == EnumSixSided.DISABLED) {
 			this.drawTexturedModalRect(x, y, disX, disY, 8, 8);
 		}
 	}
@@ -169,15 +169,15 @@ public class GuiContainerItemBuffer extends GuiContainerBasic {
 	}
 	
 	private void toggleType(EnumFacing facing) {
-		EnumSixSidedType type = this.itembuffer.getType(facing);
-		if(type == EnumSixSidedType.OFF) {
-			type = EnumSixSidedType.PULL;
-		} else if(type == EnumSixSidedType.PULL) {
-			type = EnumSixSidedType.PUSH;
-		} else if(type == EnumSixSidedType.PUSH) {
-			type = EnumSixSidedType.DISABLED;
-		} else if(type == EnumSixSidedType.DISABLED) {
-			type = EnumSixSidedType.OFF;
+		EnumSixSided type = this.itembuffer.getType(facing);
+		if(type == EnumSixSided.OFF) {
+			type = EnumSixSided.PULL;
+		} else if(type == EnumSixSided.PULL) {
+			type = EnumSixSided.PUSH;
+		} else if(type == EnumSixSided.PUSH) {
+			type = EnumSixSided.DISABLED;
+		} else if(type == EnumSixSided.DISABLED) {
+			type = EnumSixSided.OFF;
 		}
 		this.itembuffer.setType(facing, type);
 		// Handle Packet for ItemBuffer

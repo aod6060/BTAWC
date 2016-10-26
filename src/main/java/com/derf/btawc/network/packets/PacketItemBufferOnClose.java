@@ -1,6 +1,6 @@
 package com.derf.btawc.network.packets;
 
-import com.derf.btawc.blocks.tileentity.itembuffer.TileEntityItemBuffer;
+import com.derf.btawc.tileentity.itembuffer.TileEntityItemBuffer;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.PacketBuffer;

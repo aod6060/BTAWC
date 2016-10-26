@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.derf.btawc.Loader;
-import com.derf.btawc.blocks.tileentity.generators.TileEntityLunarPanel;
 import com.derf.btawc.client.Color;
 import com.derf.btawc.client.gui.GuiContainerBasic;
 import com.derf.btawc.inventory.container.generator.ContainerLunarPanel;
+import com.derf.btawc.tileentity.generators.TileEntityLunarPanel;
 import com.derf.btawc.util.GuiRectArea;
 import com.derf.btawc.util.IVec2;
 import com.derf.btawc.util.Vec2;

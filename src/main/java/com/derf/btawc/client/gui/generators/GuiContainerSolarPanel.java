@@ -1,10 +1,10 @@
 package com.derf.btawc.client.gui.generators;
 
 import com.derf.btawc.Loader;
-import com.derf.btawc.blocks.tileentity.generators.TileEntitySolarPanel;
 import com.derf.btawc.client.Color;
 import com.derf.btawc.client.gui.GuiContainerBasic;
 import com.derf.btawc.inventory.container.generator.ContainerSolarPanel;
+import com.derf.btawc.tileentity.generators.TileEntitySolarPanel;
 import com.derf.btawc.util.GuiRectArea;
 import com.derf.btawc.util.Vec2;
 

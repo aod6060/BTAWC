@@ -2,9 +2,9 @@ package com.derf.btawc.blocks.generators;
 
 import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.basic.BlockContainerBasic;
-import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
 import com.derf.btawc.client.gui.GuiHandler;
 import com.derf.btawc.energy.IEnergyLevelPrintable;
+import com.derf.btawc.tileentity.generators.TileEntityCreativeGenerator;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

@@ -1,7 +1,7 @@
 package com.derf.btawc.inventory.container.furnace;
 
-import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 import com.derf.btawc.inventory.container.ContainerBasic;
+import com.derf.btawc.tileentity.furnace.TileEntitySuperFurnace;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

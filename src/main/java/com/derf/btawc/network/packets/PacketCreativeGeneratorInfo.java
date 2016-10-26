@@ -1,6 +1,6 @@
 package com.derf.btawc.network.packets;
 
-import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
+import com.derf.btawc.tileentity.generators.TileEntityCreativeGenerator;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.PacketBuffer;

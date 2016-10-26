@@ -7,12 +7,12 @@ import java.util.Map.Entry;
 import org.lwjgl.opengl.GL11;
 
 import com.derf.btawc.Loader;
-import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.client.Color;
 import com.derf.btawc.client.gui.GuiContainerBasic;
 import com.derf.btawc.inventory.container.furnace.ContainerAlloyFurnace;
 import com.derf.btawc.recipe.handler.AlloyFurnaceRecipe;
 import com.derf.btawc.recipe.handler.AlloyFurnaceRecipeManager;
+import com.derf.btawc.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.util.GuiRect;
 import com.derf.btawc.util.OreDictionaryUtils;
 import com.derf.btawc.util.Vec2;

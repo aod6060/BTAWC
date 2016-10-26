@@ -1,7 +1,7 @@
 package com.derf.btawc.blocks.cobblestonegenerator;
 
 import com.derf.btawc.blocks.basic.BlockContainerBasic;
-import com.derf.btawc.blocks.tileentity.cobblestonegenerator.TileEntityCobblestoneGenerator;
+import com.derf.btawc.tileentity.cobblestonegenerator.TileEntityCobblestoneGenerator;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

@@ -5,8 +5,8 @@ import java.util.Random;
 import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.BlockManager;
 import com.derf.btawc.blocks.basic.BlockContainerMachineBasic;
-import com.derf.btawc.blocks.tileentity.furnace.TileEntitySuperFurnace;
 import com.derf.btawc.client.gui.GuiHandler;
+import com.derf.btawc.tileentity.furnace.TileEntitySuperFurnace;
 
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;

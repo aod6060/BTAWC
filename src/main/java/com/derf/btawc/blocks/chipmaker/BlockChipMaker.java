@@ -6,9 +6,9 @@ import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.BlockManager;
 import com.derf.btawc.blocks.basic.BlockContainerBasic;
 import com.derf.btawc.blocks.basic.BlockContainerMachineBasic;
-import com.derf.btawc.blocks.tileentity.chipmaker.TileEntityChipMaker;
-import com.derf.btawc.blocks.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.client.gui.GuiHandler;
+import com.derf.btawc.tileentity.chipmaker.TileEntityChipMaker;
+import com.derf.btawc.tileentity.furnace.TileEntityAlloyFurnace;
 
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;

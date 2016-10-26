@@ -1,8 +1,8 @@
 package com.derf.btawc.inventory.container.generator;
 
-import com.derf.btawc.blocks.tileentity.generators.TileEntityCreativeGenerator;
 import com.derf.btawc.inventory.container.ContainerBasic;
 import com.derf.btawc.items.ItemsManager;
+import com.derf.btawc.tileentity.generators.TileEntityCreativeGenerator;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

@@ -1,7 +1,7 @@
 package com.derf.btawc.network.packets;
 
-import com.derf.btawc.blocks.tileentity.itembuffer.TileEntityItemBuffer;
-import com.derf.btawc.inventory.EnumSixSidedType;
+import com.derf.btawc.tileentity.EnumSixSided;
+import com.derf.btawc.tileentity.itembuffer.TileEntityItemBuffer;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.PacketBuffer;
@@ -20,11 +20,11 @@ public class PacketItemBuffer implements IMessage {
 	private int dimesion;
 	private BlockPos pos;
 	private EnumFacing facing;
-	private EnumSixSidedType type;
+	private EnumSixSided type;
 	
 	public PacketItemBuffer() {}
 	
-	public PacketItemBuffer(int dimension, BlockPos pos, EnumFacing facing, EnumSixSidedType type) {
+	public PacketItemBuffer(int dimension, BlockPos pos, EnumFacing facing, EnumSixSided type) {
 		this.dimesion = dimension;
 		this.pos = pos;
 		this.facing = facing;
@@ -37,7 +37,7 @@ public class PacketItemBuffer implements IMessage {
 		this.dimesion = buff.readInt();
 		this.pos = buff.readBlockPos();
 		this.facing = EnumFacing.values()[buff.readInt()];
-		this.type = EnumSixSidedType.values()[buff.readInt()];
+		this.type = EnumSixSided.values()[buff.readInt()];
 	}
 
 	@Override

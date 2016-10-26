@@ -270,7 +270,8 @@ public class TileEntityItemBuffer extends TileEntityBasic implements IInventory,
 						
 					} else if(this.isSidedInventory(entity)) {
 						ISidedInventory s = (ISidedInventory)entity;
-						handlePushSided(s, opposite, inventory);
+						//handlePushSided(s, opposite, inventory);
+						handlePush(inventory);
 					} else {
 						handlePush(inventory);
 					}
@@ -282,74 +283,91 @@ public class TileEntityItemBuffer extends TileEntityBasic implements IInventory,
 
 	private void handlePull(IInventory inventory) {
 		
-		// Grab Item from inventory
-		int from_index = InventoryUtils.getInventoryIndex(inventory);
-		
-		if(from_index != -1) {
-			// Grab ItemStack from inventory
-			ItemStack stack = inventory.getStackInSlot(from_index);
+		if(!InventoryUtils.isInventoryFull(this)) {
+			// Grab Item from inventory
+			int from_index = InventoryUtils.getInventoryIndex(inventory);
 			
-			//if(stack != null) {
-				// Grab index to push to
-			int to_index = InventoryUtils.getInventoryIndex(this, stack);
-			
-			if(to_index != -1) {
-				// Move ItemStack to other invnetory
-				InventoryUtils.moveToInventory(this, inventory, to_index, from_index, 1);
-				// set slot to null if 0
-				InventoryUtils.setSlotToNullIfZero(inventory, from_index);
+			if(from_index != -1) {
+				// Grab ItemStack from inventory
+				ItemStack stack = inventory.getStackInSlot(from_index);
+				
+				//if(stack != null) {
+					// Grab index to push to
+				int to_index = InventoryUtils.getInventoryIndex(this, stack);
+				
+				if(to_index != -1) {
+					// Move ItemStack to other invnetory
+					InventoryUtils.moveToInventory(this, inventory, to_index, from_index, 1);
+					// set slot to null if 0
+					InventoryUtils.setSlotToNullIfZero(inventory, from_index);
+				}
+				//}
 			}
-			//}
 		}
-		
 	}
 	
 	private void handlePullingSided(ISidedInventory s, EnumFacing opposite, IInventory inventory) {
-		int[] slots = s.getSlotsForFace(opposite);
 		
-		for(int i = 0; i < slots.length; i++) {
+		if(!InventoryUtils.isInventoryFull(this)) {
+			int[] slots = s.getSlotsForFace(opposite);
 			
-			ItemStack stack = inventory.getStackInSlot(i);
-			
-			if(stack != null && s.canExtractItem(i, stack, opposite)) {
-				int to_index = InventoryUtils.getInventoryIndex(this, stack);
-				if(to_index != -1) {
-					InventoryUtils.moveToInventory(this, inventory, to_index, i, 1);
-					InventoryUtils.setSlotToNullIfZero(inventory, i);
+			for(int i = 0; i < slots.length; i++) {
+				
+				ItemStack stack = inventory.getStackInSlot(i);
+				
+				if(stack != null && s.canExtractItem(i, stack, opposite)) {
+					int to_index = InventoryUtils.getInventoryIndex(this, stack);
+					if(to_index != -1) {
+						InventoryUtils.moveToInventory(this, inventory, to_index, i, 1);
+						InventoryUtils.setSlotToNullIfZero(inventory, i);
+					}
 				}
 			}
 		}
 	}
 	
 	private void handlePush(IInventory inventory) {
-		int from_index = InventoryUtils.getInventoryIndex(this);
-		if(from_index != -1) {
-			// Grab ItemStack from inventory
-			ItemStack stack = this.getStackInSlot(from_index);
-			// Grab index to push to
-			
-			//if(stack != null) {
-			int to_index = InventoryUtils.getInventoryIndex(inventory, stack);
-			
-			if(to_index != -1) {
-				// Move ItemStack to other invnetory
-				InventoryUtils.moveToInventory(inventory, this, to_index, from_index, 1);
-				// set slot to null if 0
-				InventoryUtils.setSlotToNullIfZero(this, from_index);
+		
+		if(!InventoryUtils.isInventoryFull(inventory)) {
+			int from_index = InventoryUtils.getInventoryIndex(this);
+			if(from_index != -1) {
+				// Grab ItemStack from inventory
+				ItemStack stack = this.getStackInSlot(from_index);
+				// Grab index to push to
+				
+				
+				//if(stack != null) {
+				int to_index = InventoryUtils.getInventoryIndex(inventory, stack);
+				
+				if(inventory.isItemValidForSlot(to_index, stack)) {
+					if(to_index != -1) {
+						// Move ItemStack to other invnetory
+						InventoryUtils.moveToInventory(inventory, this, to_index, from_index, 1);
+						// set slot to null if 0
+						InventoryUtils.setSlotToNullIfZero(this, from_index);
+					}
+					//}
+				}
 			}
-			//}
 		}
 	}
 
 	private void handlePushSided(ISidedInventory s, EnumFacing opposite, IInventory inventory) {
-		int from_index = InventoryUtils.getInventoryIndex(this);
-		if(from_index != -1) {
-			ItemStack stack = this.getStackInSlot(from_index);
-			int slots[] = s.getSlotsForFace(opposite);
-			for(int i = 0; i < slots.length; i++) {
-				if(stack != null && s.canInsertItem(i, stack, opposite)) {
-					InventoryUtils.moveToInventory(inventory, this, i, from_index, 1);
-					InventoryUtils.setSlotToNullIfZero(this, from_index);
+		
+		if(!InventoryUtils.isInventoryFull(inventory)) {
+			int from_index = InventoryUtils.getInventoryIndex(this);
+			
+			if(from_index != -1) {
+				ItemStack stack = this.getStackInSlot(from_index);
+				int slots[] = s.getSlotsForFace(opposite);
+				
+				for(int i = 0; i < slots.length; i++) {
+					
+					
+					if(stack != null && s.canInsertItem(i, stack, opposite) && inventory.isItemValidForSlot(i, stack)) {
+						InventoryUtils.moveToInventory(inventory, this, i, from_index, 1);
+						InventoryUtils.setSlotToNullIfZero(this, from_index);
+					}
 				}
 			}
 		}

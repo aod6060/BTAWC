@@ -1,6 +1,13 @@
 2.0.2 alpha
 ------------------------------------------------------------------
 
+2.0.1.1 alpha
+------------------------------------------------------------------
+- Bug Fix: Fix an error with the ItemBuffer. It was eating blocks 
+  when pushing to am ISidedInventory such as a Recyler from IC2. 
+  Switch to default pushing method. Will look into this when working 
+  on 2.0.2 alpha. But for now it works for the most part.
+  
 2.0.1 alpha
 ------------------------------------------------------------------
 - Added RF Generators

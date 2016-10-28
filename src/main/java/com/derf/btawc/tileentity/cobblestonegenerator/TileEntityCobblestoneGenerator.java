@@ -3,7 +3,7 @@ package com.derf.btawc.tileentity.cobblestonegenerator;
 import java.util.List;
 
 import com.derf.btawc.tileentity.EnumSixSided;
-import com.derf.btawc.tileentity.ISixSided;
+import com.derf.btawc.tileentity.ISixSidedInventory;
 import com.derf.btawc.tileentity.TileEntityBasic;
 import com.derf.btawc.util.InventoryUtils;
 

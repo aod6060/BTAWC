@@ -6,7 +6,7 @@ import com.derf.btawc.Loader;
 import com.derf.btawc.blocks.basic.BlockContainerBasic;
 import com.derf.btawc.client.gui.GuiHandler;
 import com.derf.btawc.tileentity.EnumSixSided;
-import com.derf.btawc.tileentity.ISixSided;
+import com.derf.btawc.tileentity.ISixSidedInventory;
 import com.derf.btawc.tileentity.itembuffer.TileEntityItemBuffer;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.derf.btawc.tileentity.EnumSixSided;
-import com.derf.btawc.tileentity.ISixSided;
+import com.derf.btawc.tileentity.ISixSidedInventory;
 import com.derf.btawc.tileentity.TileEntityBasic;
 import com.derf.btawc.util.InventoryUtils;
 
@@ -22,7 +22,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.util.Constants;
 
-public class TileEntityItemBuffer extends TileEntityBasic implements IInventory, ISixSided, ITickable {
+public class TileEntityItemBuffer extends TileEntityBasic implements IInventory, ISixSidedInventory, ITickable {
 
 	// Inventory Portion of the class
 	private ItemStack[] inventory = new ItemStack[9];
@@ -212,7 +212,7 @@ public class TileEntityItemBuffer extends TileEntityBasic implements IInventory,
 	@Override
 	public boolean isSixSidedInventory(TileEntity entity) {
 		// TODO Auto-generated method stub
-		return entity instanceof ISixSided;
+		return entity instanceof ISixSidedInventory;
 	}
 	
 	@Override
@@ -234,7 +234,7 @@ public class TileEntityItemBuffer extends TileEntityBasic implements IInventory,
 				
 				if(inventory != null) {
 					if(this.isSixSidedInventory(entity)) {
-						ISixSided s = (ISixSided)entity;
+						ISixSidedInventory s = (ISixSidedInventory)entity;
 						
 						if(!s.isTypeDisabled(opposite) && !s.isTypePull(opposite)) {
 							handlePull(inventory);
@@ -262,7 +262,7 @@ public class TileEntityItemBuffer extends TileEntityBasic implements IInventory,
 				
 				if(inventory != null) {
 					if(this.isSixSidedInventory(entity)) {
-						ISixSided s = (ISixSided)entity;
+						ISixSidedInventory s = (ISixSidedInventory)entity;
 						
 						if(!s.isTypeDisabled(opposite) && !s.isTypePush(opposite)) {
 							handlePush(inventory);

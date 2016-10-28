@@ -2,17 +2,17 @@ package com.derf.btawc.fluid;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.FluidTankPropertiesWrapper;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
 public class FluidTank implements IFluidTank, IFluidHandler, IFluidTankChecks {
 
-	private  FluidStack fluid = null;
-	private  int capacity;
+	private FluidStack fluid = null;
+	private int capacity;
 	private IFluidTankProperties[] tankProps = null;
 	private boolean canFill = true;
 	private boolean canDrain = true;
@@ -40,23 +40,21 @@ public class FluidTank implements IFluidTank, IFluidHandler, IFluidTankChecks {
 
 	@Override
 	public FluidStack drain(FluidStack resource, boolean doDrain) {
-		
-		if(!this.canDrainFluidType(this.getFluid())) {
+		if(resource == null || resource.isFluidEqual(this.getFluid())) {
 			return null;
 		}
-		return handlDrain(resource, doDrain);
+		return this.drain(resource.amount, doDrain);
 	}
-
-	private FluidStack handlDrain(FluidStack resource, boolean doDrain) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public FluidStack getFluid() {
 		return this.fluid;
 	}
 
+	public void setFluid(FluidStack stack) {
+		this.fluid = stack;
+	}
+	
 	@Override
 	public int getFluidAmount() {
 		int amount = 0;
@@ -127,7 +125,27 @@ public class FluidTank implements IFluidTank, IFluidHandler, IFluidTankChecks {
 
 	@Override
 	public FluidStack drain(int maxDrain, boolean doDrain) {
-		return null;
+		
+		if(fluid == null || maxDrain <= 0) {
+			return null;
+		}
+		
+		int drained = maxDrain;
+		
+		if(fluid.amount < drained) {
+			drained = fluid.amount;
+		}
+		
+		FluidStack stack = new FluidStack(fluid, drained);
+		
+		if(doDrain) {
+			fluid.amount -= drained;
+			
+			if(fluid.amount <= 0) {
+				fluid = null;
+			}
+		}
+		return stack;
 	}
 
 	@Override
@@ -158,6 +176,25 @@ public class FluidTank implements IFluidTank, IFluidHandler, IFluidTankChecks {
 	public boolean canDrainFluidType(FluidStack fluid) {
 		// TODO Auto-generated method stub
 		return this.canDrain();
+	}
+	
+	public void readFromNBT(NBTTagCompound compound) {
+		if(!compound.hasKey("Empty")) {
+			FluidStack fluid = FluidStack.loadFluidStackFromNBT(compound);
+			this.setFluid(fluid);
+		} else {
+			this.setFluid(null);
+		}
+	}
+	
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		
+		if(fluid != null) {
+			fluid.writeToNBT(compound);
+		} else {
+			compound.setString("Empty", "");
+		}
+		return compound;
 	}
 	
 	

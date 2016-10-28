@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
-public interface ISixSided {
+public interface ISixSidedFluidInventory {
 	void setType(EnumFacing side, EnumSixSided type);
 	
 	EnumSixSided getType(EnumFacing side);
@@ -18,16 +18,11 @@ public interface ISixSided {
 	
 	boolean isTypeDisabled(EnumFacing side);
 	
-	boolean isInventory(TileEntity entity);
-	
-	boolean isSixSidedInventory(TileEntity entity);
-	
-	boolean isSidedInventory(TileEntity entity);
+	boolean isSixSidedFluidInventory(TileEntity entity);
 	
 	List<EnumSixSided> getAllTypes();
 	
-	void pull(EnumFacing face);
+	void drain(EnumFacing face);
 	
-	void push(EnumFacing face);
-	
+	void fill(EnumFacing face);
 }

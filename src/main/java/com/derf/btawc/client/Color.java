@@ -37,6 +37,16 @@ public class Color {
 		this(0.0f, 0.0f, 0.0f);
 	}
 	
+	public Color(int color) {
+		int red = color >> 16 & 0xff;
+		int green = color >> 8 & 0xff;
+		int blue = color & 0xff;
+		
+		this.red = this.toFloatColor(red);
+		this.green = this.toFloatColor(green);
+		this.blue = this.toFloatColor(blue);
+	}
+	
 	public Color(float grey) {
 		this(grey, grey, grey);
 	}

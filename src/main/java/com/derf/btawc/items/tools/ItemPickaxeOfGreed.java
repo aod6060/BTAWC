@@ -47,8 +47,10 @@ public class ItemPickaxeOfGreed extends ItemPickaxe {
 			}
 		}
 		
+		// Manually added blocks
 		blocks.add(Blocks.LIT_REDSTONE_ORE);
 		blocks.add(BlockManager.simpleDungeonPresent);
+		blocks.add(Blocks.GLOWSTONE);
 	}
 	
 	public static boolean isBlockDuplicatable(Block block) {

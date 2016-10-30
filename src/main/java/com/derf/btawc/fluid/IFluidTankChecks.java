@@ -10,4 +10,8 @@ public interface IFluidTankChecks {
 	boolean canFillFluidType(FluidStack fluid);
 	
 	boolean canDrainFluidType(FluidStack fluid);
+	
+	boolean isFluidTankFull();
+	
+	boolean isFluidTankEmpty();
 }

@@ -169,13 +169,13 @@ public class FluidTank implements IFluidTank, IFluidHandler, IFluidTankChecks {
 	@Override
 	public boolean canFillFluidType(FluidStack fluid) {
 		// TODO Auto-generated method stub
-		return this.canFill();
+		return this.canFill() && this.getFluid().getFluid() == fluid.getFluid();
 	}
 
 	@Override
 	public boolean canDrainFluidType(FluidStack fluid) {
 		// TODO Auto-generated method stub
-		return this.canDrain();
+		return this.canDrain() && this.getFluid().getFluid() == fluid.getFluid();
 	}
 	
 	public void readFromNBT(NBTTagCompound compound) {
@@ -197,5 +197,15 @@ public class FluidTank implements IFluidTank, IFluidHandler, IFluidTankChecks {
 		return compound;
 	}
 	
-	
+	@Override
+	public boolean isFluidTankFull() {
+		// TODO Auto-generated method stub
+		return this.getFluidAmount() >= this.getCapacity();
+	}
+
+	@Override
+	public boolean isFluidTankEmpty() {
+		// TODO Auto-generated method stub
+		return this.getFluidAmount() <= 0;
+	}
 }

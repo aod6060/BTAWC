@@ -31,7 +31,7 @@ public class ContainerSolidFuelGenerator extends ContainerBasic implements IFiel
 		this.player = player;
 		this.generator = generator;
 		// Fuel Slot [0] (76, 56)
-		this.addSlotToContainer(new SlotFuel(generator, 0, 76, 56));
+		this.addSlotToContainer(new SlotFuel(generator, 0, 76, 55));
 		// Speed Upgrade Slot [1] (150, 16)
 		SlotFilterBuilder builder = new SlotFilterBuilder(generator, 1, 150, 16);
 		builder.add(ItemsManager.speedUpgradeChip);

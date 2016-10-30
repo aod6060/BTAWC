@@ -2,10 +2,11 @@ package com.derf.btawc.tileentity;
 
 import java.util.List;
 
+import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
-public interface ISixSidedInventory {
+public interface ISixSidedInventory extends ISixSided {
 	void setType(EnumFacing side, EnumSixSided type);
 	
 	EnumSixSided getType(EnumFacing side);
@@ -29,5 +30,9 @@ public interface ISixSidedInventory {
 	void pull(EnumFacing face);
 	
 	void push(EnumFacing face);
+	
+	IInventory getInventory();
+	
+	List<IInventory> getInventories();
 	
 }

@@ -49,7 +49,7 @@ public class ContainerChipMaker extends ContainerBasic implements IField {
 			
 		});
 		// Create Fuel Slot     	[3] pos <28, 58>
-		this.addSlotToContainer(new Slot(entity, 3, 28, 58) {
+		this.addSlotToContainer(new Slot(entity, 3, 28, 57) {
 			@Override
 			public boolean isItemValid(ItemStack stack) {
 				// TODO Auto-generated method stub

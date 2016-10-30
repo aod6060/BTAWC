@@ -401,4 +401,17 @@ public class TileEntityItemBuffer extends TileEntityBasic implements IInventory,
 			this.markDirty();
 		}
 	}
+
+	@Override
+	public IInventory getInventory() {
+		// TODO Auto-generated method stub
+		return this;
+	}
+
+	@Override
+	public List<IInventory> getInventories() {
+		List<IInventory> temp = new ArrayList<IInventory>();
+		temp.add(this);
+		return temp;
+	}
 }

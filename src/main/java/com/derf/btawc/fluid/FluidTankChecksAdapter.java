@@ -37,6 +37,18 @@ public class FluidTankChecksAdapter implements IFluidTankChecks{
 		// TODO Auto-generated method stub
 		return tank.canDrainFluidType(fluid);
 	}
+
+	@Override
+	public boolean isFluidTankFull() {
+		// TODO Auto-generated method stub
+		return this.tank.getFluidAmount() >= this.tank.getCapacity();
+	}
+
+	@Override
+	public boolean isFluidTankEmpty() {
+		// TODO Auto-generated method stub
+		return this.tank.getFluidAmount() <= 0;
+	}
 	
 	
 }

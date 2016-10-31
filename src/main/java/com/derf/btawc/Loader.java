@@ -2,6 +2,7 @@ package com.derf.btawc;
 
 import com.derf.btawc.proxy.IProxy;
 
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -23,6 +24,10 @@ public class Loader {
 	// Proxy
 	@SidedProxy(clientSide="com.derf.btawc.proxy.ProxyClient", serverSide="com.derf.btawc.proxy.ProxyServer")
 	public static IProxy proxy;
+	
+	static {
+		FluidRegistry.enableUniversalBucket();
+	}
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {

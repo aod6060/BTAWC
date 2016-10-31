@@ -2,6 +2,7 @@ package com.derf.btawc.network.packets;
 
 import com.derf.btawc.tileentity.EnumSixSided;
 import com.derf.btawc.tileentity.itembuffer.TileEntityItemBuffer;
+import com.derf.btawc.tileentity.tank.TileEntityTank;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.PacketBuffer;
@@ -15,16 +16,21 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class PacketItemBuffer implements IMessage {
+/**
+ * Making this universal...
+ * @author Fred
+ *
+ */
+public class PacketSixSidedConfiguration implements IMessage {
 
 	private int dimesion;
 	private BlockPos pos;
 	private EnumFacing facing;
 	private EnumSixSided type;
 	
-	public PacketItemBuffer() {}
+	public PacketSixSidedConfiguration() {}
 	
-	public PacketItemBuffer(int dimension, BlockPos pos, EnumFacing facing, EnumSixSided type) {
+	public PacketSixSidedConfiguration(int dimension, BlockPos pos, EnumFacing facing, EnumSixSided type) {
 		this.dimesion = dimension;
 		this.pos = pos;
 		this.facing = facing;
@@ -57,14 +63,17 @@ public class PacketItemBuffer implements IMessage {
 			if(entity instanceof TileEntityItemBuffer) {
 				TileEntityItemBuffer itembuffer = (TileEntityItemBuffer)entity;
 				itembuffer.setType(this.facing, this.type);
+			} else if(entity instanceof TileEntityTank) {
+				TileEntityTank tank = (TileEntityTank)entity;
+				tank.setType(this.facing, this.type);
 			}
 		}
 	}
 	
-	public static class Handler implements IMessageHandler<PacketItemBuffer, IMessage> {
+	public static class Handler implements IMessageHandler<PacketSixSidedConfiguration, IMessage> {
 
 		@Override
-		public IMessage onMessage(PacketItemBuffer message, MessageContext ctx) {
+		public IMessage onMessage(PacketSixSidedConfiguration message, MessageContext ctx) {
 			
 			if(ctx.side == Side.SERVER) {
 				message.onMessageFromClient(ctx);

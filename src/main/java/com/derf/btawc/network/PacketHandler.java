@@ -2,7 +2,8 @@ package com.derf.btawc.network;
 
 import com.derf.btawc.Loader;
 import com.derf.btawc.network.packets.PacketCreativeGeneratorInfo;
-import com.derf.btawc.network.packets.PacketItemBuffer;
+import com.derf.btawc.network.packets.PacketSixSidedConfiguration;
+import com.derf.btawc.network.packets.PacketTankFluidUpdate;
 import com.derf.btawc.network.packets.PacketItemBufferOnClose;
 
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -22,10 +23,12 @@ public final class PacketHandler {
 		// Register Custom Messages
 		// Creative Generator
 		INSTANCE.registerMessage(PacketCreativeGeneratorInfo.Handler.class, PacketCreativeGeneratorInfo.class, nextID(), Side.SERVER);
-		// Item Buffer
-		INSTANCE.registerMessage(PacketItemBuffer.Handler.class, PacketItemBuffer.class, nextID(), Side.SERVER);
+		// Six Sided Configuration
+		INSTANCE.registerMessage(PacketSixSidedConfiguration.Handler.class, PacketSixSidedConfiguration.class, nextID(), Side.SERVER);
 		// Item Buffer On Close
 		INSTANCE.registerMessage(PacketItemBufferOnClose.Handler.class, PacketItemBufferOnClose.class, nextID(), Side.SERVER);
+		// Tank Fluid Update
+		INSTANCE.registerMessage(PacketTankFluidUpdate.Handler.class, PacketTankFluidUpdate.class, nextID(), Side.CLIENT);
 	}
 	
 }

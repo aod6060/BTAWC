@@ -6,12 +6,15 @@ import java.util.List;
 import com.derf.btawc.fluid.FluidTank;
 import com.derf.btawc.fluid.FluidTankChecksAdapter;
 import com.derf.btawc.fluid.IFluidTankChecks;
+import com.derf.btawc.network.PacketHandler;
+import com.derf.btawc.network.packets.PacketTankFluidUpdate;
 import com.derf.btawc.tileentity.EnumSixSided;
 import com.derf.btawc.tileentity.ISixSidedFluidInventory;
 import com.derf.btawc.tileentity.TileEntityBasic;
 import com.derf.btawc.util.InventoryUtils;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemBucket;
@@ -22,15 +25,20 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fluids.capability.ItemFluidContainer;
 import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
 import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
+import net.minecraftforge.fluids.capability.wrappers.FluidContainerRegistryWrapper;
 
 public class TileEntityTank extends TileEntityBasic implements ITickable, IInventory, ISixSidedFluidInventory {
 
@@ -39,7 +47,7 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 	public static final int OUTPUT_SLOT = 1;
 	public static final int SLOT_SIZE = 2;
 	
-	private FluidTank tank = new FluidTank(Fluid.BUCKET_VOLUME * 500);
+	private FluidTank tank = new FluidTank(Fluid.BUCKET_VOLUME);
 	private String name = null;
 	private ItemStack[] inventory = new ItemStack[SLOT_SIZE];
 	private EnumFacing[] faces = new EnumFacing[6];
@@ -172,7 +180,7 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
 		
-		if(index == 0 && (stack.getItem() instanceof ItemBucket || stack.getItem() instanceof ItemFluidContainer)) {
+		if(index == 0 && (stack.getItem() instanceof ItemBucket || stack.getItem() instanceof ItemFluidContainer || stack.getItem() instanceof UniversalBucket)) {
 			return true;
 		}
 		
@@ -181,17 +189,17 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 
 	@Override
 	public int getField(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.sided[id].ordinal();
 	}
 
 	@Override
 	public void setField(int id, int value) {
+		this.sided[id] = EnumSixSided.values()[value];
 	}
 
 	@Override
 	public int getFieldCount() {
-		return 0;
+		return this.sided.length;
 	}
 
 	@Override
@@ -272,6 +280,7 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 						if(tank.canFill() && tank.getFluid().containsFluid(fluid) && !this.tank.isFluidTankFull()) {
 							fluid = this.tank.drain(fluid, true);
 							tank.fill(fluid, true);
+							this.sendToClient();
 						}
 					}
 				}
@@ -287,6 +296,7 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 						if(tank.canFill() && tank.getFluid().containsFluid(fluid) && !this.tank.isFluidTankFull()) {
 							fluid = this.tank.drain(fluid, true);
 							tank.fill(fluid, true);
+							this.sendToClient();
 						}
 					}
 				} else if(obj instanceof net.minecraftforge.fluids.FluidTank) {
@@ -298,6 +308,7 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 						if(checks.canFill() && tank.getFluid().containsFluid(fluid) && !checks.isFluidTankFull()) {
 							fluid = this.tank.drain(fluid, true);
 							tank.fill(fluid, true);
+							this.sendToClient();
 						}
 					}
 				}
@@ -372,6 +383,7 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 		return temp;
 	}
 	
+	@SuppressWarnings("unused")
 	@Override
 	public void update() {
 		if(!worldObj.isRemote) {
@@ -389,95 +401,64 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 			}
 			
 			// Fill and Drain bucket
-			
 			if(this.getStackInSlot(INPUT_SLOT) != null && this.getStackInSlot(OUTPUT_SLOT) == null) {
 				ItemStack stack = this.getStackInSlot(INPUT_SLOT);
-				boolean handledFluidContainer = false;
+				ItemStack output = null;
+				boolean handle = false;
 				
-				if(stack.getItem() instanceof ItemBucket) {
-					ICapabilityProvider provider = stack.getItem().initCapabilities(stack, new NBTTagCompound());
-					handledFluidContainer = handleBucket(provider, stack);
-				} else if(stack.getItem() instanceof ItemFluidContainer){
-					ICapabilityProvider provider = stack.getItem().initCapabilities(stack, new NBTTagCompound());
-					handledFluidContainer = handleFluidContainer(provider, stack);
+				if(stack.getItem() instanceof ItemBucket || stack.getItem() instanceof UniversalBucket) {
+					
+					ICapabilityProvider provider = stack.getItem().initCapabilities(stack, null);
+					
+					if(provider instanceof FluidBucketWrapper) {
+						FluidBucketWrapper wrapper = (FluidBucketWrapper)provider;
+						
+						if(wrapper.getFluid() == null) {
+							// filling
+							if(this.tank.canDrain() && this.tank.getFluidAmount() >= Fluid.BUCKET_VOLUME) {
+								FluidStack fluid = this.tank.drain(Fluid.BUCKET_VOLUME, true);
+								
+								if(fluid != null) {
+									output = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, fluid.getFluid());
+									handle = true;
+								}
+							}
+						} else {
+							// draining
+							if(this.tank.canFillFluidType(wrapper.getFluid()) && this.tank.getFluidAmount() <= Fluid.BUCKET_VOLUME) {
+								this.tank.fill(wrapper.getFluid(), true);
+								output = new ItemStack(Items.BUCKET);
+								handle = true;
+							}
+						}
+					}
 				}
 				
-				if(handledFluidContainer) {
-					// Move stack to output slot
-					this.setInventorySlotContents(OUTPUT_SLOT, stack);
-					this.setInventorySlotContents(INPUT_SLOT, null);
+				if(handle) {	
+					this.decrStackSize(INPUT_SLOT, 1);
+					this.setInventorySlotContents(OUTPUT_SLOT, output);
 				}
 			}
 			
 			// Mark dirty for saving...
+			this.sendToClient();
 			this.markDirty();
 		}
 	}
-
-	private boolean handleFluidContainer(ICapabilityProvider provider, ItemStack stack) {
-		boolean b = false;
+	
+	public void setTank(FluidTank tank) {
 		
-		if(provider instanceof FluidHandlerItemStack) {
-			FluidHandlerItemStack wrapper = (FluidHandlerItemStack)provider;
-			
-			if(wrapper.getFluid() == null) {
-				// Fill Fluid Container
-				if(this.tank.getFluidAmount() >= Fluid.BUCKET_VOLUME) {
-					FluidStack fluid = this.tank.drain(Fluid.BUCKET_VOLUME, false);
-					
-					if(wrapper.canFillFluidType(fluid)) {
-						int amount = wrapper.fill(fluid, true);
-						this.tank.drain(amount, true);
-						b = true;
-					}
-				}
-			} else {
-				// Drain Fluid Container
-				if(this.tank.getFluidAmount() <= Fluid.BUCKET_VOLUME) {
-					FluidStack fluid = wrapper.drain(Fluid.BUCKET_VOLUME, false);
-					if(this.tank.canFillFluidType(fluid)) {
-						int amount = this.tank.fill(fluid, true);
-						wrapper.drain(amount, true);
-						b = true;
-					}
-				}
+		if(tank != null) {
+			this.tank.setCapacity(tank.getCapacity());
+			if(tank.getFluid() != null) {
+				this.tank.setFluid(tank.getFluid().copy());
 			}
+		} else {
+			tank = new FluidTank(Fluid.BUCKET_VOLUME);
 		}
-		
-		return b;
 	}
-
-	private boolean handleBucket(ICapabilityProvider provider, ItemStack stack) {
-		boolean b = false;
-		
-		if(provider instanceof FluidBucketWrapper) {
-			FluidBucketWrapper wrapper = (FluidBucketWrapper)provider;
-			
-			if(wrapper.getFluid() == null) {
-				// Fill Bucket
-				if(this.tank.getFluidAmount() >= Fluid.BUCKET_VOLUME) {
-					FluidStack fluid = this.tank.drain(Fluid.BUCKET_VOLUME, false);
-					
-					if(wrapper.canFillFluidType(fluid)) {
-						int amount = wrapper.fill(fluid, true);
-						this.tank.drain(amount, true);
-						b = true;
-					}
-				}
-			} else {
-				// Drain Bucket
-				if(this.tank.getFluidAmount() <= Fluid.BUCKET_VOLUME) {
-					FluidStack fluid = wrapper.drain(Fluid.BUCKET_VOLUME, false);
-					
-					if(this.tank.canFillFluidType(fluid)) {
-						int amount = this.tank.fill(fluid, true);
-						wrapper.drain(fluid, true);
-						b = true;
-					}
-				}
-			}
-		}
-		
-		return b;
+	
+	private void sendToClient() {
+		PacketHandler.INSTANCE.sendToAll(new PacketTankFluidUpdate(this.worldObj, this.pos, this.tank));
 	}
 }

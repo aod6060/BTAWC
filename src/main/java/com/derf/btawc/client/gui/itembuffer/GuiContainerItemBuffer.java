@@ -7,7 +7,7 @@ import com.derf.btawc.client.Color;
 import com.derf.btawc.client.gui.GuiContainerBasic;
 import com.derf.btawc.inventory.container.itembuffer.ContainerItemBuffer;
 import com.derf.btawc.network.PacketHandler;
-import com.derf.btawc.network.packets.PacketItemBuffer;
+import com.derf.btawc.network.packets.PacketSixSidedConfiguration;
 import com.derf.btawc.network.packets.PacketItemBufferOnClose;
 import com.derf.btawc.tileentity.EnumSixSided;
 import com.derf.btawc.tileentity.itembuffer.TileEntityItemBuffer;
@@ -65,15 +65,7 @@ public class GuiContainerItemBuffer extends GuiContainerBasic {
 		renderUp();
 		renderDown();
 	}
-
-	/*
-	 * 	private GuiRect west = new GuiRect(128, 40, 8, 8);
-		private GuiRect east = new GuiRect(144, 40, 8, 8);
-		private GuiRect south = new GuiRect(136, 40, 8, 8);
-		private GuiRect north = new GuiRect(144, 32, 8, 8);
-		private GuiRect up = new GuiRect(136, 32, 8, 8);
-		private GuiRect down = new GuiRect(136, 48, 8, 8);
-	 */
+	
 	private void renderWest() {
 		this.renderStuff(EnumFacing.WEST, 128, 40);
 	}
@@ -182,7 +174,7 @@ public class GuiContainerItemBuffer extends GuiContainerBasic {
 		this.itembuffer.setType(facing, type);
 		// Handle Packet for ItemBuffer
 		PacketHandler.INSTANCE.sendToServer(
-				new PacketItemBuffer(
+				new PacketSixSidedConfiguration(
 						this.itembuffer.getWorld().provider.getDimension(),
 						this.itembuffer.getPos(),
 						facing,

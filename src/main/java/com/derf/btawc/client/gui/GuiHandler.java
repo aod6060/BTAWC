@@ -8,6 +8,7 @@ import com.derf.btawc.client.gui.generators.GuiContainerLunarPanel;
 import com.derf.btawc.client.gui.generators.GuiContainerSolarPanel;
 import com.derf.btawc.client.gui.generators.GuiContainerSolidFuelGenerator;
 import com.derf.btawc.client.gui.itembuffer.GuiContainerItemBuffer;
+import com.derf.btawc.client.gui.tank.GuiContainerTank;
 import com.derf.btawc.inventory.container.chipmaker.ContainerChipMaker;
 import com.derf.btawc.inventory.container.furnace.ContainerAlloyFurnace;
 import com.derf.btawc.inventory.container.furnace.ContainerSuperFurnace;
@@ -16,6 +17,7 @@ import com.derf.btawc.inventory.container.generator.ContainerLunarPanel;
 import com.derf.btawc.inventory.container.generator.ContainerSolarPanel;
 import com.derf.btawc.inventory.container.generator.ContainerSolidFuelGenerator;
 import com.derf.btawc.inventory.container.itembuffer.ContainerItemBuffer;
+import com.derf.btawc.inventory.container.tank.ContainerTank;
 import com.derf.btawc.tileentity.chipmaker.TileEntityChipMaker;
 import com.derf.btawc.tileentity.furnace.TileEntityAlloyFurnace;
 import com.derf.btawc.tileentity.furnace.TileEntitySuperFurnace;
@@ -24,6 +26,7 @@ import com.derf.btawc.tileentity.generators.TileEntityLunarPanel;
 import com.derf.btawc.tileentity.generators.TileEntitySolarPanel;
 import com.derf.btawc.tileentity.generators.TileEntitySolidFuelGenerator;
 import com.derf.btawc.tileentity.itembuffer.TileEntityItemBuffer;
+import com.derf.btawc.tileentity.tank.TileEntityTank;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -48,6 +51,8 @@ public class GuiHandler implements IGuiHandler {
 	public static final int SOLAR_PANEL_GUI = 6;
 	// Lunar Panel
 	public static final int LUNAR_PANEL_GUI = 7;
+	// Tank
+	public static final int TANK = 8;
 	
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -70,6 +75,8 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerSolarPanel(player.inventory, (TileEntitySolarPanel)world.getTileEntity(pos));
 		case LUNAR_PANEL_GUI:
 			return new ContainerLunarPanel(player.inventory, (TileEntityLunarPanel)world.getTileEntity(pos));
+		case TANK:
+			return new ContainerTank(player.inventory, (TileEntityTank)world.getTileEntity(pos));
 		}
 		
 		return null;
@@ -96,6 +103,8 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiContainerSolarPanel(player.inventory, (TileEntitySolarPanel)world.getTileEntity(pos));
 		case LUNAR_PANEL_GUI:
 			return new GuiContainerLunarPanel(player.inventory, (TileEntityLunarPanel)world.getTileEntity(pos));
+		case TANK:
+			return new GuiContainerTank(player.inventory, (TileEntityTank)world.getTileEntity(pos));
 		}
 		
 		return null;

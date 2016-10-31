@@ -168,8 +168,12 @@ public class FluidTank implements IFluidTank, IFluidHandler, IFluidTankChecks {
 
 	@Override
 	public boolean canFillFluidType(FluidStack fluid) {
-		// TODO Auto-generated method stub
-		return this.canFill() && this.getFluid().getFluid() == fluid.getFluid();
+		
+		if(this.fluid == null) {
+			return true;
+		}
+		
+		return fluid != null && this.canFill() && this.getFluid().getFluid() == fluid.getFluid();
 	}
 
 	@Override

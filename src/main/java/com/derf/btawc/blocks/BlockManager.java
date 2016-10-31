@@ -11,6 +11,7 @@ import com.derf.btawc.blocks.generators.BlockSolarPanel;
 import com.derf.btawc.blocks.generators.BlockSolidFuelGenerator;
 import com.derf.btawc.blocks.itembuffer.BlockItemBuffer;
 import com.derf.btawc.blocks.lootpresents.BlockLootPresent;
+import com.derf.btawc.blocks.tank.BlockTank;
 import com.derf.btawc.blocks.witherproof.BlockWitherProof;
 import com.derf.btawc.blocks.witherproof.BlockWitherProofGlass;
 import com.derf.btawc.creativetabs.CreativeTabsManager;
@@ -25,6 +26,7 @@ import com.derf.btawc.tileentity.generators.TileEntityLunarPanel;
 import com.derf.btawc.tileentity.generators.TileEntitySolarPanel;
 import com.derf.btawc.tileentity.generators.TileEntitySolidFuelGenerator;
 import com.derf.btawc.tileentity.itembuffer.TileEntityItemBuffer;
+import com.derf.btawc.tileentity.tank.TileEntityTank;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -66,6 +68,8 @@ public final class BlockManager {
 	public static Block simpleDungeonPresent;
 	// Cobblestone Generator (Creates cobble stone passively)
 	public static Block cobblestoneGenerator;
+	// Tank
+	public static Block tank;
 	// Misc
 	
 	// Looped Registry :)
@@ -100,6 +104,8 @@ public final class BlockManager {
 		simpleDungeonPresent = new BlockLootPresent("simple_dungeon_present", LootTableList.CHESTS_SIMPLE_DUNGEON);
 		// Cobblestone Generator
 		cobblestoneGenerator = new BlockCobblestoneGenerator();
+		// Tank
+		tank = new BlockTank();
 	}
 	
 	public static void lifeCycle() {
@@ -131,6 +137,8 @@ public final class BlockManager {
 		LifeCycleManager.addBlockLifeCycle("simple_dungeon_present", simpleDungeonPresent, CreativeTabsManager.tabBTAWC, null, null);
 		// Cobblestone Generator
 		LifeCycleManager.addBlockLifeCycle("cobblestone_generator", cobblestoneGenerator, CreativeTabsManager.tabBTAWC, TileEntityCobblestoneGenerator.class, null);
+		// Tank
+		LifeCycleManager.addBlockLifeCycle("tank", tank, CreativeTabsManager.tabBTAWC, TileEntityTank.class, null);
 	}
 	
 	public static final void crafting() {
@@ -246,6 +254,13 @@ public final class BlockManager {
 				'w', Items.WATER_BUCKET,
 				'n', new ItemStack(Blocks.STONE, 1, 0),
 				's', ItemsManager.steelIngot);
-		
+		// Tank
+		ModRegistry.addShapedCraftingRecipe(
+				new ItemStack(tank), 
+				"sss",
+				"ggg",
+				"sss",
+				's', ItemsManager.steelIngot,
+				'g', Blocks.GLASS);
 	}
 }

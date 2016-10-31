@@ -16,6 +16,7 @@ import com.derf.btawc.network.PacketHandler;
 import com.derf.btawc.sound.SoundManager;
 import com.derf.btawc.util.MobDropUtils;
 
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;

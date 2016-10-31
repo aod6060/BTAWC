@@ -100,8 +100,8 @@ tile.item_buffer.name=Item Buffer
 tile.simple_dungeon_present.name=Simple Dungeon Present
 # Cobblestone Generator
 tile.cobblestone_generator.name=Cobblestone Generator
-
-
+# Tank
+tile.tank.name=Tank
 # JEI Extension
 jei.alloy_furnace=Alloy Furnace Recipe
 jei.chip_maker=Chip Maker Recipe

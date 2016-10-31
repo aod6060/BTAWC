@@ -69,7 +69,7 @@ public final class RenderUtils {
 		
 		int posY = (int) (y + height - iconAmount);
 		
-		RenderUtils.bindTexture();
+		RenderUtils.bindBlockTexture();
 		
 		int c = fluid.getColor(fluidStack);
 		
@@ -78,7 +78,6 @@ public final class RenderUtils {
 		GL11.glColor3f(color.getRed(), color.getGreen(), color.getBlue());
 		
 		GlStateManager.enableBlend();
-		
 		for(int i = 0; i < width; i += 16) {
 			for(int j = 0; j < iconAmount; j += 16) {
 				int drawWidth = (int) Math.min(width - i, 16);
@@ -92,14 +91,24 @@ public final class RenderUtils {
 				double minV = icon.getMinV();
 				double maxV = icon.getMaxV();
 				
+				/*
+				 *         Tessellator tessellator = Tessellator.getInstance();
+					        VertexBuffer tes = tessellator.getBuffer();
+					        tes.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+					        tes.pos(drawX, drawY + drawHeight, 0).tex(minU, minV + (maxV - minV) * drawHeight / 16F).endVertex();
+					        tes.pos(drawX + drawWidth, drawY + drawHeight, 0).tex(minU + (maxU - minU) * drawWidth / 16F, minV + (maxV - minV) * drawHeight / 16F).endVertex();
+					        tes.pos(drawX + drawWidth, drawY, 0).tex(minU + (maxU - minU) * drawWidth / 16F, minV).endVertex();
+					        tes.pos(drawX, drawY, 0).tex(minU, minV).endVertex();
+							tessellator.draw();
+				 */
 				Tessellator tess = Tessellator.getInstance();
-				
 				VertexBuffer buffer = tess.getBuffer();
 				buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 				buffer.pos(drawX, drawY + drawHeight, 0).tex(minU, minV + (maxV - minV) * drawHeight / 16f).endVertex();
-				buffer.pos(drawX + drawWidth, drawY + drawHeight, 0).tex(minU + (maxU - minV) * drawWidth / 16f, minV + (maxV - minV) * drawHeight / 16f);
-				buffer.pos(drawX + drawWidth, drawY, 0).tex(minU + (maxU - minV) * drawWidth / 16f, minV).endVertex();
+				buffer.pos(drawX + drawWidth, drawY + drawHeight, 0).tex(minU + (maxU - minU) * drawWidth / 16f, minV + (maxV - minV) * drawHeight / 16f);
+				buffer.pos(drawX + drawWidth, drawY, 0).tex(minU + (maxU - minU) * drawWidth / 16f, minV).endVertex();
 				buffer.pos(drawX, drawY, 0).tex(minU, minV).endVertex();
+				tess.draw();
 			}
 		}
 		GlStateManager.disableBlend();
@@ -109,7 +118,7 @@ public final class RenderUtils {
 		return Minecraft.getMinecraft().getTextureManager();
 	}
 	
-	public static void bindTexture() {
+	public static void bindBlockTexture() {
 		RenderUtils.getTextureManager().bindTexture(RenderUtils.BLOCK_TEXTURE);
 	}
 	

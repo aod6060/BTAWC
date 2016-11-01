@@ -212,4 +212,12 @@ public class FluidTank implements IFluidTank, IFluidHandler, IFluidTankChecks {
 		// TODO Auto-generated method stub
 		return this.getFluidAmount() <= 0;
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.getFluidAmount() + "/" + this.getCapacity() + " MB";
+	}
+	
+	
 }

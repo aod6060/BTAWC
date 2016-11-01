@@ -30,15 +30,13 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fluids.capability.ItemFluidContainer;
-import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
 import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
-import net.minecraftforge.fluids.capability.wrappers.FluidContainerRegistryWrapper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityTank extends TileEntityBasic implements ITickable, IInventory, ISixSidedFluidInventory {
 
@@ -47,7 +45,7 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 	public static final int OUTPUT_SLOT = 1;
 	public static final int SLOT_SIZE = 2;
 	
-	private FluidTank tank = new FluidTank(Fluid.BUCKET_VOLUME);
+	private FluidTank tank = new FluidTank(Fluid.BUCKET_VOLUME * 16);
 	private String name = null;
 	private ItemStack[] inventory = new ItemStack[SLOT_SIZE];
 	private EnumFacing[] faces = new EnumFacing[6];
@@ -124,7 +122,7 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 	@Override
 	public boolean hasCustomName() {
 		// TODO Auto-generated method stub
-		return this.name != null || !this.name.isEmpty();
+		return this.name != null && !this.name.isEmpty();
 	}
 
 	@Override
@@ -383,7 +381,6 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 		return temp;
 	}
 	
-	@SuppressWarnings("unused")
 	@Override
 	public void update() {
 		if(!worldObj.isRemote) {
@@ -425,7 +422,7 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 							}
 						} else {
 							// draining
-							if(this.tank.canFillFluidType(wrapper.getFluid()) && this.tank.getFluidAmount() <= Fluid.BUCKET_VOLUME) {
+							if(this.tank.canFillFluidType(wrapper.getFluid()) && this.tank.getFluidAmount() < this.tank.getCapacity()) {
 								this.tank.fill(wrapper.getFluid(), true);
 								output = new ItemStack(Items.BUCKET);
 								handle = true;
@@ -446,19 +443,26 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 		}
 	}
 	
-	public void setTank(FluidTank tank) {
-		
+	public void setTank(FluidTank tank) {	
 		if(tank != null) {
-			this.tank.setCapacity(tank.getCapacity());
 			if(tank.getFluid() != null) {
 				this.tank.setFluid(tank.getFluid().copy());
+			} else {
+				this.tank.setFluid(null);
 			}
-		} else {
-			tank = new FluidTank(Fluid.BUCKET_VOLUME);
 		}
 	}
 	
 	private void sendToClient() {
-		PacketHandler.INSTANCE.sendToAll(new PacketTankFluidUpdate(this.worldObj, this.pos, this.tank));
+		PacketHandler.INSTANCE.sendToAll(new PacketTankFluidUpdate(this.pos, this.tank));
+	}
+	
+	public String grabString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(this.tank);
+		if(this.getTank().getFluid() != null) {
+			builder.append(" Name: " + this.tank.getFluid().getLocalizedName());
+		}
+		return builder.toString();
 	}
 }

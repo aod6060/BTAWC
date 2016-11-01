@@ -21,7 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
  * @author Fred
  *
  */
-public class PacketSixSidedConfiguration implements IMessage {
+public class PacketSixSidedConfiguration implements IMessage, Runnable {
 
 	private int dimesion;
 	private BlockPos pos;
@@ -54,8 +54,29 @@ public class PacketSixSidedConfiguration implements IMessage {
 		buff.writeInt(facing.ordinal());
 		buff.writeInt(type.ordinal());
 	}
+	
+	
+	public int getDimesion() {
+		return dimesion;
+	}
 
-	public void onMessageFromClient(MessageContext ctx) {
+
+	public static class Handler implements IMessageHandler<PacketSixSidedConfiguration, IMessage> {
+
+		@Override
+		public IMessage onMessage(PacketSixSidedConfiguration message, MessageContext ctx) {
+			
+			if(ctx.side == Side.SERVER) {
+				DimensionManager.getWorld(message.getDimesion()).addScheduledTask(message);
+			}
+			
+			return null;
+		}
+		
+	}
+
+	@Override
+	public void run() {
 		World world = DimensionManager.getWorld(this.dimesion);
 		
 		if(world != null) {
@@ -68,19 +89,5 @@ public class PacketSixSidedConfiguration implements IMessage {
 				tank.setType(this.facing, this.type);
 			}
 		}
-	}
-	
-	public static class Handler implements IMessageHandler<PacketSixSidedConfiguration, IMessage> {
-
-		@Override
-		public IMessage onMessage(PacketSixSidedConfiguration message, MessageContext ctx) {
-			
-			if(ctx.side == Side.SERVER) {
-				message.onMessageFromClient(ctx);
-			}
-			
-			return null;
-		}
-		
 	}
 }

@@ -4,7 +4,12 @@ import org.lwjgl.opengl.GL11;
 
 import com.derf.btawc.client.Color;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
@@ -37,10 +42,18 @@ public abstract class GuiContainerBasic extends GuiContainer {
 	 */
 	protected void renderBackgroundImage(ResourceLocation resource) {
 		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-		this.mc.getTextureManager().bindTexture(resource);
+		this.bindTexture(resource);
 		int k = this.getK();
 		int l = this.getL();
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
+	}
+	
+	/**
+	 * This will bind a texture to the main MC stuff
+	 * @param resource
+	 */
+	protected void bindTexture(ResourceLocation resource) {
+		this.mc.getTextureManager().bindTexture(resource);
 	}
 	
 	/**
@@ -87,5 +100,20 @@ public abstract class GuiContainerBasic extends GuiContainer {
 	
 	protected int getMiddleOfScreenX(String s) {
 		return this.xSize / 2 - this.stringWidth(s) / 2;
+	}
+	
+	protected TextureAtlasSprite grabTextureFromAtlas(ResourceLocation location) {
+		return Minecraft.getMinecraft().getTextureMapBlocks().getTextureExtry(location.toString());
+	}
+	
+	protected void drawTexturedRect(int left, int top, int right, int bottom, TextureAtlasSprite icon) {
+		Tessellator t = Tessellator.getInstance();
+		VertexBuffer b = t.getBuffer();
+		b.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+		b.pos(left, bottom, 0.0).tex(icon.getMinU(), icon.getMinV()).endVertex();
+		b.pos(right, bottom, 0.0).tex(icon.getMaxU(), icon.getMinV()).endVertex();
+		b.pos(right, top, 0.0).tex(icon.getMaxU(), icon.getMaxV()).endVertex();
+		b.pos(left, top, 0.0).tex(icon.getMinU(), icon.getMaxV()).endVertex();
+		t.draw();
 	}
 }

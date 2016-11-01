@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class PacketCreativeGeneratorInfo implements IMessage {
+public class PacketCreativeGeneratorInfo implements IMessage, Runnable {
 
 	private int dimension;
 	private BlockPos pos;
@@ -43,8 +43,27 @@ public class PacketCreativeGeneratorInfo implements IMessage {
 		buff.writeInt(this.insantity);
 	}
 	
-	public void onMessageFromClient(MessageContext context) {
+	
+	public int getDimension() {
+		return dimension;
+	}
+
+
+	public static class Handler implements IMessageHandler<PacketCreativeGeneratorInfo, IMessage> {
+
+		@Override
+		public IMessage onMessage(PacketCreativeGeneratorInfo message, MessageContext ctx) {
+			
+			if(ctx.side == Side.SERVER) {
+				DimensionManager.getWorld(message.getDimension()).addScheduledTask(message);
+			}
+			return null;
+		}
 		
+	}
+
+	@Override
+	public void run() {
 		World world = DimensionManager.getWorld(this.dimension);
 		
 		if(world != null) {
@@ -55,18 +74,5 @@ public class PacketCreativeGeneratorInfo implements IMessage {
 				generator.insantity = this.insantity;
 			}
 		}
-	}
-	
-	public static class Handler implements IMessageHandler<PacketCreativeGeneratorInfo, IMessage> {
-
-		@Override
-		public IMessage onMessage(PacketCreativeGeneratorInfo message, MessageContext ctx) {
-			
-			if(ctx.side == Side.SERVER) {
-				message.onMessageFromClient(ctx);
-			}
-			return null;
-		}
-		
 	}
 }

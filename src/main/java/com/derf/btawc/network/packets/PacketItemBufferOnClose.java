@@ -13,6 +13,12 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
+/**
+ * This has bee Deprecated. I'll remove it pretty soon after I check if ther is anything using it.
+ * @author Fred
+ *
+ */
+@Deprecated
 public class PacketItemBufferOnClose implements IMessage {
 
 	private int dimesion;

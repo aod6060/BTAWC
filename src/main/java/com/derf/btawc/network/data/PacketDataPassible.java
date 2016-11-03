@@ -12,14 +12,10 @@ import net.minecraft.nbt.NBTTagCompound;
 public class PacketDataPassible implements IPacketData {
 
 	@Override
-	public void readFromNBT(NBTTagCompound compound) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void readFromNBT(NBTTagCompound compound) {}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-		// TODO Auto-generated method stub
 		return compound;
 	}
 

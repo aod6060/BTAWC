@@ -11,12 +11,9 @@ public final class NBTUtils {
 	 * @return
 	 */
 	public static BlockPos loadBlockPos(NBTTagCompound compound) {
-		
 		int x = compound.getInteger("pos_x");
 		int y = compound.getInteger("pos_y");
 		int z = compound.getInteger("pos_z");
-		
-		
 		return new BlockPos(x, y, z);
 	}
 	

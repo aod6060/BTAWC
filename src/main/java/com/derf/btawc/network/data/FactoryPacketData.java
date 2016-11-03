@@ -6,20 +6,18 @@ import java.util.Map;
 import com.derf.btawc.network.data.client.PacketDataFluidUpdate;
 
 public final class FactoryPacketData {
-	
-	
 	private static Map<String, Class<? extends IPacketData>> packetDatas = new HashMap<String, Class<? extends IPacketData>>();
 	
 	/**
-	 * This will initialize the 
-	 * @param packetData
+	 * Internal don't use 
+	 * @param name
 	 * @return
 	 */
-	public static IPacketData createPacketData(String packetData) {
+	public static IPacketData createPacketData(String name) {
 		IPacketData data = null;
 		
 		try {
-			data = packetDatas.get(packetData).newInstance();
+			data = packetDatas.get(name).newInstance();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -29,8 +27,26 @@ public final class FactoryPacketData {
 		return data;
 	}
 	
+	public static IPacketData createPacketData(String name, IPacketDataCallback cb) {
+		IPacketData data = null;
+		
+		try {
+			data = packetDatas.get(name).newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		
+		if(cb != null) {
+			cb.call(data);
+		}
+		
+		return data;
+	}
 	public static void create() {
 		// Register PacketDataFluidUpdate
+		registerPacketData("passible", PacketDataPassible.class);
 		registerPacketData("fluid_update", PacketDataFluidUpdate.class);
 	}
 	

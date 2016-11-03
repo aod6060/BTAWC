@@ -1,9 +1,13 @@
 package com.derf.btawc.network;
 
 import com.derf.btawc.Loader;
+import com.derf.btawc.network.data.FactoryPacketData;
+import com.derf.btawc.network.data.IPacketData;
+import com.derf.btawc.network.handlers.PacketToClientHandler;
 import com.derf.btawc.network.packets.PacketCreativeGeneratorInfo;
 import com.derf.btawc.network.packets.PacketSixSidedConfiguration;
 import com.derf.btawc.network.packets.PacketTankFluidUpdate;
+import com.derf.btawc.network.packets.PacketToClient;
 
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -26,6 +30,15 @@ public final class PacketHandler {
 		INSTANCE.registerMessage(PacketSixSidedConfiguration.Handler.class, PacketSixSidedConfiguration.class, nextID(), Side.SERVER);
 		// Tank Fluid Update
 		INSTANCE.registerMessage(PacketTankFluidUpdate.Handler.class, PacketTankFluidUpdate.class, nextID(), Side.CLIENT);
+		// Packet to Client
+		INSTANCE.registerMessage(PacketToClientHandler.class, PacketToClient.class, nextID(), Side.CLIENT);
+		
+		// Create Factory
+		FactoryPacketData.create();
+	}
+	
+	public static void sendPacketToClient(IPacketData packetData) {
+		INSTANCE.sendToAll(new PacketToClient(packetData));
 	}
 	
 }

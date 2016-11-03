@@ -9,4 +9,6 @@ public interface IPacketData {
 	NBTTagCompound writeToNBT(NBTTagCompound compound);
 	
 	void updatePacketData();
+	
+	String getName();
 }

@@ -7,7 +7,8 @@ import com.derf.btawc.fluid.FluidTank;
 import com.derf.btawc.fluid.FluidTankChecksAdapter;
 import com.derf.btawc.fluid.IFluidTankChecks;
 import com.derf.btawc.network.PacketHandler;
-import com.derf.btawc.network.packets.PacketTankFluidUpdate;
+import com.derf.btawc.network.data.FactoryPacketData;
+import com.derf.btawc.network.data.client.PacketDataFluidUpdate;
 import com.derf.btawc.tileentity.EnumSixSided;
 import com.derf.btawc.tileentity.ISixSidedFluidInventory;
 import com.derf.btawc.tileentity.TileEntityBasic;
@@ -35,8 +36,6 @@ import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.ItemFluidContainer;
 import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityTank extends TileEntityBasic implements ITickable, IInventory, ISixSidedFluidInventory {
 
@@ -454,7 +453,8 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 	}
 	
 	private void sendToClient() {
-		PacketHandler.INSTANCE.sendToAll(new PacketTankFluidUpdate(this.pos, this.tank));
+		//PacketHandler.INSTANCE.sendToAll(new PacketTankFluidUpdate(this.pos, this.tank));
+		PacketHandler.sendPacketToClient(FactoryPacketData.createPacketData("fluid_update", PacketDataFluidUpdate.createCallback(pos, tank)));
 	}
 	
 	public String grabString() {

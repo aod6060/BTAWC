@@ -4,7 +4,6 @@ import com.derf.btawc.Loader;
 import com.derf.btawc.network.packets.PacketCreativeGeneratorInfo;
 import com.derf.btawc.network.packets.PacketSixSidedConfiguration;
 import com.derf.btawc.network.packets.PacketTankFluidUpdate;
-import com.derf.btawc.network.packets.PacketItemBufferOnClose;
 
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -25,8 +24,6 @@ public final class PacketHandler {
 		INSTANCE.registerMessage(PacketCreativeGeneratorInfo.Handler.class, PacketCreativeGeneratorInfo.class, nextID(), Side.SERVER);
 		// Six Sided Configuration
 		INSTANCE.registerMessage(PacketSixSidedConfiguration.Handler.class, PacketSixSidedConfiguration.class, nextID(), Side.SERVER);
-		// Item Buffer On Close
-		INSTANCE.registerMessage(PacketItemBufferOnClose.Handler.class, PacketItemBufferOnClose.class, nextID(), Side.SERVER);
 		// Tank Fluid Update
 		INSTANCE.registerMessage(PacketTankFluidUpdate.Handler.class, PacketTankFluidUpdate.class, nextID(), Side.CLIENT);
 	}

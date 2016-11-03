@@ -8,7 +8,6 @@ import com.derf.btawc.client.gui.GuiContainerBasic;
 import com.derf.btawc.inventory.container.itembuffer.ContainerItemBuffer;
 import com.derf.btawc.network.PacketHandler;
 import com.derf.btawc.network.packets.PacketSixSidedConfiguration;
-import com.derf.btawc.network.packets.PacketItemBufferOnClose;
 import com.derf.btawc.tileentity.EnumSixSided;
 import com.derf.btawc.tileentity.itembuffer.TileEntityItemBuffer;
 import com.derf.btawc.util.GuiRect;

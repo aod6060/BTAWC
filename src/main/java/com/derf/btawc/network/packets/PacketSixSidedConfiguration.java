@@ -21,6 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
  * @author Fred
  *
  */
+@Deprecated
 public class PacketSixSidedConfiguration implements IMessage, Runnable {
 
 	private int dimesion;

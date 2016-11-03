@@ -24,6 +24,7 @@ import net.minecraftforge.fml.relauncher.Side;
  * @author Fred
  *
  */
+@Deprecated
 public class PacketTankFluidUpdate implements IMessage, Runnable {
 	private BlockPos pos;
 	// Tank 

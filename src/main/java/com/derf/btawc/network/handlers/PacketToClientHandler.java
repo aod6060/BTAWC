@@ -1,6 +1,5 @@
 package com.derf.btawc.network.handlers;
 
-import com.derf.btawc.network.CallablePacketHandler;
 import com.derf.btawc.network.RunnablePacketHandler;
 import com.derf.btawc.network.packets.PacketToClient;
 
@@ -17,7 +16,6 @@ public class PacketToClientHandler implements IMessageHandler<PacketToClient, IM
 		
 		if(ctx.side == Side.CLIENT) {
 			Minecraft.getMinecraft().addScheduledTask(new RunnablePacketHandler(message.getPacketData()));
-			//Minecraft.getMinecraft().addScheduledTask(new CallablePacketHandler(message.getPacketData()));
 		}
 		
 		return null;

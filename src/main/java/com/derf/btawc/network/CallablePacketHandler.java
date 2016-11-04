@@ -4,6 +4,7 @@ import java.util.concurrent.Callable;
 
 import com.derf.btawc.network.data.IPacketData;
 
+@Deprecated
 public class CallablePacketHandler implements Callable<IPacketData> {
 
 	private IPacketData packetData = null;

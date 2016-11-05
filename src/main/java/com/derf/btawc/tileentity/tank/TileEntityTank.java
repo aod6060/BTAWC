@@ -66,7 +66,7 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-			net.minecraftforge.fluids.FluidTank tank = new net.minecraftforge.fluids.FluidTank(this.tank.getFluid(), this.tank.getCapacity());
+			//net.minecraftforge.fluids.FluidTank tank = new net.minecraftforge.fluids.FluidTank(this.tank.getFluid(), this.tank.getCapacity());
 			return (T) tank;
 		}
 		return super.getCapability(capability, facing);
@@ -261,58 +261,6 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 	// Push
 	@Override
 	public void drain(EnumFacing face) {
-		/*
-		EnumFacing opposite = face.getOpposite();
-		BlockPos otherEntityPos = pos.add(face.getDirectionVec());
-		TileEntity entity = worldObj.getTileEntity(otherEntityPos);
-		
-		// Handle Drains
-		if(entity != null) {
-			if(this.isSixSidedFluidInventory(entity)) {
-				ISixSidedFluidInventory s = (ISixSidedFluidInventory)entity;
-				
-				if(!s.isTypeDisabled(opposite) && !s.isTypePull(opposite)) {
-					FluidTank tank = s.getTank();
-					
-					if(this.tank != null && this.tank.canDrain() && !this.tank.isFluidTankEmpty()) {
-						FluidStack fluid = this.tank.drain(MB_TICK, false);
-						
-						if(tank.getFluid() != null && tank.canFill() && tank.getFluid().containsFluid(fluid) && !this.tank.isFluidTankFull()) {
-							fluid = this.tank.drain(fluid, true);
-							tank.fill(fluid, true);
-						}
-					}
-				}
-			} else if(entity.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, opposite)) {
-				Object obj = entity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, opposite);
-				
-				if(obj instanceof FluidTank) {
-					FluidTank tank = (FluidTank)obj;
-					
-					if(this.tank != null && this.tank.canDrain() && !this.tank.isFluidTankEmpty()) {
-						FluidStack fluid = this.tank.drain(MB_TICK, false);
-						
-						if(tank.getFluid() != null && tank.canFill() && tank.getFluid().containsFluid(fluid) && !this.tank.isFluidTankFull()) {
-							fluid = this.tank.drain(fluid, true);
-							tank.fill(fluid, true);
-						}
-					}
-				} else if(obj instanceof net.minecraftforge.fluids.FluidTank) {
-					net.minecraftforge.fluids.FluidTank tank = (net.minecraftforge.fluids.FluidTank)obj;
-					IFluidTankChecks checks = new FluidTankChecksAdapter(tank);
-					
-					if(this.tank != null && this.tank.canDrain() && !this.tank.isFluidTankEmpty()) {
-						FluidStack fluid = this.tank.drain(MB_TICK, false);
-						if(tank.getFluid() != null && checks.canFill() && tank.getFluid().containsFluid(fluid) && !checks.isFluidTankFull()) {
-							fluid = this.tank.drain(fluid, true);
-							tank.fill(fluid, true);
-						}
-					}
-				}
-			}
-		}
-		*/
-		/*
 		EnumFacing opposite = face.getOpposite();
 		BlockPos otherEntityPos = pos.add(face.getDirectionVec());
 		TileEntity entity = worldObj.getTileEntity(otherEntityPos);
@@ -320,15 +268,46 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 		if(entity != null) {
 			if(this.isSixSidedFluidInventory(entity)) {
 				ISixSidedFluidInventory other = (ISixSidedFluidInventory)entity;
-				
-				if(!other.isTypeDisabled(opposite) || !other.isTypePull(opposite)) {
+
+				if(!other.isTypePush(opposite) && !other.isTypeDisabled(opposite)) {
 					FluidTank tank = other.getTank();
+					if(this.tank.isFluidTankEmpty()) {
+						// Return because its empty
+						return;
+					}
+					if(tank.isFluidTankEmpty()) {
+						// Drain Fluid from my tank and push it to this inventory
+						handleTank(tank, this.tank, MB_TICK);
+					} else {
+						if(!tank.isFluidTankFull()) {
+							handleTank(tank, this.tank, MB_TICK);
+						}
+					}
+				}
+			} else {
+				if(entity.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, opposite)) {
+					Object obj = entity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, opposite);
 					
-					if()
+					if(obj instanceof FluidTank) {
+						FluidTank tank = (FluidTank)obj;
+						
+						if(this.tank.isFluidTankEmpty()) {
+							return;
+						}
+						
+						if(tank.isFluidTankEmpty()) {
+							handleTank(tank, this.tank, MB_TICK);
+						} else {
+							if(!tank.isFluidTankFull()) {
+								handleTank(tank, this.tank, MB_TICK);
+							}
+						}
+					} else {
+						// Not supported for the moment
+					}
 				}
 			}
 		}
-		*/
 	}
 
 	// Pull
@@ -344,18 +323,14 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 				
 				if(!other.isTypeDisabled(opposite) && !other.isTypePull(opposite)) {
 					FluidTank tank = other.getTank();
-					
-					
 					if(tank.isFluidTankEmpty()) {
 						// Return because its empty
 						return;
 					}
-					
 					if(this.tank.isFluidTankEmpty()) {
 						// Drain Fluid from my tank and push it to this inventory
 						handleTank(this.tank, tank, MB_TICK);
 					} else {
-						
 						if(!this.tank.isFluidTankFull()) {
 							handleTank(this.tank, tank, MB_TICK);
 						}
@@ -380,81 +355,12 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 								handleTank(this.tank, tank, MB_TICK);
 							}
 						}
-					} else if(obj instanceof net.minecraftforge.fluids.FluidTank) {
-						net.minecraftforge.fluids.FluidTank tank = (net.minecraftforge.fluids.FluidTank)obj;
-						IFluidTankChecks checks = new FluidTankChecksAdapter(tank);
-						if(worldObj.getWorldTime() % 20L == 0) {
-							System.out.println("Hello, World");
-						}
-						
-						if(checks.isFluidTankEmpty()) {
-							return;
-						}
-						
-						if(this.tank.isFluidTankEmpty()) {
-							handleFluidTank(this.tank, tank, MB_TICK);
-						} else {
-							if(!this.tank.isFluidTankFull()) {
-								handleFluidTank(this.tank, tank, MB_TICK);
-							}
-						}
+					} else {
+						// Not supported for the moment
 					}
 				}
 			}
 		}
-		/*
-		EnumFacing opposite = face.getOpposite();
-		BlockPos otherEntityPos = pos.add(face.getDirectionVec());
-		TileEntity entity = worldObj.getTileEntity(otherEntityPos);
-		
-		if(entity != null) {
-			if(this.isSixSidedFluidInventory(entity)) {
-				ISixSidedFluidInventory s = (ISixSidedFluidInventory)entity;
-				
-				if(!s.isTypeDisabled(opposite) && !s.isTypePush(opposite)) {
-					// Handle Fill
-					FluidTank tank = s.getTank();
-					
-					if(tank.canDrain() && !tank.isFluidTankEmpty()) {
-						
-						FluidStack fluid = tank.drain(MB_TICK, false);
-						if(this.tank.canFill() && this.tank.getFluid().containsFluid(fluid) && !this.tank.isFluidTankFull()) {
-							fluid = tank.drain(fluid, true);
-							this.tank.fill(fluid, true);
-						}
-					}
-				}
-			} else if(entity.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, opposite)) {
-				Object obj = entity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, opposite);
-				
-				if(obj instanceof FluidTank) {
-					FluidTank tank = (FluidTank)obj;
-					
-					if(tank.canDrain() && !tank.isFluidTankEmpty()) {
-						FluidStack fluid = tank.drain(MB_TICK, false);
-						
-						if(this.tank.canFill() && this.tank.getFluid().containsFluid(fluid) && !this.tank.isFluidTankFull()) {
-							fluid = tank.drain(fluid, true);
-							this.tank.fill(fluid, true);
-						}
-					}
-				} else if(obj instanceof net.minecraftforge.fluids.FluidTank){
-					net.minecraftforge.fluids.FluidTank tank = (net.minecraftforge.fluids.FluidTank)obj;
-					// Because I'm wrapping this with my interfaces because its better OOP
-					IFluidTankChecks checks = new FluidTankChecksAdapter(tank);
-					
-					if(checks.canDrain() && !checks.isFluidTankEmpty()) {
-						FluidStack fluid = tank.getFluid();
-						
-						if(this.tank.canFill() && this.tank.getFluid().containsFluid(fluid) && !this.tank.isFluidTankFull()) {
-							fluid = tank.drain(fluid, true);
-							this.tank.fill(fluid, true);
-						}
-					}
-				}
-			}
-		}
-		*/
 	}
 	
 	private void handleFluidTank(FluidTank output, net.minecraftforge.fluids.FluidTank input, int buckets) {

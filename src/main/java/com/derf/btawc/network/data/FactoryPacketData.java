@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.derf.btawc.network.data.client.PacketDataFluidUpdate;
+import com.derf.btawc.network.data.server.PacketDataCreativeGeneratorConfiguration;
+import com.derf.btawc.network.data.server.PacketDataSixSidedConfiguration;
 
 public final class FactoryPacketData {
 	private static Map<String, Class<? extends IPacketData>> packetDatas = new HashMap<String, Class<? extends IPacketData>>();
@@ -48,6 +50,8 @@ public final class FactoryPacketData {
 		// Register PacketDataFluidUpdate
 		registerPacketData("passible", PacketDataPassible.class);
 		registerPacketData("fluid_update", PacketDataFluidUpdate.class);
+		registerPacketData("six_sided_configuration", PacketDataSixSidedConfiguration.class);
+		registerPacketData("creative_generator_configuration", PacketDataCreativeGeneratorConfiguration.class);
 	}
 	
 	

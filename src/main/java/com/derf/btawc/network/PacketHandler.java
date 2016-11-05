@@ -4,11 +4,14 @@ import com.derf.btawc.Loader;
 import com.derf.btawc.network.data.FactoryPacketData;
 import com.derf.btawc.network.data.IPacketData;
 import com.derf.btawc.network.handlers.PacketToClientHandler;
+import com.derf.btawc.network.handlers.PacketToServerHandler;
 import com.derf.btawc.network.packets.PacketCreativeGeneratorInfo;
 import com.derf.btawc.network.packets.PacketSixSidedConfiguration;
 import com.derf.btawc.network.packets.PacketTankFluidUpdate;
 import com.derf.btawc.network.packets.PacketToClient;
+import com.derf.btawc.network.packets.PacketToServer;
 
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -32,6 +35,8 @@ public final class PacketHandler {
 		INSTANCE.registerMessage(PacketTankFluidUpdate.Handler.class, PacketTankFluidUpdate.class, nextID(), Side.CLIENT);
 		// Packet to Client
 		INSTANCE.registerMessage(PacketToClientHandler.class, PacketToClient.class, nextID(), Side.CLIENT);
+		// Packet to Server
+		INSTANCE.registerMessage(PacketToServerHandler.class, PacketToServer.class, nextID(), Side.SERVER);
 		
 		// Create Factory
 		FactoryPacketData.create();
@@ -39,6 +44,10 @@ public final class PacketHandler {
 	
 	public static void sendPacketToClient(IPacketData packetData) {
 		INSTANCE.sendToAll(new PacketToClient(packetData));
+	}
+	
+	public static void sendPacketToServer(IPacketData packetData, World world) {
+		INSTANCE.sendToServer(new PacketToServer(packetData, world.provider.getDimension()));
 	}
 	
 }

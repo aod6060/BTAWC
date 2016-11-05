@@ -1,9 +1,10 @@
 package com.derf.btawc.network.data.server;
 
+import com.derf.btawc.network.data.IPacketData;
+import com.derf.btawc.network.data.IPacketDataCallback;
 import com.derf.btawc.network.data.IPacketDataServer;
 import com.derf.btawc.tileentity.EnumSixSided;
-import com.derf.btawc.tileentity.itembuffer.TileEntityItemBuffer;
-import com.derf.btawc.tileentity.tank.TileEntityTank;
+import com.derf.btawc.tileentity.ISixSided;
 import com.derf.btawc.util.NBTUtils;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -46,14 +47,64 @@ public class PacketDataSixSidedConfiguration implements IPacketDataServer {
 	public void updatePacketData(int dimension) {
 		World world = DimensionManager.getWorld(dimension);
 		if(world != null) {
-			TileEntity entity = world.getTileEntity(pos);
-			if(entity instanceof TileEntityItemBuffer) {
-				TileEntityItemBuffer itemBuffer = (TileEntityItemBuffer)entity;
-				itemBuffer.setType(this.facing, type);
-			} else if(entity instanceof TileEntityTank) {
-				TileEntityTank tank = (TileEntityTank)entity;
+			TileEntity entity = world.getTileEntity(this.pos);
+			if(entity instanceof ISixSided) {
+				ISixSided s = (ISixSided)entity;
+				s.setType(this.facing, type);
 			}
 		}
 	}
 
+	public BlockPos getPos() {
+		return pos;
+	}
+
+	public void setPos(BlockPos pos) {
+		this.pos = pos;
+	}
+
+	public EnumFacing getFacing() {
+		return facing;
+	}
+
+	public void setFacing(EnumFacing facing) {
+		this.facing = facing;
+	}
+
+	public EnumSixSided getType() {
+		return type;
+	}
+
+	public void setType(EnumSixSided type) {
+		this.type = type;
+	}
+
+	private static class Callback implements IPacketDataCallback {
+		private BlockPos pos;
+		private EnumFacing facing;
+		private EnumSixSided type;
+		
+		public Callback() {}
+		
+		public Callback(BlockPos pos, EnumFacing facing, EnumSixSided type) {
+			this.pos = pos;
+			this.facing = facing;
+			this.type = type;
+		}
+		
+		@Override
+		public void call(IPacketData dataPacket) {
+			if(dataPacket instanceof PacketDataSixSidedConfiguration) {
+				PacketDataSixSidedConfiguration conf = (PacketDataSixSidedConfiguration)dataPacket;
+				conf.setPos(this.pos);
+				conf.setFacing(facing);
+				conf.setType(type);
+			}
+		}
+		
+	}
+	
+	public static IPacketDataCallback createCallback(BlockPos pos, EnumFacing facing, EnumSixSided sided) {
+		return new Callback(pos, facing, sided);
+	}
 }

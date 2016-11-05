@@ -383,6 +383,9 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 					} else if(obj instanceof net.minecraftforge.fluids.FluidTank) {
 						net.minecraftforge.fluids.FluidTank tank = (net.minecraftforge.fluids.FluidTank)obj;
 						IFluidTankChecks checks = new FluidTankChecksAdapter(tank);
+						if(worldObj.getWorldTime() % 20L == 0) {
+							System.out.println("Hello, World");
+						}
 						
 						if(checks.isFluidTankEmpty()) {
 							return;

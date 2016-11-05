@@ -80,7 +80,34 @@ public class FluidTank implements IFluidTank, IFluidHandler, IFluidTankChecks {
 
 	@Override
 	public int fill(FluidStack resource, boolean doFill) {
+		int filled = 0;
+		if(!this.canFillFluidType(resource)) {
+			return filled;
+		}
 		
+		filled = resource.amount;
+		
+		if(filled <= this.getFluidAmount()) {
+			filled = this.getFluidAmount();
+		}
+		
+		if(doFill) {
+			
+			if(this.fluid == null) {
+				this.fluid = resource.copy();
+			} else {
+				if(this.fluid.amount < this.capacity) {
+					this.fluid.amount += filled;
+				}
+				
+				if(this.fluid.amount >= this.capacity) {
+					this.fluid.amount = this.capacity;
+				}
+			}
+		}
+		
+		return filled;
+		/*
 		if(!this.canFillFluidType(resource)) {
 			return 0;
 		}
@@ -121,6 +148,8 @@ public class FluidTank implements IFluidTank, IFluidHandler, IFluidTankChecks {
 		}
 		
 		return filled;
+		*/
+		
 	}
 
 	@Override

@@ -1,18 +1,26 @@
 package com.derf.btawc.client.gui.tank;
 
+import java.io.IOException;
+
 import com.derf.btawc.Loader;
 import com.derf.btawc.client.Color;
 import com.derf.btawc.client.gui.GuiContainerBasic;
 import com.derf.btawc.fluid.FluidTank;
 import com.derf.btawc.inventory.container.tank.ContainerTank;
+import com.derf.btawc.network.PacketHandler;
+import com.derf.btawc.network.data.FactoryPacketData;
+import com.derf.btawc.network.data.server.PacketDataSixSidedConfiguration;
+import com.derf.btawc.tileentity.EnumSixSided;
 import com.derf.btawc.tileentity.tank.TileEntityTank;
 import com.derf.btawc.util.GuiRect;
 import com.derf.btawc.util.GuiRectArea;
 import com.derf.btawc.util.Vec2;
 
+import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
@@ -38,17 +46,17 @@ public class GuiContainerTank extends GuiContainerBasic {
 		
 		// Init all sides for the tank...
 		// West
-		sides[EnumFacing.WEST.ordinal()] = new GuiRect(72, 28, 79 - 72, 35 - 28);
+		sides[EnumFacing.WEST.ordinal()] = new GuiRect(72, 28, 8, 8);
 		// East
-		sides[EnumFacing.EAST.ordinal()] = new GuiRect(88, 28, 95 - 88, 35 - 28);
+		sides[EnumFacing.EAST.ordinal()] = new GuiRect(88, 28, 8, 8);
 		// South
-		sides[EnumFacing.SOUTH.ordinal()] = new GuiRect(80, 28, 87-80, 35 - 28);
+		sides[EnumFacing.SOUTH.ordinal()] = new GuiRect(80, 28, 8, 8);
 		// North
-		sides[EnumFacing.NORTH.ordinal()] = new GuiRect(88, 20, 85 - 88, 27 - 20);
+		sides[EnumFacing.NORTH.ordinal()] = new GuiRect(88, 20, 8, 8);
 		// Up
-		sides[EnumFacing.UP.ordinal()] = new GuiRect(80, 20, 87 - 80, 27 - 20);
+		sides[EnumFacing.UP.ordinal()] = new GuiRect(80, 20, 8, 8);
 		// Down
-		sides[EnumFacing.DOWN.ordinal()] = new GuiRect(80, 36, 87 - 80, 43 - 36);
+		sides[EnumFacing.DOWN.ordinal()] = new GuiRect(80, 36, 8, 8);
 	}
 	
 	@Override
@@ -135,12 +143,56 @@ public class GuiContainerTank extends GuiContainerBasic {
 		// Disabled
 		int disabledV = 64;
 		
-		/*
-		 * for now i'm going to work on the packet system.
 		for(EnumFacing facing : EnumFacing.values()) {
 			GuiRect r = this.sides[facing.ordinal()];
+			
+			EnumSixSided ss = this.tank.getType(facing);
+			
+			if(ss == EnumSixSided.PULL) {
+				this.drawTexturedModalRect((int)r.getX() + k, (int)r.getY() + l, u, pullV, (int)r.getWidth(), (int)r.getHeight());
+			} else if(ss == EnumSixSided.PUSH) {
+				this.drawTexturedModalRect((int)r.getX() + k, (int)r.getY() + l, u, pushV, (int)r.getWidth(), (int)r.getHeight());
+			} else if(ss == EnumSixSided.DISABLED) {
+				this.drawTexturedModalRect((int)r.getX() + k, (int)r.getY() + l, u, disabledV, (int)r.getWidth(), (int)r.getHeight());
+			}
 		}
-		*/
 	}
 
+	@Override
+	protected void mouseClicked(int x, int y, int button) throws IOException {
+		// TODO Auto-generated method stub
+		super.mouseClicked(x, y, button);
+		
+		int k = this.getK();
+		int l = this.getL();
+		
+		if(button == 0 || button == 1) {
+			Vec2 mc = new Vec2(x - k, y - l);
+			for(EnumFacing facing : EnumFacing.values()) {
+				if(this.sides[facing.ordinal()].collide(mc)) {
+					this.toggleType(facing);
+					this.mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f));
+				}
+			}
+		}
+	}
+
+	private void toggleType(EnumFacing facing) {
+		EnumSixSided type = this.tank.getType(facing);
+		if(type == EnumSixSided.OFF) {
+			type = EnumSixSided.PULL;
+		} else if(type == EnumSixSided.PULL) {
+			type = EnumSixSided.PUSH;
+		} else if(type == EnumSixSided.PUSH) {
+			type = EnumSixSided.DISABLED;
+		} else if(type == EnumSixSided.DISABLED) {
+			type = EnumSixSided.OFF;
+		}
+		// Handle Packet for ItemBuffer
+		PacketHandler.sendPacketToServer(
+				FactoryPacketData.createPacketData("six_sided_configuration", 
+						PacketDataSixSidedConfiguration.createCallback(this.tank.getPos(), facing, type)), tank.getWorld());
+	}
+
+	
 }

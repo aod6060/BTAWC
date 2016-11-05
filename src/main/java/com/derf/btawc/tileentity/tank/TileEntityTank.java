@@ -256,9 +256,10 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 		return temp;
 	}
 
+	// Push
 	@Override
 	public void drain(EnumFacing face) {
-		
+		/*
 		EnumFacing opposite = face.getOpposite();
 		BlockPos otherEntityPos = pos.add(face.getDirectionVec());
 		TileEntity entity = worldObj.getTileEntity(otherEntityPos);
@@ -271,13 +272,12 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 				if(!s.isTypeDisabled(opposite) && !s.isTypePull(opposite)) {
 					FluidTank tank = s.getTank();
 					
-					if(this.tank.canDrain() && !this.tank.isFluidTankEmpty()) {
+					if(this.tank != null && this.tank.canDrain() && !this.tank.isFluidTankEmpty()) {
 						FluidStack fluid = this.tank.drain(MB_TICK, false);
 						
-						if(tank.canFill() && tank.getFluid().containsFluid(fluid) && !this.tank.isFluidTankFull()) {
+						if(tank.getFluid() != null && tank.canFill() && tank.getFluid().containsFluid(fluid) && !this.tank.isFluidTankFull()) {
 							fluid = this.tank.drain(fluid, true);
 							tank.fill(fluid, true);
-							this.sendToClient();
 						}
 					}
 				}
@@ -287,34 +287,81 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 				if(obj instanceof FluidTank) {
 					FluidTank tank = (FluidTank)obj;
 					
-					if(this.tank.canDrain() && !this.tank.isFluidTankEmpty()) {
+					if(this.tank != null && this.tank.canDrain() && !this.tank.isFluidTankEmpty()) {
 						FluidStack fluid = this.tank.drain(MB_TICK, false);
 						
-						if(tank.canFill() && tank.getFluid().containsFluid(fluid) && !this.tank.isFluidTankFull()) {
+						if(tank.getFluid() != null && tank.canFill() && tank.getFluid().containsFluid(fluid) && !this.tank.isFluidTankFull()) {
 							fluid = this.tank.drain(fluid, true);
 							tank.fill(fluid, true);
-							this.sendToClient();
 						}
 					}
 				} else if(obj instanceof net.minecraftforge.fluids.FluidTank) {
 					net.minecraftforge.fluids.FluidTank tank = (net.minecraftforge.fluids.FluidTank)obj;
 					IFluidTankChecks checks = new FluidTankChecksAdapter(tank);
 					
-					if(this.tank.canDrain() && !this.tank.isFluidTankEmpty()) {
+					if(this.tank != null && this.tank.canDrain() && !this.tank.isFluidTankEmpty()) {
 						FluidStack fluid = this.tank.drain(MB_TICK, false);
-						if(checks.canFill() && tank.getFluid().containsFluid(fluid) && !checks.isFluidTankFull()) {
+						if(tank.getFluid() != null && checks.canFill() && tank.getFluid().containsFluid(fluid) && !checks.isFluidTankFull()) {
 							fluid = this.tank.drain(fluid, true);
 							tank.fill(fluid, true);
-							this.sendToClient();
 						}
 					}
 				}
 			}
 		}
+		*/
+		/*
+		EnumFacing opposite = face.getOpposite();
+		BlockPos otherEntityPos = pos.add(face.getDirectionVec());
+		TileEntity entity = worldObj.getTileEntity(otherEntityPos);
+		
+		if(entity != null) {
+			if(this.isSixSidedFluidInventory(entity)) {
+				ISixSidedFluidInventory other = (ISixSidedFluidInventory)entity;
+				
+				if(!other.isTypeDisabled(opposite) || !other.isTypePull(opposite)) {
+					FluidTank tank = other.getTank();
+					
+					if()
+				}
+			}
+		}
+		*/
 	}
 
+	// Pull
 	@Override
 	public void fill(EnumFacing face) {
+		EnumFacing opposite = face.getOpposite();
+		BlockPos otherEntityPos = pos.add(face.getDirectionVec());
+		TileEntity entity = worldObj.getTileEntity(otherEntityPos);
+		
+		if(entity != null) {
+			if(this.isSixSidedFluidInventory(entity)) {
+				ISixSidedFluidInventory other = (ISixSidedFluidInventory)entity;
+				
+				if(!other.isTypeDisabled(opposite) || !other.isTypePull(opposite)) {
+					FluidTank tank = other.getTank();
+					
+					
+					if(tank.isFluidTankEmpty()) {
+						// Return because its empty
+						return;
+					}
+					
+					if(this.tank.isFluidTankEmpty()) {
+						// Drain Fluid from my tank and push it to this inventory
+						handleTank(this.tank, tank, MB_TICK);
+					} else {
+						
+						if(!tank.isFluidTankFull()) {
+							handleTank(this.tank, tank, MB_TICK);
+						}
+					}
+				}
+			}
+		}
+		/*
 		EnumFacing opposite = face.getOpposite();
 		BlockPos otherEntityPos = pos.add(face.getDirectionVec());
 		TileEntity entity = worldObj.getTileEntity(otherEntityPos);
@@ -366,8 +413,22 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 				}
 			}
 		}
+		*/
 	}
 	
+	private void handleTank(FluidTank output, FluidTank input, int buckets) {
+		// Test to see if I can do a fake drain on the input tank
+		FluidStack input_stack = input.drain(buckets, false);
+		// Check and see if the fluid in the tanks are the same...
+		if(!output.isFluidTankFull() || output.getFluid().containsFluid(input_stack)) {
+			// Fill output tank
+			int filled = output.fill(input_stack, true);
+			// drain input tank
+			input.drain(filled, true);
+		}
+
+	}
+
 	@Override
 	public FluidTank getTank() {
 		return this.tank;
@@ -433,6 +494,7 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 				if(handle) {	
 					this.decrStackSize(INPUT_SLOT, 1);
 					this.setInventorySlotContents(OUTPUT_SLOT, output);
+					this.sendToClient();
 				}
 			}
 			
@@ -453,7 +515,6 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 	}
 	
 	private void sendToClient() {
-		//PacketHandler.INSTANCE.sendToAll(new PacketTankFluidUpdate(this.pos, this.tank));
 		PacketHandler.sendPacketToClient(FactoryPacketData.createPacketData("fluid_update", PacketDataFluidUpdate.createCallback(pos, tank)));
 	}
 	

@@ -32,6 +32,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.ItemFluidContainer;
@@ -65,6 +66,7 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+			net.minecraftforge.fluids.FluidTank tank = new net.minecraftforge.fluids.FluidTank(this.tank.getFluid(), this.tank.getCapacity());
 			return (T) tank;
 		}
 		return super.getCapability(capability, facing);
@@ -340,7 +342,7 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 			if(this.isSixSidedFluidInventory(entity)) {
 				ISixSidedFluidInventory other = (ISixSidedFluidInventory)entity;
 				
-				if(!other.isTypeDisabled(opposite) || !other.isTypePull(opposite)) {
+				if(!other.isTypeDisabled(opposite) && !other.isTypePull(opposite)) {
 					FluidTank tank = other.getTank();
 					
 					
@@ -354,8 +356,44 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 						handleTank(this.tank, tank, MB_TICK);
 					} else {
 						
-						if(!tank.isFluidTankFull()) {
+						if(!this.tank.isFluidTankFull()) {
 							handleTank(this.tank, tank, MB_TICK);
+						}
+					}
+				}
+			} else {
+				
+				if(entity.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, opposite)) {
+					Object obj = entity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, opposite);
+					
+					if(obj instanceof FluidTank) {
+						FluidTank tank = (FluidTank)obj;
+						
+						if(tank.isFluidTankEmpty()) {
+							return;
+						}
+						
+						if(this.tank.isFluidTankEmpty()) {
+							handleTank(this.tank, tank, MB_TICK);
+						} else {
+							if(!this.tank.isFluidTankFull()) {
+								handleTank(this.tank, tank, MB_TICK);
+							}
+						}
+					} else if(obj instanceof net.minecraftforge.fluids.FluidTank) {
+						net.minecraftforge.fluids.FluidTank tank = (net.minecraftforge.fluids.FluidTank)obj;
+						IFluidTankChecks checks = new FluidTankChecksAdapter(tank);
+						
+						if(checks.isFluidTankEmpty()) {
+							return;
+						}
+						
+						if(this.tank.isFluidTankEmpty()) {
+							handleFluidTank(this.tank, tank, MB_TICK);
+						} else {
+							if(!this.tank.isFluidTankFull()) {
+								handleFluidTank(this.tank, tank, MB_TICK);
+							}
 						}
 					}
 				}
@@ -416,19 +454,27 @@ public class TileEntityTank extends TileEntityBasic implements ITickable, IInven
 		*/
 	}
 	
+	private void handleFluidTank(FluidTank output, net.minecraftforge.fluids.FluidTank input, int buckets) {
+		FluidStack input_stack = input.drain(buckets, false);
+		if(output.isFluidTankEmpty() || (!output.isFluidTankFull() && output.getFluid().containsFluid(input_stack))) {
+			int filled = output.fill(input_stack, true);
+			input.drain(filled, true);
+		}
+	}
+
 	private void handleTank(FluidTank output, FluidTank input, int buckets) {
 		// Test to see if I can do a fake drain on the input tank
 		FluidStack input_stack = input.drain(buckets, false);
 		// Check and see if the fluid in the tanks are the same...
-		if(!output.isFluidTankFull() || output.getFluid().containsFluid(input_stack)) {
+		if(output.isFluidTankEmpty() || (!output.isFluidTankFull() && output.getFluid().containsFluid(input_stack))) {
 			// Fill output tank
 			int filled = output.fill(input_stack, true);
 			// drain input tank
 			input.drain(filled, true);
 		}
-
 	}
 
+	
 	@Override
 	public FluidTank getTank() {
 		return this.tank;

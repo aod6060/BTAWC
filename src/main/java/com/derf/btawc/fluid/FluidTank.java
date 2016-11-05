@@ -87,10 +87,6 @@ public class FluidTank implements IFluidTank, IFluidHandler, IFluidTankChecks {
 		
 		filled = resource.amount;
 		
-		if(filled <= this.getFluidAmount()) {
-			filled = this.getFluidAmount();
-		}
-		
 		if(doFill) {
 			
 			if(this.fluid == null) {
@@ -107,49 +103,6 @@ public class FluidTank implements IFluidTank, IFluidHandler, IFluidTankChecks {
 		}
 		
 		return filled;
-		/*
-		if(!this.canFillFluidType(resource)) {
-			return 0;
-		}
-		
-		// Handle Fill
-		if(resource == null || resource.amount <= 0) {
-			return 0;
-		}
-		
-		if(!this.canFill()) {
-			if(fluid == null) {
-				return Math.min(capacity, resource.amount);
-			}
-			
-			if(!fluid.isFluidEqual(resource)) {
-				return 0;
-			}
-			
-			return Math.min(capacity - fluid.amount, resource.amount);
-		}
-		
-		if(fluid == null) {
-			fluid = new FluidStack(resource, Math.min(capacity, resource.amount));
-			return fluid.amount;
-		}
-		
-		if(!fluid.isFluidEqual(resource)) {
-			return 0;
-		}
-		
-		int filled = capacity - fluid.amount;
-		
-		if(resource.amount < filled) {
-			fluid.amount += resource.amount;
-			filled = resource.amount;
-		} else {
-			fluid.amount = capacity;
-		}
-		
-		return filled;
-		*/
-		
 	}
 
 	@Override

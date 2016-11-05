@@ -3,6 +3,7 @@ package com.derf.btawc.network.data;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.derf.btawc.network.data.client.PacketDataEnergyStorageUpdate;
 import com.derf.btawc.network.data.client.PacketDataFluidUpdate;
 import com.derf.btawc.network.data.server.PacketDataCreativeGeneratorConfiguration;
 import com.derf.btawc.network.data.server.PacketDataSixSidedConfiguration;
@@ -52,6 +53,7 @@ public final class FactoryPacketData {
 		registerPacketData("fluid_update", PacketDataFluidUpdate.class);
 		registerPacketData("six_sided_configuration", PacketDataSixSidedConfiguration.class);
 		registerPacketData("creative_generator_configuration", PacketDataCreativeGeneratorConfiguration.class);
+		registerPacketData("energy_storage_update", PacketDataEnergyStorageUpdate.class);
 	}
 	
 	

@@ -71,6 +71,11 @@ public abstract class TileEntityGenerator extends TileEntityBasic implements ITi
 		return this.storage;
 	}
 	
+	public void setStorage(EnergyStorage storage) {
+		// Copy stuff over the client doen't just copy instances.
+		this.storage = new EnergyStorage(storage.getEnergy(), storage.getCapacity(), storage.getMaxReceive(), storage.getMaxExtract());
+	}
+	
 	protected void storeIntoBuffer(int currentEnergyTicks) {
 		int value = this.storage.receiveEnergy(currentEnergyTicks, true);
 		this.storage.receiveEnergy(value, false);
@@ -98,4 +103,6 @@ public abstract class TileEntityGenerator extends TileEntityBasic implements ITi
 	
 	// Abstract Methods
 	protected abstract void caculateRFTicks();
+
+
 }

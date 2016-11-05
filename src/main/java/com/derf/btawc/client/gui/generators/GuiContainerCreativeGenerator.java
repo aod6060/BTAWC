@@ -9,7 +9,6 @@ import com.derf.btawc.inventory.container.generator.ContainerCreativeGenerator;
 import com.derf.btawc.network.PacketHandler;
 import com.derf.btawc.network.data.FactoryPacketData;
 import com.derf.btawc.network.data.server.PacketDataCreativeGeneratorConfiguration;
-import com.derf.btawc.network.packets.PacketCreativeGeneratorInfo;
 import com.derf.btawc.tileentity.generators.TileEntityCreativeGenerator;
 import com.derf.btawc.util.GuiRect;
 import com.derf.btawc.util.Vec2;
@@ -147,13 +146,6 @@ public class GuiContainerCreativeGenerator extends GuiContainerBasic {
 			}
 			
 			// Send Packet to TileEntity
-			/*
-			PacketHandler.INSTANCE.sendToServer(
-					new PacketCreativeGeneratorInfo(this.generator.getWorld().provider.getDimension(),
-							this.generator.getPos(),
-							this.generator.insantity));
-							*/
-			
 			PacketHandler.sendPacketToServer(
 					FactoryPacketData.createPacketData("creative_generator_configuration", 
 							PacketDataCreativeGeneratorConfiguration.createCallback(this.generator.getPos(), this.generator.insantity)), 

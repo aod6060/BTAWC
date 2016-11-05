@@ -5,9 +5,6 @@ import com.derf.btawc.network.data.FactoryPacketData;
 import com.derf.btawc.network.data.IPacketData;
 import com.derf.btawc.network.handlers.PacketToClientHandler;
 import com.derf.btawc.network.handlers.PacketToServerHandler;
-import com.derf.btawc.network.packets.PacketCreativeGeneratorInfo;
-import com.derf.btawc.network.packets.PacketSixSidedConfiguration;
-import com.derf.btawc.network.packets.PacketTankFluidUpdate;
 import com.derf.btawc.network.packets.PacketToClient;
 import com.derf.btawc.network.packets.PacketToServer;
 
@@ -18,7 +15,9 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public final class PacketHandler {
 	private static int packetId = 0;
-	public static SimpleNetworkWrapper INSTANCE = null;
+	// I don't want any access to the INSTANCE field anymore because I have 
+	// functions that does it.
+	private static SimpleNetworkWrapper INSTANCE = null;
 	
 	public static int nextID() {
 		return ++packetId;
@@ -27,12 +26,6 @@ public final class PacketHandler {
 	public static void registerMessages() {
 		INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(Loader.MODID);
 		// Register Custom Messages
-		// Creative Generator
-		INSTANCE.registerMessage(PacketCreativeGeneratorInfo.Handler.class, PacketCreativeGeneratorInfo.class, nextID(), Side.SERVER);
-		// Six Sided Configuration
-		INSTANCE.registerMessage(PacketSixSidedConfiguration.Handler.class, PacketSixSidedConfiguration.class, nextID(), Side.SERVER);
-		// Tank Fluid Update
-		INSTANCE.registerMessage(PacketTankFluidUpdate.Handler.class, PacketTankFluidUpdate.class, nextID(), Side.CLIENT);
 		// Packet to Client
 		INSTANCE.registerMessage(PacketToClientHandler.class, PacketToClient.class, nextID(), Side.CLIENT);
 		// Packet to Server

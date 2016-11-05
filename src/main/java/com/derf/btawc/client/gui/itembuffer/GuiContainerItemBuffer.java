@@ -9,7 +9,6 @@ import com.derf.btawc.inventory.container.itembuffer.ContainerItemBuffer;
 import com.derf.btawc.network.PacketHandler;
 import com.derf.btawc.network.data.FactoryPacketData;
 import com.derf.btawc.network.data.server.PacketDataSixSidedConfiguration;
-import com.derf.btawc.network.packets.PacketSixSidedConfiguration;
 import com.derf.btawc.tileentity.EnumSixSided;
 import com.derf.btawc.tileentity.itembuffer.TileEntityItemBuffer;
 import com.derf.btawc.util.GuiRect;
@@ -174,32 +173,10 @@ public class GuiContainerItemBuffer extends GuiContainerBasic {
 		}
 		this.itembuffer.setType(facing, type);
 		// Handle Packet for ItemBuffer
-		/*
-		PacketHandler.INSTANCE.sendToServer(
-				new PacketSixSidedConfiguration(
-						this.itembuffer.getWorld().provider.getDimension(),
-						this.itembuffer.getPos(),
-						facing,
-						type));
-		*/
 		
 		PacketHandler.sendPacketToServer(
 				FactoryPacketData.createPacketData("six_sided_configuration", 
 						PacketDataSixSidedConfiguration.createCallback(this.itembuffer.getPos(), facing, type)), itembuffer.getWorld());
 		this.inventorySlots.detectAndSendChanges();
 	}
-
-
-	@Override
-	public void onGuiClosed() {
-		// TODO Auto-generated method stub
-		super.onGuiClosed();
-		/*
-		PacketHandler.INSTANCE.sendToServer(new PacketItemBufferOnClose(
-				this.itembuffer.getWorld().provider.getDimension(),
-				this.itembuffer.getPos()));
-				*/
-	}
-	
-	
 }

@@ -58,11 +58,13 @@ public class TileEntityLunarPanel extends TileEntityGenerator implements IInvent
 			this.efficency = this.getGeneratorEfficency();
 			
 			if(!this.isLessThanZero()) {
-				this.onEnergyUpdate(this.currentEnergyTicks);
+				this.getStorage().setMaxTransfer(this.currentEnergyTicks);
+				this.onEnergyUpdate();
 			} else {
 				if(!this.getStorage().isEmpty()) {
 					this.currentEnergyTicks = this.energyTicks * this.caculateSpeedUpgrades();
-					this.outputAllSides(this.currentEnergyTicks);
+					this.getStorage().setMaxTransfer(this.currentEnergyTicks);
+					this.outputAllSides();
 				}
 			}
 			

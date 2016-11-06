@@ -65,20 +65,28 @@ public class EnergyStorage implements IEnergyStorage {
 		return this.capacity;
 	}
 
-	public void readFromNBT(NBTTagCompound comp) {
-		this.energy = comp.getInteger("energy");
-		
-		if(energy > this.capacity) {
-			energy = this.capacity;
-		}
+	public void readFromNBT(NBTTagCompound compound) {
+		/*
+		 * 	protected int energy;
+			protected int capacity;
+			protected int maxReceive;
+			protected int maxExtract;
+		 */
+		NBTTagCompound energyStorage = compound.getCompoundTag("energy_storage");
+		this.energy = energyStorage.getInteger("energy");
+		this.capacity = energyStorage.getInteger("capacity");
+		this.maxExtract = energyStorage.getInteger("max_extract");
+		this.maxReceive = energyStorage.getInteger("energy_storage");
 	}
 	
-	public NBTTagCompound writeToNBT(NBTTagCompound comp) {
-		if(energy < 0) {
-			energy = 0;
-		}
-		comp.setInteger("energy", energy);
-		return comp;
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		NBTTagCompound energyStorage = new NBTTagCompound();
+		energyStorage.setInteger("energy", this.energy);
+		energyStorage.setInteger("capacity", this.capacity);
+		energyStorage.setInteger("max_extract", this.maxExtract);
+		energyStorage.setInteger("max_receive", this.maxReceive);
+		compound.setTag("energy_storage", energyStorage);
+		return compound;
 	}
 
 	public int getMaxReceive() {
@@ -124,5 +132,9 @@ public class EnergyStorage implements IEnergyStorage {
 	public void setMaxTransfer(int transfer) {
 		this.setMaxExtract(transfer);
 		this.setMaxReceive(transfer);
+	}
+	
+	public int getMaxTransfer() {
+		return this.getMaxExtract();
 	}
 }

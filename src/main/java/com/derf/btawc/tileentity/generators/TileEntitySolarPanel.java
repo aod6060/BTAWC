@@ -54,11 +54,12 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 			this.efficency = this.getGeneratorEfficency();
 			
 			if(!this.isLessThanZero()) {
-				this.onEnergyUpdate(this.currentEnergyTicks);
+				this.getStorage().setMaxTransfer(this.g);
+				this.onEnergyUpdate();
 			} else {
 				if(!this.getStorage().isEmpty()) {
 					this.currentEnergyTicks = this.energyTicks * this.caculateSpeedUpdates();
-					this.outputAllSides(this.currentEnergyTicks);
+					this.outputAllSides();
 				}
 			}
 			this.markDirty();

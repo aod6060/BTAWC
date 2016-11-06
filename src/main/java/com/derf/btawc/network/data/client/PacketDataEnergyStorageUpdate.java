@@ -17,6 +17,8 @@ public class PacketDataEnergyStorageUpdate implements IPacketData {
 	private BlockPos pos;
 	private EnergyStorage storage = new EnergyStorage(1000);
 	
+	public PacketDataEnergyStorageUpdate() {}
+	
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		this.pos = NBTUtils.loadBlockPos(compound);

@@ -76,18 +76,18 @@ public abstract class TileEntityGenerator extends TileEntityBasic implements ITi
 		this.storage = new EnergyStorage(storage.getEnergy(), storage.getCapacity(), storage.getMaxReceive(), storage.getMaxExtract());
 	}
 	
-	protected void storeIntoBuffer(int currentEnergyTicks) {
-		int value = this.storage.receiveEnergy(currentEnergyTicks, true);
+	protected void storeIntoBuffer() {
+		int value = this.storage.receiveEnergy(this.getStorage().getMaxReceive(), true);
 		this.storage.receiveEnergy(value, false);
 	}
 	
-	protected void outputAllSides(int currentEnergyTicks) {
+	protected void outputAllSides() {
 		List<Holder> sides = Holder.getHolders(pos);
 		for(Holder side : sides) {
 			TileEntity entity = worldObj.getTileEntity(side.getPos());
 			if(entity != null && entity instanceof IEnergyReceiver) {
 				IEnergyReceiver handler = (IEnergyReceiver)entity;
-				int ee = this.extractEnergy(side.getDirection(), currentEnergyTicks, true);
+				int ee = this.extractEnergy(side.getDirection(), this.getStorage().getMaxExtract(), true);
 				int er = handler.receiveEnergy(side.getDirection().getOpposite(), ee, true);
 				this.extractEnergy(side.getDirection(), er, false);
 				handler.receiveEnergy(side.getDirection().getOpposite(), er, false);
@@ -95,10 +95,10 @@ public abstract class TileEntityGenerator extends TileEntityBasic implements ITi
 		}
 	}
 	
-	protected void onEnergyUpdate(int currentEnergyTicks) {
+	protected void onEnergyUpdate() {
 		caculateRFTicks();
-		this.storeIntoBuffer(currentEnergyTicks);
-		this.outputAllSides(currentEnergyTicks);
+		this.storeIntoBuffer();
+		this.outputAllSides();
 	}
 	
 	// Abstract Methods

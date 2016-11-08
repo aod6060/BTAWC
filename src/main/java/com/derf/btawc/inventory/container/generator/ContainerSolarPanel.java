@@ -17,14 +17,7 @@ public class ContainerSolarPanel extends ContainerBasic implements IField{
 	private final InventoryPlayer player;
 	private TileEntitySolarPanel generator;
 	
-	
-	private int energy; // 0
-	private int capacity; // 1
-	private int maxExtract; // 2
-	private int maxReceive; // 3
-	private int currentEnergyTicks; // 4
-	private int insantity; // 5
-	private int efficency; // 6
+	private int efficency; // 0
 	
 	public ContainerSolarPanel(InventoryPlayer player, TileEntitySolarPanel generator) {
 		this.player = player;
@@ -118,34 +111,13 @@ public class ContainerSolarPanel extends ContainerBasic implements IField{
 		}
 		return stack;
 	}
-
-
-
-
+	
 	@Override
 	public int getField(int index) {
 		int value = 0;
 		
 		switch(index) {
 		case 0:
-			value = this.energy;
-			break;
-		case 1:
-			value = this.capacity;
-			break;
-		case 2:
-			value = this.maxExtract;
-			break;
-		case 3:
-			value = this.maxReceive;
-			break;
-		case 4:
-			value = this.currentEnergyTicks;
-			break;
-		case 5:
-			value = this.insantity;
-			break;
-		case 6:
 			value = this.efficency;
 			break;
 		}
@@ -156,24 +128,6 @@ public class ContainerSolarPanel extends ContainerBasic implements IField{
 	public void setField(int index, int value) {
 		switch(index) {
 		case 0:
-			this.energy = value;
-			break;
-		case 1:
-			this.capacity = value;
-			break;
-		case 2:
-			this.maxExtract = value;
-			break;
-		case 3:
-			this.maxReceive = value;
-			break;
-		case 4:
-			this.currentEnergyTicks = value;
-			break;
-		case 5:
-			this.insantity = value;
-			break;
-		case 6:
 			this.efficency = value;
 			break;
 		}
@@ -181,7 +135,7 @@ public class ContainerSolarPanel extends ContainerBasic implements IField{
 	@Override
 	public int getFieldCount() {
 		// TODO Auto-generated method stub
-		return 7;
+		return 1;
 	}
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {

@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.derf.btawc.energy.EnergyStorage;
 import com.derf.btawc.energy.IEnergyLevelPrintable;
+import com.derf.btawc.network.PacketHandler;
+import com.derf.btawc.network.data.FactoryPacketData;
+import com.derf.btawc.network.data.client.PacketDataEnergyStorageUpdate;
 import com.derf.btawc.tileentity.TileEntityBasic;
 import com.derf.btawc.util.Holder;
 
@@ -99,8 +102,14 @@ public abstract class TileEntityGenerator extends TileEntityBasic implements ITi
 		caculateRFTicks();
 		this.storeIntoBuffer();
 		this.outputAllSides();
+		this.sendToClient();
 	}
 	
+	protected void sendToClient() {
+		PacketHandler.sendPacketToClient(
+				FactoryPacketData.createPacketData("energy_storage_update", 
+						PacketDataEnergyStorageUpdate.createCallback(pos, storage)));
+	}
 	// Abstract Methods
 	protected abstract void caculateRFTicks();
 

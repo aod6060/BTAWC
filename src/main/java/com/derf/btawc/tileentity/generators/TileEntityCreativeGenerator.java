@@ -41,6 +41,7 @@ public class TileEntityCreativeGenerator extends TileEntityGenerator implements 
 	public TileEntityCreativeGenerator() {
 		super();
 		this.storage = new EnergyStorage(MAX_CAPACITY);
+		this.storage.setMaxTransfer(0);
 	}
 
 	@Override
@@ -50,9 +51,6 @@ public class TileEntityCreativeGenerator extends TileEntityGenerator implements 
 		if(!worldObj.isRemote) {
 			this.getStorage().setMaxTransfer(this.currentEnergyTicks);
 			this.onEnergyUpdate();
-			PacketHandler.sendPacketToClient(
-					FactoryPacketData.createPacketData("energy_storage_update", 
-							PacketDataEnergyStorageUpdate.createCallback(pos, storage)));
 			this.markDirty();
 		}
 		
@@ -82,7 +80,7 @@ public class TileEntityCreativeGenerator extends TileEntityGenerator implements 
 	
 	@Override
 	public String printEnergyValue() {
-		String s = String.format("[%d/%d] %d RF/t", this.storage.getEnergyStored(), this.storage.getMaxEnergyStored(), this.currentEnergyTicks);
+		String s = String.format("[%d/%d] %d RF/t", this.storage.getEnergyStored(), this.storage.getMaxEnergyStored(), this.storage.getMaxTransfer());
 		return s;
 	}
 

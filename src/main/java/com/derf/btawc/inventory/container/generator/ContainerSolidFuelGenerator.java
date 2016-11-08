@@ -20,12 +20,6 @@ public class ContainerSolidFuelGenerator extends ContainerBasic implements IFiel
 	private TileEntitySolidFuelGenerator generator;
 	
 	private int burnTime;
-	private int energy;
-	private int capacity;
-	private int maxExtract;
-	private int maxReceive;
-	private int currentEnergyTicks;
-	private int insantity;
 	
 	public ContainerSolidFuelGenerator(InventoryPlayer player, TileEntitySolidFuelGenerator generator) {
 		this.player = player;
@@ -142,24 +136,6 @@ public class ContainerSolidFuelGenerator extends ContainerBasic implements IFiel
 		case 0:
 			value = this.burnTime;
 			break;
-		case 1:
-			value = this.energy;
-			break;
-		case 2:
-			value = this.capacity;
-			break;
-		case 3:
-			value = this.maxExtract;
-			break;
-		case 4:
-			value = this.maxReceive;
-			break;
-		case 5:
-			value = this.currentEnergyTicks;
-			break;
-		case 6: 
-			value = this.insantity;
-			break;
 		}
 		return value;
 	}
@@ -170,31 +146,13 @@ public class ContainerSolidFuelGenerator extends ContainerBasic implements IFiel
 		case 0:
 			this.burnTime = value;
 			break;
-		case 1:
-			this.energy = value;
-			break;
-		case 2:
-			this.capacity = value;
-			break;
-		case 3:
-			this.maxExtract = value;
-			break;
-		case 4:
-			this.maxReceive = value;
-			break;
-		case 5:
-			this.currentEnergyTicks = value;
-			break;
-		case 6: 
-			this.insantity = value;
-			break;
 		}
 	}
 
 	@Override
 	public int getFieldCount() {
 		// TODO Auto-generated method stub
-		return 7;
+		return 1;
 	}
 
 	// Add stuff for transfer

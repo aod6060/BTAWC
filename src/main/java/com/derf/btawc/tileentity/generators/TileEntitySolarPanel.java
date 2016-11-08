@@ -45,6 +45,7 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 	public TileEntitySolarPanel() {
 		super();
 		this.storage = new EnergyStorage(MAX_CAPACITY);
+		this.storage.setMaxTransfer(0);
 	}
 	
 	@Override
@@ -54,12 +55,14 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 			this.efficency = this.getGeneratorEfficency();
 			
 			if(!this.isLessThanZero()) {
-				this.getStorage().setMaxTransfer(this.g);
+				this.getStorage().setMaxTransfer(this.currentEnergyTicks);
 				this.onEnergyUpdate();
 			} else {
 				if(!this.getStorage().isEmpty()) {
 					this.currentEnergyTicks = this.energyTicks * this.caculateSpeedUpdates();
+					this.getStorage().setMaxTransfer(this.currentEnergyTicks);
 					this.outputAllSides();
+					this.sendToClient();
 				}
 			}
 			this.markDirty();
@@ -192,24 +195,6 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 		
 		switch(id) {
 		case 0:
-			value = this.getStorage().getEnergy();
-			break;
-		case 1:
-			value = this.getStorage().getCapacity();
-			break;
-		case 2:
-			value = this.getStorage().getMaxExtract();
-			break;
-		case 3:
-			value = this.getStorage().getMaxReceive();
-			break;
-		case 4:
-			value = this.currentEnergyTicks;
-			break;
-		case 5:
-			value = this.insantity;
-			break;
-		case 6:
 			value = this.efficency;
 			break;
 		}
@@ -221,24 +206,6 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 	public void setField(int id, int value) {
 		switch(id) {
 		case 0:
-			this.getStorage().setEnergy(value);
-			break;
-		case 1:
-			this.getStorage().setCapacity(value);
-			break;
-		case 2:
-			this.getStorage().setMaxExtract(value);
-			break;
-		case 3:
-			this.getStorage().setMaxReceive(value);
-			break;
-		case 4:
-			this.currentEnergyTicks = value;
-			break;
-		case 5:
-			this.insantity = value;
-			break;
-		case 6:
 			this.efficency = value;
 			break; // Do Nothing because this value is procedurally generated.
 		}
@@ -246,7 +213,7 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 
 	@Override
 	public int getFieldCount() {
-		return 7;
+		return 1;
 	}
 
 	@Override
@@ -266,7 +233,7 @@ public class TileEntitySolarPanel extends TileEntityGenerator implements IInvent
 	
 	@Override
 	public String printEnergyValue() {
-		String s = String.format("[%d/%d] %d RF/t", this.storage.getEnergyStored(), this.storage.getMaxEnergyStored(), this.currentEnergyTicks);
+		String s = String.format("[%d/%d] %d RF/t", this.storage.getEnergyStored(), this.storage.getMaxEnergyStored(), this.storage.getMaxTransfer());
 		return s;
 	}
 
